@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "my_dpia" "\0"
+            VALUE "FileDescription", "dpia_project" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "my_dpia" "\0"
+            VALUE "InternalName", "dpia_project" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2023 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "my_dpia.exe" "\0"
-            VALUE "ProductName", "my_dpia" "\0"
+            VALUE "OriginalFilename", "dpia_project.exe" "\0"
+            VALUE "ProductName", "dpia_project" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END
