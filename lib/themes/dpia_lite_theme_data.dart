@@ -98,63 +98,63 @@ class DpiaLiteThemeData {
   static const _bold = FontWeight.w600;
 
   static final TextTheme _textTheme = TextTheme(
-    displayLarge: GoogleFonts.poppins(
+    displayLarge: GoogleFonts.ibmPlexSansThai(
       fontWeight: _bold,
       fontSize: 24.0,
     ),
-    displayMedium: GoogleFonts.poppins(
+    displayMedium: GoogleFonts.ibmPlexSansThai(
       fontWeight: _semiBold,
       fontSize: 22.0,
     ),
-    displaySmall: GoogleFonts.poppins(
+    displaySmall: GoogleFonts.ibmPlexSansThai(
       fontWeight: _semiBold,
       fontSize: 20.0,
     ),
-    headlineLarge: GoogleFonts.poppins(
+    headlineLarge: GoogleFonts.ibmPlexSansThai(
       fontWeight: _regular,
       fontSize: 24.0,
     ),
-    headlineMedium: GoogleFonts.poppins(
+    headlineMedium: GoogleFonts.ibmPlexSansThai(
       fontWeight: _regular,
       fontSize: 22.0,
     ),
-    headlineSmall: GoogleFonts.poppins(
+    headlineSmall: GoogleFonts.ibmPlexSansThai(
       fontWeight: _regular,
       fontSize: 20.0,
     ),
-    titleLarge: GoogleFonts.poppins(
+    titleLarge: GoogleFonts.ibmPlexSansThai(
       fontWeight: _semiBold,
       fontSize: 18.0,
     ),
-    titleMedium: GoogleFonts.poppins(
+    titleMedium: GoogleFonts.ibmPlexSansThai(
       fontWeight: _semiBold,
       fontSize: 16.0,
     ),
-    titleSmall: GoogleFonts.poppins(
+    titleSmall: GoogleFonts.ibmPlexSansThai(
       fontWeight: _semiBold,
       fontSize: 14.0,
     ),
-    bodyLarge: GoogleFonts.poppins(
+    bodyLarge: GoogleFonts.ibmPlexSansThai(
       fontWeight: _regular,
       fontSize: 18.0,
     ),
-    bodyMedium: GoogleFonts.poppins(
+    bodyMedium: GoogleFonts.ibmPlexSansThai(
       fontWeight: _regular,
       fontSize: 16.0,
     ),
-    bodySmall: GoogleFonts.poppins(
+    bodySmall: GoogleFonts.ibmPlexSansThai(
       fontWeight: _regular,
       fontSize: 14.0,
     ),
-    labelLarge: GoogleFonts.poppins(
+    labelLarge: GoogleFonts.ibmPlexSansThai(
       fontWeight: _light,
       fontSize: 14.0,
     ),
-    labelMedium: GoogleFonts.poppins(
+    labelMedium: GoogleFonts.ibmPlexSansThai(
       fontWeight: _light,
       fontSize: 12.0,
     ),
-    labelSmall: GoogleFonts.poppins(
+    labelSmall: GoogleFonts.ibmPlexSansThai(
       fontWeight: _light,
       fontSize: 10.0,
     ),
