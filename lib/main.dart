@@ -1,4 +1,5 @@
-import 'package:dpia_project/login/login_page.dart';
+import 'package:dpia_project/screens/home/homepage.dart';
+import 'package:dpia_project/screens/login/login_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -12,8 +13,9 @@ class DPIA extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "DPIA By Wisework",
+      debugShowCheckedModeBanner: false,
       // theme: DpiaLiteThemeData.lightThemeData,
-      home: LoginPage(),
+      home: HomePage(),
     );
   }
 }

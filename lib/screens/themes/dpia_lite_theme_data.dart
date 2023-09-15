@@ -52,7 +52,7 @@ class DpiaLiteThemeData {
     onPrimary: Colors.white,
     secondary: Color(0xFF1570EF), // second
     onSecondary: Color(0xFF595958), // text 2
-    tertiary: Color(0xFF3D98E1), // slide button
+    tertiary: Color(0xFF23A9E1), // slide button
     onTertiary: Color(0xFF7CC4FF), // variable
     error: Color(0xFFF22525), // error | favorite
     onError: Colors.white,
@@ -75,7 +75,7 @@ class DpiaLiteThemeData {
     onPrimary: Colors.white,
     secondary: Color(0xFF1570EF), // second
     onSecondary: Color(0xFF595958), // text 2
-    tertiary: Color(0xFF3D98E1), // slide button
+    tertiary: Color(0xFF23A9E1), // slide button
     onTertiary: Color(0xFF7CC4FF), // variable
     error: Color(0xFFF22525), // error | favorite
     onError: Colors.white,
