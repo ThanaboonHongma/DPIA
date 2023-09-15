@@ -31,8 +31,8 @@ class DpiaLiteThemeData {
       iconTheme: IconThemeData(color: colorScheme.primary),
       canvasColor: colorScheme.background,
       scaffoldBackgroundColor: colorScheme.background,
-      highlightColor: Colors.transparent,
-      focusColor: const Color(0xFFF1F5FF),
+      highlightColor: Color.fromARGB(0, 254, 254, 254),
+      focusColor: const Color(0xFFFEFEFE),
       snackBarTheme: SnackBarThemeData(
         behavior: SnackBarBehavior.floating,
         backgroundColor: Color.alphaBlend(
