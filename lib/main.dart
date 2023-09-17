@@ -1,3 +1,4 @@
+import 'package:dpia_project/screens/dpia-Consultation/Consultation1.dart';
 import 'package:dpia_project/screens/dpia-Identification/Identification1.dart';
 import 'package:dpia_project/screens/login/login_page.dart';
 //import 'package:dpia_project/screens/themes/dpia_lite_theme_data.dart';
@@ -15,7 +16,7 @@ class DPIA extends StatelessWidget {
     return MaterialApp(
       title: "DPIA By Wisework",
       //theme: DpiaLiteThemeData.lightThemeData,
-      home: Identification1(),
+      home: Consultation1(),
     );
   }
 }
