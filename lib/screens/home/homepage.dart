@@ -1,3 +1,4 @@
+import 'package:dpia_project/screens/models/homedescription.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -8,6 +9,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  List<HomeDescription> homedescription =
+      defaltHomeDescription.map((e) => e).toList();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -155,8 +158,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   _dpialistview() {
-    final List<String> data = <String>[];
-    if (data.isEmpty) {
+    if (homedescription.isEmpty) {
       return [
         Column(
           children: [
@@ -248,11 +250,12 @@ class _HomePageState extends State<HomePage> {
             ListView.builder(
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
-              itemCount: data.length,
+              itemCount: homedescription.length,
               itemBuilder: (BuildContext context, int index) {
                 return Column(
                   children: [
                     Container(
+                      height: homedescription[index].manage == '' ? 90 : 115,
                       width: 360,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
@@ -273,12 +276,12 @@ class _HomePageState extends State<HomePage> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(data[index],
+                                Text(homedescription[index].titel,
                                     style: Theme.of(context)
                                         .textTheme
                                         .titleMedium),
                                 Text(
-                                  '15/12/2023',
+                                  homedescription[index].datetime,
                                   style: Theme.of(context)
                                       .textTheme
                                       .bodySmall
@@ -295,21 +298,30 @@ class _HomePageState extends State<HomePage> {
                             ),
                             Row(
                               children: [
-                                Text('2 ความเสี่ยงสูง',
+                                Text(homedescription[index].rick,
                                     style:
                                         Theme.of(context).textTheme.bodyMedium)
                               ],
                             ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            Row(
-                              children: [
-                                Text('สถานะดำเนินการ : 25 %',
-                                    style:
-                                        Theme.of(context).textTheme.bodyMedium)
-                              ],
-                            ),
+                            Container(
+                                child: homedescription[index].manage == ''
+                                    ? null
+                                    : Column(
+                                        children: [
+                                          const SizedBox(
+                                            height: 10,
+                                          ),
+                                          Row(
+                                            children: [
+                                              Text(
+                                                  homedescription[index].manage,
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .bodyMedium)
+                                            ],
+                                          ),
+                                        ],
+                                      )),
                           ],
                         ),
                       ),

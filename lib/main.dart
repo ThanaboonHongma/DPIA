@@ -11,7 +11,7 @@ class DPIA extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       title: "DPIA By Wisework",
       debugShowCheckedModeBanner: false,
       // theme: DpiaLiteThemeData.lightThemeData,
