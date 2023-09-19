@@ -1,4 +1,4 @@
-import 'package:dpia_project/screens/models/homedescription.dart';
+import 'package:dpia_project/models/homedescription.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
