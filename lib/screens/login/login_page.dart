@@ -1,3 +1,4 @@
+import 'package:dpia_project/screens/home/homepage.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -255,7 +256,10 @@ class _LoginPageState extends State<LoginPage> {
           style: ElevatedButton.styleFrom(
             backgroundColor: Color(0xff23A9E1), // Background color
           ),
-          onPressed: _handleClickLogin,
+          onPressed: () {
+            Navigator.pushReplacement(
+                context, MaterialPageRoute(builder: (context) => HomePage()));
+          },
           child: Text(
             "เข้าสู่ระบบ",
             style: Theme.of(context).textTheme.titleMedium?.copyWith(
@@ -267,8 +271,8 @@ class _LoginPageState extends State<LoginPage> {
     ];
   }
 
-  void _handleClickLogin() {
-    print(
-        "Login : with ${_usernameController.text}, ${_companynameController.text}, ${_telController.text}, ${_emailController.text})");
-  }
+  // void _handleClickLogin() {
+  //   print(
+  //       "Login : with ${_usernameController.text}, ${_companynameController.text}, ${_telController.text}, ${_emailController.text})");
+  // }
 }
