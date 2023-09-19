@@ -42,14 +42,14 @@ class _DescriptionListviewState extends State<DescriptionListview> {
                 ),
                 children: [
                   const Divider(
-                              color: Color(0xffC4C4C6),
-                              thickness: 1,
-                            ),
+                    color: Color(0xffC4C4C6),
+                    thickness: 1,
+                  ),
                   ...descriptions[index]
                       .list
                       .map(
                         (checkbox) => CheckboxListTile(
-                          side: const BorderSide(color:Color(0xff2684FF)),
+                          side: const BorderSide(color: Color(0xff2684FF)),
                           controlAffinity: ListTileControlAffinity.leading,
                           value: checkbox.isChecked,
                           onChanged: (bool? value) {
