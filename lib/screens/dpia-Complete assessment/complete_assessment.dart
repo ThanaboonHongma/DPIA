@@ -10,9 +10,9 @@ class CompletePage extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           'แบบฟอร์มประเมิน DPIA',
-          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                color: Theme.of(context).colorScheme.tertiary,
-              ),
+          style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                        color: Theme.of(context).colorScheme.tertiary,
+                      ),
         ),
         backgroundColor: Theme.of(context).colorScheme.onPrimary,
       ),
