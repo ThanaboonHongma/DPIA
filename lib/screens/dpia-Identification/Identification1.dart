@@ -1,7 +1,7 @@
-import 'package:dpia_project/models/activity.dart';
-import 'package:dpia_project/screens/dpia_description/dpia_description.dart';
-import 'package:dpia_project/screens/home/homepage.dart';
+// ignore_for_file: file_names
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:dpia_project/models/activity.dart';
 
 class Identification1 extends StatefulWidget {
   const Identification1({super.key});
@@ -18,6 +18,7 @@ class _Identification1State extends State<Identification1> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -40,11 +41,7 @@ class _Identification1State extends State<Identification1> {
             color: Theme.of(context).colorScheme.tertiary,
           ),
           onTap: () {
-            Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(
-                      builder: (context) => const HomePage(),
-                    ),
-                  );
+            context.go('/HomePage');
           },
         ),
         backgroundColor: Theme.of(context).colorScheme.onPrimary,
@@ -172,11 +169,7 @@ Container buildMyNavBar(BuildContext context) {
             height: 40,
             child: ElevatedButton(
                 onPressed: () {
-                  Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(
-                      builder: (context) => const DpiaDescriptionPage(),
-                    ),
-                  );
+                  context.go('/DpiaDescriptionPage');
                 },
                 child: const Text('ถัดไป'))),
       ],

@@ -1,8 +1,7 @@
 import 'package:dpia_project/models/counter_provider.dart';
-import 'package:dpia_project/screens/dpia_necessity_and_proportionlity/dpia_necessity_and_proportionlity.dart';
 import 'package:dpia_project/screens/dpia_risk_assessment/dpia_risk_assessment_add_page.dart';
-import 'package:dpia_project/screens/mitigating/mitigating.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class RiskAssessmentPage extends StatefulWidget {
@@ -26,6 +25,7 @@ class _RiskAssessmentPageState extends State<RiskAssessmentPage> {
     final productList = Provider.of<CounterProvider>(context);
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Row(
           children: [
             Text(
@@ -42,11 +42,7 @@ class _RiskAssessmentPageState extends State<RiskAssessmentPage> {
             color: Theme.of(context).colorScheme.tertiary,
           ),
           onTap: () {
-            Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(
-                      builder: (context) => const NecessityandProportionlityPage(),
-                    ),
-                  );
+            context.go('/NecessityandProportionlityPage');
           },
         ),
         backgroundColor: Theme.of(context).colorScheme.onPrimary,
@@ -327,11 +323,7 @@ class _RiskAssessmentPageState extends State<RiskAssessmentPage> {
             height: 40,
             child: ElevatedButton(
                 onPressed: () {
-                  Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(
-                      builder: (context) => const NecessityandProportionlityPage(),
-                    ),
-                  );
+                  context.go('/NecessityandProportionlityPage');
                 },
                 child: const Text('ย้อนกลับ')),
           ),
@@ -344,11 +336,7 @@ class _RiskAssessmentPageState extends State<RiskAssessmentPage> {
               height: 40,
               child: ElevatedButton(
                   onPressed: () {
-                    Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(
-                        builder: (context) => const MitigatingMeasures(),
-                      ),
-                    );
+                    context.go('/MitigatingMeasuresPage');
                   },
                   child: const Text('ถัดไป'))),
         ],

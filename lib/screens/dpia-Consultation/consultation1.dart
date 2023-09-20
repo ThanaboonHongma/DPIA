@@ -1,7 +1,6 @@
 import 'package:dpia_project/models/consultation/consultation.dart';
-import 'package:dpia_project/screens/dpia_description/dpia_description.dart';
-import 'package:dpia_project/screens/dpia_necessity_and_proportionlity/dpia_necessity_and_proportionlity.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class Consultation1 extends StatefulWidget {
   const Consultation1({super.key});
@@ -19,6 +18,7 @@ class _Consultation1State extends State<Consultation1> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Row(
           children: [
             Text(
@@ -35,11 +35,7 @@ class _Consultation1State extends State<Consultation1> {
             color: Theme.of(context).colorScheme.tertiary,
           ),
           onTap: () {
-            Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(
-                      builder: (context) => const DpiaDescriptionPage(),
-                    ),
-                  );
+            context.go('/DpiaDescriptionPage');
           },
         ),
         backgroundColor: Theme.of(context).colorScheme.onPrimary,
@@ -156,54 +152,47 @@ class _Consultation1State extends State<Consultation1> {
 }
 
 Container buildMyNavBar(BuildContext context) {
-    return Container(
-      height: 60,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.3),
-            spreadRadius: 5,
-            blurRadius: 7,
-            offset: const Offset(0, -8),
-          ),
-        ],
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          SizedBox(
+  return Container(
+    height: 60,
+    decoration: BoxDecoration(
+      color: Colors.white,
+      boxShadow: [
+        BoxShadow(
+          color: Colors.grey.withOpacity(0.3),
+          spreadRadius: 5,
+          blurRadius: 7,
+          offset: const Offset(0, -8),
+        ),
+      ],
+    ),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        SizedBox(
+          width: 100,
+          height: 40,
+          child: ElevatedButton(
+              onPressed: () {
+                context.go('/DpiaDescriptionPage');
+              },
+              child: const Text('ย้อนกลับ')),
+        ),
+        const Text(
+          '3 / 7',
+          style: TextStyle(color: Colors.black),
+        ),
+        SizedBox(
             width: 100,
             height: 40,
-            child:
-                ElevatedButton(onPressed: () {
-                  Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(
-                      builder: (context) => const DpiaDescriptionPage(),
-                    ),
-                  );
-                      }, child: const Text('ย้อนกลับ')),
-          ),
-          const Text(
-            '3 / 7',
-            style: TextStyle(color: Colors.black),
-          ),
-          SizedBox(
-              width: 100,
-              height: 40,
-              child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(
-                        builder: (context) => const NecessityandProportionlityPage(),
-                      ),
-                    );
-                  },
-                  child: const Text('ถัดไป'))),
-        ],
-      ),
-    );
-  }
+            child: ElevatedButton(
+                onPressed: () {
+                  context.go('/NecessityandProportionlityPage');
+                },
+                child: const Text('ถัดไป'))),
+      ],
+    ),
+  );
+}
 
 class ConsultationListview extends StatefulWidget {
   const ConsultationListview({super.key});

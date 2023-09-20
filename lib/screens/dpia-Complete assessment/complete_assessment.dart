@@ -1,5 +1,5 @@
-import 'package:dpia_project/screens/home/homepage.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class CompletePage extends StatelessWidget {
   const CompletePage({Key? key}) : super(key: key);
@@ -8,6 +8,7 @@ class CompletePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+
         title: Text(
           'แบบฟอร์มประเมิน DPIA',
           style: Theme.of(context).textTheme.headlineSmall?.copyWith(
@@ -40,10 +41,7 @@ class CompletePage extends StatelessWidget {
                     ),
                   ),
                   onPressed: () {
-                    Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const HomePage()));
+                    context.go('/HomePage');
                   },
                   child: const Text('OK')),
             ),

@@ -1,8 +1,7 @@
-import 'package:dpia_project/screens/dpia-Consultation/consultation1.dart';
-import 'package:dpia_project/screens/dpia-Identification/Identification1.dart';
 import 'package:dpia_project/screens/dpia_description/description_listview.dart';
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class DpiaDescriptionPage extends StatefulWidget {
   const DpiaDescriptionPage({super.key});
@@ -16,6 +15,7 @@ class _DpiaDescriptionPageState extends State<DpiaDescriptionPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Row(
           children: [
             Text(
@@ -32,11 +32,7 @@ class _DpiaDescriptionPageState extends State<DpiaDescriptionPage> {
             color: Theme.of(context).colorScheme.tertiary,
           ),
           onTap: () {
-            Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(
-                      builder: (context) => const Identification1(),
-                    ),
-                  );
+            context.go('/Identification');
           },
         ),
         backgroundColor: Theme.of(context).colorScheme.onPrimary,
@@ -148,14 +144,11 @@ class _DpiaDescriptionPageState extends State<DpiaDescriptionPage> {
           SizedBox(
             width: 100,
             height: 40,
-            child:
-                ElevatedButton(onPressed: () {
-                  Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(
-                      builder: (context) => const Identification1(),
-                    ),
-                  );
-                      }, child: const Text('ย้อนกลับ')),
+            child: ElevatedButton(
+                onPressed: () {
+                  context.go('/Identification');
+                },
+                child: const Text('ย้อนกลับ')),
           ),
           const Text(
             '2 / 7',
@@ -166,11 +159,7 @@ class _DpiaDescriptionPageState extends State<DpiaDescriptionPage> {
               height: 40,
               child: ElevatedButton(
                   onPressed: () {
-                    Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(
-                        builder: (context) => const Consultation1(),
-                      ),
-                    );
+                    context.go('/Consultation');
                   },
                   child: const Text('ถัดไป'))),
         ],

@@ -1,8 +1,8 @@
-import 'package:dpia_project/screens/home/homepage.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class LoginPage extends StatefulWidget {
-  LoginPage({super.key});
+  const LoginPage({super.key});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -257,8 +257,9 @@ class _LoginPageState extends State<LoginPage> {
             backgroundColor: const Color(0xff23A9E1), // Background color
           ),
           onPressed: () {
-            Navigator.pushReplacement(
-                context, MaterialPageRoute(builder: (context) => const HomePage()));
+            context.go('/HomePage');
+            // Navigator.pushReplacement(
+                // context, MaterialPageRoute(builder: (context) => const HomePage()));
           },
           child: Text(
             "เข้าสู่ระบบ",

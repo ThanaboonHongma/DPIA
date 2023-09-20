@@ -1,8 +1,7 @@
+import 'package:dpia_project/Router/router.dart';
 import 'package:dpia_project/models/counter_provider.dart';
-import 'package:dpia_project/screens/login/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 
 void main() {
   runApp(const DPIA());
@@ -13,14 +12,12 @@ class DPIA extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final router = GoRouteProvider();
     return ChangeNotifierProvider(
-      create: (context) => CounterProvider(),
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: "DPIA By Wisework",
-        // theme: DpiaLiteThemeData.lightThemeData,
-        home: LoginPage(),
-      )
-    );
+        create: (context) => CounterProvider(),
+        child: MaterialApp.router(
+          debugShowCheckedModeBanner: false,
+          routerConfig: router.goRouter(),
+        ));
   }
 }

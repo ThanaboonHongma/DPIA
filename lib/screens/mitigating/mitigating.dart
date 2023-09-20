@@ -1,8 +1,6 @@
-import 'package:dpia_project/screens/dpia-Monitoring%20and%20review/monitoring.dart';
-import 'package:dpia_project/screens/dpia_risk_assessment/dpia_risk_assessment.dart';
-import 'package:dpia_project/screens/mitigating/addmeasure.dart';
 import 'package:dpia_project/models/mitigatingdescription/mitigatingdescription.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class MitigatingMeasures extends StatefulWidget {
   const MitigatingMeasures({super.key});
@@ -19,6 +17,7 @@ class _MitigatingMeasuresState extends State<MitigatingMeasures> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Row(
           children: [
             Text(
@@ -35,11 +34,7 @@ class _MitigatingMeasuresState extends State<MitigatingMeasures> {
             color: Theme.of(context).colorScheme.tertiary,
           ),
           onTap: () {
-             Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(
-                      builder: (context) => const RiskAssessmentPage(),
-                    ),
-                  );
+            context.go('/RiskAssessmentPage');
           },
         ),
         backgroundColor: Theme.of(context).colorScheme.onPrimary,
@@ -93,11 +88,7 @@ class _MitigatingMeasuresState extends State<MitigatingMeasures> {
             height: 40,
             child: ElevatedButton(
                 onPressed: () {
-                  Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(
-                      builder: (context) => const RiskAssessmentPage(),
-                    ),
-                  );
+                  context.go('/RiskAssessmentPage');
                 },
                 child: const Text('ย้อนกลับ')),
           ),
@@ -110,11 +101,7 @@ class _MitigatingMeasuresState extends State<MitigatingMeasures> {
               height: 40,
               child: ElevatedButton(
                   onPressed: () {
-                    Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(
-                        builder: (context) => const MonitoringPage(),
-                      ),
-                    );
+                    context.go('/MonitoringPage');
                   },
                   child: const Text('ถัดไป'))),
         ],
@@ -257,11 +244,7 @@ class _MitigatingMeasuresState extends State<MitigatingMeasures> {
                             width: double.infinity,
                             child: ElevatedButton(
                                 onPressed: () {
-                                  Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              const AddMeasure()));
+                                  context.go('/AddMitigatingMeasuresPage');
                                 },
                                 child: Text('เพิ่ม/แก้ไขมาตรการ',
                                     style: Theme.of(context)
@@ -350,11 +333,7 @@ class _MitigatingMeasuresState extends State<MitigatingMeasures> {
                             width: double.infinity,
                             child: ElevatedButton(
                                 onPressed: () {
-                                  Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              const AddMeasure()));
+                                  context.go('/AddMitigatingMeasuresPage');
                                 },
                                 child: Text('เพิ่ม/แก้ไขมาตรการ',
                                     style: Theme.of(context)

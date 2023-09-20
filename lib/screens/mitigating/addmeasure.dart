@@ -1,6 +1,6 @@
-import 'package:dpia_project/screens/mitigating/mitigating.dart';
 import 'package:dpia_project/screens/mitigating/proosedmeasures.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
 class AddMeasure extends StatefulWidget {
@@ -15,6 +15,7 @@ class _AddMeasureState extends State<AddMeasure> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           title: Row(
             children: [
               Text(
@@ -31,11 +32,7 @@ class _AddMeasureState extends State<AddMeasure> {
               color: Theme.of(context).colorScheme.tertiary,
             ),
             onTap: () {
-              Navigator.of(context).pushReplacement(
-                MaterialPageRoute(
-                  builder: (context) => const MitigatingMeasures(),
-                ),
-              );
+              context.go('/MitigatingMeasuresPage');
             },
           ),
           actions: <Widget>[
@@ -45,10 +42,7 @@ class _AddMeasureState extends State<AddMeasure> {
                 width: 70,
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const MitigatingMeasures()));
+                    context.go('/MitigatingMeasuresPage');
                   },
                   style: ButtonStyle(
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(

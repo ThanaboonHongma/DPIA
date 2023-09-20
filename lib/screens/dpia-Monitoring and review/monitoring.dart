@@ -1,6 +1,5 @@
-import 'package:dpia_project/screens/dpia-Complete%20assessment/complete_assessment.dart';
-import 'package:dpia_project/screens/mitigating/mitigating.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class MonitoringPage extends StatefulWidget {
   const MonitoringPage({super.key});
@@ -24,9 +23,12 @@ class _MonitoringPage extends State<MonitoringPage> {
     super.dispose();
   }
 
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Row(
           children: [
             Text(
@@ -43,11 +45,7 @@ class _MonitoringPage extends State<MonitoringPage> {
             color: Theme.of(context).colorScheme.tertiary,
           ),
           onTap: () {
-            Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(
-                      builder: (context) => const MitigatingMeasures(),
-                    ),
-                  );
+            context.go('/MitigatingMeasuresPage');
           },
         ),
         backgroundColor: Theme.of(context).colorScheme.onPrimary,
@@ -229,11 +227,7 @@ class _MonitoringPage extends State<MonitoringPage> {
             height: 40,
             child: ElevatedButton(
                 onPressed: () {
-                  Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(
-                      builder: (context) => const MitigatingMeasures(),
-                    ),
-                  );
+                  context.go('/MitigatingMeasuresPage');
                 },
                 child: const Text('ย้อนกลับ')),
           ),
@@ -246,11 +240,7 @@ class _MonitoringPage extends State<MonitoringPage> {
               height: 40,
               child: ElevatedButton(
                   onPressed: () {
-                    Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(
-                        builder: (context) => const CompletePage(),
-                      ),
-                    );
+                    context.go('/CompletePage');
                   },
                   child: const Text('ถัดไป'))),
         ],

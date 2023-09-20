@@ -1,6 +1,6 @@
 import 'package:dpia_project/models/home/homedescription.dart';
-import 'package:dpia_project/screens/dpia-Identification/Identification1.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -16,6 +16,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Row(
           children: [
             Text(
@@ -45,11 +46,7 @@ class _HomePageState extends State<HomePage> {
               width: 130,
               child: ElevatedButton(
                 onPressed: () {
-                  Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(
-                      builder: (context) => const Identification1(),
-                    ),
-                  );
+                  context.go('/Identification');
                 },
                 style: ButtonStyle(
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -97,11 +94,7 @@ class _HomePageState extends State<HomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.of(context).pushReplacement(
-            MaterialPageRoute(
-              builder: (context) => const Identification1(),
-            ),
-          );
+          context.go('/Identification');
         },
         tooltip: 'Increment',
         child: const Icon(Icons.add),
@@ -151,11 +144,7 @@ class _HomePageState extends State<HomePage> {
                   children: [
                     TextButton(
                         onPressed: () {
-                          Navigator.of(context).pushReplacement(
-                            MaterialPageRoute(
-                              builder: (context) => const Identification1(),
-                            ),
-                          );
+                          context.go('/Identification');
                         },
                         child: Text(
                           'อ่านเพิ่มเติม',
@@ -232,11 +221,7 @@ class _HomePageState extends State<HomePage> {
                                   Theme.of(context).colorScheme.tertiary),
                             ),
                             onPressed: () {
-                              Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(
-                                  builder: (context) => const Identification1(),
-                                ),
-                              );
+                              context.go('/Identification');
                             },
                             child: Text(
                               'เริ่มประเมิน DPIA',

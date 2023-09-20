@@ -1,8 +1,6 @@
-import 'package:dpia_project/screens/dpia-Consultation/consultation1.dart';
 import 'package:dpia_project/screens/dpia_necessity_and_proportionlity/necessity_and_proportionlity_listview.dart';
-import 'package:dpia_project/screens/dpia_risk_assessment/dpia_risk_assessment.dart';
-
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class NecessityandProportionlityPage extends StatefulWidget {
   const NecessityandProportionlityPage({super.key});
@@ -18,6 +16,7 @@ class _NecessityandProportionlityPageState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Row(
           children: [
             Text(
@@ -34,11 +33,7 @@ class _NecessityandProportionlityPageState
             color: Theme.of(context).colorScheme.tertiary,
           ),
           onTap: () {
-            Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(
-                      builder: (context) => const Consultation1(),
-                    ),
-                  );
+            context.go('/Consultation');
           },
         ),
         backgroundColor: Theme.of(context).colorScheme.onPrimary,
@@ -155,11 +150,7 @@ class _NecessityandProportionlityPageState
             height: 40,
             child: ElevatedButton(
                 onPressed: () {
-                  Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(
-                      builder: (context) => const Consultation1(),
-                    ),
-                  );
+                  context.go('/Consultation');
                 },
                 child: const Text('ย้อนกลับ')),
           ),
@@ -172,11 +163,7 @@ class _NecessityandProportionlityPageState
               height: 40,
               child: ElevatedButton(
                   onPressed: () {
-                    Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(
-                        builder: (context) => const RiskAssessmentPage(),
-                      ),
-                    );
+                    context.go('/RiskAssessmentPage');
                   },
                   child: const Text('ถัดไป'))),
         ],

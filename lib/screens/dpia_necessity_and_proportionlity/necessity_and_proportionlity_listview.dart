@@ -20,48 +20,46 @@ class _NecessityandProportionlityListviewState
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       itemBuilder: (BuildContext context, int index) {
-        return Container(
-          child: Column(children: [
-            
-            ...necessityandproportionlitys[index]
-                .list
-                .map(
-                  (checkbox) => CheckboxListTile(
-                    contentPadding: EdgeInsets.symmetric(vertical: 5),
-                    side: const BorderSide(color: Color(0xff2684FF)),
-                    controlAffinity: ListTileControlAffinity.leading,
-                    value: checkbox.isChecked,
-                    onChanged: (bool? value) {
-                      List<NecessityandProportionlity> temp = [];
-                      for (NecessityandProportionlity nec
-                          in necessityandproportionlitys) {
-                        if (nec == necessityandproportionlitys[index]) {
-                          final list = nec.list
-                              .map((i) => i == checkbox
-                                  ? i.copyWith(isChecked: value)
-                                  : i)
-                              .toList();
-                          temp.add(nec.copyWith(list: list));
-                        } else {
-                          temp.add(nec);
-                        }
+        return Column(children: [
+          
+          ...necessityandproportionlitys[index]
+              .list
+              .map(
+                (checkbox) => CheckboxListTile(
+                  contentPadding: const EdgeInsets.symmetric(vertical: 5),
+                  side: const BorderSide(color: Color(0xff2684FF)),
+                  controlAffinity: ListTileControlAffinity.leading,
+                  value: checkbox.isChecked,
+                  onChanged: (bool? value) {
+                    List<NecessityandProportionlity> temp = [];
+                    for (NecessityandProportionlity nec
+                        in necessityandproportionlitys) {
+                      if (nec == necessityandproportionlitys[index]) {
+                        final list = nec.list
+                            .map((i) => i == checkbox
+                                ? i.copyWith(isChecked: value)
+                                : i)
+                            .toList();
+                        temp.add(nec.copyWith(list: list));
+                      } else {
+                        temp.add(nec);
                       }
-                      setState(() {
-                        necessityandproportionlitys = temp;
-                      });
-                    },
-                    title: Transform.translate(
-                      offset: const Offset(-16, 0),
-                      child: Text(
-                        checkbox.name,
-                        style: Theme.of(context).textTheme.titleMedium,
-                      ),
+                    }
+                    setState(() {
+                      necessityandproportionlitys = temp;
+                    });
+                  },
+                  title: Transform.translate(
+                    offset: const Offset(-16, 0),
+                    child: Text(
+                      checkbox.name,
+                      style: Theme.of(context).textTheme.titleMedium,
                     ),
                   ),
-                )
-                .toList(),
-          ]),
-        );
+                ),
+              )
+              .toList(),
+        ]);
       },
     );
   }
