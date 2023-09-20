@@ -22,14 +22,14 @@ class CompletePage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Image.asset('assets/images/CompletePage/iconpass.png'),
-            SizedBox(height: 16), // เพิ่มระยะห่างระหว่างรูปภาพและข้อความ
+            const SizedBox(height: 16), // เพิ่มระยะห่างระหว่างรูปภาพและข้อความ
             Text(
               'ทำประเมินเสร็จสิ้น!',
               style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                     color: Theme.of(context).colorScheme.tertiary,
                   ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             SizedBox(
               width: 200,
               height: 40,
@@ -41,9 +41,9 @@ class CompletePage extends StatelessWidget {
                   ),
                   onPressed: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => monitoring()));
+                        MaterialPageRoute(builder: (context) => const monitoring()));
                   },
-                  child: Text('OK')),
+                  child: const Text('OK')),
             ),
           ],
         ),

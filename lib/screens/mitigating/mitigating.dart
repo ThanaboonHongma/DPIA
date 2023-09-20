@@ -1,5 +1,5 @@
 import 'package:dpia_project/screens/mitigating/addmeasure.dart';
-import 'package:dpia_project/models/mitigatingdescription.dart';
+import 'package:dpia_project/models/mitigatingdescription/mitigatingdescription.dart';
 import 'package:flutter/material.dart';
 
 class MitigatingMeasures extends StatefulWidget {
@@ -240,7 +240,7 @@ class _MitigatingMeasuresState extends State<MitigatingMeasures> {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => AddMeasure()));
+                                          builder: (context) => const AddMeasure()));
                                 },
                                 child: Text('เพิ่ม/แก้ไขมาตรการ',
                                     style: Theme.of(context)
@@ -330,7 +330,7 @@ class _MitigatingMeasuresState extends State<MitigatingMeasures> {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => AddMeasure()));
+                                          builder: (context) => const AddMeasure()));
                                 },
                                 child: Text('เพิ่ม/แก้ไขมาตรการ',
                                     style: Theme.of(context)

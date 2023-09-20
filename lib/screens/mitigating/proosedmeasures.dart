@@ -68,7 +68,7 @@ class PproosedmeasuMesState extends State<ProosedMeasures> {
                     color: Colors.grey,
                     thickness: 1,
                   ),
-                  ..._Measures(),
+                  ..._measures(),
                   const SizedBox(
                     height: 15,
                   ),
@@ -117,7 +117,7 @@ class PproosedmeasuMesState extends State<ProosedMeasures> {
     );
   }
 
-  _Measures() {
+  _measures() {
     return [
       Column(
         crossAxisAlignment: CrossAxisAlignment.start,

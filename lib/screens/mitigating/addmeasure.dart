@@ -47,7 +47,7 @@ class _AddMeasureState extends State<AddMeasure> {
                     Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => MitigatingMeasures()));
+                            builder: (context) => const MitigatingMeasures()));
                   },
                   style: ButtonStyle(
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(

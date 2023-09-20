@@ -1,4 +1,4 @@
-import 'package:dpia_project/models/consultation.dart';
+import 'package:dpia_project/models/consultation/consultation.dart';
 import 'package:flutter/material.dart';
 
 class Consultation1 extends StatefulWidget {
@@ -48,8 +48,8 @@ class _Consultation1State extends State<Consultation1> {
               margin: const EdgeInsets.all(
                 10,
               ),
-              child: Padding(
-                padding: const EdgeInsets.all(15.0),
+              child: const Padding(
+                padding: EdgeInsets.all(15.0),
                 child: Column(
                   children: [
                     Align(
@@ -57,10 +57,10 @@ class _Consultation1State extends State<Consultation1> {
                       child: Text('ขั้นตอนที่ 3 DPIA Consultation',
                           style: TextStyle(
                               fontWeight: FontWeight.w400,
-                              color: const Color.fromRGBO(35, 169, 225, 1),
+                              color: Color.fromRGBO(35, 169, 225, 1),
                               fontSize: 16)),
                     ),
-                    const Divider(
+                    Divider(
                       thickness: 1,
                       indent: 0,
                       endIndent: 0,
@@ -88,7 +88,7 @@ class _Consultation1State extends State<Consultation1> {
                 ),
               ),
             ),
-            ConsultationListview(),
+            const ConsultationListview(),
             Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
@@ -111,7 +111,7 @@ class _Consultation1State extends State<Consultation1> {
                       controlAffinity: ListTileControlAffinity.leading,
                       title: Transform.translate(
                         offset: const Offset(-16, 0),
-                        child: Text("อื่นๆ (โปรดระบุ)"),
+                        child: const Text("อื่นๆ (โปรดระบุ)"),
                       ),
                       value: showTextField,
                       onChanged: (newValue) {
@@ -122,8 +122,8 @@ class _Consultation1State extends State<Consultation1> {
                       },
                     ),
                     if (showTextField)
-                      Padding(
-                        padding: const EdgeInsets.all(16.0),
+                      const Padding(
+                        padding: EdgeInsets.all(16.0),
                         child: TextField(
                           decoration: InputDecoration(hintText: "โปรดกรอก"),
                         ),

@@ -112,7 +112,7 @@ class _NecessityandProportionlityPageState extends State<NecessityandProportionl
                             ),
                             
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
                           const NecessityandProportionlityListview(),

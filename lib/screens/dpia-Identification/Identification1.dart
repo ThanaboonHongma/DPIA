@@ -1,4 +1,4 @@
-import 'package:dpia_project/models/activity.dart';
+import 'package:dpia_project/models/Identification/activity.dart';
 import 'package:flutter/material.dart';
 
 class Identification1 extends StatefulWidget {
@@ -51,12 +51,12 @@ class _Identification1State extends State<Identification1> {
                 padding: const EdgeInsets.all(15.0),
                 child: Column(
                   children: [
-                    Align(
+                    const Align(
                       alignment: Alignment.topLeft,
                       child: Text('ขั้นตอนที่ 1 [DPIA Identification]',
                           style: TextStyle(
                               fontWeight: FontWeight.w400,
-                              color: const Color.fromRGBO(35, 169, 225, 1),
+                              color: Color.fromRGBO(35, 169, 225, 1),
                               fontSize: 16)),
                     ),
                     const Divider(
@@ -65,22 +65,22 @@ class _Identification1State extends State<Identification1> {
                       endIndent: 0,
                       color: Colors.grey,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
-                    Align(
+                    const Align(
                       alignment: Alignment.topLeft,
                       child: Text('[DPIA Identification]'),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
-                    Align(
+                    const Align(
                       alignment: Alignment.topLeft,
                       child: Text(
                           'การระบุความจำเป็นในการทำ DPIA ตามประเภทของการประมวลผลข้อมูล หรือโครงการที่จะมีการประมูลข้อมูล ทั้งที่เป็นโครงการใหม่หรือที่มีการปรับปรุงเปลี่ยนแปลงการประมวลข้อมูลที่มีอยู่เดิม โดยระบุลักษณะที่แสดงถึงความจำเป็น รวมถึงแหล่งอ้างอิงที่เหมาะสม'),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     CheckboxListTile(

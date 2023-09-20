@@ -1,4 +1,5 @@
-import 'package:dpia_project/models/homedescription.dart';
+import 'package:dpia_project/models/home/homedescription.dart';
+import 'package:dpia_project/screens/dpia-Identification/Identification1.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -43,7 +44,13 @@ class _HomePageState extends State<HomePage> {
             child: SizedBox(
               width: 130,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const Identification1(),
+                    ),
+                  );
+                },
                 style: ButtonStyle(
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                     RoundedRectangleBorder(
@@ -89,7 +96,13 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => const Identification1(),
+            ),
+          );
+        },
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ),
@@ -137,7 +150,13 @@ class _HomePageState extends State<HomePage> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => const Identification1(),
+                            ),
+                          );
+                        },
                         child: Text(
                           'อ่านเพิ่มเติม',
                           style: Theme.of(context)

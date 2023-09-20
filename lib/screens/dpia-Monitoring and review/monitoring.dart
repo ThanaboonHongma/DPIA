@@ -56,8 +56,8 @@ class _monitoring extends State<monitoring> {
               margin: const EdgeInsets.all(
                 10,
               ),
-              child: Padding(
-                padding: const EdgeInsets.all(15.0),
+              child: const Padding(
+                padding: EdgeInsets.all(15.0),
                 child: Column(
                   children: [
                     Align(
@@ -65,10 +65,10 @@ class _monitoring extends State<monitoring> {
                       child: Text('ขั้นตอนที่ 7 Monitoring and review',
                           style: TextStyle(
                               fontWeight: FontWeight.w400,
-                              color: const Color.fromRGBO(35, 169, 225, 1),
+                              color: Color.fromRGBO(35, 169, 225, 1),
                               fontSize: 16)),
                     ),
-                    const Divider(
+                    Divider(
                       thickness: 1,
                       indent: 0,
                       endIndent: 0,
@@ -118,40 +118,40 @@ class _monitoring extends State<monitoring> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start, // ชิดซ้าย
                     children: [
-                      Text('ให้ติดตามตรวจสอบโดย',
+                      const Text('ให้ติดตามตรวจสอบโดย',
                           style: TextStyle(
                               fontWeight: FontWeight.w400,
-                              color: const Color.fromRGBO(35, 169, 225, 1),
+                              color: Color.fromRGBO(35, 169, 225, 1),
                               fontSize: 16)),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
-                      Text('DPO หรือหน่วยงาน'),
+                      const Text('DPO หรือหน่วยงาน'),
                       SizedBox(
                         child: TextField(
                           controller: textController1,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             border: OutlineInputBorder(),
                           ),
                         ),
                       ),
-                      Text(
+                      const Text(
                           'ผู้รับผิดชอบโครงการหรือการประมวลผลข้อมูลตาม DPIA นี้มีหน้าที่รายงาน DPO หรือหน่วยงาน'),
                       SizedBox(
                         child: TextField(
                           controller: textController2,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             border: OutlineInputBorder(),
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
-                      Text('การเผยแพร่เอกสาร DPIA ฉบับนี้',
+                      const Text('การเผยแพร่เอกสาร DPIA ฉบับนี้',
                           style: TextStyle(
                               fontWeight: FontWeight.w400,
-                              color: const Color.fromRGBO(35, 169, 225, 1),
+                              color: Color.fromRGBO(35, 169, 225, 1),
                               fontSize: 16)),
                       const Divider(
                         thickness: 1,
@@ -159,23 +159,23 @@ class _monitoring extends State<monitoring> {
                         endIndent: 0,
                         color: Colors.grey,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
-                      Text('ให้เผยแพร่ทาง'),
+                      const Text('ให้เผยแพร่ทาง'),
                       SizedBox(
                         child: TextField(
                           controller: textController3,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             border: OutlineInputBorder(),
                           ),
                         ),
                       ),
-                      Text('การติดตามตรวจสอบและทบทวนตาม DPIA ฉบับนี้'),
+                      const Text('การติดตามตรวจสอบและทบทวนตาม DPIA ฉบับนี้'),
                       SizedBox(
                         child: TextField(
                           controller: textController4,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             border: OutlineInputBorder(),
                           ),
                         ),

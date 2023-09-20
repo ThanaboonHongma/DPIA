@@ -1,5 +1,5 @@
 import 'package:dpia_project/models/riskassessment/risklist.dart';
-import 'package:dpia_project/screens/dpia_risk_assessment/counter_provider.dart';
+import 'package:dpia_project/models/counter_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -86,13 +86,13 @@ class _DpiaAddRiskState extends State<DpiaAddRisk> {
               children: [
                 IconButton(
                     onPressed: () => Navigator.pop(context),
-                    icon: Icon(Icons.close)),
+                    icon: const Icon(Icons.close)),
               ],
             ),
             Align(
               alignment: Alignment.centerLeft,
               child: Padding(
-                padding: EdgeInsets.only(left: 1.0),
+                padding: const EdgeInsets.only(left: 1.0),
                 child: Text(
                   'ความเสี่ยงที่ $riskCounter',
                 ),
@@ -116,7 +116,7 @@ class _DpiaAddRiskState extends State<DpiaAddRisk> {
               child: TextField(
   controller: _impactTextController, // กำหนด Controller
   textAlignVertical: TextAlignVertical.center, // กำหนดการจัดวางแนวดิ่งเป็นกลาง
-  decoration: InputDecoration(
+  decoration: const InputDecoration(
     focusedBorder: OutlineInputBorder(
       borderSide: BorderSide(color: Colors.blue),
     ),
@@ -244,8 +244,8 @@ class _DpiaAddRiskState extends State<DpiaAddRisk> {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           color: _riskLevel == "ระดับต่ำ"
-                              ? Color(0xffA2EDCE)
-                              : Color(0xffA2EDCE).withOpacity(0.3),
+                              ? const Color(0xffA2EDCE)
+                              : const Color(0xffA2EDCE).withOpacity(0.3),
                         ),
                         child: const Padding(
                           padding: EdgeInsets.all(8.0),
@@ -258,8 +258,8 @@ class _DpiaAddRiskState extends State<DpiaAddRisk> {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           color: _riskLevel == "ระดับกลาง"
-                              ? Color(0xffEDCFA2)
-                              : Color(0xffEDCFA2).withOpacity(0.3),
+                              ? const Color(0xffEDCFA2)
+                              : const Color(0xffEDCFA2).withOpacity(0.3),
                         ),
                         child: const Padding(
                           padding: EdgeInsets.all(8.0),
@@ -272,8 +272,8 @@ class _DpiaAddRiskState extends State<DpiaAddRisk> {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           color: _riskLevel == "ระดับสูง"
-                              ? Color(0xffFFA8B8)
-                              : Color(0xffFFA8B8).withOpacity(0.3),
+                              ? const Color(0xffFFA8B8)
+                              : const Color(0xffFFA8B8).withOpacity(0.3),
                         ),
                         child: const Padding(
                           padding: EdgeInsets.all(8.0),

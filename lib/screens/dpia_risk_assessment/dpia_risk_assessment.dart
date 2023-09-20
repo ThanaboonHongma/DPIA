@@ -1,4 +1,4 @@
-import 'package:dpia_project/screens/dpia_risk_assessment/counter_provider.dart';
+import 'package:dpia_project/models/counter_provider.dart';
 import 'package:dpia_project/screens/dpia_risk_assessment/dpia_risk_assessment_add_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -145,8 +145,8 @@ class _RiskAssessmentPageState extends State<RiskAssessmentPage> {
                   child: Column(
                     children: [
                       productList.risklist.isEmpty
-                          ? Padding(
-                              padding: const EdgeInsets.all(8.0),
+                          ? const Padding(
+                              padding: EdgeInsets.all(8.0),
                               child: Center(
                                 child: Text(
                                   "ไม่มีรายการประเมินความเสี่ยง",
@@ -194,18 +194,18 @@ class _RiskAssessmentPageState extends State<RiskAssessmentPage> {
                                                                       index]
                                                                   .riskLevel ==
                                                               "ระดับต่ำ"
-                                                          ? Color(0xffA2EDCE)
+                                                          ? const Color(0xffA2EDCE)
                                                           : productList
                                                                       .risklist[
                                                                           index]
                                                                       .riskLevel ==
                                                                   "ระดับกลาง"
-                                                              ? Color(
+                                                              ? const Color(
                                                                   0xffEDCFA2)
-                                                              : Color(
+                                                              : const Color(
                                                                   0xffFFA8B8),
                                                     ),
-                                                    padding: EdgeInsets.all(5),
+                                                    padding: const EdgeInsets.all(5),
                                                     child: Center(
                                                       child: Text(
                                                         ' ${productList.risklist[index].riskLevel} ',
@@ -215,22 +215,22 @@ class _RiskAssessmentPageState extends State<RiskAssessmentPage> {
                                                                           index]
                                                                       .riskLevel ==
                                                                   "ระดับต่ำ"
-                                                              ? Color(
+                                                              ? const Color(
                                                                   0xff0A5134)
                                                               : productList
                                                                           .risklist[
                                                                               index]
                                                                           .riskLevel ==
                                                                       "ระดับกลาง"
-                                                                  ? Color(
+                                                                  ? const Color(
                                                                       0xff735323)
-                                                                  : Color(
+                                                                  : const Color(
                                                                       0xffAF3232),
                                                         ),
                                                       ),
                                                     ),
                                                   ),
-                                                  SizedBox(
+                                                  const SizedBox(
                                                     width: 8,
                                                   ),
                                                   Text(
@@ -269,7 +269,7 @@ class _RiskAssessmentPageState extends State<RiskAssessmentPage> {
                         width: 150,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Color(
+                            backgroundColor: const Color(
                                 0xff23A9E1), // Background color
                           ),
                           onPressed: () {
@@ -277,11 +277,11 @@ class _RiskAssessmentPageState extends State<RiskAssessmentPage> {
                               isScrollControlled: true,
                               context: context,
                               builder: (BuildContext context) {
-                                return DpiaAddRisk();
+                                return const DpiaAddRisk();
                               },
                             );
                           },
-                          child: Text(
+                          child: const Text(
                             "เพิ่มความเสี่ยง",
                           ),
                         ),
@@ -306,7 +306,7 @@ class _RiskAssessmentPageState extends State<RiskAssessmentPage> {
         return Container(
           height: sheetHeight,
           color: Colors.white,
-          child: Center(
+          child: const Center(
             child: Text('This is a custom BottomSheet'),
           ),
         );

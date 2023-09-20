@@ -27,7 +27,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
@@ -41,12 +41,12 @@ class _LoginPageState extends State<LoginPage> {
           child: SingleChildScrollView(
             child: Padding(
               padding:
-                  EdgeInsets.only(left: 29, right: 29, top: 44, bottom: 44),
+                  const EdgeInsets.only(left: 29, right: 29, top: 44, bottom: 44),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Image.asset(
@@ -54,7 +54,7 @@ class _LoginPageState extends State<LoginPage> {
                     width: 232,
                     height: 85,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 50,
                   ),
                   Text(
@@ -63,7 +63,7 @@ class _LoginPageState extends State<LoginPage> {
                           color: Theme.of(context).colorScheme.onPrimary,
                         ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Text(
@@ -73,7 +73,7 @@ class _LoginPageState extends State<LoginPage> {
                           color: Theme.of(context).colorScheme.onPrimary,
                         ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   Container(
@@ -82,14 +82,14 @@ class _LoginPageState extends State<LoginPage> {
                       color: Colors.white.withOpacity(0.44),
                     ),
                     child: Padding(
-                      padding: EdgeInsets.all(15.0),
+                      padding: const EdgeInsets.all(15.0),
                       child: Column(
                         children: [
                           
                           Align(
                             alignment: Alignment.centerLeft,
                             child: Padding(
-                              padding: EdgeInsets.only(left: 1.0),
+                              padding: const EdgeInsets.only(left: 1.0),
                               child: Text(
                                 'เข้าสู่ระบบ',
                                 style:
@@ -102,11 +102,11 @@ class _LoginPageState extends State<LoginPage> {
               thickness: 1,
                
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
                           ..._buildTextFields(),
-                          SizedBox(height: 32),
+                          const SizedBox(height: 32),
                           ..._buildButtons(),
                         ],
                       ),
@@ -133,7 +133,7 @@ class _LoginPageState extends State<LoginPage> {
           ),
         ],
       ),
-      SizedBox(
+      const SizedBox(
         height: 5,
       ),
       SizedBox(
@@ -141,7 +141,7 @@ class _LoginPageState extends State<LoginPage> {
         child: TextField(
           controller: _usernameController,
           textAlignVertical: TextAlignVertical.center,
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
             focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(color: Colors.blue),
             ),
@@ -151,7 +151,7 @@ class _LoginPageState extends State<LoginPage> {
           ),
         ),
       ),
-      SizedBox(
+      const SizedBox(
         height: 10,
       ),
       Row(
@@ -165,14 +165,14 @@ class _LoginPageState extends State<LoginPage> {
           ),
         ],
       ),
-      SizedBox(
+      const SizedBox(
         height: 5,
       ),
       SizedBox(
         height: 40,
         child: TextField(
           controller: _companynameController,
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
             focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(color: Colors.blue),
             ),
@@ -182,7 +182,7 @@ class _LoginPageState extends State<LoginPage> {
           ),
         ),
       ),
-      SizedBox(
+      const SizedBox(
         height: 10,
       ),
       Row(
@@ -196,14 +196,14 @@ class _LoginPageState extends State<LoginPage> {
           ),
         ],
       ),
-      SizedBox(
+      const SizedBox(
         height: 5,
       ),
       SizedBox(
         height: 40,
         child: TextField(
           controller: _telController,
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
             focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(color: Colors.blue),
             ),
@@ -213,7 +213,7 @@ class _LoginPageState extends State<LoginPage> {
           ),
         ),
       ),
-      SizedBox(
+      const SizedBox(
         height: 10,
       ),
       Row(
@@ -228,14 +228,14 @@ class _LoginPageState extends State<LoginPage> {
           
         ],
       ),
-      SizedBox(
+      const SizedBox(
         height: 5,
       ),
       SizedBox(
         height: 40,
         child: TextField(
           controller: _emailController,
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
             focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(color: Colors.blue),
             ),
@@ -254,11 +254,11 @@ class _LoginPageState extends State<LoginPage> {
         width: 500,
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
-            backgroundColor: Color(0xff23A9E1), // Background color
+            backgroundColor: const Color(0xff23A9E1), // Background color
           ),
           onPressed: () {
             Navigator.pushReplacement(
-                context, MaterialPageRoute(builder: (context) => HomePage()));
+                context, MaterialPageRoute(builder: (context) => const HomePage()));
           },
           child: Text(
             "เข้าสู่ระบบ",
