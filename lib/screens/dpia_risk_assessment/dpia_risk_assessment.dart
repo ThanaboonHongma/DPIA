@@ -156,7 +156,7 @@ class _RiskAssessmentPageState extends State<RiskAssessmentPage> {
                               ),
                             )
                           : SizedBox(
-                              height: 400,
+                              height: 350,
                               child: ListView.builder(
                                 itemCount: productList.risklist.length,
                                 itemBuilder: (BuildContext context, int index) {
