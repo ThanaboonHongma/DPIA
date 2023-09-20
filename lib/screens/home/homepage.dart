@@ -78,16 +78,87 @@ class _HomePageState extends State<HomePage> {
               color: const Color(0xffDEDEDE),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Column(
-                children: [
-                  ..._dpiais(),
-                  const SizedBox(
-                    height: 25,
+              padding: const EdgeInsets.all(10.0),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.1),
+                      spreadRadius: 5,
+                      blurRadius: 7,
+                      offset: const Offset(0, 8),
+                    ),
+                  ],
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 20),
+                  child: Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: Column(
+                      children: [
+                        ..._dpiais(),
+                      ],
+                    ),
                   ),
-                  ..._dpialistview(),
-                ],
+                ),
               ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(right: 20),
+              child: Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Column(
+                  children: [
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 1.0),
+                        child: Text(
+                          'รายการประเมินDPIA',
+                          style:
+                              Theme.of(context).textTheme.titleLarge?.copyWith(
+                                    color: Color.fromRGBO(35, 169, 225, 1),
+                                  ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.1),
+                          spreadRadius: 5,
+                          blurRadius: 7,
+                          offset: const Offset(0, 8),
+                        ),
+                      ],
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.only(right: 20),
+                      child: Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: Column(
+                          children: [
+                            ..._dpialistview(),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ],
         ),
@@ -104,63 +175,45 @@ class _HomePageState extends State<HomePage> {
 
   _dpiais() {
     return [
-      Padding(
-        padding: const EdgeInsets.only(top: 20),
-        child: Container(
-          width: 360,
-          height: 220,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            color: Colors.white,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.1),
-                spreadRadius: 5,
-                blurRadius: 7,
-                offset: const Offset(0, 8),
-              ),
-            ],
-          ),
-          child: Padding(
-            padding: const EdgeInsets.only(left: 15, top: 15, right: 15),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Text(
-                  'DPIA',
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: Theme.of(context).colorScheme.tertiary,
-                      ),
+      Align(
+        alignment: Alignment.centerLeft,
+        child: Padding(
+          padding: const EdgeInsets.only(left: 1.0),
+          child: Text(
+            'DPIA',
+            style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                  color: Color.fromRGBO(35, 169, 225, 1),
                 ),
-                const SizedBox(
-                  height: 5,
-                ),
-                Text(
-                    'คือ การประเมินผลกระทบด้านความเป็นส่วนตัว (privacy impact assessment) หรือ “การประเมินผลกระทบด้านการคุ้มครองข้อมูลส่วนบุคคล”(data protection impact assessment, DPIA) เป็นเครื่องมือสำคัญที่จะช่วยให้องค์กรสามารถบริหารการจัดการความเสี่ยงด้านข้อมูลส่วนบุคคล (privacy risk) ได้อย่างเป็นระบบและเป็นรูปธรรม',
-                    style: Theme.of(context).textTheme.bodyMedium),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    TextButton(
-                        onPressed: () {
-                          context.go('/Identification');
-                        },
-                        child: Text(
-                          'อ่านเพิ่มเติม',
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyMedium
-                              ?.copyWith(
-                                color: Theme.of(context).colorScheme.tertiary,
-                              ),
-                        )),
-                  ],
-                )
-              ],
-            ),
           ),
         ),
+      ),
+      const SizedBox(
+        height: 5,
+      ),
+      Align(
+        alignment: Alignment.centerLeft,
+        child: Padding(
+          padding: const EdgeInsets.only(left: 1.0),
+          child: Text(
+            'คือ การประเมินผลกระทบด้านความเป็นส่วนตัว (privacy impact assessment) หรือ “การประเมินผลกระทบด้านการคุ้มครองข้อมูลส่วนบุคคล”(data protection impact assessment, DPIA) เป็นเครื่องมือสำคัญที่จะช่วยให้องค์กรสามารถบริหารการจัดการความเสี่ยงด้านข้อมูลส่วนบุคคล (privacy risk) ได้อย่างเป็นระบบและเป็นรูปธรรม',
+            style: Theme.of(context).textTheme.titleMedium,
+          ),
+        ),
+      ),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          TextButton(
+              onPressed: () {
+                context.go('/Identification');
+              },
+              child: Text(
+                'อ่านเพิ่มเติม',
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: Theme.of(context).colorScheme.tertiary,
+                    ),
+              )),
+        ],
       )
     ];
   }
@@ -170,71 +223,45 @@ class _HomePageState extends State<HomePage> {
       return [
         Column(
           children: [
-            Row(
-              children: [
-                Text(
-                  'รายการประเมิน DPIA',
-                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        color: Theme.of(context).colorScheme.tertiary,
-                      ),
-                ),
-              ],
-            ),
             const SizedBox(
               height: 15,
             ),
-            Container(
-              width: 360,
-              height: 150,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.1),
-                    spreadRadius: 5,
-                    blurRadius: 7,
-                    offset: const Offset(0, 8),
+            Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text('ไม่มีรายการประเมิน DPIA',
+                      style: Theme.of(context).textTheme.bodyMedium),
+                  const SizedBox(
+                    height: 25,
                   ),
-                ],
-              ),
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text('ไม่มีรายการประเมิน DPIA',
-                        style: Theme.of(context).textTheme.bodyMedium),
-                    const SizedBox(
-                      height: 25,
-                    ),
-                    SizedBox(
-                        width: 300,
-                        child: ElevatedButton(
-                            style: ButtonStyle(
-                              shape: MaterialStateProperty.all<
-                                  RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
+                  SizedBox(
+                      width: 300,
+                      child: ElevatedButton(
+                          style: ButtonStyle(
+                            shape: MaterialStateProperty.all<
+                                RoundedRectangleBorder>(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.0),
                               ),
-                              backgroundColor: MaterialStateProperty.all<Color>(
-                                  Theme.of(context).colorScheme.tertiary),
                             ),
-                            onPressed: () {
-                              context.go('/Identification');
-                            },
-                            child: Text(
-                              'เริ่มประเมิน DPIA',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyMedium
-                                  ?.copyWith(
-                                    color:
-                                        Theme.of(context).colorScheme.onPrimary,
-                                  ),
-                            )))
-                  ],
-                ),
+                            backgroundColor: MaterialStateProperty.all<Color>(
+                                Theme.of(context).colorScheme.tertiary),
+                          ),
+                          onPressed: () {
+                            context.go('/Identification');
+                          },
+                          child: Text(
+                            'เริ่มประเมิน DPIA',
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium
+                                ?.copyWith(
+                                  color:
+                                      Theme.of(context).colorScheme.onPrimary,
+                                ),
+                          )))
+                ],
               ),
             ),
           ],

@@ -30,7 +30,7 @@ class _RiskAssessmentPageState extends State<RiskAssessmentPage> {
           children: [
             Text(
               'แบบฟอร์มประเมิน DPIA ',
-              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+              style: Theme.of(context).textTheme.titleLarge?.copyWith(
                     color: Theme.of(context).colorScheme.tertiary,
                   ),
             ),
@@ -73,8 +73,7 @@ class _RiskAssessmentPageState extends State<RiskAssessmentPage> {
                 child: Padding(
                   padding: const EdgeInsets.only(right: 20),
                   child: Padding(
-                    padding: const EdgeInsets.only(
-                        left: 20, top: 20, bottom: 20, right: 10),
+                    padding: const EdgeInsets.all(15.0),
                     child: Column(
                       children: [
                         Align(
@@ -85,17 +84,18 @@ class _RiskAssessmentPageState extends State<RiskAssessmentPage> {
                               'ขั้นตอนที่ 5 Risk Assessment',
                               style: Theme.of(context)
                                   .textTheme
-                                  .titleMedium
+                                  .titleLarge
                                   ?.copyWith(
-                                    color:
-                                        Theme.of(context).colorScheme.tertiary,
+                                    color: Color.fromRGBO(35, 169, 225, 1),
                                   ),
                             ),
                           ),
                         ),
                         const Divider(
-                          color: Colors.black,
                           thickness: 1,
+                          indent: 0,
+                          endIndent: 0,
+                          color: Colors.grey,
                         ),
                         Align(
                           alignment: Alignment.centerLeft,
@@ -103,7 +103,7 @@ class _RiskAssessmentPageState extends State<RiskAssessmentPage> {
                             padding: const EdgeInsets.only(left: 1.0),
                             child: Text(
                               '[Risk Assessment]',
-                              style: Theme.of(context).textTheme.bodyMedium,
+                              style: Theme.of(context).textTheme.titleMedium,
                             ),
                           ),
                         ),
@@ -116,7 +116,7 @@ class _RiskAssessmentPageState extends State<RiskAssessmentPage> {
                             padding: const EdgeInsets.only(left: 1.0),
                             child: Text(
                               "การประเมินความเสี่ยงที่จะมีผลกระทบต่อสิทธิเสรีภาพของบุคคล ทั้งในเชิงร่างกาย จิตใจ และทรัพย์สิน โดนคำนึงถึง “ความน่าจะเป็น” (likelihood) และ “ความร้ายแรง” (severity) โดยแต่ละความเสี่ยงอย่างน้อยควรระบุถึงรายละเอียดละเอียดต่อไปนี้",
-                              style: Theme.of(context).textTheme.bodyMedium,
+                              style: Theme.of(context).textTheme.titleMedium,
                             ),
                           ),
                         ),

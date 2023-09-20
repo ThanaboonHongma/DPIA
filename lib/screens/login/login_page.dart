@@ -40,8 +40,8 @@ class _LoginPageState extends State<LoginPage> {
         child: Center(
           child: SingleChildScrollView(
             child: Padding(
-              padding:
-                  const EdgeInsets.only(left: 29, right: 29, top: 44, bottom: 44),
+              padding: const EdgeInsets.only(
+                  left: 29, right: 29, top: 44, bottom: 44),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -51,11 +51,11 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   Image.asset(
                     "assets/images/LoginPage/logo.png",
-                    width: 232,
+                    width: 200,
                     height: 85,
                   ),
                   const SizedBox(
-                    height: 50,
+                    height: 30,
                   ),
                   Text(
                     "ยินดีต้อนรับสู่ DPIA Lite",
@@ -85,7 +85,6 @@ class _LoginPageState extends State<LoginPage> {
                       padding: const EdgeInsets.all(15.0),
                       child: Column(
                         children: [
-                          
                           Align(
                             alignment: Alignment.centerLeft,
                             child: Padding(
@@ -93,18 +92,17 @@ class _LoginPageState extends State<LoginPage> {
                               child: Text(
                                 'เข้าสู่ระบบ',
                                 style:
-                                    Theme.of(context).textTheme.headlineSmall,
+                                    Theme.of(context).textTheme.titleLarge,
                               ),
                             ),
                           ),
                           Divider(
-              color: Colors.white.withOpacity(0.44),
-              thickness: 1,
-               
-            ),
-            const SizedBox(
-              height: 10,
-            ),
+                            color: Colors.white.withOpacity(0.44),
+                            thickness: 1,
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
                           ..._buildTextFields(),
                           const SizedBox(height: 32),
                           ..._buildButtons(),
@@ -127,7 +125,7 @@ class _LoginPageState extends State<LoginPage> {
         children: [
           Text(
             "ชื่อผู้ใช้",
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(
                   color: Theme.of(context).colorScheme.onSurface,
                 ),
           ),
@@ -159,7 +157,7 @@ class _LoginPageState extends State<LoginPage> {
         children: [
           Text(
             "ชื่อบริษัท",
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(
                   color: Theme.of(context).colorScheme.onSurface,
                 ),
           ),
@@ -190,7 +188,7 @@ class _LoginPageState extends State<LoginPage> {
         children: [
           Text(
             "เบอร์โทรศัพท์",
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(
                   color: Theme.of(context).colorScheme.onSurface,
                 ),
           ),
@@ -221,11 +219,10 @@ class _LoginPageState extends State<LoginPage> {
         children: [
           Text(
             "อีเมล",
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(
                   color: Theme.of(context).colorScheme.onSurface,
                 ),
           ),
-          
         ],
       ),
       const SizedBox(
@@ -259,11 +256,11 @@ class _LoginPageState extends State<LoginPage> {
           onPressed: () {
             context.go('/HomePage');
             // Navigator.pushReplacement(
-                // context, MaterialPageRoute(builder: (context) => const HomePage()));
+            // context, MaterialPageRoute(builder: (context) => const HomePage()));
           },
           child: Text(
             "เข้าสู่ระบบ",
-            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                   color: Theme.of(context).colorScheme.onPrimary,
                 ),
           ),

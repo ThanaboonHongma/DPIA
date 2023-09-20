@@ -8,7 +8,6 @@ class CompletePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-
         title: Text(
           'แบบฟอร์มประเมิน DPIA',
           style: Theme.of(context).textTheme.headlineSmall?.copyWith(

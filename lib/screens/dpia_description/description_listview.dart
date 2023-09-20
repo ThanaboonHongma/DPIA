@@ -37,7 +37,7 @@ class _DescriptionListviewState extends State<DescriptionListview> {
                 title: Text(
                   descriptions[index].title,
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        color: Theme.of(context).colorScheme.tertiary,
+                        color: Color.fromRGBO(35, 169, 225, 1),
                       ),
                 ),
                 children: [
@@ -74,7 +74,7 @@ class _DescriptionListviewState extends State<DescriptionListview> {
                             offset: const Offset(-16, 0),
                             child: Text(
                               checkbox.name,
-                              style: Theme.of(context).textTheme.titleMedium,
+                              style: Theme.of(context).textTheme.titleSmall,
                             ),
                           ),
                         ),

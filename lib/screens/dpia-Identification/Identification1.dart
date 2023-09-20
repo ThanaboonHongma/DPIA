@@ -50,58 +50,70 @@ class _Identification1State extends State<Identification1> {
         child: Column(
           children: [
             Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.1),
-                    spreadRadius: 5,
-                    blurRadius: 7,
-                    offset: const Offset(0, 8),
-                  ),
-                ],
-              ),
-              margin: const EdgeInsets.all(
-                10,
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: Column(
-                  children: [
-                    const Align(
-                      alignment: Alignment.topLeft,
-                      child: Text('ขั้นตอนที่ 1 [DPIA Identification]',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w400,
-                              color: Color.fromRGBO(35, 169, 225, 1),
-                              fontSize: 16)),
+              height: 8,
+              width: double.infinity,
+              color: const Color(0xffDEDEDE),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.1),
+                      spreadRadius: 5,
+                      blurRadius: 7,
+                      offset: const Offset(0, 8),
                     ),
-                    const Divider(
-                      thickness: 1,
-                      indent: 0,
-                      endIndent: 0,
-                      color: Colors.grey,
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    const Align(
-                      alignment: Alignment.topLeft,
-                      child: Text('[DPIA Identification]'),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    const Align(
-                      alignment: Alignment.topLeft,
-                      child: Text(
-                          'การระบุความจำเป็นในการทำ DPIA ตามประเภทของการประมวลผลข้อมูล หรือโครงการที่จะมีการประมูลข้อมูล ทั้งที่เป็นโครงการใหม่หรือที่มีการปรับปรุงเปลี่ยนแปลงการประมวลข้อมูลที่มีอยู่เดิม โดยระบุลักษณะที่แสดงถึงความจำเป็น รวมถึงแหล่งอ้างอิงที่เหมาะสม'),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    CheckboxListTile(
+                  ],
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Column(
+                    children: [
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          'ขั้นตอนที่ 1 DPIA Identification',
+                          style:
+                              Theme.of(context).textTheme.titleLarge?.copyWith(
+                                    color: Color.fromRGBO(35, 169, 225, 1),
+                                  ),
+                        ),
+                      ),
+                      const Divider(
+                        thickness: 1,
+                        indent: 0,
+                        endIndent: 0,
+                        color: Colors.grey,
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          '[DPIA Identification]',
+                          style: Theme.of(context).textTheme.titleMedium,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          'การระบุความจำเป็นในการทำ DPIA ตามประเภทของการประมวลผลข้อมูล หรือโครงการที่จะมีการประมูลข้อมูล ทั้งที่เป็นโครงการใหม่หรือที่มีการปรับปรุงเปลี่ยนแปลงการประมวลข้อมูลที่มีอยู่เดิม โดยระบุลักษณะที่แสดงถึงความจำเป็น รวมถึงแหล่งอ้างอิงที่เหมาะสม',
+                          style: Theme.of(context).textTheme.titleMedium,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      CheckboxListTile(
+                        side: const BorderSide(color: Color(0xff2684FF)),
                         controlAffinity: ListTileControlAffinity
                             .leading, //  <-- leading Checkbox
                         value: checkboxValue1,
@@ -110,10 +122,16 @@ class _Identification1State extends State<Identification1> {
                             checkboxValue1 = value!;
                           });
                         },
-                        title: const Text('จำเป็น อ้างอิงตาม')),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 30),
-                      child: CheckboxListTile(
+                        title: Transform.translate(
+                          offset: const Offset(-16, 0),
+                          child: Text("จำเป็น อ้างอิงตาม",
+                              style: Theme.of(context).textTheme.titleSmall),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 30),
+                        child: CheckboxListTile(
+                          side: const BorderSide(color: Color(0xff2684FF)),
                           controlAffinity: ListTileControlAffinity
                               .leading, //  <-- leading Checkbox
                           value: checkboxValue2,
@@ -122,9 +140,15 @@ class _Identification1State extends State<Identification1> {
                               checkboxValue2 = value!;
                             });
                           },
-                          title: const Text('ประกาศหรือบัญชีรายชื่อ')),
-                    ),
-                  ],
+                          title: Transform.translate(
+                            offset: const Offset(-16, 0),
+                            child: Text("ประกาศหรือบัญชีรายชื่อ",
+                                style: Theme.of(context).textTheme.titleSmall),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -137,6 +161,9 @@ class _Identification1State extends State<Identification1> {
   }
 }
 
+bool checkboxValue1 = false;
+bool checkboxValue2 = false;
+bool checkboxValue3 = false;
 Container buildMyNavBar(BuildContext context) {
   return Container(
     height: 60,
@@ -210,6 +237,7 @@ class _ActivityListviewState extends State<ActivityListview> {
         ),
         child: ExpansionTile(
           title: CheckboxListTile(
+            side: const BorderSide(color: Color(0xff2684FF)),
             contentPadding: EdgeInsets.zero,
             title: Transform.translate(
               offset: const Offset(-16, 0),
@@ -240,7 +268,9 @@ class _ActivityListviewState extends State<ActivityListview> {
             ListTile(title: Text(activities[index].subtitle)),
             Padding(
               padding: const EdgeInsets.only(bottom: 20),
-              child: ListTile(title: Text(activities[index].description)),
+              child: ListTile(
+                  title: Text(activities[index].description,
+                      style: Theme.of(context).textTheme.titleSmall)),
             ),
           ],
         ),

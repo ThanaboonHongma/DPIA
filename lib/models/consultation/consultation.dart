@@ -75,6 +75,4 @@ const List<Consultation> defaultConsultation = [
         "ในบางกรณีผู้ควบคุมข้อมูลอาจขอความเห็นจาก สำนักงานคณะกรรมการคุ้มครองข้อมูลส่วนบุคคล",
     isChecked: false,
   ),
-  
-  
 ];

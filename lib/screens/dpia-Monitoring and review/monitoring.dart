@@ -23,7 +23,6 @@ class _MonitoringPage extends State<MonitoringPage> {
     super.dispose();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +32,7 @@ class _MonitoringPage extends State<MonitoringPage> {
           children: [
             Text(
               'แบบฟอร์มประเมิน DPIA',
-              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+              style: Theme.of(context).textTheme.titleLarge?.copyWith(
                     color: Theme.of(context).colorScheme.tertiary,
                   ),
             ),
@@ -54,57 +53,75 @@ class _MonitoringPage extends State<MonitoringPage> {
         child: Column(
           children: [
             Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.1),
-                    spreadRadius: 5,
-                    blurRadius: 7,
-                    offset: const Offset(0, 8),
-                  ),
-                ],
-              ),
-              margin: const EdgeInsets.all(
-                10,
-              ),
-              child: const Padding(
-                padding: EdgeInsets.all(15.0),
-                child: Column(
-                  children: [
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: Text('ขั้นตอนที่ 7 MonitoringPage and review',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w400,
-                              color: Color.fromRGBO(35, 169, 225, 1),
-                              fontSize: 16)),
-                    ),
-                    Divider(
-                      thickness: 1,
-                      indent: 0,
-                      endIndent: 0,
-                      color: Colors.grey,
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: Text('[MonitoringPage and review]'),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: Text('การติดตามตรวจสอบและทบทวนตาม DPIA ฉบับนี้'),
-                    ),
-                    SizedBox(
-                      height: 10,
+              height: 8,
+              width: double.infinity,
+              color: const Color(0xffDEDEDE),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.1),
+                      spreadRadius: 5,
+                      blurRadius: 7,
+                      offset: const Offset(0, 8),
                     ),
                   ],
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 20),
+                  child: Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: Column(
+                      children: [
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: Text(
+                            'ขั้นตอนที่ 7 MonitoringPage and review',
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleLarge
+                                ?.copyWith(
+                                  color: Color.fromRGBO(35, 169, 225, 1),
+                                ),
+                          ),
+                        ),
+                        Divider(
+                          thickness: 1,
+                          indent: 0,
+                          endIndent: 0,
+                          color: Colors.grey,
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: Text(
+                            '[MonitoringPage and review]',
+                            style: Theme.of(context).textTheme.titleMedium,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: Text(
+                            'การติดตามตรวจสอบและทบทวนตาม DPIA ฉบับนี้',
+                            style: Theme.of(context).textTheme.titleMedium,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ),
             ),
@@ -131,15 +148,19 @@ class _MonitoringPage extends State<MonitoringPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start, // ชิดซ้าย
                     children: [
-                      const Text('ให้ติดตามตรวจสอบโดย',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w400,
+                      Text(
+                        'ให้ติดตามตรวจสอบโดย',
+                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
                               color: Color.fromRGBO(35, 169, 225, 1),
-                              fontSize: 16)),
+                            ),
+                      ),
                       const SizedBox(
                         height: 10,
                       ),
                       const Text('DPO หรือหน่วยงาน'),
+                      SizedBox(
+                        height: 10,
+                      ),
                       SizedBox(
                         child: TextField(
                           controller: textController1,
@@ -148,8 +169,14 @@ class _MonitoringPage extends State<MonitoringPage> {
                           ),
                         ),
                       ),
+                      SizedBox(
+                        height: 10,
+                      ),
                       const Text(
                           'ผู้รับผิดชอบโครงการหรือการประมวลผลข้อมูลตาม DPIA นี้มีหน้าที่รายงาน DPO หรือหน่วยงาน'),
+                      SizedBox(
+                        height: 10,
+                      ),
                       SizedBox(
                         child: TextField(
                           controller: textController2,
@@ -161,11 +188,12 @@ class _MonitoringPage extends State<MonitoringPage> {
                       const SizedBox(
                         height: 20,
                       ),
-                      const Text('การเผยแพร่เอกสาร DPIA ฉบับนี้',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w400,
+                      Text(
+                        'การเผยแพร่เอกสาร DPIA ฉบับนี้',
+                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
                               color: Color.fromRGBO(35, 169, 225, 1),
-                              fontSize: 16)),
+                            ),
+                      ),
                       const Divider(
                         thickness: 1,
                         indent: 0,
@@ -177,6 +205,9 @@ class _MonitoringPage extends State<MonitoringPage> {
                       ),
                       const Text('ให้เผยแพร่ทาง'),
                       SizedBox(
+                        height: 10,
+                      ),
+                      SizedBox(
                         child: TextField(
                           controller: textController3,
                           decoration: const InputDecoration(
@@ -185,6 +216,9 @@ class _MonitoringPage extends State<MonitoringPage> {
                         ),
                       ),
                       const Text('การติดตามตรวจสอบและทบทวนตาม DPIA ฉบับนี้'),
+                      SizedBox(
+                        height: 10,
+                      ),
                       SizedBox(
                         child: TextField(
                           controller: textController4,

@@ -21,7 +21,7 @@ class _NecessityandProportionlityPageState
           children: [
             Text(
               'แบบฟอร์มประเมิน DPIA ',
-              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+              style: Theme.of(context).textTheme.titleLarge?.copyWith(
                     color: Theme.of(context).colorScheme.tertiary,
                   ),
             ),
@@ -64,8 +64,7 @@ class _NecessityandProportionlityPageState
                   child: Padding(
                     padding: const EdgeInsets.only(right: 20),
                     child: Padding(
-                      padding: const EdgeInsets.only(
-                          left: 20, top: 20, bottom: 20, right: 10),
+                      padding: const EdgeInsets.all(15.0),
                       child: Column(
                         children: [
                           Align(
@@ -76,18 +75,18 @@ class _NecessityandProportionlityPageState
                                 'ขั้นตอนที่ 4\nDPIA Necessity and proportionlity',
                                 style: Theme.of(context)
                                     .textTheme
-                                    .titleMedium
+                                    .titleLarge
                                     ?.copyWith(
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .tertiary,
+                                      color: Color.fromRGBO(35, 169, 225, 1),
                                     ),
                               ),
                             ),
                           ),
                           const Divider(
-                            color: Colors.black,
                             thickness: 1,
+                            indent: 0,
+                            endIndent: 0,
+                            color: Colors.grey,
                           ),
                           Align(
                             alignment: Alignment.centerLeft,
@@ -95,7 +94,7 @@ class _NecessityandProportionlityPageState
                               padding: const EdgeInsets.only(left: 1.0),
                               child: Text(
                                 '[DPIA Necessity and proportionlity]',
-                                style: Theme.of(context).textTheme.bodyMedium,
+                                style: Theme.of(context).textTheme.titleMedium,
                               ),
                             ),
                           ),
@@ -108,7 +107,7 @@ class _NecessityandProportionlityPageState
                               padding: const EdgeInsets.only(left: 1.0),
                               child: Text(
                                 "อธิบายความจำเป็นและความได้สัดส่วนของการประมวลผลข้อมูล โดยอาจระบุเนื้อหาต่อไปนี้",
-                                style: Theme.of(context).textTheme.bodyMedium,
+                                style: Theme.of(context).textTheme.titleMedium,
                               ),
                             ),
                           ),

@@ -1,7 +1,6 @@
 import 'package:dpia_project/models/riskassessment/risklist.dart';
 import 'package:flutter/material.dart';
 
-
 class CounterProvider extends ChangeNotifier {
   bool _isBottomSheetOpen = false;
   final int _id = 0;

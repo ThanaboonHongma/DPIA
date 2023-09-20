@@ -22,7 +22,7 @@ class _MitigatingMeasuresState extends State<MitigatingMeasures> {
           children: [
             Text(
               'แบบฟอร์มประเมิน DPIA',
-              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+              style: Theme.of(context).textTheme.titleLarge?.copyWith(
                     color: Theme.of(context).colorScheme.tertiary,
                   ),
             ),
@@ -137,10 +137,9 @@ class _MitigatingMeasuresState extends State<MitigatingMeasures> {
                       padding: const EdgeInsets.only(left: 1.0),
                       child: Text(
                         'ขั้นตอนที่ 6 Mitigating measures',
-                        style:
-                            Theme.of(context).textTheme.titleMedium?.copyWith(
-                                  color: Theme.of(context).colorScheme.tertiary,
-                                ),
+                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                              color: Color.fromRGBO(35, 169, 225, 1),
+                            ),
                       ),
                     ),
                   ),
@@ -154,7 +153,7 @@ class _MitigatingMeasuresState extends State<MitigatingMeasures> {
                       padding: const EdgeInsets.only(left: 1.0),
                       child: Text(
                         '[Mitigating measures]',
-                        style: Theme.of(context).textTheme.bodyMedium,
+                        style: Theme.of(context).textTheme.titleMedium,
                       ),
                     ),
                   ),
@@ -167,7 +166,7 @@ class _MitigatingMeasuresState extends State<MitigatingMeasures> {
                       padding: const EdgeInsets.only(left: 1.0),
                       child: Text(
                         'ระบุมาตรการเพื่อลดความเสี่ยงแต่ละรายการจากขั้นตอนที่ 5 โดยควรระบุว่ามาตรการดังกล่าวสามารถลดหรือกำจัดความเสี่ยงได้หรือไม่ อย่างไร ข้อดีข้อเสียของแต่ละมาตรการที่เลือกใช้',
-                        style: Theme.of(context).textTheme.bodyMedium,
+                        style: Theme.of(context).textTheme.titleMedium,
                       ),
                     ),
                   ),

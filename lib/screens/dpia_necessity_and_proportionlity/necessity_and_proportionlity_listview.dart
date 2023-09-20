@@ -21,7 +21,6 @@ class _NecessityandProportionlityListviewState
       physics: const NeverScrollableScrollPhysics(),
       itemBuilder: (BuildContext context, int index) {
         return Column(children: [
-          
           ...necessityandproportionlitys[index]
               .list
               .map(
@@ -53,7 +52,7 @@ class _NecessityandProportionlityListviewState
                     offset: const Offset(-16, 0),
                     child: Text(
                       checkbox.name,
-                      style: Theme.of(context).textTheme.titleMedium,
+                      style: Theme.of(context).textTheme.titleSmall,
                     ),
                   ),
                 ),
