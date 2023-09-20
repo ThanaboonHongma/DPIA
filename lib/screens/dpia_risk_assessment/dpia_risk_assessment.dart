@@ -1,5 +1,7 @@
 import 'package:dpia_project/models/counter_provider.dart';
+import 'package:dpia_project/screens/dpia_necessity_and_proportionlity/dpia_necessity_and_proportionlity.dart';
 import 'package:dpia_project/screens/dpia_risk_assessment/dpia_risk_assessment_add_page.dart';
+import 'package:dpia_project/screens/mitigating/mitigating.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -40,7 +42,11 @@ class _RiskAssessmentPageState extends State<RiskAssessmentPage> {
             color: Theme.of(context).colorScheme.tertiary,
           ),
           onTap: () {
-            const Navigator();
+            Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (context) => const NecessityandProportionlityPage(),
+                    ),
+                  );
           },
         ),
         backgroundColor: Theme.of(context).colorScheme.onPrimary,
@@ -150,7 +156,6 @@ class _RiskAssessmentPageState extends State<RiskAssessmentPage> {
                               child: Center(
                                 child: Text(
                                   "ไม่มีรายการประเมินความเสี่ยง",
-                                 
                                 ),
                               ),
                             )
@@ -168,8 +173,8 @@ class _RiskAssessmentPageState extends State<RiskAssessmentPage> {
                                           color: Colors.white,
                                           boxShadow: [
                                             BoxShadow(
-                                              color: Colors.grey.withOpacity(
-                                                  0.1),
+                                              color:
+                                                  Colors.grey.withOpacity(0.1),
                                               spreadRadius: 5,
                                               blurRadius: 7,
                                               offset: const Offset(0, 8),
@@ -194,7 +199,8 @@ class _RiskAssessmentPageState extends State<RiskAssessmentPage> {
                                                                       index]
                                                                   .riskLevel ==
                                                               "ระดับต่ำ"
-                                                          ? const Color(0xffA2EDCE)
+                                                          ? const Color(
+                                                              0xffA2EDCE)
                                                           : productList
                                                                       .risklist[
                                                                           index]
@@ -205,7 +211,8 @@ class _RiskAssessmentPageState extends State<RiskAssessmentPage> {
                                                               : const Color(
                                                                   0xffFFA8B8),
                                                     ),
-                                                    padding: const EdgeInsets.all(5),
+                                                    padding:
+                                                        const EdgeInsets.all(5),
                                                     child: Center(
                                                       child: Text(
                                                         ' ${productList.risklist[index].riskLevel} ',
@@ -269,8 +276,8 @@ class _RiskAssessmentPageState extends State<RiskAssessmentPage> {
                         width: 150,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(
-                                0xff23A9E1), // Background color
+                            backgroundColor:
+                                const Color(0xff23A9E1), // Background color
                           ),
                           onPressed: () {
                             showModalBottomSheet<dynamic>(
@@ -293,6 +300,58 @@ class _RiskAssessmentPageState extends State<RiskAssessmentPage> {
             ),
           ],
         ),
+      ),
+      bottomNavigationBar: buildMyNavBar(context),
+    );
+  }
+
+  Container buildMyNavBar(BuildContext context) {
+    return Container(
+      height: 60,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.3),
+            spreadRadius: 5,
+            blurRadius: 7,
+            offset: const Offset(0, -8),
+          ),
+        ],
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          SizedBox(
+            width: 100,
+            height: 40,
+            child: ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (context) => const NecessityandProportionlityPage(),
+                    ),
+                  );
+                },
+                child: const Text('ย้อนกลับ')),
+          ),
+          const Text(
+            '5 / 7',
+            style: TextStyle(color: Colors.black),
+          ),
+          SizedBox(
+              width: 100,
+              height: 40,
+              child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(
+                        builder: (context) => const MitigatingMeasures(),
+                      ),
+                    );
+                  },
+                  child: const Text('ถัดไป'))),
+        ],
       ),
     );
   }

@@ -1,13 +1,15 @@
+import 'package:dpia_project/screens/dpia-Complete%20assessment/complete_assessment.dart';
+import 'package:dpia_project/screens/mitigating/mitigating.dart';
 import 'package:flutter/material.dart';
 
-class monitoring extends StatefulWidget {
-  const monitoring({super.key});
+class MonitoringPage extends StatefulWidget {
+  const MonitoringPage({super.key});
 
   @override
-  State<monitoring> createState() => _monitoring();
+  State<MonitoringPage> createState() => _MonitoringPage();
 }
 
-class _monitoring extends State<monitoring> {
+class _MonitoringPage extends State<MonitoringPage> {
   final textController1 = TextEditingController();
   final textController2 = TextEditingController();
   final textController3 = TextEditingController();
@@ -34,6 +36,19 @@ class _monitoring extends State<monitoring> {
                   ),
             ),
           ],
+        ),
+        leading: GestureDetector(
+          child: Icon(
+            Icons.arrow_back_ios,
+            color: Theme.of(context).colorScheme.tertiary,
+          ),
+          onTap: () {
+            Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (context) => const MitigatingMeasures(),
+                    ),
+                  );
+          },
         ),
         backgroundColor: Theme.of(context).colorScheme.onPrimary,
       ),
@@ -62,7 +77,7 @@ class _monitoring extends State<monitoring> {
                   children: [
                     Align(
                       alignment: Alignment.topLeft,
-                      child: Text('ขั้นตอนที่ 7 Monitoring and review',
+                      child: Text('ขั้นตอนที่ 7 MonitoringPage and review',
                           style: TextStyle(
                               fontWeight: FontWeight.w400,
                               color: Color.fromRGBO(35, 169, 225, 1),
@@ -79,7 +94,7 @@ class _monitoring extends State<monitoring> {
                     ),
                     Align(
                       alignment: Alignment.topLeft,
-                      child: Text('[Monitoring and review]'),
+                      child: Text('[MonitoringPage and review]'),
                     ),
                     SizedBox(
                       height: 10,
@@ -188,7 +203,58 @@ class _monitoring extends State<monitoring> {
           ], //children
         ),
       ),
+      bottomNavigationBar: buildMyNavBar(context),
+    );
+  }
+
+  Container buildMyNavBar(BuildContext context) {
+    return Container(
+      height: 60,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.3),
+            spreadRadius: 5,
+            blurRadius: 7,
+            offset: const Offset(0, -8),
+          ),
+        ],
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          SizedBox(
+            width: 100,
+            height: 40,
+            child: ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (context) => const MitigatingMeasures(),
+                    ),
+                  );
+                },
+                child: const Text('ย้อนกลับ')),
+          ),
+          const Text(
+            '7 / 7',
+            style: TextStyle(color: Colors.black),
+          ),
+          SizedBox(
+              width: 100,
+              height: 40,
+              child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(
+                        builder: (context) => const CompletePage(),
+                      ),
+                    );
+                  },
+                  child: const Text('ถัดไป'))),
+        ],
+      ),
     );
   }
 }
-

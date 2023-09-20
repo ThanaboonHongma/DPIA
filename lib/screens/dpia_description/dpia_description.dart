@@ -1,3 +1,5 @@
+import 'package:dpia_project/screens/dpia-Consultation/consultation1.dart';
+import 'package:dpia_project/screens/dpia-Identification/Identification1.dart';
 import 'package:dpia_project/screens/dpia_description/description_listview.dart';
 
 import 'package:flutter/material.dart';
@@ -30,7 +32,11 @@ class _DpiaDescriptionPageState extends State<DpiaDescriptionPage> {
             color: Theme.of(context).colorScheme.tertiary,
           ),
           onTap: () {
-            const Navigator();
+            Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (context) => const Identification1(),
+                    ),
+                  );
           },
         ),
         backgroundColor: Theme.of(context).colorScheme.onPrimary,
@@ -117,6 +123,57 @@ class _DpiaDescriptionPageState extends State<DpiaDescriptionPage> {
             const DescriptionListview(),
           ],
         ),
+      ),
+      bottomNavigationBar: buildMyNavBar(context),
+    );
+  }
+
+  Container buildMyNavBar(BuildContext context) {
+    return Container(
+      height: 60,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.3),
+            spreadRadius: 5,
+            blurRadius: 7,
+            offset: const Offset(0, -8),
+          ),
+        ],
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          SizedBox(
+            width: 100,
+            height: 40,
+            child:
+                ElevatedButton(onPressed: () {
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (context) => const Identification1(),
+                    ),
+                  );
+                      }, child: const Text('ย้อนกลับ')),
+          ),
+          const Text(
+            '2 / 7',
+            style: TextStyle(color: Colors.black),
+          ),
+          SizedBox(
+              width: 100,
+              height: 40,
+              child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(
+                        builder: (context) => const Consultation1(),
+                      ),
+                    );
+                  },
+                  child: const Text('ถัดไป'))),
+        ],
       ),
     );
   }

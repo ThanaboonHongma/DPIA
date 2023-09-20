@@ -45,7 +45,7 @@ class _HomePageState extends State<HomePage> {
               width: 130,
               child: ElevatedButton(
                 onPressed: () {
-                  Navigator.of(context).push(
+                  Navigator.of(context).pushReplacement(
                     MaterialPageRoute(
                       builder: (context) => const Identification1(),
                     ),
@@ -97,7 +97,7 @@ class _HomePageState extends State<HomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.of(context).push(
+          Navigator.of(context).pushReplacement(
             MaterialPageRoute(
               builder: (context) => const Identification1(),
             ),
@@ -151,7 +151,7 @@ class _HomePageState extends State<HomePage> {
                   children: [
                     TextButton(
                         onPressed: () {
-                          Navigator.of(context).push(
+                          Navigator.of(context).pushReplacement(
                             MaterialPageRoute(
                               builder: (context) => const Identification1(),
                             ),
@@ -231,7 +231,13 @@ class _HomePageState extends State<HomePage> {
                               backgroundColor: MaterialStateProperty.all<Color>(
                                   Theme.of(context).colorScheme.tertiary),
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                  builder: (context) => const Identification1(),
+                                ),
+                              );
+                            },
                             child: Text(
                               'เริ่มประเมิน DPIA',
                               style: Theme.of(context)

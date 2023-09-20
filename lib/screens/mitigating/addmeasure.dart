@@ -18,30 +18,31 @@ class _AddMeasureState extends State<AddMeasure> {
           title: Row(
             children: [
               Text(
-                'DPIA LITE',
-                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                'แบบฟอร์มประเมิน DPIA',
+                style: Theme.of(context).textTheme.titleLarge?.copyWith(
                       color: Theme.of(context).colorScheme.tertiary,
                     ),
               ),
-              const SizedBox(
-                width: 10,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 10),
-                child: Text(
-                  'By WiseWork',
-                  style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                        color: Theme.of(context).colorScheme.tertiary,
-                      ),
-                ),
-              ),
             ],
+          ),
+          leading: GestureDetector(
+            child: Icon(
+              Icons.arrow_back_ios,
+              color: Theme.of(context).colorScheme.tertiary,
+            ),
+            onTap: () {
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                  builder: (context) => const MitigatingMeasures(),
+                ),
+              );
+            },
           ),
           actions: <Widget>[
             Padding(
               padding: const EdgeInsets.all(13),
               child: SizedBox(
-                width: 90,
+                width: 70,
                 child: ElevatedButton(
                   onPressed: () {
                     Navigator.pushReplacement(

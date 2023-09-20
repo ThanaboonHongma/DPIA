@@ -1,4 +1,4 @@
-import 'package:dpia_project/screens/dpia-Monitoring%20and%20review/monitoring.dart';
+import 'package:dpia_project/screens/home/homepage.dart';
 import 'package:flutter/material.dart';
 
 class CompletePage extends StatelessWidget {
@@ -40,8 +40,10 @@ class CompletePage extends StatelessWidget {
                     ),
                   ),
                   onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => const monitoring()));
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const HomePage()));
                   },
                   child: const Text('OK')),
             ),

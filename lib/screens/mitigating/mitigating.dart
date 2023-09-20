@@ -1,3 +1,5 @@
+import 'package:dpia_project/screens/dpia-Monitoring%20and%20review/monitoring.dart';
+import 'package:dpia_project/screens/dpia_risk_assessment/dpia_risk_assessment.dart';
 import 'package:dpia_project/screens/mitigating/addmeasure.dart';
 import 'package:dpia_project/models/mitigatingdescription/mitigatingdescription.dart';
 import 'package:flutter/material.dart';
@@ -20,24 +22,25 @@ class _MitigatingMeasuresState extends State<MitigatingMeasures> {
         title: Row(
           children: [
             Text(
-              'DPIA LITE',
+              'แบบฟอร์มประเมิน DPIA',
               style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                     color: Theme.of(context).colorScheme.tertiary,
                   ),
             ),
-            const SizedBox(
-              width: 10,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 10),
-              child: Text(
-                'By WiseWork',
-                style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                      color: Theme.of(context).colorScheme.tertiary,
-                    ),
-              ),
-            ),
           ],
+        ),
+        leading: GestureDetector(
+          child: Icon(
+            Icons.arrow_back_ios,
+            color: Theme.of(context).colorScheme.tertiary,
+          ),
+          onTap: () {
+             Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (context) => const RiskAssessmentPage(),
+                    ),
+                  );
+          },
         ),
         backgroundColor: Theme.of(context).colorScheme.onPrimary,
       ),
@@ -64,45 +67,60 @@ class _MitigatingMeasuresState extends State<MitigatingMeasures> {
           ],
         ),
       ),
-      // bottomNavigationBar: buildMyNavBar(context),
+      bottomNavigationBar: buildMyNavBar(context),
     );
   }
 
-  // Container buildMyNavBar(BuildContext context) {
-  //   return Container(
-  //     height: 60,
-  //     decoration: BoxDecoration(
-  //       color: Colors.white,
-  //       boxShadow: [
-  //         BoxShadow(
-  //           color: Colors.grey.withOpacity(0.3),
-  //           spreadRadius: 5,
-  //           blurRadius: 7,
-  //           offset: const Offset(0, -8),
-  //         ),
-  //       ],
-  //     ),
-  //     child: Row(
-  //       mainAxisAlignment: MainAxisAlignment.spaceAround,
-  //       children: [
-  //         SizedBox(
-  //             width: 100,
-  //             height: 40,
-  //             child: ElevatedButton(
-  //                 onPressed: () {}, child: const Text('ย้อนกลับ'))),
-  //         const Text(
-  //           '6 / 7',
-  //           style: TextStyle(color: Colors.black),
-  //         ),
-  //         SizedBox(
-  //             width: 100,
-  //             height: 40,
-  //             child:
-  //                 ElevatedButton(onPressed: () {}, child: const Text('ถัดไป'))),
-  //       ],
-  //     ),
-  //   );
-  // }
+  Container buildMyNavBar(BuildContext context) {
+    return Container(
+      height: 60,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.3),
+            spreadRadius: 5,
+            blurRadius: 7,
+            offset: const Offset(0, -8),
+          ),
+        ],
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          SizedBox(
+            width: 100,
+            height: 40,
+            child: ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (context) => const RiskAssessmentPage(),
+                    ),
+                  );
+                },
+                child: const Text('ย้อนกลับ')),
+          ),
+          const Text(
+            '6 / 7',
+            style: TextStyle(color: Colors.black),
+          ),
+          SizedBox(
+              width: 100,
+              height: 40,
+              child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(
+                        builder: (context) => const MonitoringPage(),
+                      ),
+                    );
+                  },
+                  child: const Text('ถัดไป'))),
+        ],
+      ),
+    );
+  }
 
   _mitigatingis() {
     return [
@@ -181,7 +199,9 @@ class _MitigatingMeasuresState extends State<MitigatingMeasures> {
         itemCount: mitigatingdescription.length,
         itemBuilder: (BuildContext context, int index) {
           if (mitigatingdescription[index].dpo.isEmpty) {
-            return Column(children: [Padding(
+            return Column(
+              children: [
+                Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 10),
                   child: Container(
                     decoration: BoxDecoration(
@@ -237,10 +257,11 @@ class _MitigatingMeasuresState extends State<MitigatingMeasures> {
                             width: double.infinity,
                             child: ElevatedButton(
                                 onPressed: () {
-                                  Navigator.push(
+                                  Navigator.pushReplacement(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => const AddMeasure()));
+                                          builder: (context) =>
+                                              const AddMeasure()));
                                 },
                                 child: Text('เพิ่ม/แก้ไขมาตรการ',
                                     style: Theme.of(context)
@@ -255,7 +276,9 @@ class _MitigatingMeasuresState extends State<MitigatingMeasures> {
                       ),
                     ),
                   ),
-                ),],);
+                ),
+              ],
+            );
           } else {
             return Column(
               children: [
@@ -327,10 +350,11 @@ class _MitigatingMeasuresState extends State<MitigatingMeasures> {
                             width: double.infinity,
                             child: ElevatedButton(
                                 onPressed: () {
-                                  Navigator.push(
+                                  Navigator.pushReplacement(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => const AddMeasure()));
+                                          builder: (context) =>
+                                              const AddMeasure()));
                                 },
                                 child: Text('เพิ่ม/แก้ไขมาตรการ',
                                     style: Theme.of(context)

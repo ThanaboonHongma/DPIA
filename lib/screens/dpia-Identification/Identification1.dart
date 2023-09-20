@@ -1,4 +1,6 @@
-import 'package:dpia_project/models/Identification/activity.dart';
+import 'package:dpia_project/models/activity.dart';
+import 'package:dpia_project/screens/dpia_description/dpia_description.dart';
+import 'package:dpia_project/screens/home/homepage.dart';
 import 'package:flutter/material.dart';
 
 class Identification1 extends StatefulWidget {
@@ -16,15 +18,34 @@ class _Identification1State extends State<Identification1> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Row(
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'แบบฟอร์มประเมิน DPIA',
-              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                    color: Theme.of(context).colorScheme.tertiary,
-                  ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Text(
+                  'แบบฟอร์มประเมิน DPIA',
+                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                        color: Theme.of(context).colorScheme.tertiary,
+                      ),
+                ),
+              ],
             ),
           ],
+        ),
+        leading: GestureDetector(
+          child: Icon(
+            Icons.arrow_back_ios,
+            color: Theme.of(context).colorScheme.tertiary,
+          ),
+          onTap: () {
+            Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (context) => const HomePage(),
+                    ),
+                  );
+          },
         ),
         backgroundColor: Theme.of(context).colorScheme.onPrimary,
       ),
@@ -114,8 +135,53 @@ class _Identification1State extends State<Identification1> {
           ],
         ),
       ),
+      bottomNavigationBar: buildMyNavBar(context),
     );
   }
+}
+
+Container buildMyNavBar(BuildContext context) {
+  return Container(
+    height: 60,
+    decoration: BoxDecoration(
+      color: Colors.white,
+      boxShadow: [
+        BoxShadow(
+          color: Colors.grey.withOpacity(0.3),
+          spreadRadius: 5,
+          blurRadius: 7,
+          offset: const Offset(0, -8),
+        ),
+      ],
+    ),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        const SizedBox(
+          width: 100,
+          height: 40,
+          // child: ElevatedButton(
+          //     onPressed: () {}, child: const Text('ย้อนกลับ')),
+        ),
+        const Text(
+          '1 / 7',
+          style: TextStyle(color: Colors.black),
+        ),
+        SizedBox(
+            width: 100,
+            height: 40,
+            child: ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (context) => const DpiaDescriptionPage(),
+                    ),
+                  );
+                },
+                child: const Text('ถัดไป'))),
+      ],
+    ),
+  );
 }
 
 class ActivityListview extends StatefulWidget {
@@ -126,8 +192,7 @@ class ActivityListview extends StatefulWidget {
 }
 
 class _ActivityListviewState extends State<ActivityListview> {
-   List<Activity> activities=defaultActivities.map((e) => e).toList();
- 
+  List<Activity> activities = defaultActivities.map((e) => e).toList();
 
   @override
   Widget build(BuildContext context) {
@@ -162,9 +227,10 @@ class _ActivityListviewState extends State<ActivityListview> {
             value: activities[index].isChecked,
             onChanged: (bool? value) {
               List<Activity> temp = [
-                for (Activity activity in activities) activity == activities[index]
-                    ? activity.copyWith(isChecked: value)
-                    : activity
+                for (Activity activity in activities)
+                  activity == activities[index]
+                      ? activity.copyWith(isChecked: value)
+                      : activity
               ];
               setState(() {
                 activities = temp;
