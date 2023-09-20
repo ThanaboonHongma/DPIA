@@ -2,7 +2,7 @@ import 'package:dpia_project/screens/home/homepage.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+  LoginPage({super.key});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -27,7 +27,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
@@ -40,13 +40,13 @@ class _LoginPageState extends State<LoginPage> {
         child: Center(
           child: SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.only(
-                  left: 29, right: 29, top: 44, bottom: 44),
+              padding:
+                  EdgeInsets.only(left: 29, right: 29, top: 44, bottom: 44),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const SizedBox(
+                  SizedBox(
                     height: 10,
                   ),
                   Image.asset(
@@ -54,7 +54,7 @@ class _LoginPageState extends State<LoginPage> {
                     width: 232,
                     height: 85,
                   ),
-                  const SizedBox(
+                  SizedBox(
                     height: 50,
                   ),
                   Text(
@@ -63,7 +63,7 @@ class _LoginPageState extends State<LoginPage> {
                           color: Theme.of(context).colorScheme.onPrimary,
                         ),
                   ),
-                  const SizedBox(
+                  SizedBox(
                     height: 10,
                   ),
                   Text(
@@ -73,7 +73,7 @@ class _LoginPageState extends State<LoginPage> {
                           color: Theme.of(context).colorScheme.onPrimary,
                         ),
                   ),
-                  const SizedBox(
+                  SizedBox(
                     height: 20,
                   ),
                   Container(
@@ -82,11 +82,31 @@ class _LoginPageState extends State<LoginPage> {
                       color: Colors.white.withOpacity(0.44),
                     ),
                     child: Padding(
-                      padding: const EdgeInsets.all(15.0),
+                      padding: EdgeInsets.all(15.0),
                       child: Column(
                         children: [
+                          
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: Padding(
+                              padding: EdgeInsets.only(left: 1.0),
+                              child: Text(
+                                'เข้าสู่ระบบ',
+                                style:
+                                    Theme.of(context).textTheme.headlineSmall,
+                              ),
+                            ),
+                          ),
+                          Divider(
+              color: Colors.white.withOpacity(0.44),
+              thickness: 1,
+               
+            ),
+            SizedBox(
+              height: 10,
+            ),
                           ..._buildTextFields(),
-                          const SizedBox(height: 32),
+                          SizedBox(height: 32),
                           ..._buildButtons(),
                         ],
                       ),
@@ -104,7 +124,6 @@ class _LoginPageState extends State<LoginPage> {
   _buildTextFields() {
     return [
       Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             "ชื่อผู้ใช้",
@@ -114,7 +133,7 @@ class _LoginPageState extends State<LoginPage> {
           ),
         ],
       ),
-      const SizedBox(
+      SizedBox(
         height: 5,
       ),
       SizedBox(
@@ -122,7 +141,7 @@ class _LoginPageState extends State<LoginPage> {
         child: TextField(
           controller: _usernameController,
           textAlignVertical: TextAlignVertical.center,
-          decoration: const InputDecoration(
+          decoration: InputDecoration(
             focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(color: Colors.blue),
             ),
@@ -132,7 +151,7 @@ class _LoginPageState extends State<LoginPage> {
           ),
         ),
       ),
-      const SizedBox(
+      SizedBox(
         height: 10,
       ),
       Row(
@@ -146,14 +165,14 @@ class _LoginPageState extends State<LoginPage> {
           ),
         ],
       ),
-      const SizedBox(
+      SizedBox(
         height: 5,
       ),
       SizedBox(
         height: 40,
         child: TextField(
           controller: _companynameController,
-          decoration: const InputDecoration(
+          decoration: InputDecoration(
             focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(color: Colors.blue),
             ),
@@ -163,7 +182,7 @@ class _LoginPageState extends State<LoginPage> {
           ),
         ),
       ),
-      const SizedBox(
+      SizedBox(
         height: 10,
       ),
       Row(
@@ -177,14 +196,14 @@ class _LoginPageState extends State<LoginPage> {
           ),
         ],
       ),
-      const SizedBox(
+      SizedBox(
         height: 5,
       ),
       SizedBox(
         height: 40,
         child: TextField(
           controller: _telController,
-          decoration: const InputDecoration(
+          decoration: InputDecoration(
             focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(color: Colors.blue),
             ),
@@ -194,7 +213,7 @@ class _LoginPageState extends State<LoginPage> {
           ),
         ),
       ),
-      const SizedBox(
+      SizedBox(
         height: 10,
       ),
       Row(
@@ -206,16 +225,17 @@ class _LoginPageState extends State<LoginPage> {
                   color: Theme.of(context).colorScheme.onSurface,
                 ),
           ),
+          
         ],
       ),
-      const SizedBox(
+      SizedBox(
         height: 5,
       ),
       SizedBox(
         height: 40,
         child: TextField(
           controller: _emailController,
-          decoration: const InputDecoration(
+          decoration: InputDecoration(
             focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(color: Colors.blue),
             ),
@@ -234,7 +254,7 @@ class _LoginPageState extends State<LoginPage> {
         width: 500,
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
-            backgroundColor: const Color(0xff23A9E1), // Background color
+            backgroundColor: Color(0xff23A9E1), // Background color
           ),
           onPressed: () {
             Navigator.pushReplacement(
