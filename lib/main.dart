@@ -13,8 +13,13 @@ class DPIA extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final router = GoRouteProvider();
-    return ChangeNotifierProvider(
-        create: (context) => CounterProvider(),
+    return MultiProvider(
+        providers: [
+          ChangeNotifierProvider<CounterProvider>(
+            create: (_) => CounterProvider(),
+          ),
+          
+        ],
         child: MaterialApp.router(
           debugShowCheckedModeBanner: false,
           routerConfig: router.goRouter(),

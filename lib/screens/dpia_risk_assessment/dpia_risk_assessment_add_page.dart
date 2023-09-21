@@ -2,6 +2,7 @@ import 'package:dpia_project/models/riskassessment/risklist.dart';
 import 'package:dpia_project/models/counter_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:uuid/uuid.dart';
 
 class DpiaAddRisk extends StatefulWidget {
   const DpiaAddRisk({super.key});
@@ -51,11 +52,12 @@ class _DpiaAddRiskState extends State<DpiaAddRisk> {
   void saveRisk() {
     setState(() {
       defaultriskdata.add((RiskData(
-          id: 0,
+          id: '0',
           effect: _impactTextController.text,
           probability: _probability,
           severity: _severity,
-          riskLevel: _riskLevel)));
+          riskLevel: _riskLevel,
+          measures: [])));
     });
 
     // เคลียร์ข้อมูลใน TextField หลังจากเพิ่มความเสี่ยง
@@ -72,7 +74,7 @@ class _DpiaAddRiskState extends State<DpiaAddRisk> {
 
   @override
   Widget build(BuildContext context) {
-    final counterProvider = Provider.of<CounterProvider>(context);
+    final productList = Provider.of<CounterProvider>(context, listen: false);
 
     return SingleChildScrollView(
       padding: const EdgeInsets.all(10.0),
@@ -94,7 +96,7 @@ class _DpiaAddRiskState extends State<DpiaAddRisk> {
               child: Padding(
                 padding: const EdgeInsets.only(left: 1.0),
                 child: Text(
-                  'ความเสี่ยงที่ $riskCounter',
+                  'ความเสี่ยงที่ ${productList.risklist.length + 1}',
                 ),
               ),
             ),
@@ -114,19 +116,20 @@ class _DpiaAddRiskState extends State<DpiaAddRisk> {
             SizedBox(
               height: 40,
               child: TextField(
-  controller: _impactTextController, // กำหนด Controller
-  textAlignVertical: TextAlignVertical.center, // กำหนดการจัดวางแนวดิ่งเป็นกลาง
-  decoration: const InputDecoration(
-    focusedBorder: OutlineInputBorder(
-      borderSide: BorderSide(color: Colors.blue),
-    ),
-    enabledBorder: OutlineInputBorder(
-      borderSide: BorderSide(color: Colors.black, width: 0.5),
-    ),
-    filled: true,
-    fillColor: Colors.white,
-  ),
-),
+                controller: _impactTextController, // กำหนด Controller
+                textAlignVertical:
+                    TextAlignVertical.center, // กำหนดการจัดวางแนวดิ่งเป็นกลาง
+                decoration: const InputDecoration(
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.blue),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black, width: 0.5),
+                  ),
+                  filled: true,
+                  fillColor: Colors.white,
+                ),
+              ),
             ),
             const SizedBox(
               height: 10,
@@ -292,16 +295,16 @@ class _DpiaAddRiskState extends State<DpiaAddRisk> {
                 ElevatedButton(
                   onPressed: () {
                     Navigator.pop(context);
-                    final productList =
-                        Provider.of<CounterProvider>(context, listen: false);
+
+                    // print(productList.risklist.length);
                     productList.saveRisk(RiskData(
-                        id: riskCounter,
+                        id: const Uuid().v4(),
                         effect: _impactTextController.text,
                         probability: _probability,
                         severity: _severity,
-                        riskLevel: _riskLevel));
-                    counterProvider.toggleBottomSheet(true);
-                    
+                        riskLevel: _riskLevel,
+                        measures: []));
+                    // counterProvider.toggleBottomSheet(true);
                   },
                   child: const Text('บันทึกความเสี่ยง'),
                 ),

@@ -336,6 +336,7 @@ class _RiskAssessmentPageState extends State<RiskAssessmentPage> {
               height: 40,
               child: ElevatedButton(
                   onPressed: () {
+                    context.read<CounterProvider>().setrickhigh();
                     context.go('/MitigatingMeasuresPage');
                   },
                   child: const Text('ถัดไป'))),

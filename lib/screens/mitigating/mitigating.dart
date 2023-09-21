@@ -1,20 +1,24 @@
-import 'package:dpia_project/models/mitigatingdescription/mitigatingdescription.dart';
+import 'package:dpia_project/models/counter_provider.dart';
+// import 'package:dpia_project/models/riskassessment/risklist.dart';
+// import 'package:dpia_project/models/mitigatingdescription/mitigatingdescription.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 class MitigatingMeasures extends StatefulWidget {
-  const MitigatingMeasures({super.key});
+  const MitigatingMeasures({
+    super.key,
+  });
 
   @override
   State<MitigatingMeasures> createState() => _MitigatingMeasuresState();
 }
 
 class _MitigatingMeasuresState extends State<MitigatingMeasures> {
-  List<MitigatingDescription> mitigatingdescription =
-      defaltMitigatingDescription.map((e) => e).toList();
 
   @override
   Widget build(BuildContext context) {
+    final productList = Provider.of<CounterProvider>(context);
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -56,7 +60,117 @@ class _MitigatingMeasuresState extends State<MitigatingMeasures> {
                 const SizedBox(
                   height: 15,
                 ),
-                ..._mitigatingview(),
+
+                // final dpo = productList.dpolist.map((e) => e);
+
+                ListView.builder(
+                  physics: const NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: productList.rickdatahigh.length,
+                  itemBuilder: (context, index) {
+                    // print(riskList[index].id);
+                    return Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: Colors.white,
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.1),
+                                  spreadRadius: 5,
+                                  blurRadius: 7,
+                                  offset: const Offset(0, 8),
+                                ),
+                              ],
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 20, top: 20, bottom: 20, right: 10),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                          productList
+                                              .rickdatahigh[index].effect,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .labelLarge),
+                                      Container(
+                                          width: 80,
+                                          height: 25,
+                                          alignment: Alignment.center,
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(20),
+                                            color: const Color(0xffFFA8B8),
+                                          ),
+                                          child: Text(
+                                            'ระดับสูง',
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodySmall
+                                                ?.copyWith(
+                                                    color: const Color(
+                                                        0xFFAF3232)),
+                                          ))
+                                    ],
+                                  ),
+                                  Container(
+                                      child: productList.risklist[index]
+                                              .measures.isNotEmpty
+                                          ? Text(
+                                              productList.rickdatahigh[index]
+                                                  .measures[productList.id].dpo,
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .labelLarge)
+                                          : Text('ว่าง')),
+                                  const SizedBox(
+                                    height: 20,
+                                  ),
+                                  SizedBox(
+                                    height: 100,
+                                    width: double.infinity,
+                                    child: Column(
+                                      children: [
+                                        ElevatedButton(
+                                          onPressed: () {
+                                            context.go(
+                                              '/AddMitigatingMeasuresPage/${productList.rickdatahigh[index].id}',
+                                              // extra: {'id': riskList[index].id, 'name': riskList[index].effect},
+                                            );
+                                          },
+                                          child: Text(
+                                            'เพิ่ม/แก้ไขมาตรการ',
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodySmall
+                                                ?.copyWith(
+                                                    color: Theme.of(context)
+                                                        .colorScheme
+                                                        .onPrimary),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    );
+                  },
+                ),
               ],
             )
           ],
@@ -175,188 +289,6 @@ class _MitigatingMeasuresState extends State<MitigatingMeasures> {
               ),
             )),
       ),
-    ];
-  }
-
-  _mitigatingview() {
-    return [
-      ListView.builder(
-        physics: const NeverScrollableScrollPhysics(),
-        shrinkWrap: true,
-        itemCount: mitigatingdescription.length,
-        itemBuilder: (BuildContext context, int index) {
-          if (mitigatingdescription[index].dpo.isEmpty) {
-            return Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: Colors.white,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.1),
-                          spreadRadius: 5,
-                          blurRadius: 7,
-                          offset: const Offset(0, 8),
-                        ),
-                      ],
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                          left: 20, top: 20, bottom: 20, right: 10),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text('ทำให้ไม่สามารถใช้สิทธิได้ตามสมควร',
-                                  style:
-                                      Theme.of(context).textTheme.labelLarge),
-                              Container(
-                                  width: 80,
-                                  height: 25,
-                                  alignment: Alignment.center,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                    color: const Color(0xffFFA8B8),
-                                  ),
-                                  child: Text(
-                                    'ระดับสูง',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodySmall
-                                        ?.copyWith(
-                                            color: const Color(0xFFAF3232)),
-                                  ))
-                            ],
-                          ),
-                          Text('ทั้งที่เป็นสิทธิความเป็นส่วนตัว\nและสิทธิอื่นๆ',
-                              style: Theme.of(context).textTheme.labelLarge),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          SizedBox(
-                            height: 45,
-                            width: double.infinity,
-                            child: ElevatedButton(
-                                onPressed: () {
-                                  context.go('/AddMitigatingMeasuresPage');
-                                },
-                                child: Text('เพิ่ม/แก้ไขมาตรการ',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodySmall
-                                        ?.copyWith(
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .onPrimary))),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            );
-          } else {
-            return Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: Colors.white,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.1),
-                          spreadRadius: 5,
-                          blurRadius: 7,
-                          offset: const Offset(0, 8),
-                        ),
-                      ],
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                          left: 20, top: 20, bottom: 20, right: 10),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text('ทำให้ไม่สามารถใช้สิทธิได้ตามสมควร',
-                                  style:
-                                      Theme.of(context).textTheme.labelLarge),
-                              Container(
-                                  width: 80,
-                                  height: 25,
-                                  alignment: Alignment.center,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                    color: const Color(0xffFFA8B8),
-                                  ),
-                                  child: Text(
-                                    'ระดับสูง',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodySmall
-                                        ?.copyWith(
-                                            color: const Color(0xFFAF3232)),
-                                  ))
-                            ],
-                          ),
-                          Text('ทั้งที่เป็นสิทธิความเป็นส่วนตัว\nและสิทธิอื่นๆ',
-                              style: Theme.of(context).textTheme.labelLarge),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                              'ความเห็นของ DPO : ${mitigatingdescription[index].dpo}',
-                              style: Theme.of(context).textTheme.labelLarge),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                              'สถานะการดำเนินการ : ${mitigatingdescription[index].manage}',
-                              style: Theme.of(context).textTheme.labelLarge),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          SizedBox(
-                            height: 45,
-                            width: double.infinity,
-                            child: ElevatedButton(
-                                onPressed: () {
-                                  context.go('/AddMitigatingMeasuresPage');
-                                },
-                                child: Text('เพิ่ม/แก้ไขมาตรการ',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodySmall
-                                        ?.copyWith(
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .onPrimary))),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-              ],
-            );
-          }
-        },
-      )
     ];
   }
 }

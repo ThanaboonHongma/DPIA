@@ -154,11 +154,11 @@ class GoRouteProvider {
             },
           ),
           GoRoute(
-            path: '/AddMitigatingMeasuresPage',
+            path: '/AddMitigatingMeasuresPage/:id',
             pageBuilder: (context, state) {
               return CustomTransitionPage(
                 key: state.pageKey,
-                child: const AddMeasure(),
+                child: AddMeasure(id: state.pathParameters['id']!),
                 transitionsBuilder:
                     (context, animation, secondaryAnimation, child) {
                   return FadeTransition(
@@ -204,27 +204,6 @@ class GoRouteProvider {
               );
             },
           ),
-          // ShellRoute(
-          //     navigatorKey: _shellNavigatorKey,
-          //     builder: (context, state, child) {
-          //       return MyApp(key: state.pageKey);
-          //     },
-          //     routes: [
-          //       GoRoute(
-          //         path: '/',
-          //         name: loginRoute,
-          //         pageBuilder: (context, state) {
-          //           return LoginScreen();
-          //         },
-          //       ),
-          //       GoRoute(
-          //         path: '/home',
-          //         name: homeRoute,
-          //         pageBuilder: (context, state) {
-          //           return HomeScreen(key: state.pageKey);
-          //         },
-          //       )
-          //     ])
         ]);
   }
 }
