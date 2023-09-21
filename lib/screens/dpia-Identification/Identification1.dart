@@ -10,10 +10,31 @@ class Identification1 extends StatefulWidget {
   State<Identification1> createState() => _Identification1State();
 }
 
+const List<String> list = <String>['Public monitoring on a large scale', 'Two', 'Three', 'Four'];
+
 class _Identification1State extends State<Identification1> {
   bool checkboxValue1 = false;
   bool checkboxValue2 = false;
   bool checkboxValue3 = false;
+  final textController11 = TextEditingController();
+  final textController22 = TextEditingController();
+  final textController33 = TextEditingController();
+  final textController44 = TextEditingController();
+  final textController55 = TextEditingController(); 
+  final textController66 = TextEditingController();
+  
+
+  @override
+  void dispose() {
+    textController11.dispose();
+    textController22.dispose();
+    textController33.dispose();
+    textController44.dispose();
+    textController55.dispose();
+    textController66.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,6 +74,187 @@ class _Identification1State extends State<Identification1> {
               height: 8,
               width: double.infinity,
               color: const Color(0xffDEDEDE),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.1),
+                      spreadRadius: 5,
+                      blurRadius: 7,
+                      offset: const Offset(0, 8),
+                    ),
+                  ],
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Column(
+                    children: [
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          'ขั้นตอนที่ 1 กำหนดระดับความเสี่ยงของข้อมูล',
+                          style:
+                              Theme.of(context).textTheme.titleLarge?.copyWith(
+                                    color: Color.fromRGBO(35, 169, 225, 1),
+                                  ),
+                        ),
+                      ),
+                      const Divider(
+                        thickness: 1,
+                        indent: 0,
+                        endIndent: 0,
+                        color: Colors.grey,
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          'กำหนดความเสี่ยงของข้อมูลส่วนบุคคลชุดต่างๆ โดยอย่างน้อยคำนึงถึง',
+                          style: Theme.of(context).textTheme.titleMedium,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.1),
+                    spreadRadius: 5,
+                    blurRadius: 7,
+                    offset: const Offset(0, 8),
+                  ),
+                ],
+              ),
+              margin: const EdgeInsets.all(
+                10,
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start, // ชิดซ้าย
+                    children: [
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      const Text('Identifiable'),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      SizedBox(
+                        child: TextField(
+                          controller: textController11,
+                          decoration: const InputDecoration(
+                            border: OutlineInputBorder(),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      const Text('Access'),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      SizedBox(
+                        child: TextField(
+                          controller: textController22,
+                          decoration: const InputDecoration(
+                            border: OutlineInputBorder(),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      const Text('Activity'),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      SizedBox(
+                        child: TextField(
+                          controller: textController33,
+                          decoration: const InputDecoration(
+                            border: OutlineInputBorder(),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      const Text('Volume'),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      SizedBox(
+                        child: TextField(
+                          controller: textController44,
+                          decoration: const InputDecoration(
+                            border: OutlineInputBorder(),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      const Text('Volume options'),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      SizedBox(
+                        child: DropdownMenuExample(),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      const Text('Adverse Effects to Data Subjects'),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      SizedBox(
+                        child: TextField(
+                          controller: textController55,
+                          decoration: const InputDecoration(
+                            border: OutlineInputBorder(),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      const Text('Adverse Effects to Organization'),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      SizedBox(
+                        child: TextField(
+                          controller: textController66,
+                          decoration: const InputDecoration(
+                            border: OutlineInputBorder(),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             ),
             Padding(
               padding: const EdgeInsets.all(10.0),
@@ -276,6 +478,35 @@ class _ActivityListviewState extends State<ActivityListview> {
         ),
       ),
       itemCount: activities.length,
+    );
+  }
+}
+
+
+class DropdownMenuExample extends StatefulWidget {
+  const DropdownMenuExample({super.key});
+
+  @override
+  State<DropdownMenuExample> createState() => _DropdownMenuExampleState();
+}
+
+class _DropdownMenuExampleState extends State<DropdownMenuExample> {
+  String dropdownValue = list.first;
+
+  @override
+  Widget build(BuildContext context) {
+    return DropdownMenu<String>(
+      width: 340,
+      initialSelection: list.first,
+      onSelected: (String? value) {
+        // This is called when the user selects an item.
+        setState(() {
+          dropdownValue = value!;
+        });
+      },
+      dropdownMenuEntries: list.map<DropdownMenuEntry<String>>((String value) {
+        return DropdownMenuEntry<String>(value: value, label: value);
+      }).toList(),
     );
   }
 }
