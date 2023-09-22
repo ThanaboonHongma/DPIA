@@ -49,20 +49,20 @@ class _DpiaAddRiskState extends State<DpiaAddRisk> {
 
   int riskCounter = 1;
 
-  void saveRisk() {
-    setState(() {
-      defaultriskdata.add((RiskData(
-          id: '0',
-          effect: _impactTextController.text,
-          probability: _probability,
-          severity: _severity,
-          riskLevel: _riskLevel,
-          measures: [])));
-    });
+  // void saveRisk() {
+  //   setState(() {
+  //     defaultriskdata.add((RiskData(
+  //         id: '0',
+  //         effect: _impactTextController.text,
+  //         probability: _probability,
+  //         severity: _severity,
+  //         riskLevel: _riskLevel,
+  //         measures: [])));
+  //   });
 
-    // เคลียร์ข้อมูลใน TextField หลังจากเพิ่มความเสี่ยง
-    _impactTextController.clear();
-  }
+  //   // เคลียร์ข้อมูลใน TextField หลังจากเพิ่มความเสี่ยง
+  //   _impactTextController.clear();
+  // }
 
   final TextEditingController _impactTextController = TextEditingController();
 
@@ -303,6 +303,7 @@ class _DpiaAddRiskState extends State<DpiaAddRisk> {
                         probability: _probability,
                         severity: _severity,
                         riskLevel: _riskLevel,
+                        createdAt: DateTime.now(),
                         measures: []));
                     // counterProvider.toggleBottomSheet(true);
                   },

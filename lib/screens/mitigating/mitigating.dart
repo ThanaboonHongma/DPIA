@@ -15,7 +15,6 @@ class MitigatingMeasures extends StatefulWidget {
 }
 
 class _MitigatingMeasuresState extends State<MitigatingMeasures> {
-
   @override
   Widget build(BuildContext context) {
     final productList = Provider.of<CounterProvider>(context);
@@ -60,117 +59,131 @@ class _MitigatingMeasuresState extends State<MitigatingMeasures> {
                 const SizedBox(
                   height: 15,
                 ),
-
-                // final dpo = productList.dpolist.map((e) => e);
-
-                ListView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: productList.rickdatahigh.length,
-                  itemBuilder: (context, index) {
-                    // print(riskList[index].id);
-                    return Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 10),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              color: Colors.white,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.1),
-                                  spreadRadius: 5,
-                                  blurRadius: 7,
-                                  offset: const Offset(0, 8),
-                                ),
-                              ],
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 20, top: 20, bottom: 20, right: 10),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                          productList
-                                              .rickdatahigh[index].effect,
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .labelLarge),
-                                      Container(
-                                          width: 80,
-                                          height: 25,
-                                          alignment: Alignment.center,
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(20),
-                                            color: const Color(0xffFFA8B8),
-                                          ),
-                                          child: Text(
-                                            'ระดับสูง',
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .bodySmall
-                                                ?.copyWith(
-                                                    color: const Color(
-                                                        0xFFAF3232)),
-                                          ))
-                                    ],
-                                  ),
-                                  Container(
-                                      child: productList.risklist[index]
-                                              .measures.isNotEmpty
-                                          ? Text(
-                                              productList.rickdatahigh[index]
-                                                  .measures[productList.id].dpo,
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .labelLarge)
-                                          : Text('ว่าง')),
-                                  const SizedBox(
-                                    height: 20,
-                                  ),
-                                  SizedBox(
-                                    height: 100,
-                                    width: double.infinity,
-                                    child: Column(
-                                      children: [
-                                        ElevatedButton(
-                                          onPressed: () {
-                                            context.go(
-                                              '/AddMitigatingMeasuresPage/${productList.rickdatahigh[index].id}',
-                                              // extra: {'id': riskList[index].id, 'name': riskList[index].effect},
-                                            );
-                                          },
-                                          child: Text(
-                                            'เพิ่ม/แก้ไขมาตรการ',
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .bodySmall
-                                                ?.copyWith(
-                                                    color: Theme.of(context)
-                                                        .colorScheme
-                                                        .onPrimary),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
+                Builder(builder: (context) {
+                  // final dpo = productList.dpolist.map((e) => e);
+                  List riskList = productList.risklist
+                      .where((risk) => risk.riskLevel == 'ระดับสูง',)
+                      .map((risk) => risk.copyWith(riskLevel: 'ระดับสูง')).toList();
+                      print('riskList.length: ${riskList.length}');
+             
+                  return ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: riskList.length,
+                    itemBuilder: (context, index) {
+                      print(riskList[index].id);
+                      return Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                color: Colors.white,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey.withOpacity(0.1),
+                                    spreadRadius: 5,
+                                    blurRadius: 7,
+                                    offset: const Offset(0, 8),
                                   ),
                                 ],
                               ),
+                              child: Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 20, top: 20, bottom: 20, right: 10),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(riskList[index].effect,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .labelLarge),
+                                                Text(riskList[index].id,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .labelLarge),
+                                        Container(
+                                            width: 80,
+                                            height: 25,
+                                            alignment: Alignment.center,
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(20),
+                                              color: const Color(0xffFFA8B8),
+                                            ),
+                                            child: Text(
+                                              'ระดับสูง',
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .bodySmall
+                                                  ?.copyWith(
+                                                      color: const Color(
+                                                          0xFFAF3232)),
+                                            ))
+                                      ],
+                                    ),
+                                    Container(
+                                        child: productList.risklist[index]
+                                                .measures.isNotEmpty
+                                            ? Column(
+                                              children: [
+                                                Text(
+                                                  productList.risklist[index].measures[0].dpo,
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .labelLarge),
+                                                Text(
+                                                  '${productList.risklist[index].measures[0].percent.toString()} %',
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .labelLarge),
+                                                        
+                                              ],
+                                            )
+                                            : Text('ว่าง')),
+                                    const SizedBox(
+                                      height: 20,
+                                    ),
+                                    SizedBox(
+                                      height: 45,
+                                      width: double.infinity,
+                                      child: Column(
+                                        children: [
+                                          ElevatedButton(
+                                              onPressed: () {
+                                                context.go(
+                                                  '/AddMitigatingMeasuresPage/${riskList[index].id}',
+                                                  // extra: {'id': riskList[index].id, 'name': riskList[index].effect},
+                                                );
+                                                print('risk id: ${index}');
+                                              },
+                                              child: Text('เพิ่ม/แก้ไขมาตรการ',
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .bodySmall
+                                                      ?.copyWith(
+                                                          color: Theme.of(context)
+                                                              .colorScheme
+                                                              .onPrimary))),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
                             ),
                           ),
-                        ),
-                      ],
-                    );
-                  },
-                ),
+                        ],
+                      );
+                    },
+                  );
+                }),
               ],
             )
           ],

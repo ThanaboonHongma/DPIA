@@ -6,6 +6,7 @@ class RiskData {
   final String probability;
   final String severity;
   final String riskLevel;
+  final DateTime createdAt;
   final List<Measure> measures;
   RiskData({
     required this.id,
@@ -14,9 +15,8 @@ class RiskData {
     required this.severity,
     required this.riskLevel,
     required this.measures,
+    required this.createdAt,
   });
-  
-   
 
   RiskData copyWith({
     String? id,
@@ -24,6 +24,7 @@ class RiskData {
     String? probability,
     String? severity,
     String? riskLevel,
+    DateTime? createdAt,
     List<Measure>? measures,
   }) {
     return RiskData(
@@ -33,6 +34,7 @@ class RiskData {
       severity: severity ?? this.severity,
       riskLevel: riskLevel ?? this.riskLevel,
       measures: measures ?? this.measures,
+      createdAt: createdAt ?? this.createdAt,
     );
   }
 }
@@ -49,6 +51,7 @@ class Measure {
  final String rick3;
  final String dpo;
  final String results;
+ final int percent;
   Measure({
     required this.measure1,
     required this.measure2,
@@ -61,6 +64,7 @@ class Measure {
     required this.rick3,
     required this.dpo,
     required this.results,
+    required this.percent,
   });
 
   Measure copyWith({
@@ -75,6 +79,7 @@ class Measure {
     String? rick3,
     String? dpo,
     String? results,
+    int? percent,
   }) {
     return Measure(
       measure1: measure1 ?? this.measure1,
@@ -88,6 +93,7 @@ class Measure {
       rick3: rick3 ?? this.rick3,
       dpo: dpo ?? this.dpo,
       results: results ?? this.results,
+      percent: percent ?? this.percent,
     );
   }
 }

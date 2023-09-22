@@ -74,7 +74,8 @@ class _AddMeasureState extends State<AddMeasure> {
           rick2: rick2.toString(),
           rick3: rick3.toString(),
           dpo: _checkdpo,
-          results: _checkresults) as RiskData);
+          results: _checkresults,
+          percent: _checkmanage) as RiskData);
     });
   }
 
@@ -116,8 +117,7 @@ class _AddMeasureState extends State<AddMeasure> {
                         .where((risk) => risk.id == widget.id)
                         .first;
                     print('=====>>>>${riskData.id}');
-                    
-                    context.go('/MitigatingMeasuresPage');
+
                     context
                         .read<CounterProvider>()
                         .saveRiskData(riskData.copyWith(measures: [
@@ -133,9 +133,11 @@ class _AddMeasureState extends State<AddMeasure> {
                             rick3: rick3.toString(),
                             dpo: _checkdpo,
                             results: _checkresults,
+                            percent: _checkmanage
                           )
                         ]));
-
+                    context.go('/MitigatingMeasuresPage');
+                    setState(() {});
                   },
                   style: ButtonStyle(
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -742,8 +744,7 @@ class _AddMeasureState extends State<AddMeasure> {
                                             onChanged: (bool? newValue) {
                                               setState(() {
                                                 listenagree[0] = newValue!;
-                                                listenagree[1] =
-                                                    false;
+                                                listenagree[1] = false;
                                                 _updateresults();
                                               });
                                             },
