@@ -1,13 +1,11 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-
 class RiskData {
   final String id;
   final String effect;
   final String probability;
   final String severity;
   final String riskLevel;
-  final DateTime createdAt;
   final List<Measure> measures;
+
   RiskData({
     required this.id,
     required this.effect,
@@ -15,7 +13,6 @@ class RiskData {
     required this.severity,
     required this.riskLevel,
     required this.measures,
-    required this.createdAt,
   });
 
   RiskData copyWith({
@@ -24,7 +21,6 @@ class RiskData {
     String? probability,
     String? severity,
     String? riskLevel,
-    DateTime? createdAt,
     List<Measure>? measures,
   }) {
     return RiskData(
@@ -34,24 +30,24 @@ class RiskData {
       severity: severity ?? this.severity,
       riskLevel: riskLevel ?? this.riskLevel,
       measures: measures ?? this.measures,
-      createdAt: createdAt ?? this.createdAt,
     );
   }
 }
 
 class Measure {
- final String measure1;
- final String measure2;
- final String measure3;
- final String project;
- final DateTime date;
- final String responsible;
- final String rick1;
- final String rick2;
- final String rick3;
- final String dpo;
- final String results;
- final int percent;
+  final String measure1;
+  final String measure2;
+  final String measure3;
+  final String project;
+  final DateTime date;
+  final String responsible;
+  final String rick1;
+  final String rick2;
+  final String rick3;
+  final String dpo;
+  final String results;
+  final int percent;
+
   Measure({
     required this.measure1,
     required this.measure2,
@@ -97,4 +93,3 @@ class Measure {
     );
   }
 }
-

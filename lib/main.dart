@@ -1,5 +1,5 @@
 import 'package:dpia_project/Router/router.dart';
-import 'package:dpia_project/models/counter_provider.dart';
+import 'package:dpia_project/models/dpia_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -14,15 +14,15 @@ class DPIA extends StatelessWidget {
   Widget build(BuildContext context) {
     final router = GoRouteProvider();
     return MultiProvider(
-        providers: [
-          ChangeNotifierProvider<CounterProvider>(
-            create: (_) => CounterProvider(),
-          ),
-          
-        ],
-        child: MaterialApp.router(
-          debugShowCheckedModeBanner: false,
-          routerConfig: router.goRouter(),
-        ));
+      providers: [
+        ChangeNotifierProvider<DpiaProvider>(
+          create: (_) => DpiaProvider(),
+        ),
+      ],
+      child: MaterialApp.router(
+        debugShowCheckedModeBanner: false,
+        routerConfig: router.goRouter(),
+      ),
+    );
   }
 }

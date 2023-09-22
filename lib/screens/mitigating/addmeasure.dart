@@ -1,4 +1,4 @@
-import 'package:dpia_project/models/counter_provider.dart';
+import 'package:dpia_project/models/dpia_provider.dart';
 // import 'package:dpia_project/models/mitigatingdescription/mitigatingdescription.dart';
 import 'package:dpia_project/models/riskassessment/risklist.dart';
 import 'package:flutter/material.dart';
@@ -81,7 +81,6 @@ class _AddMeasureState extends State<AddMeasure> {
 
   @override
   Widget build(BuildContext context) {
-    print('=========${widget.id}');
     return Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
@@ -112,32 +111,37 @@ class _AddMeasureState extends State<AddMeasure> {
                 child: ElevatedButton(
                   onPressed: () {
                     final riskData = context
-                        .read<CounterProvider>()
-                        .risklist
+                        .read<DpiaProvider>()
+                        .riskAssessments
                         .where((risk) => risk.id == widget.id)
                         .first;
-                    print('=====>>>>${riskData.id}');
 
-                    context
-                        .read<CounterProvider>()
-                        .saveRiskData(riskData.copyWith(measures: [
-                          Measure(
-                            measure1: measures1.toString(),
-                            measure2: measures2.toString(),
-                            measure3: measures3.toString(),
-                            project: project.toString(),
-                            date: selectedDate,
-                            responsible: responsible.toString(),
-                            rick1: rick1.toString(),
-                            rick2: rick2.toString(),
-                            rick3: rick3.toString(),
-                            dpo: _checkdpo,
-                            results: _checkresults,
-                            percent: _checkmanage
-                          )
-                        ]));
+                    final newMeasure = Measure(
+                      measure1: measures1.toString(),
+                      measure2: measures2.toString(),
+                      measure3: measures3.toString(),
+                      project: project.toString(),
+                      date: selectedDate,
+                      responsible: responsible.toString(),
+                      rick1: rick1.toString(),
+                      rick2: rick2.toString(),
+                      rick3: rick3.toString(),
+                      dpo: _checkdpo,
+                      results: _checkresults,
+                      percent: _checkmanage,
+                    );
+
+                    List<Measure> measures = riskData.measures
+                        .map((measure) => measure)
+                        .toList()
+                      ..add(newMeasure);
+
+                    final updated = riskData.copyWith(
+                      measures: measures,
+                    );
+
+                    context.read<DpiaProvider>().saveRiskHighLevel(updated);
                     context.go('/MitigatingMeasuresPage');
-                    setState(() {});
                   },
                   style: ButtonStyle(
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(

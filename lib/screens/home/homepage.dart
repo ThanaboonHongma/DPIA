@@ -1,4 +1,4 @@
-import 'package:dpia_project/models/counter_provider.dart';
+import 'package:dpia_project/models/dpia_provider.dart';
 import 'package:dpia_project/models/home/homedescription.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -16,7 +16,6 @@ class _HomePageState extends State<HomePage> {
       defaltHomeDescription.map((e) => e).toList();
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -169,8 +168,8 @@ class _HomePageState extends State<HomePage> {
   }
 
   _dpialistview() {
-    final productList = Provider.of<CounterProvider>(context);
-    if (productList.risklist.isEmpty) {
+    final productList = Provider.of<DpiaProvider>(context);
+    if (productList.riskAssessments.isEmpty) {
       return [
         Column(
           children: [
@@ -264,7 +263,7 @@ class _HomePageState extends State<HomePage> {
             ListView.builder(
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
-              itemCount: productList.risklist.length,
+              itemCount: productList.riskAssessments.length,
               itemBuilder: (BuildContext context, int index) {
                 return Column(
                   children: [
@@ -290,12 +289,14 @@ class _HomePageState extends State<HomePage> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(productList.risklist[index].effect,
+                                Text(productList.riskAssessments[index].effect,
                                     style: Theme.of(context)
                                         .textTheme
                                         .titleMedium),
                                 Text(
-                                  productList.risklist[index].measures[index].date.toString(),
+                                  productList.riskAssessments[index]
+                                      .measures[index].date
+                                      .toString(),
                                   style: Theme.of(context)
                                       .textTheme
                                       .bodySmall

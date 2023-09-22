@@ -1,4 +1,4 @@
-import 'package:dpia_project/models/counter_provider.dart';
+import 'package:dpia_project/models/dpia_provider.dart';
 import 'package:dpia_project/screens/dpia_risk_assessment/dpia_risk_assessment_add_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -22,7 +22,8 @@ class _RiskAssessmentPageState extends State<RiskAssessmentPage> {
 
   @override
   Widget build(BuildContext context) {
-    final productList = Provider.of<CounterProvider>(context);
+    final dpiaProvider = Provider.of<DpiaProvider>(context);
+
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -146,7 +147,7 @@ class _RiskAssessmentPageState extends State<RiskAssessmentPage> {
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
                     children: [
-                      productList.risklist.isEmpty
+                      dpiaProvider.riskAssessments.isEmpty
                           ? const Padding(
                               padding: EdgeInsets.all(8.0),
                               child: Center(
@@ -158,7 +159,7 @@ class _RiskAssessmentPageState extends State<RiskAssessmentPage> {
                           : SizedBox(
                               height: 400,
                               child: ListView.builder(
-                                itemCount: productList.risklist.length,
+                                itemCount: dpiaProvider.riskAssessments.length,
                                 itemBuilder: (BuildContext context, int index) {
                                   return Column(
                                     children: [
@@ -190,15 +191,15 @@ class _RiskAssessmentPageState extends State<RiskAssessmentPage> {
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                               20),
-                                                      color: productList
-                                                                  .risklist[
+                                                      color: dpiaProvider
+                                                                  .riskAssessments[
                                                                       index]
                                                                   .riskLevel ==
                                                               "ระดับต่ำ"
                                                           ? const Color(
                                                               0xffA2EDCE)
-                                                          : productList
-                                                                      .risklist[
+                                                          : dpiaProvider
+                                                                      .riskAssessments[
                                                                           index]
                                                                       .riskLevel ==
                                                                   "ระดับกลาง"
@@ -211,17 +212,17 @@ class _RiskAssessmentPageState extends State<RiskAssessmentPage> {
                                                         const EdgeInsets.all(5),
                                                     child: Center(
                                                       child: Text(
-                                                        ' ${productList.risklist[index].riskLevel} ',
+                                                        ' ${dpiaProvider.riskAssessments[index].riskLevel} ',
                                                         style: TextStyle(
-                                                          color: productList
-                                                                      .risklist[
+                                                          color: dpiaProvider
+                                                                      .riskAssessments[
                                                                           index]
                                                                       .riskLevel ==
                                                                   "ระดับต่ำ"
                                                               ? const Color(
                                                                   0xff0A5134)
-                                                              : productList
-                                                                          .risklist[
+                                                              : dpiaProvider
+                                                                          .riskAssessments[
                                                                               index]
                                                                           .riskLevel ==
                                                                       "ระดับกลาง"
@@ -233,11 +234,10 @@ class _RiskAssessmentPageState extends State<RiskAssessmentPage> {
                                                       ),
                                                     ),
                                                   ),
-                                                  const SizedBox(
-                                                    width: 8,
-                                                  ),
+                                                  const SizedBox(width: 8),
                                                   Text(
-                                                      'ความเสี่ยงที่ ${index + 1}'),
+                                                    'ความเสี่ยงที่ ${index + 1}',
+                                                  ),
                                                 ],
                                               ),
                                             ],
@@ -249,11 +249,14 @@ class _RiskAssessmentPageState extends State<RiskAssessmentPage> {
                                                     CrossAxisAlignment.start,
                                                 children: [
                                                   Text(
-                                                      'ผลกระทบ: ${productList.risklist[index].effect}'),
+                                                    'ผลกระทบ: ${dpiaProvider.riskAssessments[index].effect}',
+                                                  ),
                                                   Text(
-                                                      'ความน่าจะเป็น: ${productList.risklist[index].probability}'),
+                                                    'ความน่าจะเป็น: ${dpiaProvider.riskAssessments[index].probability}',
+                                                  ),
                                                   Text(
-                                                      'ความร้ายแรง: ${productList.risklist[index].severity}'),
+                                                    'ความร้ายแรง: ${dpiaProvider.riskAssessments[index].severity}',
+                                                  ),
                                                 ],
                                               ),
                                             ),
@@ -322,24 +325,26 @@ class _RiskAssessmentPageState extends State<RiskAssessmentPage> {
             width: 100,
             height: 40,
             child: ElevatedButton(
-                onPressed: () {
-                  context.go('/NecessityandProportionlityPage');
-                },
-                child: const Text('ย้อนกลับ')),
+              onPressed: () {
+                context.go('/NecessityandProportionlityPage');
+              },
+              child: const Text('ย้อนกลับ'),
+            ),
           ),
           const Text(
             '5 / 7',
             style: TextStyle(color: Colors.black),
           ),
           SizedBox(
-              width: 100,
-              height: 40,
-              child: ElevatedButton(
-                  onPressed: () {
-                    context.read<CounterProvider>().setrickhigh();
-                    context.go('/MitigatingMeasuresPage');
-                  },
-                  child: const Text('ถัดไป'))),
+            width: 100,
+            height: 40,
+            child: ElevatedButton(
+              onPressed: () {
+                context.go('/MitigatingMeasuresPage');
+              },
+              child: const Text('ถัดไป'),
+            ),
+          ),
         ],
       ),
     );

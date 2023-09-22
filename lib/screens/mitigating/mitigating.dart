@@ -1,6 +1,4 @@
-import 'package:dpia_project/models/counter_provider.dart';
-// import 'package:dpia_project/models/riskassessment/risklist.dart';
-// import 'package:dpia_project/models/mitigatingdescription/mitigatingdescription.dart';
+import 'package:dpia_project/models/dpia_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -17,7 +15,7 @@ class MitigatingMeasures extends StatefulWidget {
 class _MitigatingMeasuresState extends State<MitigatingMeasures> {
   @override
   Widget build(BuildContext context) {
-    final productList = Provider.of<CounterProvider>(context);
+    final dpiaProvider = Provider.of<DpiaProvider>(context);
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -52,144 +50,134 @@ class _MitigatingMeasuresState extends State<MitigatingMeasures> {
             ),
             Column(
               children: [
-                const SizedBox(
-                  height: 10,
-                ),
+                const SizedBox(height: 10),
                 ..._mitigatingis(),
-                const SizedBox(
-                  height: 15,
-                ),
-                Builder(builder: (context) {
-                  // final dpo = productList.dpolist.map((e) => e);
-                  List riskList = productList.risklist
-                      .where((risk) => risk.riskLevel == 'ระดับสูง',)
-                      .map((risk) => risk.copyWith(riskLevel: 'ระดับสูง')).toList();
-                      print('riskList.length: ${riskList.length}');
-             
-                  return ListView.builder(
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: riskList.length,
-                    itemBuilder: (context, index) {
-                      print(riskList[index].id);
-                      return Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 10),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
-                                color: Colors.white,
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.grey.withOpacity(0.1),
-                                    spreadRadius: 5,
-                                    blurRadius: 7,
-                                    offset: const Offset(0, 8),
-                                  ),
-                                ],
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.only(
-                                    left: 20, top: 20, bottom: 20, right: 10),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(riskList[index].effect,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .labelLarge),
-                                                Text(riskList[index].id,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .labelLarge),
-                                        Container(
-                                            width: 80,
-                                            height: 25,
-                                            alignment: Alignment.center,
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(20),
-                                              color: const Color(0xffFFA8B8),
-                                            ),
-                                            child: Text(
-                                              'ระดับสูง',
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .bodySmall
-                                                  ?.copyWith(
-                                                      color: const Color(
-                                                          0xFFAF3232)),
-                                            ))
-                                      ],
-                                    ),
-                                    Container(
-                                        child: productList.risklist[index]
-                                                .measures.isNotEmpty
-                                            ? Column(
-                                              children: [
-                                                Text(
-                                                  productList.risklist[index].measures[0].dpo,
-                                                    style: Theme.of(context)
-                                                        .textTheme
-                                                        .labelLarge),
-                                                Text(
-                                                  '${productList.risklist[index].measures[0].percent.toString()} %',
-                                                    style: Theme.of(context)
-                                                        .textTheme
-                                                        .labelLarge),
-                                                        
-                                              ],
-                                            )
-                                            : Text('ว่าง')),
-                                    const SizedBox(
-                                      height: 20,
-                                    ),
-                                    SizedBox(
-                                      height: 45,
-                                      width: double.infinity,
-                                      child: Column(
-                                        children: [
-                                          ElevatedButton(
-                                              onPressed: () {
-                                                context.go(
-                                                  '/AddMitigatingMeasuresPage/${riskList[index].id}',
-                                                  // extra: {'id': riskList[index].id, 'name': riskList[index].effect},
-                                                );
-                                                print('risk id: ${index}');
-                                              },
-                                              child: Text('เพิ่ม/แก้ไขมาตรการ',
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .bodySmall
-                                                      ?.copyWith(
-                                                          color: Theme.of(context)
-                                                              .colorScheme
-                                                              .onPrimary))),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      );
-                    },
-                  );
-                }),
+                const SizedBox(height: 15),
+                _buildRiskListVIew(dpiaProvider),
               ],
             )
           ],
         ),
       ),
       bottomNavigationBar: buildMyNavBar(context),
+    );
+  }
+
+  ListView _buildRiskListVIew(DpiaProvider dpiaProvider) {
+    final riskAssessments = dpiaProvider.riskAssessments
+        .where((risk) => risk.riskLevel == 'ระดับสูง')
+        .toList();
+
+    return ListView.builder(
+      physics: const NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      itemCount: riskAssessments.length,
+      itemBuilder: (context, index) {
+        return Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.1),
+                      spreadRadius: 5,
+                      blurRadius: 7,
+                      offset: const Offset(0, 8),
+                    ),
+                  ],
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                      left: 20, top: 20, bottom: 20, right: 10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            riskAssessments[index].effect,
+                            style: Theme.of(context).textTheme.labelLarge,
+                          ),
+                          Text(
+                            riskAssessments[index].id,
+                            style: Theme.of(context).textTheme.labelLarge,
+                          ),
+                          Container(
+                            width: 80,
+                            height: 25,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: const Color(0xffFFA8B8),
+                            ),
+                            child: Text(
+                              'ระดับสูง',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodySmall
+                                  ?.copyWith(color: const Color(0xFFAF3232)),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Container(
+                        child: riskAssessments[index].measures.isNotEmpty
+                            ? Column(
+                                children: [
+                                  Text(
+                                    riskAssessments[index].measures[0].dpo,
+                                    style:
+                                        Theme.of(context).textTheme.labelLarge,
+                                  ),
+                                  Text(
+                                    '${riskAssessments[index].measures[0].percent.toString()} %',
+                                    style:
+                                        Theme.of(context).textTheme.labelLarge,
+                                  ),
+                                ],
+                              )
+                            : const Text('ว่าง'),
+                      ),
+                      const SizedBox(height: 20),
+                      SizedBox(
+                        height: 45,
+                        width: double.infinity,
+                        child: Column(
+                          children: [
+                            ElevatedButton(
+                              onPressed: () {
+                                context.go(
+                                  '/AddMitigatingMeasuresPage/${riskAssessments[index].id}',
+                                );
+                              },
+                              child: Text(
+                                'เพิ่ม/แก้ไขมาตรการ',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodySmall
+                                    ?.copyWith(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .onPrimary),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 
@@ -241,66 +229,66 @@ class _MitigatingMeasuresState extends State<MitigatingMeasures> {
       Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              color: Colors.white,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.1),
-                  spreadRadius: 5,
-                  blurRadius: 7,
-                  offset: const Offset(0, 8),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.1),
+                spreadRadius: 5,
+                blurRadius: 7,
+                offset: const Offset(0, 8),
+              ),
+            ],
+          ),
+          child: Padding(
+            padding:
+                const EdgeInsets.only(left: 20, top: 20, bottom: 20, right: 10),
+            child: Column(
+              children: [
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 1.0),
+                    child: Text(
+                      'ขั้นตอนที่ 6 Mitigating measures',
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                            color: Theme.of(context).colorScheme.tertiary,
+                          ),
+                    ),
+                  ),
+                ),
+                const Divider(
+                  color: Colors.grey,
+                  thickness: 1,
+                ),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 1.0),
+                    child: Text(
+                      '[Mitigating measures]',
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 1.0),
+                    child: Text(
+                      'ระบุมาตรการเพื่อลดความเสี่ยงแต่ละรายการจากขั้นตอนที่ 5 โดยควรระบุว่ามาตรการดังกล่าวสามารถลดหรือกำจัดความเสี่ยงได้หรือไม่ อย่างไร ข้อดีข้อเสียของแต่ละมาตรการที่เลือกใช้',
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
+                  ),
                 ),
               ],
             ),
-            child: Padding(
-              padding: const EdgeInsets.only(
-                  left: 20, top: 20, bottom: 20, right: 10),
-              child: Column(
-                children: [
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 1.0),
-                      child: Text(
-                        'ขั้นตอนที่ 6 Mitigating measures',
-                        style:
-                            Theme.of(context).textTheme.titleMedium?.copyWith(
-                                  color: Theme.of(context).colorScheme.tertiary,
-                                ),
-                      ),
-                    ),
-                  ),
-                  const Divider(
-                    color: Colors.grey,
-                    thickness: 1,
-                  ),
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 1.0),
-                      child: Text(
-                        '[Mitigating measures]',
-                        style: Theme.of(context).textTheme.bodyMedium,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 1.0),
-                      child: Text(
-                        'ระบุมาตรการเพื่อลดความเสี่ยงแต่ละรายการจากขั้นตอนที่ 5 โดยควรระบุว่ามาตรการดังกล่าวสามารถลดหรือกำจัดความเสี่ยงได้หรือไม่ อย่างไร ข้อดีข้อเสียของแต่ละมาตรการที่เลือกใช้',
-                        style: Theme.of(context).textTheme.bodyMedium,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            )),
+          ),
+        ),
       ),
     ];
   }

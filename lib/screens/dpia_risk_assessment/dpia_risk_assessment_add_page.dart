@@ -1,5 +1,5 @@
 import 'package:dpia_project/models/riskassessment/risklist.dart';
-import 'package:dpia_project/models/counter_provider.dart';
+import 'package:dpia_project/models/dpia_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:uuid/uuid.dart';
@@ -47,23 +47,6 @@ class _DpiaAddRiskState extends State<DpiaAddRisk> {
     });
   }
 
-  int riskCounter = 1;
-
-  // void saveRisk() {
-  //   setState(() {
-  //     defaultriskdata.add((RiskData(
-  //         id: '0',
-  //         effect: _impactTextController.text,
-  //         probability: _probability,
-  //         severity: _severity,
-  //         riskLevel: _riskLevel,
-  //         measures: [])));
-  //   });
-
-  //   // เคลียร์ข้อมูลใน TextField หลังจากเพิ่มความเสี่ยง
-  //   _impactTextController.clear();
-  // }
-
   final TextEditingController _impactTextController = TextEditingController();
 
   @override
@@ -74,7 +57,7 @@ class _DpiaAddRiskState extends State<DpiaAddRisk> {
 
   @override
   Widget build(BuildContext context) {
-    final productList = Provider.of<CounterProvider>(context, listen: false);
+    final dpiaProvider = Provider.of<DpiaProvider>(context, listen: false);
 
     return SingleChildScrollView(
       padding: const EdgeInsets.all(10.0),
@@ -96,7 +79,7 @@ class _DpiaAddRiskState extends State<DpiaAddRisk> {
               child: Padding(
                 padding: const EdgeInsets.only(left: 1.0),
                 child: Text(
-                  'ความเสี่ยงที่ ${productList.risklist.length + 1}',
+                  'ความเสี่ยงที่ ${dpiaProvider.riskAssessments.length + 1}',
                 ),
               ),
             ),
@@ -295,17 +278,16 @@ class _DpiaAddRiskState extends State<DpiaAddRisk> {
                 ElevatedButton(
                   onPressed: () {
                     Navigator.pop(context);
-
-                    // print(productList.risklist.length);
-                    productList.saveRisk(RiskData(
+                    dpiaProvider.saveRiskAssessment(
+                      RiskData(
                         id: const Uuid().v4(),
                         effect: _impactTextController.text,
                         probability: _probability,
                         severity: _severity,
                         riskLevel: _riskLevel,
-                        createdAt: DateTime.now(),
-                        measures: []));
-                    // counterProvider.toggleBottomSheet(true);
+                        measures: [],
+                      ),
+                    );
                   },
                   child: const Text('บันทึกความเสี่ยง'),
                 ),
