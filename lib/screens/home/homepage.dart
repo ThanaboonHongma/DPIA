@@ -268,7 +268,7 @@ class _HomePageState extends State<HomePage> {
                 return Column(
                   children: [
                     Container(
-                      height: homedescription[index].manage == '' ? 90 : 115,
+                      height: productList.riskAssessments[index].measures[index].percent == '' ? 100 : 125,
                       width: 360,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
@@ -294,9 +294,13 @@ class _HomePageState extends State<HomePage> {
                                         .textTheme
                                         .titleMedium),
                                 Text(
-                                  productList.riskAssessments[index]
-                                      .measures[index].date
-                                      .toString(),
+                                  '${productList.riskAssessments[index]
+                                      .measures[index].date.day
+                                      .toString()}/${productList.riskAssessments[index]
+                                      .measures[index].date.month
+                                      .toString()}/${productList.riskAssessments[index]
+                                      .measures[index].date.year
+                                      .toString()}',
                                   style: Theme.of(context)
                                       .textTheme
                                       .bodySmall
@@ -313,13 +317,13 @@ class _HomePageState extends State<HomePage> {
                             ),
                             Row(
                               children: [
-                                Text(homedescription[index].rick,
+                                Text('${productList.riskAssessments[index].riskLevel.length} ความเสี่ยงสูง',
                                     style:
                                         Theme.of(context).textTheme.bodyMedium)
                               ],
                             ),
                             Container(
-                                child: homedescription[index].manage == ''
+                                child: productList.riskAssessments[index].measures[index].percent == ''
                                     ? null
                                     : Column(
                                         children: [
@@ -329,7 +333,7 @@ class _HomePageState extends State<HomePage> {
                                           Row(
                                             children: [
                                               Text(
-                                                  homedescription[index].manage,
+                                                  'สถานะดำเนินการ : ${productList.riskAssessments[index].measures[index].percent.toString()} %',
                                                   style: Theme.of(context)
                                                       .textTheme
                                                       .bodyMedium)

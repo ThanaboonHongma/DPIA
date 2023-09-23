@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "857445819748",
+    "project_id": "dpia-2772a",
+    "storage_bucket": "dpia-2772a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:857445819748:android:98c25f280aa73ffa0fc671",
+        "android_client_info": {
+          "package_name": "com.example.dpia_project"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyABTz6pGIeyMmxkQT60wA17l2nc6N6Ouhc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

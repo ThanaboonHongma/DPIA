@@ -104,10 +104,6 @@ class _MitigatingMeasuresState extends State<MitigatingMeasures> {
                             riskAssessments[index].effect,
                             style: Theme.of(context).textTheme.labelLarge,
                           ),
-                          Text(
-                            riskAssessments[index].id,
-                            style: Theme.of(context).textTheme.labelLarge,
-                          ),
                           Container(
                             width: 80,
                             height: 25,
@@ -129,20 +125,22 @@ class _MitigatingMeasuresState extends State<MitigatingMeasures> {
                       Container(
                         child: riskAssessments[index].measures.isNotEmpty
                             ? Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   Text(
-                                    riskAssessments[index].measures[0].dpo,
+                                    'ความเห็นของ DPO: ${riskAssessments[index].measures[0].dpo}',
                                     style:
                                         Theme.of(context).textTheme.labelLarge,
                                   ),
                                   Text(
-                                    '${riskAssessments[index].measures[0].percent.toString()} %',
+                                    'สถานะการดำเนินการ: ${riskAssessments[index].measures[0].percent.toString()} %',
                                     style:
                                         Theme.of(context).textTheme.labelLarge,
                                   ),
                                 ],
                               )
-                            : const Text('ว่าง'),
+                            : null,
                       ),
                       const SizedBox(height: 20),
                       SizedBox(

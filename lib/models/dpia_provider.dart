@@ -2,8 +2,10 @@ import 'package:dpia_project/models/riskassessment/risklist.dart';
 import 'package:flutter/material.dart';
 
 class DpiaProvider extends ChangeNotifier {
+  List _dpiaAssessments = [];
   List<RiskData> _riskAssessments = [];
 
+  List get dpiaAssessments => _dpiaAssessments;
   List<RiskData> get riskAssessments => _riskAssessments;
 
   void saveRiskAssessment(RiskData riskdata) {
@@ -29,5 +31,10 @@ class DpiaProvider extends ChangeNotifier {
     }
     _riskAssessments = temp;
     notifyListeners();
+  }
+
+  void saveRiskAssessmentToDPIAlist(){
+    _dpiaAssessments = _riskAssessments;
+    print('List DPIA : ${_dpiaAssessments.first.hashCode}');
   }
 }

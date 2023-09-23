@@ -1,4 +1,6 @@
 // ignore_for_file: file_names
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:dpia_project/models/activity.dart';
@@ -11,11 +13,35 @@ class Identification1 extends StatefulWidget {
 }
 
 class _Identification1State extends State<Identification1> {
+  final Future<FirebaseApp> firebase = Firebase.initializeApp();
+  List<Activity> activities = defaultActivities.map((e) => e).toList();
+
+  Activity checkActivity = Activity(
+    id: 0,
+    title: '',
+    subtitle: '',
+    description: '',
+    isChecked: false,
+  );
+
+  final CollectionReference _dpiaCollection =
+      FirebaseFirestore.instance.collection('DPIA_Project');
+
+  late DocumentReference<Object?> documentRef =
+      _dpiaCollection.doc('DPIA_Document');
+
+  late CollectionReference<Map<String, dynamic>> childCollectionRef =
+      documentRef.collection('DPIA_User');
+
+  late CollectionReference<Map<String, dynamic>> childCollectionRefuser =
+      documentRef.collection('DPIA_assessment');
+
   bool checkboxValue1 = false;
   bool checkboxValue2 = false;
   bool checkboxValue3 = false;
   @override
   Widget build(BuildContext context) {
+    List<Activity> temp;
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -128,124 +154,114 @@ class _Identification1State extends State<Identification1> {
                 ),
               ),
             ),
-            const ActivityListview(),
+            ListView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemBuilder: (context, index) => Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.1),
+                      spreadRadius: 5,
+                      blurRadius: 7,
+                      offset: const Offset(0, 8),
+                    ),
+                  ],
+                ),
+                margin: const EdgeInsets.all(
+                  10,
+                ),
+                child: ExpansionTile(
+                  title: CheckboxListTile(
+                    contentPadding: EdgeInsets.zero,
+                    title: Transform.translate(
+                      offset: const Offset(-16, 0),
+                      child: Text(activities[index].title),
+                    ),
+                    controlAffinity: ListTileControlAffinity
+                        .leading, //  <-- leading Checkbox
+                    value: activities[index].isChecked,
+                    onChanged: (bool? value) {
+                      // กำหนดค่าให้กับตัวแปร `temp` ก่อนที่จะใช้ตัวแปรนั้น
+                      List<Activity> temp = [
+                        for (Activity activity in activities)
+                          activity == activities[index]
+                              ? activity.copyWith(isChecked: value)
+                              : activity
+                      ];
+                      setState(() {
+                        activities = temp;
+                      });
+                    },
+                  ),
+                  children: <Widget>[
+                    const Divider(
+                      thickness: 1,
+                      indent: 0,
+                      endIndent: 0,
+                      color: Colors.grey,
+                    ),
+                    ListTile(title: Text(activities[index].subtitle)),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 20),
+                      child:
+                          ListTile(title: Text(activities[index].description)),
+                    ),
+                  ],
+                ),
+              ),
+              itemCount: activities.length,
+            ),
           ],
         ),
       ),
-      bottomNavigationBar: buildMyNavBar(context),
-    );
-  }
-}
-
-Container buildMyNavBar(BuildContext context) {
-  return Container(
-    height: 60,
-    decoration: BoxDecoration(
-      color: Colors.white,
-      boxShadow: [
-        BoxShadow(
-          color: Colors.grey.withOpacity(0.3),
-          spreadRadius: 5,
-          blurRadius: 7,
-          offset: const Offset(0, -8),
-        ),
-      ],
-    ),
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [
-        const SizedBox(
-          width: 100,
-          height: 40,
-          // child: ElevatedButton(
-          //     onPressed: () {}, child: const Text('ย้อนกลับ')),
-        ),
-        const Text(
-          '1 / 7',
-          style: TextStyle(color: Colors.black),
-        ),
-        SizedBox(
-            width: 100,
-            height: 40,
-            child: ElevatedButton(
-                onPressed: () {
-                  context.go('/DpiaDescriptionPage');
-                },
-                child: const Text('ถัดไป'))),
-      ],
-    ),
-  );
-}
-
-class ActivityListview extends StatefulWidget {
-  const ActivityListview({super.key});
-
-  @override
-  State<ActivityListview> createState() => _ActivityListviewState();
-}
-
-class _ActivityListviewState extends State<ActivityListview> {
-  List<Activity> activities = defaultActivities.map((e) => e).toList();
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      itemBuilder: (context, index) => Container(
+      bottomNavigationBar: Container(
+        height: 60,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
           color: Colors.white,
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(0.1),
+              color: Colors.grey.withOpacity(0.3),
               spreadRadius: 5,
               blurRadius: 7,
-              offset: const Offset(0, 8),
+              offset: const Offset(0, -8),
             ),
           ],
         ),
-        margin: const EdgeInsets.all(
-          10,
-        ),
-        child: ExpansionTile(
-          title: CheckboxListTile(
-            contentPadding: EdgeInsets.zero,
-            title: Transform.translate(
-              offset: const Offset(-16, 0),
-              child: Text(activities[index].title),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            const SizedBox(
+              width: 100,
+              height: 40,
+              // child: ElevatedButton(
+              //     onPressed: () {}, child: const Text('ย้อนกลับ')),
             ),
-            controlAffinity:
-                ListTileControlAffinity.leading, //  <-- leading Checkbox
-            value: activities[index].isChecked,
-            onChanged: (bool? value) {
-              List<Activity> temp = [
-                for (Activity activity in activities)
-                  activity == activities[index]
-                      ? activity.copyWith(isChecked: value)
-                      : activity
-              ];
-              setState(() {
-                activities = temp;
-              });
-            },
-          ),
-          children: <Widget>[
-            const Divider(
-              thickness: 1,
-              indent: 0,
-              endIndent: 0,
-              color: Colors.grey,
+            const Text(
+              '1 / 7',
+              style: TextStyle(color: Colors.black),
             ),
-            ListTile(title: Text(activities[index].subtitle)),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 20),
-              child: ListTile(title: Text(activities[index].description)),
-            ),
+            SizedBox(
+                width: 100,
+                height: 40,
+                child: ElevatedButton(
+                    onPressed: () async {
+                      var check = {
+                        'id': 0,
+                        'title': '',
+                        'subtitle': '',
+                        'description': '',
+                        'isChecked': true,
+                      };
+                      // await childCollectionRefuser.add(check);
+                      context.go('/DpiaDescriptionPage');
+                    },
+                    child: const Text('ถัดไป'))),
           ],
         ),
       ),
-      itemCount: activities.length,
     );
   }
 }
