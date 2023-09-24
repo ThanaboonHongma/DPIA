@@ -1,3 +1,5 @@
+
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -9,6 +11,9 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+
+
+
   final _usernameController = TextEditingController();
   final _companynameController = TextEditingController();
   final _telController = TextEditingController();
@@ -200,6 +205,7 @@ class _LoginPageState extends State<LoginPage> {
       SizedBox(
         height: 40,
         child: TextField(
+          keyboardType: TextInputType.phone,
           controller: _telController,
           decoration: const InputDecoration(
             focusedBorder: OutlineInputBorder(
@@ -231,6 +237,7 @@ class _LoginPageState extends State<LoginPage> {
       SizedBox(
         height: 40,
         child: TextField(
+          keyboardType: TextInputType.emailAddress,
           controller: _emailController,
           decoration: const InputDecoration(
             focusedBorder: OutlineInputBorder(
@@ -253,10 +260,8 @@ class _LoginPageState extends State<LoginPage> {
           style: ElevatedButton.styleFrom(
             backgroundColor: const Color(0xff23A9E1), // Background color
           ),
-          onPressed: () {
-            context.go('/HomePage');
-            // Navigator.pushReplacement(
-            // context, MaterialPageRoute(builder: (context) => const HomePage()));
+          onPressed: () async {
+
           },
           child: Text(
             "เข้าสู่ระบบ",

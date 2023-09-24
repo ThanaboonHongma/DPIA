@@ -25,7 +25,7 @@ class _NecessityandProportionlityListviewState
               .list
               .map(
                 (checkbox) => CheckboxListTile(
-                  contentPadding: const EdgeInsets.symmetric(vertical: 5),
+                  contentPadding: EdgeInsets.zero,
                   side: const BorderSide(color: Color(0xff2684FF)),
                   controlAffinity: ListTileControlAffinity.leading,
                   value: checkbox.isChecked,

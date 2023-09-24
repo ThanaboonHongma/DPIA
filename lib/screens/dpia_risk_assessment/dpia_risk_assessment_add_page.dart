@@ -121,9 +121,9 @@ class _DpiaAddRiskState extends State<DpiaAddRisk> {
             SizedBox(
               height: 40,
               child: TextField(
-                controller: _impactTextController, // กำหนด Controller
+                controller: _impactTextController, 
                 textAlignVertical:
-                    TextAlignVertical.center, // กำหนดการจัดวางแนวดิ่งเป็นกลาง
+                    TextAlignVertical.center, 
                 decoration: const InputDecoration(
                   focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.blue),
@@ -158,172 +158,215 @@ class _DpiaAddRiskState extends State<DpiaAddRisk> {
             const SizedBox(
               height: 10,
             ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Column(
-                  children: [
-                    ListTile(
-                      title: Text("ความน่าจะเป็น",
-                          style: Theme.of(context).textTheme.titleMedium),
-                      subtitle: Wrap(
-                        children: <Widget>[
-                          RadioListTile(
-                            title: Text("โอกาสต่ำ",
-                                style: Theme.of(context).textTheme.titleSmall),
-                            value: "โอกาสต่ำ",
-                            groupValue: _probability,
-                            onChanged: (value) {
-                              setState(() {
-                                _probability = value!;
-                                _updateRisk();
-                              });
-                            },
-                          ),
-                          RadioListTile(
-                            title: Text("โอกาสพอสมควร",
-                                style: Theme.of(context).textTheme.titleSmall),
-                            value: "โอกาสพอสมควร",
-                            groupValue: _probability,
-                            onChanged: (value) {
-                              setState(() {
-                                _probability = value!;
-                                _updateRisk();
-                              });
-                            },
-                          ),
-                          RadioListTile(
-                            title: Text("โอกาสสูง",
-                                style: Theme.of(context).textTheme.titleSmall),
-                            value: "โอกาสสูง",
-                            groupValue: _probability,
-                            onChanged: (value) {
-                              setState(() {
-                                _probability = value!;
-                                _updateRisk();
-                              });
-                            },
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-                ListTile(
-                  title: Text("ความร้ายแรง",
-                      style: Theme.of(context).textTheme.titleMedium),
-                  subtitle: Column(
-                    children: <Widget>[
-                      RadioListTile(
-                        title: Text("ร้ายแรงน้อย",
-                            style: Theme.of(context).textTheme.titleSmall),
-                        value: "ร้ายแรงน้อย",
-                        groupValue: _severity,
-                        onChanged: (value) {
-                          setState(() {
-                            _severity = value!;
-                            _updateRisk();
-                          });
-                        },
-                      ),
-                      RadioListTile(
-                        title: Text("ร้ายแรงพอสมควร",
-                            style: Theme.of(context).textTheme.titleSmall),
-                        value: "ร้ายแรงพอสมควร",
-                        groupValue: _severity,
-                        onChanged: (value) {
-                          setState(() {
-                            _severity = value!;
-                            _updateRisk();
-                          });
-                        },
-                      ),
-                      RadioListTile(
-                        title: Text("ร้ายแรงมาก",
-                            style: Theme.of(context).textTheme.titleSmall),
-                        value: "ร้ายแรงมาก",
-                        groupValue: _severity,
-                        onChanged: (value) {
-                          setState(() {
-                            _severity = value!;
-                            _updateRisk();
-                          });
-                        },
-                      ),
-                    ],
+            ListTile(
+              contentPadding: EdgeInsets.zero,
+              title: Text("ความน่าจะเป็น",
+                  style: Theme.of(context).textTheme.titleMedium),
+              subtitle: Wrap(
+                children: <Widget>[
+                  RadioListTile(
+                    contentPadding: EdgeInsets.zero,
+                    title: Text("โอกาสต่ำ",
+                        style: Theme.of(context).textTheme.titleSmall),
+                    value: "โอกาสต่ำ",
+                    groupValue: _probability,
+                    onChanged: (value) {
+                      setState(() {
+                        _probability = value!;
+                        _updateRisk();
+                      });
+                    },
                   ),
+                  RadioListTile(
+                    contentPadding: EdgeInsets.zero,
+                    title: Text("โอกาสพอสมควร",
+                        style: Theme.of(context).textTheme.titleSmall),
+                    value: "โอกาสพอสมควร",
+                    groupValue: _probability,
+                    onChanged: (value) {
+                      setState(() {
+                        _probability = value!;
+                        _updateRisk();
+                      });
+                    },
+                  ),
+                  RadioListTile(
+                    contentPadding: EdgeInsets.zero,
+                    title: Text("โอกาสสูง",
+                        style: Theme.of(context).textTheme.titleSmall),
+                    value: "โอกาสสูง",
+                    groupValue: _probability,
+                    onChanged: (value) {
+                      setState(() {
+                        _probability = value!;
+                        _updateRisk();
+                      });
+                    },
+                  ),
+                ],
+              ),
+            ),
+            ListTile(
+              contentPadding: EdgeInsets.zero,
+              title: Text("ความร้ายแรง",
+                  style: Theme.of(context).textTheme.titleMedium),
+              subtitle: Column(
+                children: <Widget>[
+                  RadioListTile(
+                    contentPadding: EdgeInsets.zero,
+                    title: Text("ร้ายแรงน้อย",
+                        style: Theme.of(context).textTheme.titleSmall),
+                    value: "ร้ายแรงน้อย",
+                    groupValue: _severity,
+                    onChanged: (value) {
+                      setState(() {
+                        _severity = value!;
+                        _updateRisk();
+                      });
+                    },
+                  ),
+                  RadioListTile(
+                    contentPadding: EdgeInsets.zero,
+                    title: Text("ร้ายแรงพอสมควร",
+                        style: Theme.of(context).textTheme.titleSmall),
+                    value: "ร้ายแรงพอสมควร",
+                    groupValue: _severity,
+                    onChanged: (value) {
+                      setState(() {
+                        _severity = value!;
+                        _updateRisk();
+                      });
+                    },
+                  ),
+                  RadioListTile(
+                    contentPadding: EdgeInsets.zero,
+                    title: Text("ร้ายแรงมาก",
+                        style: Theme.of(context).textTheme.titleSmall),
+                    value: "ร้ายแรงมาก",
+                    groupValue: _severity,
+                    onChanged: (value) {
+                      setState(() {
+                        _severity = value!;
+                        _updateRisk();
+                      });
+                    },
+                  ),
+                ],
+              ),
+            ),
+            const Divider(
+              thickness: 1,
+              indent: 0,
+              endIndent: 0,
+              color: Colors.grey,
+            ),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 1.0),
+                child: Text(
+                  'ผลการประเมินความเสี่ยง',
+                  style: Theme.of(context).textTheme.titleMedium,
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Wrap(
-                    spacing: 16,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 16 , bottom: 16),
+              child: Container(
+                  width: double.infinity,
+                  child: Row(
+                    mainAxisAlignment:
+                        MainAxisAlignment.spaceEvenly, // จัดการชิดขวาและซ้าย
                     children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: _riskLevel == "ระดับต่ำ"
-                              ? const Color(0xffA2EDCE)
-                              : const Color(0xffA2EDCE).withOpacity(0.2),
-                        ),
-                        child: const Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Text(
-                            "ระดับต่ำ",
+                      Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.all(
+                              2.0), // ความห่างระหว่าง Container แต่ละตัว (2 ความหนา)
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: const Color(0xffA2EDCE),
+                              border: _riskLevel == "ระดับต่ำ"
+                                  ? Border.all(
+                                      color: Color(0xff00FF96), width: 2)
+                                  : null,
+                            ),
+                            child: Center(
+                              child: const Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Text(
+                                  "ระดับต่ำ",
+                                ),
+                              ),
+                            ),
                           ),
                         ),
                       ),
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: _riskLevel == "ระดับกลาง"
-                              ? const Color(0xffEDCFA2)
-                              : const Color(0xffEDCFA2).withOpacity(0.2),
-                        ),
-                        child: const Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Text(
-                            "ระดับกลาง",
+                      Expanded(
+                        child: Center(
+                          child: Padding(
+                            padding: EdgeInsets.all(2.0),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: const Color(0xffEDCFA2),
+                                border: _riskLevel == "ระดับกลาง"
+                                    ? Border.all(
+                                        color: Color(0xffFF8700), width: 2)
+                                    : null,
+                              ),
+                              child: Center(
+                                child: const Padding(
+                                  padding: EdgeInsets.all(8.0),
+                                  child: Text(
+                                    "ระดับกลาง",
+                                  ),
+                                ),
+                              ),
+                            ),
                           ),
                         ),
                       ),
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: _riskLevel == "ระดับสูง"
-                              ? const Color(0xffFFA8B8)
-                              : const Color(0xffFFA8B8).withOpacity(0.2),
-                        ),
-                        child: const Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Text(
-                            "ระดับสูง",
+                      Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.all(2.0),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: const Color(0xffFFA8B8),
+                              border: _riskLevel == "ระดับสูง"
+                                  ? Border.all(
+                                      color: Color(0xffFF0000), width: 2)
+                                  : null,
+                            ),
+                            child: Center(
+                              child: const Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Text(
+                                  "ระดับสูง",
+                                ),
+                              ),
+                            ),
                           ),
                         ),
                       ),
                     ],
-                  ),
-                ),
-                Divider(
-                  color: Colors.black.withOpacity(0.44),
-                  thickness: 1,
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                    final productList =
-                        Provider.of<CounterProvider>(context, listen: false);
-                    productList.saveRisk(RiskData(
-                        id: riskCounter,
-                        effect: _impactTextController.text,
-                        probability: _probability,
-                        severity: _severity,
-                        riskLevel: _riskLevel));
-                    counterProvider.toggleBottomSheet(true);
-                  },
-                  child: const Text('บันทึกความเสี่ยง'),
-                ),
-              ],
+                  )),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context);
+                final productList =
+                    Provider.of<CounterProvider>(context, listen: false);
+                productList.saveRisk(RiskData(
+                    id: riskCounter,
+                    effect: _impactTextController.text,
+                    probability: _probability,
+                    severity: _severity,
+                    riskLevel: _riskLevel));
+                counterProvider.toggleBottomSheet(true);
+              },
+              child: const Text('บันทึกความเสี่ยง'),
             ),
           ],
         ),

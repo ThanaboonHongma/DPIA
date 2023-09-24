@@ -32,8 +32,9 @@ class _DescriptionListviewState extends State<DescriptionListview> {
             ],
           ),
           child: Padding(
-            padding: const EdgeInsets.all(10),
+            padding: const EdgeInsets.only(left : 10, right: 10),
             child: ExpansionTile(
+             tilePadding: EdgeInsets.all(10),
                 title: Text(
                   descriptions[index].title,
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
@@ -49,6 +50,7 @@ class _DescriptionListviewState extends State<DescriptionListview> {
                       .list
                       .map(
                         (checkbox) => CheckboxListTile(
+                          contentPadding: EdgeInsets.zero,
                           side: const BorderSide(color: Color(0xff2684FF)),
                           controlAffinity: ListTileControlAffinity.leading,
                           value: checkbox.isChecked,

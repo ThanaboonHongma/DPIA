@@ -13,6 +13,7 @@ class RiskAssessmentPage extends StatefulWidget {
 
 class _RiskAssessmentPageState extends State<RiskAssessmentPage> {
   final TextEditingController _impactTextController = TextEditingController();
+  int _expandedTileIndex = -1;
 
   @override
   void dispose() {
@@ -178,6 +179,14 @@ class _RiskAssessmentPageState extends State<RiskAssessmentPage> {
                                           ],
                                         ),
                                         child: ExpansionTile(
+                                          onExpansionChanged:
+                                              (bool isExpanded) {
+                                            // เมื่อมีการ expand หรือ collapse ExpansionTile
+                                            setState(() {
+                                              _expandedTileIndex =
+                                                  isExpanded ? index : -1;
+                                            });
+                                          },
                                           title: Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
@@ -186,27 +195,63 @@ class _RiskAssessmentPageState extends State<RiskAssessmentPage> {
                                                 children: [
                                                   Container(
                                                     width: 90,
-                                                    decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              20),
-                                                      color: productList
-                                                                  .risklist[
-                                                                      index]
-                                                                  .riskLevel ==
-                                                              "ระดับต่ำ"
-                                                          ? const Color(
-                                                              0xffA2EDCE)
-                                                          : productList
-                                                                      .risklist[
-                                                                          index]
-                                                                      .riskLevel ==
-                                                                  "ระดับกลาง"
-                                                              ? const Color(
-                                                                  0xffEDCFA2)
-                                                              : const Color(
-                                                                  0xffFFA8B8),
-                                                    ),
+                                                    decoration:
+                                                        _expandedTileIndex ==
+                                                                index
+                                                            ? BoxDecoration(
+                                                                border:
+                                                                    Border.all(
+                                                                  color: productList
+                                                                              .risklist[
+                                                                                  index]
+                                                                              .riskLevel ==
+                                                                          "ระดับต่ำ"
+                                                                      ? const Color(
+                                                                          0xff00FF96)
+                                                                      : productList.risklist[index].riskLevel ==
+                                                                              "ระดับกลาง"
+                                                                          ? const Color(
+                                                                              0xffFF8700)
+                                                                          : const Color(
+                                                                              0xffFF0000),
+                                                                ),
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            20),
+                                                                color: productList
+                                                                            .risklist[
+                                                                                index]
+                                                                            .riskLevel ==
+                                                                        "ระดับต่ำ"
+                                                                    ? const Color(
+                                                                        0xffA2EDCE)
+                                                                    : productList.risklist[index].riskLevel ==
+                                                                            "ระดับกลาง"
+                                                                        ? const Color(
+                                                                            0xffEDCFA2)
+                                                                        : const Color(
+                                                                            0xffFFA8B8),
+                                                              )
+                                                            : BoxDecoration(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            20),
+                                                                color: productList
+                                                                            .risklist[
+                                                                                index]
+                                                                            .riskLevel ==
+                                                                        "ระดับต่ำ"
+                                                                    ? const Color(
+                                                                        0xffA2EDCE)
+                                                                    : productList.risklist[index].riskLevel ==
+                                                                            "ระดับกลาง"
+                                                                        ? const Color(
+                                                                            0xffEDCFA2)
+                                                                        : const Color(
+                                                                            0xffFFA8B8),
+                                                              ),
                                                     padding:
                                                         const EdgeInsets.all(5),
                                                     child: Center(
@@ -285,7 +330,7 @@ class _RiskAssessmentPageState extends State<RiskAssessmentPage> {
                             );
                           },
                           child: const Text(
-                            "เพิ่มความเสี่ยง",
+                            "+ เพิ่มความเสี่ยง",
                           ),
                         ),
                       ),
