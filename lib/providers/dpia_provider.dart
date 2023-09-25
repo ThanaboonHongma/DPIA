@@ -535,6 +535,18 @@ class DpiaProvider extends ChangeNotifier {
 
     notifyListeners();
   }
-
+ 
+ void reset() {
+    _riskAssessments = [];
+    _activities = [];
+     _descriptions = [];
+     _consultations = [];
+     _monitoring = [];
+     _necessityandProportionlitys = [];
+     _determine = [];
+     _checkboxValue1 = false;
+     _checkboxValue2 = false;
+    notifyListeners();
+  }
 
 }

@@ -14,6 +14,7 @@ class IdentificationPage1 extends StatefulWidget {
 }
 
 const List<String> list = <String>[
+  '-- Select --',
   'Systematic and extensive profiling with significant effects',
   'Processing of sensitive data on a large scale',
   'Public monitoring on a large scale'
@@ -40,7 +41,6 @@ class _IdentificationPage1State extends State<IdentificationPage1> {
 
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -282,8 +282,7 @@ class _IdentificationPage1State extends State<IdentificationPage1> {
           ],
         ),
       ),
-      bottomNavigationBar:
-          buildMyNavBar(context),
+      bottomNavigationBar: buildMyNavBar(context),
     );
   }
 
@@ -329,7 +328,11 @@ class _IdentificationPage1State extends State<IdentificationPage1> {
                         dropdown: dropdownValue,
                         datasubjects: textController5.text,
                         organization: textController6.text));
-                    context.go('/Identification');
+                    if (dropdownValue != '-- Select --') {
+                      context.go('/Identification');
+                    }else {
+                      context.go('/CompletePageNoRisk');
+                    }
                   },
                   child: const Text('ถัดไป'))),
         ],

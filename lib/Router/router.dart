@@ -1,4 +1,5 @@
 import 'package:dpia_project/screens/dpia-Complete%20assessment/complete_assessment.dart';
+import 'package:dpia_project/screens/dpia-Complete%20assessment/completenorisk.dart';
 import 'package:dpia_project/screens/dpia-Consultation/consultation1.dart';
 import 'package:dpia_project/screens/dpia-Identification/Identification1.dart';
 import 'package:dpia_project/screens/dpia-Monitoring%20and%20review/monitoring.dart';
@@ -41,6 +42,23 @@ class GoRouteProvider {
               return CustomTransitionPage(
                 key: state.pageKey,
                 child: const HomePage(),
+                transitionsBuilder:
+                    (context, animation, secondaryAnimation, child) {
+                  return FadeTransition(
+                    opacity: CurveTween(curve: Curves.easeInOutCirc)
+                        .animate(animation),
+                    child: child,
+                  );
+                },
+              );
+            },
+          ),
+          GoRoute(
+            path: '/CompletePageNoRisk',
+            pageBuilder: (context, state) {
+              return CustomTransitionPage(
+                key: state.pageKey,
+                child:  CompletePageNoRisk(),
                 transitionsBuilder:
                     (context, animation, secondaryAnimation, child) {
                   return FadeTransition(

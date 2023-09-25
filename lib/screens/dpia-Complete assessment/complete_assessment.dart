@@ -185,8 +185,14 @@ class CompletePage extends StatelessWidget {
                       final firebase = FirebaseFirestore.instance
                           .collection('DPIA_assessment')
                           .doc();
-                      await firebase.set(map).then(
-                          (value) => context.pushReplacement('/HomePage'));
+                      await firebase.set(map).then((value) {
+                        context.pushReplacement('/HomePage');
+                        Provider.of<DpiaProvider>(context, listen: false)
+                            .reset();
+                        Provider.of<DpiaProvider>(context, listen: false)
+                            .setupData();
+                            
+                      });
                     }
                   },
                   child: const Text('OK')),

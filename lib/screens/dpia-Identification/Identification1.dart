@@ -12,11 +12,10 @@ class Identification1 extends StatefulWidget {
 }
 
 class _Identification1State extends State<Identification1> {
-   
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<DpiaProvider>(context);
- 
+
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -119,7 +118,7 @@ class _Identification1State extends State<Identification1> {
                             .leading, //  <-- leading Checkbox
                         value: provider.checkboxValue1,
                         onChanged: (bool? value) {
-                          if(value != null){
+                          if (value != null) {
                             provider.checkBool1Activity(value);
                           }
                         },
@@ -137,9 +136,9 @@ class _Identification1State extends State<Identification1> {
                               .leading, //  <-- leading Checkbox
                           value: provider.checkboxValue2,
                           onChanged: (bool? value) {
-                            if(value != null){
-                            provider.checkBool2Activity(value);
-                          }
+                            if (value != null) {
+                              provider.checkBool2Activity(value);
+                            }
                           },
                           title: Transform.translate(
                             offset: const Offset(-16, 0),
@@ -153,7 +152,9 @@ class _Identification1State extends State<Identification1> {
                 ),
               ),
             ),
-             ActivityListview(provider: provider,),
+            ActivityListview(
+              provider: provider,
+            ),
           ],
         ),
       ),
@@ -162,8 +163,12 @@ class _Identification1State extends State<Identification1> {
   }
 }
 
-
 Container buildMyNavBar(BuildContext context) {
+  final provider = Provider.of<DpiaProvider>(context);
+  int count1 = 0;
+  int count2 = 0;
+  List countTEST = [];
+  List countTEST2 = [];
   return Container(
     height: 60,
     decoration: BoxDecoration(
@@ -195,7 +200,29 @@ Container buildMyNavBar(BuildContext context) {
             height: 40,
             child: ElevatedButton(
                 onPressed: () {
-                  context.go('/DpiaDescriptionPage');
+                  print(count1);
+
+                  for (int i = 0; i <= 8; i++) {
+                    if (provider.activities[i].isChecked == true) {
+                      countTEST.add(provider.activities[i]);
+                      print(countTEST.length);
+                    }
+                  }
+                  for (int j = 9; j <= 18; j++) {
+                    if (provider.activities[j].isChecked == true) {
+                     countTEST2.add(provider.activities[j]);
+                                           print(countTEST2.length);
+
+                    }
+                  }
+
+                  if (countTEST.isNotEmpty && countTEST.length >= 2 ||
+                      countTEST2.isNotEmpty ||
+                      provider.checkboxValue2 == true) {
+                    context.go('/DpiaDescriptionPage');
+                  }else if (countTEST.length == 1 ){
+                    context.go('/CompletePageNoRisk');
+                  }
                 },
                 child: const Text('ถัดไป'))),
       ],
@@ -204,17 +231,15 @@ Container buildMyNavBar(BuildContext context) {
 }
 
 class ActivityListview extends StatefulWidget {
-  const ActivityListview({super.key , required this.provider});
+  const ActivityListview({super.key, required this.provider});
 
-final DpiaProvider provider;
+  final DpiaProvider provider;
 
   @override
   State<ActivityListview> createState() => _ActivityListviewState();
 }
 
 class _ActivityListviewState extends State<ActivityListview> {
-
-
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
@@ -245,14 +270,14 @@ class _ActivityListviewState extends State<ActivityListview> {
               contentPadding: EdgeInsets.zero,
               title: Transform.translate(
                 offset: const Offset(-16, 0),
-                child: Text(widget.provider.activities[index].title ),
+                child: Text(widget.provider.activities[index].title),
               ),
               controlAffinity:
                   ListTileControlAffinity.leading, //  <-- leading Checkbox
               value: widget.provider.activities[index].isChecked,
               onChanged: (bool? value) {
                 if (value != null) {
-                  widget.provider.checkActivity(index , value);
+                  widget.provider.checkActivity(index, value);
                 }
               },
             ),
@@ -263,7 +288,7 @@ class _ActivityListviewState extends State<ActivityListview> {
                 endIndent: 0,
                 color: Colors.grey,
               ),
-              ListTile(title: Text(widget.provider.activities[index].subtitle )),
+              ListTile(title: Text(widget.provider.activities[index].subtitle)),
               Padding(
                 padding: const EdgeInsets.only(bottom: 20),
                 child: ListTile(
@@ -274,7 +299,6 @@ class _ActivityListviewState extends State<ActivityListview> {
           ),
         ),
       ),
-      
     );
   }
 }
