@@ -1,17 +1,19 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 class RiskData {
   final String id;
   final String effect;
   final String probability;
   final String severity;
   final String riskLevel;
+  final DateTime date;
   final List<Measure> measures;
-
   RiskData({
     required this.id,
     required this.effect,
     required this.probability,
     required this.severity,
     required this.riskLevel,
+    required this.date,
     required this.measures,
   });
 
@@ -21,6 +23,7 @@ class RiskData {
     String? probability,
     String? severity,
     String? riskLevel,
+    DateTime? date,
     List<Measure>? measures,
   }) {
     return RiskData(
@@ -29,6 +32,7 @@ class RiskData {
       probability: probability ?? this.probability,
       severity: severity ?? this.severity,
       riskLevel: riskLevel ?? this.riskLevel,
+      date: date ?? this.date,
       measures: measures ?? this.measures,
     );
   }
@@ -39,7 +43,7 @@ class Measure {
   final String measure2;
   final String measure3;
   final String project;
-  final DateTime date;
+
   final String responsible;
   final String rick1;
   final String rick2;
@@ -53,7 +57,6 @@ class Measure {
     required this.measure2,
     required this.measure3,
     required this.project,
-    required this.date,
     required this.responsible,
     required this.rick1,
     required this.rick2,
@@ -82,7 +85,6 @@ class Measure {
       measure2: measure2 ?? this.measure2,
       measure3: measure3 ?? this.measure3,
       project: project ?? this.project,
-      date: date ?? this.date,
       responsible: responsible ?? this.responsible,
       rick1: rick1 ?? this.rick1,
       rick2: rick2 ?? this.rick2,

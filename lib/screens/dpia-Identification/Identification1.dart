@@ -16,13 +16,6 @@ class _Identification1State extends State<Identification1> {
   final Future<FirebaseApp> firebase = Firebase.initializeApp();
   List<Activity> activities = defaultActivities.map((e) => e).toList();
 
-  Activity checkActivity = Activity(
-    id: 0,
-    title: '',
-    subtitle: '',
-    description: '',
-    isChecked: false,
-  );
 
   final CollectionReference _dpiaCollection =
       FirebaseFirestore.instance.collection('DPIA_Project');
@@ -41,7 +34,6 @@ class _Identification1State extends State<Identification1> {
   bool checkboxValue3 = false;
   @override
   Widget build(BuildContext context) {
-    List<Activity> temp;
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -248,14 +240,6 @@ class _Identification1State extends State<Identification1> {
                 height: 40,
                 child: ElevatedButton(
                     onPressed: () async {
-                      var check = {
-                        'id': 0,
-                        'title': '',
-                        'subtitle': '',
-                        'description': '',
-                        'isChecked': true,
-                      };
-                      // await childCollectionRefuser.add(check);
                       context.go('/DpiaDescriptionPage');
                     },
                     child: const Text('ถัดไป'))),

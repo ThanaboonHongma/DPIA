@@ -163,7 +163,7 @@ class _NecessityandProportionlityPageState
               height: 40,
               child: ElevatedButton(
                   onPressed: () {
-                    context.go('/RiskAssessmentPage');
+                    context.pushReplacement('/RiskAssessmentPage');
                   },
                   child: const Text('ถัดไป'))),
         ],

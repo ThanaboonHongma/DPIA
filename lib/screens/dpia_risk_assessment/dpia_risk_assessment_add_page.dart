@@ -1,5 +1,5 @@
 import 'package:dpia_project/models/riskassessment/risklist.dart';
-import 'package:dpia_project/models/dpia_provider.dart';
+import 'package:dpia_project/providers/dpia_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:uuid/uuid.dart';
@@ -12,7 +12,6 @@ class DpiaAddRisk extends StatefulWidget {
 }
 
 class _DpiaAddRiskState extends State<DpiaAddRisk> {
-  List<RiskData> defaultriskdata = [];
 
   // This variable tracks whether the modal bottom sheet is open or closed.
   String _probability = "โอกาสต่ำ";
@@ -58,6 +57,7 @@ class _DpiaAddRiskState extends State<DpiaAddRisk> {
   @override
   Widget build(BuildContext context) {
     final dpiaProvider = Provider.of<DpiaProvider>(context, listen: false);
+    DateTime selectedDate = DateTime.now();
 
     return SingleChildScrollView(
       padding: const EdgeInsets.all(10.0),
@@ -283,6 +283,7 @@ class _DpiaAddRiskState extends State<DpiaAddRisk> {
                         id: const Uuid().v4(),
                         effect: _impactTextController.text,
                         probability: _probability,
+                        date: selectedDate,
                         severity: _severity,
                         riskLevel: _riskLevel,
                         measures: [],

@@ -1,7 +1,5 @@
-import 'package:dpia_project/models/dpia_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:provider/provider.dart';
 
 class MonitoringPage extends StatefulWidget {
   const MonitoringPage({super.key});
@@ -209,7 +207,6 @@ class _MonitoringPage extends State<MonitoringPage> {
   }
 
   Container buildMyNavBar(BuildContext context) {
-    final dpiaProvider = Provider.of<DpiaProvider>(context, listen: false);
     return Container(
       height: 60,
       decoration: BoxDecoration(
@@ -244,7 +241,6 @@ class _MonitoringPage extends State<MonitoringPage> {
               height: 40,
               child: ElevatedButton(
                   onPressed: () {
-                    dpiaProvider.saveRiskAssessmentToDPIAlist();
                     context.go('/CompletePage');
                   },
                   child: const Text('สิ้นสุดแบบประเมิน'))),

@@ -1,6 +1,6 @@
 import 'package:dpia_project/Router/router.dart';
 import 'package:dpia_project/firebase_options.dart';
-import 'package:dpia_project/models/dpia_provider.dart';
+import 'package:dpia_project/providers/dpia_provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

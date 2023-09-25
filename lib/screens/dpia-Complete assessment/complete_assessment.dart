@@ -41,7 +41,7 @@ class CompletePage extends StatelessWidget {
                     ),
                   ),
                   onPressed: () {
-                    context.go('/HomePage');
+                    context.pushReplacement('/HomePage');
                   },
                   child: const Text('OK')),
             ),

@@ -326,7 +326,7 @@ class _LoginPageState extends State<LoginPage> {
                 'phone': modelDPIA.phonenumber,
                 'email': modelDPIA.email,
               };
-              await childCollectionRefuser.add(datedpia);
+              await childCollectionRef.add(datedpia);
               context.go('/HomePage');
             }
           },

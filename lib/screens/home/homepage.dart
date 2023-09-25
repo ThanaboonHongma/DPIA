@@ -1,4 +1,4 @@
-import 'package:dpia_project/models/dpia_provider.dart';
+import 'package:dpia_project/providers/dpia_provider.dart';
 import 'package:dpia_project/models/home/homedescription.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -16,6 +16,7 @@ class _HomePageState extends State<HomePage> {
       defaltHomeDescription.map((e) => e).toList();
   @override
   Widget build(BuildContext context) {
+    final dpiaProvider = Provider.of<DpiaProvider>(context);
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -87,7 +88,7 @@ class _HomePageState extends State<HomePage> {
                   const SizedBox(
                     height: 25,
                   ),
-                  ..._dpialistview(),
+                  ..._dpialistview(dpiaProvider),
                 ],
               ),
             ),
@@ -167,7 +168,7 @@ class _HomePageState extends State<HomePage> {
     ];
   }
 
-  _dpialistview() {
+  _dpialistview(DpiaProvider dpiaProvider) {
     final productList = Provider.of<DpiaProvider>(context);
     if (productList.riskAssessments.isEmpty) {
       return [
@@ -244,6 +245,11 @@ class _HomePageState extends State<HomePage> {
         ),
       ];
     } else {
+      List numhomelength = [];
+      numhomelength = dpiaProvider.riskAssessments
+        .where((risk) => risk.riskLevel == 'ระดับสูง')
+        .toList();;
+      print(numhomelength.length);
       return [
         Column(
           children: [
@@ -263,12 +269,12 @@ class _HomePageState extends State<HomePage> {
             ListView.builder(
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
-              itemCount: productList.riskAssessments.length,
+              itemCount: numhomelength.length,
               itemBuilder: (BuildContext context, int index) {
                 return Column(
                   children: [
                     Container(
-                      height: productList.riskAssessments[index].measures[index].percent == '' ? 100 : 125,
+                      height: 125,
                       width: 360,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
@@ -289,18 +295,12 @@ class _HomePageState extends State<HomePage> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(productList.riskAssessments[index].effect,
+                                Text('แบบประเมิน DPIA',
                                     style: Theme.of(context)
                                         .textTheme
                                         .titleMedium),
                                 Text(
-                                  '${productList.riskAssessments[index]
-                                      .measures[index].date.day
-                                      .toString()}/${productList.riskAssessments[index]
-                                      .measures[index].date.month
-                                      .toString()}/${productList.riskAssessments[index]
-                                      .measures[index].date.year
-                                      .toString()}',
+                                  '${productList.riskAssessments[index].date.day.toString()}/${productList.riskAssessments[index].date.month.toString()}/${productList.riskAssessments[index].date.year.toString()}',
                                   style: Theme.of(context)
                                       .textTheme
                                       .bodySmall
@@ -317,30 +317,31 @@ class _HomePageState extends State<HomePage> {
                             ),
                             Row(
                               children: [
-                                Text('${productList.riskAssessments[index].riskLevel.length} ความเสี่ยงสูง',
+                                Text(
+                                    '${numhomelength.length} ความเสี่ยงสูง',
                                     style:
                                         Theme.of(context).textTheme.bodyMedium)
                               ],
                             ),
                             Container(
-                                child: productList.riskAssessments[index].measures[index].percent == ''
-                                    ? null
-                                    : Column(
-                                        children: [
-                                          const SizedBox(
-                                            height: 10,
-                                          ),
-                                          Row(
-                                            children: [
-                                              Text(
-                                                  'สถานะดำเนินการ : ${productList.riskAssessments[index].measures[index].percent.toString()} %',
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .bodyMedium)
-                                            ],
-                                          ),
-                                        ],
-                                      )),
+                              child: Column(
+                                children: [
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        // ${productList.riskAssessments[index].measures[index].percent.toString()}
+                                          'สถานะดำเนินการ : 0 %',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyMedium)
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
                           ],
                         ),
                       ),

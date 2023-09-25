@@ -1,4 +1,4 @@
-import 'package:dpia_project/models/dpia_provider.dart';
+import 'package:dpia_project/providers/dpia_provider.dart';
 import 'package:dpia_project/screens/dpia_risk_assessment/dpia_risk_assessment_add_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';

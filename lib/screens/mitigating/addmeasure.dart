@@ -1,4 +1,4 @@
-import 'package:dpia_project/models/dpia_provider.dart';
+import 'package:dpia_project/providers/dpia_provider.dart';
 // import 'package:dpia_project/models/mitigatingdescription/mitigatingdescription.dart';
 import 'package:dpia_project/models/riskassessment/risklist.dart';
 import 'package:flutter/material.dart';
@@ -48,7 +48,7 @@ class _AddMeasureState extends State<AddMeasure> {
   void _updateDPO() {
     if (dpoagree[0] == true) {
       _checkdpo = 'เห็นด้วย';
-    } else if (dpoagree[1] == true) {
+    } if (dpoagree[1] == true) {
       _checkdpo = 'ไม่เห็นด้วย';
     }
   }
@@ -56,7 +56,7 @@ class _AddMeasureState extends State<AddMeasure> {
   void _updateresults() {
     if (listenagree[0] == true) {
       _checkresults = 'เห็นด้วย';
-    } else if (listenagree[1] == true) {
+    } if (listenagree[1] == true) {
       _checkresults = 'ไม่เห็นด้วย';
     }
   }
@@ -68,7 +68,6 @@ class _AddMeasureState extends State<AddMeasure> {
           measure2: measures2.toString(),
           measure3: measures3.toString(),
           project: project.toString(),
-          date: selectedDate,
           responsible: responsible.toString(),
           rick1: rick1.toString(),
           rick2: rick2.toString(),
@@ -121,7 +120,6 @@ class _AddMeasureState extends State<AddMeasure> {
                       measure2: measures2.toString(),
                       measure3: measures3.toString(),
                       project: project.toString(),
-                      date: selectedDate,
                       responsible: responsible.toString(),
                       rick1: rick1.toString(),
                       rick2: rick2.toString(),
