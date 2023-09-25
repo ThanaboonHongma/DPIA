@@ -1,5 +1,6 @@
-import 'package:dpia_project/models/descriptions/description.dart';
+import 'package:dpia_project/providers/dpia_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class DescriptionListview extends StatefulWidget {
   const DescriptionListview({super.key});
@@ -9,11 +10,11 @@ class DescriptionListview extends StatefulWidget {
 }
 
 class _DescriptionListviewState extends State<DescriptionListview> {
-  List<Description> descriptions = defaltDescription.map((e) => e).toList();
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<DpiaProvider>(context);
     return ListView.builder(
-      itemCount: descriptions.length,
+      itemCount: provider.descriptions.length,
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       itemBuilder: (BuildContext context, int index) {
@@ -32,13 +33,13 @@ class _DescriptionListviewState extends State<DescriptionListview> {
             ],
           ),
           child: Padding(
-            padding: const EdgeInsets.only(left : 10, right: 10),
+            padding: const EdgeInsets.only(left: 10, right: 10),
             child: Theme(
               data: ThemeData(dividerColor: Colors.transparent),
               child: ExpansionTile(
-               tilePadding: EdgeInsets.all(10),
+                  tilePadding: EdgeInsets.all(10),
                   title: Text(
-                    descriptions[index].title,
+                    provider.descriptions[index].title,
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
                           color: Color.fromRGBO(35, 169, 225, 1),
                         ),
@@ -48,8 +49,7 @@ class _DescriptionListviewState extends State<DescriptionListview> {
                       color: Color(0xffC4C4C6),
                       thickness: 1,
                     ),
-                    ...descriptions[index]
-                        .list
+                    ...provider.descriptions[index].list
                         .map(
                           (checkbox) => CheckboxListTile(
                             contentPadding: EdgeInsets.zero,
@@ -57,22 +57,10 @@ class _DescriptionListviewState extends State<DescriptionListview> {
                             controlAffinity: ListTileControlAffinity.leading,
                             value: checkbox.isChecked,
                             onChanged: (bool? value) {
-                              List<Description> temp = [];
-                              for (Description des in descriptions) {
-                                if (des == descriptions[index]) {
-                                  final list = des.list
-                                      .map((i) => i == checkbox
-                                          ? i.copyWith(isChecked: value)
-                                          : i)
-                                      .toList();
-                                  temp.add(des.copyWith(list: list));
-                                } else {
-                                  temp.add(des);
-                                }
+                              if (value != null) {
+                                provider.checkDescription(
+                                    index, value, checkbox);
                               }
-                              setState(() {
-                                descriptions = temp;
-                              });
                             },
                             title: Transform.translate(
                               offset: const Offset(-16, 0),

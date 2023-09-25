@@ -3,7 +3,6 @@ import 'package:dpia_project/providers/dpia_provider.dart';
 import 'package:dpia_project/models/riskassessment/risklist.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:provider/provider.dart';
 
 class AddMeasure extends StatefulWidget {
@@ -28,7 +27,7 @@ class _AddMeasureState extends State<AddMeasure> {
   final TextEditingController rick1 = TextEditingController();
   final TextEditingController rick2 = TextEditingController();
   final TextEditingController rick3 = TextEditingController();
-  final int _checkmanage = 0;
+  final TextEditingController checkmanage = TextEditingController();
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
@@ -48,7 +47,8 @@ class _AddMeasureState extends State<AddMeasure> {
   void _updateDPO() {
     if (dpoagree[0] == true) {
       _checkdpo = 'เห็นด้วย';
-    } if (dpoagree[1] == true) {
+    }
+    if (dpoagree[1] == true) {
       _checkdpo = 'ไม่เห็นด้วย';
     }
   }
@@ -56,7 +56,8 @@ class _AddMeasureState extends State<AddMeasure> {
   void _updateresults() {
     if (listenagree[0] == true) {
       _checkresults = 'เห็นด้วย';
-    } if (listenagree[1] == true) {
+    }
+    if (listenagree[1] == true) {
       _checkresults = 'ไม่เห็นด้วย';
     }
   }
@@ -74,7 +75,7 @@ class _AddMeasureState extends State<AddMeasure> {
           rick3: rick3.toString(),
           dpo: _checkdpo,
           results: _checkresults,
-          percent: _checkmanage) as RiskData);
+          percent: checkmanage.toString()) as RiskData);
     });
   }
 
@@ -116,17 +117,17 @@ class _AddMeasureState extends State<AddMeasure> {
                         .first;
 
                     final newMeasure = Measure(
-                      measure1: measures1.toString(),
-                      measure2: measures2.toString(),
-                      measure3: measures3.toString(),
-                      project: project.toString(),
-                      responsible: responsible.toString(),
-                      rick1: rick1.toString(),
-                      rick2: rick2.toString(),
-                      rick3: rick3.toString(),
+                      measure1: measures1.text,
+                      measure2: measures2.text,
+                      measure3: measures3.text,
+                      project: project.text,
+                      responsible: responsible.text,
+                      rick1: rick1.text,
+                      rick2: rick2.text,
+                      rick3: rick3.text,
                       dpo: _checkdpo,
                       results: _checkresults,
-                      percent: _checkmanage,
+                      percent: checkmanage.text,
                     );
 
                     List<Measure> measures = riskData.measures
@@ -353,22 +354,18 @@ class _AddMeasureState extends State<AddMeasure> {
                                 const SizedBox(
                                   height: 10,
                                 ),
-                                LinearPercentIndicator(
-                                  center: Text('$_checkmanage %',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodySmall
-                                          ?.copyWith(
-                                              color: Theme.of(context)
-                                                  .colorScheme
-                                                  .onPrimary)),
-                                  barRadius: const Radius.circular(30),
-                                  lineHeight: 30,
-                                  percent: _checkmanage / 10,
-                                  progressColor:
-                                      Theme.of(context).colorScheme.tertiary,
-                                  backgroundColor: const Color(0xFF7CC4FF),
-                                )
+                                SizedBox(
+                                  height: 40,
+                                  width: double.infinity,
+                                  child: TextField(
+                                    controller: checkmanage,
+                                    keyboardType: TextInputType.number,
+                                    decoration: const InputDecoration(
+                                      hintText: 'กรอกเปอร์เซ็น %',
+                                      border: OutlineInputBorder(),
+                                    ),
+                                  ),
+                                ),
                               ],
                             ),
                           ),

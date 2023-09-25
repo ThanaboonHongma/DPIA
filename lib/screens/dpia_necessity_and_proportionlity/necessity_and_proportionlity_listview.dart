@@ -1,5 +1,6 @@
-import 'package:dpia_project/models/NecessityandProportionlity/necessityandproportionlity.dart';
+import 'package:dpia_project/providers/dpia_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class NecessityandProportionlityListview extends StatefulWidget {
   const NecessityandProportionlityListview({super.key});
@@ -11,18 +12,16 @@ class NecessityandProportionlityListview extends StatefulWidget {
 
 class _NecessityandProportionlityListviewState
     extends State<NecessityandProportionlityListview> {
-  List<NecessityandProportionlity> necessityandproportionlitys =
-      defaltnecessityandProportionlity.map((e) => e).toList();
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<DpiaProvider>(context);
     return ListView.builder(
-      itemCount: necessityandproportionlitys.length,
+      itemCount: provider.necessityandProportionlitys.length,
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       itemBuilder: (BuildContext context, int index) {
         return Column(children: [
-          ...necessityandproportionlitys[index]
-              .list
+          ...provider.necessityandProportionlitys[index].list
               .map(
                 (checkbox) => CheckboxListTile(
                   contentPadding: EdgeInsets.zero,
@@ -30,23 +29,10 @@ class _NecessityandProportionlityListviewState
                   controlAffinity: ListTileControlAffinity.leading,
                   value: checkbox.isChecked,
                   onChanged: (bool? value) {
-                    List<NecessityandProportionlity> temp = [];
-                    for (NecessityandProportionlity nec
-                        in necessityandproportionlitys) {
-                      if (nec == necessityandproportionlitys[index]) {
-                        final list = nec.list
-                            .map((i) => i == checkbox
-                                ? i.copyWith(isChecked: value)
-                                : i)
-                            .toList();
-                        temp.add(nec.copyWith(list: list));
-                      } else {
-                        temp.add(nec);
-                      }
+                    if (value != null) {
+                      provider.checkNecessityandProportionlity(
+                          index, value, checkbox);
                     }
-                    setState(() {
-                      necessityandproportionlitys = temp;
-                    });
                   },
                   title: Transform.translate(
                     offset: const Offset(-16, 0),

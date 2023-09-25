@@ -2,7 +2,6 @@
 import 'package:dpia_project/providers/dpia_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:dpia_project/models/activity.dart';
 import 'package:provider/provider.dart';
 
 class Identification1 extends StatefulWidget {
@@ -14,10 +13,6 @@ class Identification1 extends StatefulWidget {
 
 class _Identification1State extends State<Identification1> {
    
-
-  
-
-  
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<DpiaProvider>(context);
@@ -225,6 +220,7 @@ class _ActivityListviewState extends State<ActivityListview> {
     return ListView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
+      itemCount: widget.provider.activities.length,
       itemBuilder: (context, index) => Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
@@ -278,7 +274,7 @@ class _ActivityListviewState extends State<ActivityListview> {
           ),
         ),
       ),
-      itemCount: widget.provider.activities.length,
+      
     );
   }
 }

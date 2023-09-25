@@ -20,4 +20,7 @@ class CheckBoxList {
       isChecked: isChecked ?? this.isChecked,
     );
   }
+
+  @override
+  String toString() => 'CheckBoxList(id: $id, name: $name, isChecked: $isChecked)';
 }

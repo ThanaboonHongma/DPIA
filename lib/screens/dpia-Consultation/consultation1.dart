@@ -1,6 +1,7 @@
-import 'package:dpia_project/models/consultation/consultation.dart';
+import 'package:dpia_project/providers/dpia_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 class Consultation1 extends StatefulWidget {
   const Consultation1({super.key});
@@ -217,13 +218,13 @@ class ConsultationListview extends StatefulWidget {
 }
 
 class _ConsultationListviewState extends State<ConsultationListview> {
-  List<Consultation> consultations = defaultConsultation.map((e) => e).toList();
-
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<DpiaProvider>(context);
     return ListView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
+      itemCount: provider.consultations.length,
       itemBuilder: (context, index) => Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
@@ -243,27 +244,20 @@ class _ConsultationListviewState extends State<ConsultationListview> {
         child: Theme(
           data: ThemeData(dividerColor: Colors.transparent),
           child: ExpansionTile(
-            
             title: CheckboxListTile(
               side: const BorderSide(color: Color(0xff2684FF)),
               contentPadding: EdgeInsets.zero,
               title: Transform.translate(
                 offset: const Offset(-16, 0),
-                child: Text(consultations[index].title),
+                child: Text(provider.consultations[index].title),
               ),
               controlAffinity:
                   ListTileControlAffinity.leading, //  <-- leading Checkbox
-              value: consultations[index].isChecked,
+              value: provider.consultations[index].isChecked,
               onChanged: (bool? value) {
-                List<Consultation> temp = [
-                  for (Consultation consultation in consultations)
-                    consultation == consultations[index]
-                        ? consultation.copyWith(isChecked: value)
-                        : consultation
-                ];
-                setState(() {
-                  consultations = temp;
-                });
+                if(value != null){
+                provider.checkConsultations(index, value);
+                }
               },
             ),
             children: <Widget>[
@@ -273,18 +267,17 @@ class _ConsultationListviewState extends State<ConsultationListview> {
                 endIndent: 0,
                 color: Colors.grey,
               ),
-              ListTile(title: Text(consultations[index].subtitle)),
+              ListTile(title: Text(provider.consultations[index].subtitle)),
               Padding(
                 padding: const EdgeInsets.only(bottom: 20),
                 child: ListTile(
-                    title: Text(consultations[index].description,
+                    title: Text(provider.consultations[index].description,
                         style: Theme.of(context).textTheme.titleSmall)),
               ),
             ],
           ),
         ),
       ),
-      itemCount: consultations.length,
     );
   }
 }

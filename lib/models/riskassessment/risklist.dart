@@ -36,6 +36,11 @@ class RiskData {
       measures: measures ?? this.measures,
     );
   }
+
+  @override
+  String toString() {
+    return 'RiskData(id: $id, effect: $effect, probability: $probability, severity: $severity, riskLevel: $riskLevel, date: $date, measures: $measures)';
+  }
 }
 
 class Measure {
@@ -43,14 +48,13 @@ class Measure {
   final String measure2;
   final String measure3;
   final String project;
-
   final String responsible;
   final String rick1;
   final String rick2;
   final String rick3;
   final String dpo;
   final String results;
-  final int percent;
+  final String percent;
 
   Measure({
     required this.measure1,
@@ -71,14 +75,13 @@ class Measure {
     String? measure2,
     String? measure3,
     String? project,
-    DateTime? date,
     String? responsible,
     String? rick1,
     String? rick2,
     String? rick3,
     String? dpo,
     String? results,
-    int? percent,
+    String? percent,
   }) {
     return Measure(
       measure1: measure1 ?? this.measure1,
@@ -93,5 +96,10 @@ class Measure {
       results: results ?? this.results,
       percent: percent ?? this.percent,
     );
+  }
+
+  @override
+  String toString() {
+    return 'Measure(measure1: $measure1, measure2: $measure2, measure3: $measure3, project: $project, responsible: $responsible, rick1: $rick1, rick2: $rick2, rick3: $rick3, dpo: $dpo, results: $results, percent: $percent)';
   }
 }

@@ -122,7 +122,7 @@ class _HomePageState extends State<HomePage> {
                           'รายการประเมินDPIA',
                           style:
                               Theme.of(context).textTheme.titleLarge?.copyWith(
-                                    color: Color.fromRGBO(35, 169, 225, 1),
+                                    color: const Color.fromRGBO(35, 169, 225, 1),
                                   ),
                         ),
                       ),
@@ -197,7 +197,7 @@ class _HomePageState extends State<HomePage> {
           child: Text(
             'DPIA',
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                  color: Color.fromRGBO(35, 169, 225, 1),
+                  color: const Color.fromRGBO(35, 169, 225, 1),
                 ),
           ),
         ),
@@ -347,24 +347,22 @@ class _HomePageState extends State<HomePage> {
                                       Theme.of(context).textTheme.bodyMedium)
                             ],
                           ),
-                          Container(
-                            child: Column(
-                              children: [
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                Row(
-                                  children: [
-                                    Text(
-                                      // ${productList.riskAssessments[index].measures[index].percent.toString()}
-                                        'สถานะดำเนินการ : 0 %',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodyMedium)
-                                  ],
-                                ),
-                              ],
-                            ),
+                          Column(
+                            children: [
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Row(
+                                children: [
+                                  Text(
+                                    // ${productList.riskAssessments[index].measures[index].percent.toString()}
+                                      'สถานะดำเนินการ : 0 %',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyMedium)
+                                ],
+                              ),
+                            ],
                           ),
                         ],
                       ),

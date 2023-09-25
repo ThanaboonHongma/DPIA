@@ -23,7 +23,7 @@ class _MitigatingMeasuresState extends State<MitigatingMeasures> {
           children: [
             Text(
               'แบบฟอร์มประเมิน DPIA',
-              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+              style: Theme.of(context).textTheme.titleLarge?.copyWith(
                     color: Theme.of(context).colorScheme.tertiary,
                   ),
             ),
@@ -129,18 +129,18 @@ class _MitigatingMeasuresState extends State<MitigatingMeasures> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   const SizedBox(
-                            height: 10,
-                          ),
+                                    height: 10,
+                                  ),
                                   Text(
                                     'ความเห็นของ DPO: ${riskAssessments[index].measures[0].dpo}',
                                     style:
                                         Theme.of(context).textTheme.labelLarge,
                                   ),
                                   const SizedBox(
-                            height: 10,
-                          ),
+                                    height: 10,
+                                  ),
                                   Text(
-                                    'สถานะการดำเนินการ: ${riskAssessments[index].measures[0].percent.toString()} %',
+                                    'สถานะการดำเนินการ: ${riskAssessments[index].measures[0].percent} %',
                                     style:
                                         Theme.of(context).textTheme.labelLarge,
                                   ),
@@ -244,8 +244,7 @@ class _MitigatingMeasuresState extends State<MitigatingMeasures> {
               ],
             ),
             child: Padding(
-              padding: const EdgeInsets.only(
-                  left: 20, top: 20, bottom: 20, right: 10),
+              padding: const EdgeInsets.all(15),
               child: Column(
                 children: [
                   Align(

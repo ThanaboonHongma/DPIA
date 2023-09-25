@@ -1,5 +1,9 @@
+import 'package:dpia_project/models/monitoring/monitoring.dart';
+import 'package:dpia_project/providers/dpia_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
+import 'package:uuid/uuid.dart';
 
 class MonitoringPage extends StatefulWidget {
   const MonitoringPage({super.key});
@@ -86,17 +90,17 @@ class _MonitoringPage extends State<MonitoringPage> {
                                 .textTheme
                                 .titleLarge
                                 ?.copyWith(
-                                  color: Color.fromRGBO(35, 169, 225, 1),
+                                  color: const Color.fromRGBO(35, 169, 225, 1),
                                 ),
                           ),
                         ),
-                        Divider(
+                        const Divider(
                           thickness: 1,
                           indent: 0,
                           endIndent: 0,
                           color: Colors.grey,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         Align(
@@ -106,7 +110,7 @@ class _MonitoringPage extends State<MonitoringPage> {
                             style: Theme.of(context).textTheme.titleMedium,
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         Align(
@@ -116,7 +120,7 @@ class _MonitoringPage extends State<MonitoringPage> {
                             style: Theme.of(context).textTheme.titleMedium,
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                       ],
@@ -151,14 +155,14 @@ class _MonitoringPage extends State<MonitoringPage> {
                       Text(
                         'ให้ติดตามตรวจสอบโดย',
                         style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                              color: Color.fromRGBO(35, 169, 225, 1),
+                              color: const Color.fromRGBO(35, 169, 225, 1),
                             ),
                       ),
                       const SizedBox(
                         height: 10,
                       ),
                       const Text('DPO หรือหน่วยงาน'),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       SizedBox(
@@ -169,12 +173,12 @@ class _MonitoringPage extends State<MonitoringPage> {
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       const Text(
                           'ผู้รับผิดชอบโครงการหรือการประมวลผลข้อมูลตาม DPIA นี้มีหน้าที่รายงาน DPO หรือหน่วยงาน'),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       SizedBox(
@@ -191,7 +195,7 @@ class _MonitoringPage extends State<MonitoringPage> {
                       Text(
                         'การเผยแพร่เอกสาร DPIA ฉบับนี้',
                         style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                              color: Color.fromRGBO(35, 169, 225, 1),
+                              color: const Color.fromRGBO(35, 169, 225, 1),
                             ),
                       ),
                       const Divider(
@@ -204,7 +208,7 @@ class _MonitoringPage extends State<MonitoringPage> {
                         height: 10,
                       ),
                       const Text('ให้เผยแพร่ทาง'),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       SizedBox(
@@ -215,8 +219,8 @@ class _MonitoringPage extends State<MonitoringPage> {
                           ),
                         ),
                       ),
-                      const Text('การติดตามตรวจสอบและทบทวนตาม DPIA ฉบับนี้'),
-                      SizedBox(
+                      const Text('โดยปกติปิดเฉพาะข้อมูล'),
+                      const SizedBox(
                         height: 10,
                       ),
                       SizedBox(
@@ -240,6 +244,8 @@ class _MonitoringPage extends State<MonitoringPage> {
   }
 
   Container buildMyNavBar(BuildContext context) {
+    final dpiaProvider = Provider.of<DpiaProvider>(context, listen: false);
+
     return Container(
       height: 60,
       decoration: BoxDecoration(
@@ -274,6 +280,12 @@ class _MonitoringPage extends State<MonitoringPage> {
               height: 40,
               child: ElevatedButton(
                   onPressed: () {
+                    dpiaProvider.saveMonitoring(Monitoring(
+                        id: const Uuid().v4(),
+                        agency: textController1.text,
+                        responsible: textController2.text,
+                        publish: textController3.text,
+                        closedata: textController4.text));
                     context.go('/CompletePage');
                   },
                   child: const Text('ถัดไป'))),
