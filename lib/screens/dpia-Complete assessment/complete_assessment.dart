@@ -3,6 +3,7 @@ import 'package:dpia_project/models/NecessityandProportionlity/necessityandpropo
 import 'package:dpia_project/models/activity.dart';
 import 'package:dpia_project/models/consultation/consultation.dart';
 import 'package:dpia_project/models/descriptions/description.dart';
+import 'package:dpia_project/models/dpia_determine_the_risk/determinetherisk.dart';
 import 'package:dpia_project/models/monitoring/monitoring.dart';
 import 'package:dpia_project/models/riskassessment/risklist.dart';
 import 'package:dpia_project/providers/dpia_provider.dart';
@@ -53,7 +54,22 @@ class CompletePage extends StatelessWidget {
                     final provider =
                         Provider.of<DpiaProvider>(context, listen: false);
                     Map<String, dynamic> map = {};
-                    print('หน้าที่ 1');
+
+                    print('หน้าที่ 1.1');
+                    List<Map<String, dynamic>> page0 = [];
+                    for (Determine determine in provider.determine) {
+                      page0.add(determine.toMap());
+                    }
+                    print(page0);
+                    List<Determine> dataDetermine = [];
+                    for (var item in page0) {
+                      final determinedata =
+                          Determine.fromMap(item as Map<String, dynamic>);
+                      dataDetermine.add(determinedata);
+                    }
+                    print(dataDetermine);
+                    map.addAll({'determine': page0});
+                    print('หน้าที่ 1.2');
                     List<Map<String, dynamic>> page1 = [];
                     for (Activity activity in provider.activities) {
                       page1.add(activity.toMap());

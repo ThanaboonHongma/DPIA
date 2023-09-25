@@ -67,4 +67,9 @@ class Determine {
       organization: map['organization'] as String,
     );
   }
+
+  @override
+  String toString() {
+    return 'Determine(id: $id, identifiable: $identifiable, access: $access, activity: $activity, volume: $volume, dropdown: $dropdown, datasubjects: $datasubjects, organization: $organization)';
+  }
 }
