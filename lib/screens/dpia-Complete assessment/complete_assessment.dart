@@ -1,5 +1,8 @@
+import 'package:dpia_project/models/activity.dart';
+import 'package:dpia_project/providers/dpia_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 class CompletePage extends StatelessWidget {
   const CompletePage({Key? key}) : super(key: key);
@@ -41,6 +44,15 @@ class CompletePage extends StatelessWidget {
                     ),
                   ),
                   onPressed: () {
+                    final provider = Provider.of<DpiaProvider>(context, listen: false);
+
+                    for(Activity activity in provider.activities){
+                      print('${activity.id} ${activity.isChecked}');
+                    }
+
+      print(provider.checkboxValue1);
+      print(provider.checkboxValue2);
+                
                     context.pushReplacement('/HomePage');
                   },
                   child: const Text('OK')),

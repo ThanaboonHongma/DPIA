@@ -1,7 +1,9 @@
 // ignore_for_file: file_names
+import 'package:dpia_project/providers/dpia_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:dpia_project/models/activity.dart';
+import 'package:provider/provider.dart';
 
 class Identification1 extends StatefulWidget {
   const Identification1({super.key});
@@ -11,11 +13,15 @@ class Identification1 extends StatefulWidget {
 }
 
 class _Identification1State extends State<Identification1> {
-  bool checkboxValue1 = false;
-  bool checkboxValue2 = false;
-  bool checkboxValue3 = false;
+   
+
+  
+
+  
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<DpiaProvider>(context);
+ 
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -116,11 +122,11 @@ class _Identification1State extends State<Identification1> {
                         side: const BorderSide(color: Color(0xff2684FF)),
                         controlAffinity: ListTileControlAffinity
                             .leading, //  <-- leading Checkbox
-                        value: checkboxValue1,
+                        value: provider.checkboxValue1,
                         onChanged: (bool? value) {
-                          setState(() {
-                            checkboxValue1 = value!;
-                          });
+                          if(value != null){
+                            provider.checkBool1Activity(value);
+                          }
                         },
                         title: Transform.translate(
                           offset: const Offset(-16, 0),
@@ -134,11 +140,11 @@ class _Identification1State extends State<Identification1> {
                           side: const BorderSide(color: Color(0xff2684FF)),
                           controlAffinity: ListTileControlAffinity
                               .leading, //  <-- leading Checkbox
-                          value: checkboxValue2,
+                          value: provider.checkboxValue2,
                           onChanged: (bool? value) {
-                            setState(() {
-                              checkboxValue2 = value!;
-                            });
+                            if(value != null){
+                            provider.checkBool2Activity(value);
+                          }
                           },
                           title: Transform.translate(
                             offset: const Offset(-16, 0),
@@ -152,7 +158,7 @@ class _Identification1State extends State<Identification1> {
                 ),
               ),
             ),
-            const ActivityListview(),
+             ActivityListview(provider: provider,),
           ],
         ),
       ),
@@ -161,9 +167,7 @@ class _Identification1State extends State<Identification1> {
   }
 }
 
-bool checkboxValue1 = false;
-bool checkboxValue2 = false;
-bool checkboxValue3 = false;
+
 Container buildMyNavBar(BuildContext context) {
   return Container(
     height: 60,
@@ -205,14 +209,16 @@ Container buildMyNavBar(BuildContext context) {
 }
 
 class ActivityListview extends StatefulWidget {
-  const ActivityListview({super.key});
+  const ActivityListview({super.key , required this.provider});
+
+final DpiaProvider provider;
 
   @override
   State<ActivityListview> createState() => _ActivityListviewState();
 }
 
 class _ActivityListviewState extends State<ActivityListview> {
-  List<Activity> activities = defaultActivities.map((e) => e).toList();
+
 
   @override
   Widget build(BuildContext context) {
@@ -243,21 +249,15 @@ class _ActivityListviewState extends State<ActivityListview> {
               contentPadding: EdgeInsets.zero,
               title: Transform.translate(
                 offset: const Offset(-16, 0),
-                child: Text(activities[index].title ),
+                child: Text(widget.provider.activities[index].title ),
               ),
               controlAffinity:
                   ListTileControlAffinity.leading, //  <-- leading Checkbox
-              value: activities[index].isChecked,
+              value: widget.provider.activities[index].isChecked,
               onChanged: (bool? value) {
-                List<Activity> temp = [
-                  for (Activity activity in activities)
-                    activity == activities[index]
-                        ? activity.copyWith(isChecked: value)
-                        : activity
-                ];
-                setState(() {
-                  activities = temp;
-                });
+                if (value != null) {
+                  widget.provider.checkActivity(index , value);
+                }
               },
             ),
             children: <Widget>[
@@ -267,18 +267,18 @@ class _ActivityListviewState extends State<ActivityListview> {
                 endIndent: 0,
                 color: Colors.grey,
               ),
-              ListTile(title: Text(activities[index].subtitle )),
+              ListTile(title: Text(widget.provider.activities[index].subtitle )),
               Padding(
                 padding: const EdgeInsets.only(bottom: 20),
                 child: ListTile(
-                    title: Text(activities[index].description,
+                    title: Text(widget.provider.activities[index].description,
                         style: Theme.of(context).textTheme.titleSmall)),
               ),
             ],
           ),
         ),
       ),
-      itemCount: activities.length,
+      itemCount: widget.provider.activities.length,
     );
   }
 }

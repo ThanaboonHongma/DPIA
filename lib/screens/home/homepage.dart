@@ -287,7 +287,7 @@ class _HomePageState extends State<HomePage> {
       List numhomelength = [];
       numhomelength = dpiaProvider.riskAssessments
         .where((risk) => risk.riskLevel == 'ระดับสูง')
-        .toList();;
+        .toList();
       print(numhomelength.length);
       return [
         Column(
