@@ -244,61 +244,6 @@ class _HomePageState extends State<HomePage> {
   }
 
   _dpialistview(DpiaProvider dpiaProvider) {
-    // final productList = Provider.of<DpiaProvider>(context);
-    // if (productList.riskAssessments.isEmpty) {
-    //   return [
-    //     Column(
-    //       children: [
-    //         const SizedBox(
-    //           height: 15,
-    //         ),
-    //         Center(
-    //           child: Column(
-    //             mainAxisAlignment: MainAxisAlignment.center,
-    //             children: [
-    //               Text('ไม่มีรายการประเมิน DPIA',
-    //                   style: Theme.of(context).textTheme.bodyMedium),
-    //               const SizedBox(
-    //                 height: 25,
-    //               ),
-    //               SizedBox(
-    //                   width: 300,
-    //                   child: ElevatedButton(
-    //                       style: ButtonStyle(
-    //                         shape: MaterialStateProperty.all<
-    //                             RoundedRectangleBorder>(
-    //                           RoundedRectangleBorder(
-    //                             borderRadius: BorderRadius.circular(10.0),
-    //                           ),
-    //                         ),
-    //                         backgroundColor: MaterialStateProperty.all<Color>(
-    //                             Theme.of(context).colorScheme.tertiary),
-    //                       ),
-    //                       onPressed: () {
-    //                         context.go('/IdentificationPage1');
-    //                       },
-    //                       child: Text(
-    //                         'เริ่มประเมิน DPIA',
-    //                         style: Theme.of(context)
-    //                             .textTheme
-    //                             .bodyMedium
-    //                             ?.copyWith(
-    //                               color:
-    //                                   Theme.of(context).colorScheme.onPrimary,
-    //                             ),
-    //                       )))
-    //             ],
-    //           ),
-    //         ),
-    //       ],
-    //     ),
-    //   ];
-    // } else {
-    // List numhomelength = [];
-    // numhomelength = dpiaProvider.riskAssessments
-    //     .where((risk) => risk.riskLevel == 'ระดับสูง')
-    //     .toList();
-    // print(numhomelength.length);
     return [
       Column(
         children: [
@@ -328,110 +273,168 @@ class _HomePageState extends State<HomePage> {
                 // If the Future has completed successfully, display the user's information.
                 final summary = snapshot.data ?? [];
 
-                return ListView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: summary.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    double progress = 0;
+                if (summary.isEmpty) {
+                  return Column(
+                    children: [
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text('ไม่มีรายการประเมิน DPIA',
+                                style: Theme.of(context).textTheme.bodyMedium),
+                            const SizedBox(
+                              height: 25,
+                            ),
+                            SizedBox(
+                                width: 300,
+                                child: ElevatedButton(
+                                    style: ButtonStyle(
+                                      shape: MaterialStateProperty.all<
+                                          RoundedRectangleBorder>(
+                                        RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10.0),
+                                        ),
+                                      ),
+                                      backgroundColor:
+                                          MaterialStateProperty.all<Color>(
+                                              Theme.of(context)
+                                                  .colorScheme
+                                                  .tertiary),
+                                    ),
+                                    onPressed: () {
+                                      context.go('/IdentificationPage1');
+                                    },
+                                    child: Text(
+                                      'เริ่มประเมิน DPIA',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyMedium
+                                          ?.copyWith(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .onPrimary,
+                                          ),
+                                    )))
+                          ],
+                        ),
+                      ),
+                    ],
+                  );
+                } else {
+                  return ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: summary.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      double progress = 0;
                       print('');
                       print('risk');
                       print(summary[index].risks.length);
-                    final divider = summary[index].risks.length;
-                    for (RiskData risk in summary[index].risks) {
-                      if(risk.measures.isEmpty) continue;
-                      print('start');
-                      print(risk.measures.length);
+                      final divider = summary[index].risks.length;
+                      for (RiskData risk in summary[index].risks) {
+                        if (risk.measures.isEmpty) continue;
+                        print('start');
+                        print(risk.measures.length);
 
-                      final allMeasures = risk.measures.length;
-                      int sumMeasurProgress = 0;
+                        final allMeasures = risk.measures.length;
+                        int sumMeasurProgress = 0;
 
-                      for (Measure measure in risk.measures) {
-                        sumMeasurProgress += int.parse(measure.percent);
+                        for (Measure measure in risk.measures) {
+                          sumMeasurProgress += int.parse(measure.percent);
+                        }
+                        print('allMeasures $allMeasures');
+                        print('sumMeasurProgress $sumMeasurProgress');
+
+                        progress += (sumMeasurProgress / allMeasures);
                       }
-                      print('allMeasures $allMeasures');
-                      print('sumMeasurProgress $sumMeasurProgress');
+                      print('divider $divider');
+                      print('progress ${progress / divider}');
 
-                      progress += (sumMeasurProgress / allMeasures);
-                    }
-                    print('divider $divider');
-                    print('progress ${progress / divider}');
-
-
-                    return Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(15.0),
-                          child: Column(
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                      'แบบประเมิน DPIA ${summary.length - index}',
+                      return Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(15.0),
+                            child: Column(
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                        'แบบประเมิน DPIA ${summary.length - index}',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleMedium),
+                                    Text(
+                                      '${summary[index].risks.last.date.day.toString()}/'
+                                      '${summary[index].risks.last.date.month.toString()}/'
+                                      '${summary[index].risks.last.date.year.toString()}',
                                       style: Theme.of(context)
                                           .textTheme
-                                          .titleMedium),
-                                  Text(
-                                    '${summary[index].risks.last.date.day.toString()}/'
-                                    '${summary[index].risks.last.date.month.toString()}/'
-                                    '${summary[index].risks.last.date.year.toString()}',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodySmall
-                                        ?.copyWith(
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .onSurface,
-                                        ),
-                                  )
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Row(
-                                children: [
-                                  Text(
-                                      '${summary[index].risks.length} ความเสี่ยงสูง',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodyMedium)
-                                ],
-                              ),
-                              Column(
-                                children: [
-                                  const SizedBox(
-                                    height: 10,
-                                  ),
-                                  Row(
-                                    children: [
-                                      Text(
-                                          // ${productList.riskAssessments[index].measures[index].percent.toString()}
-                                          'สถานะดำเนินการ : ${progress~/divider}%',
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodyMedium)
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ],
+                                          .bodySmall
+                                          ?.copyWith(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .onSurface,
+                                          ),
+                                    )
+                                  ],
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Row(
+                                  children: [
+                                    Container(
+                                      child: summary[index].risks.isEmpty
+                                          ? Text('ไม่มีความเสี่ยง',
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .bodyMedium)
+                                          : Text(
+                                              '${summary[index].risks.length} ความเสี่ยงสูง',
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .bodyMedium),
+                                    )
+                                  ],
+                                ),
+                                Column(
+                                  children: [
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    Row(
+                                      children: [
+                                        Container( 
+                                          child: summary[index].risks.isEmpty? Text('') :Text(
+                                              // ${productList.riskAssessments[index].measures[index].percent.toString()}
+                                              'สถานะดำเนินการ : ${progress ~/ divider}%',
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .bodyMedium),
+                                        )
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                      ],
-                    );
-                  },
-                );
+                          const SizedBox(
+                            height: 10,
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                }
               }
             },
-          ),
-          const SizedBox(
-            height: 80,
           ),
         ],
       ),

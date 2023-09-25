@@ -60,14 +60,14 @@ class CompletePage extends StatelessWidget {
                     for (Determine determine in provider.determine) {
                       page0.add(determine.toMap());
                     }
-                    print(page0);
+                    // print(page0);
                     List<Determine> dataDetermine = [];
                     for (var item in page0) {
                       final determinedata =
                           Determine.fromMap(item as Map<String, dynamic>);
                       dataDetermine.add(determinedata);
                     }
-                    print(dataDetermine);
+                    // print(dataDetermine);
                     map.addAll({'determine': page0});
                     print('หน้าที่ 1.2');
                     List<Map<String, dynamic>> page1 = [];
@@ -151,7 +151,7 @@ class CompletePage extends StatelessWidget {
                       page5.add(riskData.toMap());
                     }
                     map.addAll({'riskData': page5});
-                    // print(page5);
+                    print(page5);
                     //ดึงกับมาใช้-----
                     List<RiskData> datarisk = [];
                     for (var item in page5) {
@@ -159,7 +159,7 @@ class CompletePage extends StatelessWidget {
                           RiskData.fromMap(item as Map<String, dynamic>);
                       datarisk.add(riskdatas);
                     }
-                    // print(datarisk);
+                    print(datarisk);
 
                     //--------------------
                     print('หน้าที่ 7');

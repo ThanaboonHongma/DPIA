@@ -267,7 +267,7 @@ class _ConsultationListviewState extends State<ConsultationListview> {
                 endIndent: 0,
                 color: Colors.grey,
               ),
-              ListTile(title: Text(provider.consultations[index].subtitle)),
+              
               Padding(
                 padding: const EdgeInsets.only(bottom: 20),
                 child: ListTile(

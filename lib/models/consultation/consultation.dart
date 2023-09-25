@@ -4,14 +4,12 @@
 class Consultation {
   final int id;
   final String title;
-  final String subtitle;
   final String description;
   final bool isChecked;
 
   const Consultation({
     required this.id,
     required this.title,
-    required this.subtitle,
     required this.description,
     this.isChecked = false,
   });
@@ -26,7 +24,6 @@ class Consultation {
     return Consultation(
       id: id ?? this.id,
       title: title ?? this.title,
-      subtitle: subtitle ?? this.subtitle,
       description: description ?? this.description,
       isChecked: isChecked ?? this.isChecked,
     );
@@ -34,14 +31,13 @@ class Consultation {
 
   @override
   String toString() {
-    return 'Consultation(id: $id, title: $title, subtitle: $subtitle, description: $description, isChecked: $isChecked)';
+    return 'Consultation(id: $id, title: $title, description: $description, isChecked: $isChecked)';
   }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id,
       'title': title,
-      'subtitle': subtitle,
       'description': description,
       'isChecked': isChecked,
     };
@@ -51,7 +47,6 @@ class Consultation {
     return Consultation(
       id: map['id'] as int,
       title: map['title'] as String,
-      subtitle: map['subtitle'] as String,
       description: map['description'] as String,
       isChecked: map['isChecked'] as bool,
     );
