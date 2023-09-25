@@ -25,18 +25,14 @@ class DPIA extends StatelessWidget {
           create: (_) => DpiaProvider(),
         ),
       ],
-      child: Builder(
-        builder: (context) {
-           final provider = Provider.of<DpiaProvider>(context, listen: false);
-    provider.setupData();
-
-
-          return MaterialApp.router(
-            debugShowCheckedModeBanner: false,
-            routerConfig: router.goRouter(),
-          );
-        }
-      ),
+      child: Builder(builder: (context) {
+        final provider = Provider.of<DpiaProvider>(context, listen: false);
+        provider.setupData();
+        return MaterialApp.router(
+          debugShowCheckedModeBanner: false,
+          routerConfig: router.goRouter(),
+        );
+      }),
     );
   }
 }

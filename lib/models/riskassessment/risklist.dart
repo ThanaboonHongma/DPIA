@@ -1,3 +1,7 @@
+import 'dart:convert';
+
+import 'package:flutter/foundation.dart';
+
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 class RiskData {
   final String id;
@@ -40,6 +44,34 @@ class RiskData {
   @override
   String toString() {
     return 'RiskData(id: $id, effect: $effect, probability: $probability, severity: $severity, riskLevel: $riskLevel, date: $date, measures: $measures)';
+  }
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'id': id,
+      'effect': effect,
+      'probability': probability,
+      'severity': severity,
+      'riskLevel': riskLevel,
+      'date': date.millisecondsSinceEpoch,
+      'measures': measures.map((x) => x.toMap()).toList(),
+    };
+  }
+
+  factory RiskData.fromMap(Map<String, dynamic> map) {
+    return RiskData(
+      id: map['id'] as String,
+      effect: map['effect'] as String,
+      probability: map['probability'] as String,
+      severity: map['severity'] as String,
+      riskLevel: map['riskLevel'] as String,
+      date: DateTime.fromMillisecondsSinceEpoch(map['date'] as int),
+      measures: List<Measure>.from(
+        (map['measures'] as List<dynamic>).map<Measure>(
+          (x) => Measure.fromMap(x as Map<String, dynamic>),
+        ),
+      ),
+    );
   }
 }
 
@@ -101,5 +133,37 @@ class Measure {
   @override
   String toString() {
     return 'Measure(measure1: $measure1, measure2: $measure2, measure3: $measure3, project: $project, responsible: $responsible, rick1: $rick1, rick2: $rick2, rick3: $rick3, dpo: $dpo, results: $results, percent: $percent)';
+  }
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'measure1': measure1,
+      'measure2': measure2,
+      'measure3': measure3,
+      'project': project,
+      'responsible': responsible,
+      'rick1': rick1,
+      'rick2': rick2,
+      'rick3': rick3,
+      'dpo': dpo,
+      'results': results,
+      'percent': percent,
+    };
+  }
+
+  factory Measure.fromMap(Map<String, dynamic> map) {
+    return Measure(
+      measure1: map['measure1'] as String,
+      measure2: map['measure2'] as String,
+      measure3: map['measure3'] as String,
+      project: map['project'] as String,
+      responsible: map['responsible'] as String,
+      rick1: map['rick1'] as String,
+      rick2: map['rick2'] as String,
+      rick3: map['rick3'] as String,
+      dpo: map['dpo'] as String,
+      results: map['results'] as String,
+      percent: map['percent'] as String,
+    );
   }
 }

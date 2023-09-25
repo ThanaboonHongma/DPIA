@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dpia_project/models/login/loginmodel.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -25,9 +26,8 @@ class _LoginPageState extends State<LoginPage> {
   late CollectionReference<Map<String, dynamic>> childCollectionRef =
       documentRef.collection('DPIA_User');
 
-      late CollectionReference<Map<String, dynamic>> childCollectionRefuser =
+  late CollectionReference<Map<String, dynamic>> childCollectionRefuser =
       documentRef.collection('DPIA_assessment');
-
 
   LoginModel modelDPIA = LoginModel(
     username: '',
@@ -35,6 +35,30 @@ class _LoginPageState extends State<LoginPage> {
     phonenumber: '',
     email: '',
   );
+
+  @override
+  void initState() {
+    super.initState();
+    getCurrentUser();
+  }
+
+  Future<void> signInAsGuest() async {
+    try {
+      await FirebaseAuth.instance.signInAnonymously();
+      // The user is signed in as a guest
+      print('Signed in as a guest');
+    } catch (e) {
+      // Handle any errors that occur during guest sign-in
+      print('Error signing in as a guest: $e');
+    }
+  }
+
+  void getCurrentUser() {
+    final user = FirebaseAuth.instance.currentUser;
+    if(user != null){
+      context.go('/HomePage');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -319,15 +343,7 @@ class _LoginPageState extends State<LoginPage> {
           onPressed: () async {
             if (formKey.currentState!.validate()) {
               formKey.currentState?.save();
-              // print(modelDPIA.username);
-              var datedpia = {
-                'User': modelDPIA.username,
-                'company': modelDPIA.company,
-                'phone': modelDPIA.phonenumber,
-                'email': modelDPIA.email,
-              };
-              await childCollectionRef.add(datedpia);
-              context.go('/HomePage');
+              await signInAsGuest().then((value) => context.go('/HomePage'));
             }
           },
           child: Text(

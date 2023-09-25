@@ -3,6 +3,7 @@ import 'package:dpia_project/screens/dpia-Consultation/consultation1.dart';
 import 'package:dpia_project/screens/dpia-Identification/Identification1.dart';
 import 'package:dpia_project/screens/dpia-Monitoring%20and%20review/monitoring.dart';
 import 'package:dpia_project/screens/dpia_description/dpia_description.dart';
+import 'package:dpia_project/screens/dpia_determine_the_risk/determinetherisk.dart';
 import 'package:dpia_project/screens/dpia_necessity_and_proportionlity/dpia_necessity_and_proportionlity.dart';
 import 'package:dpia_project/screens/dpia_risk_assessment/dpia_risk_assessment.dart';
 import 'package:dpia_project/screens/home/homepage.dart';
@@ -40,6 +41,23 @@ class GoRouteProvider {
               return CustomTransitionPage(
                 key: state.pageKey,
                 child: const HomePage(),
+                transitionsBuilder:
+                    (context, animation, secondaryAnimation, child) {
+                  return FadeTransition(
+                    opacity: CurveTween(curve: Curves.easeInOutCirc)
+                        .animate(animation),
+                    child: child,
+                  );
+                },
+              );
+            },
+          ),
+          GoRoute(
+            path: '/IdentificationPage1',
+            pageBuilder: (context, state) {
+              return CustomTransitionPage(
+                key: state.pageKey,
+                child: const IdentificationPage1(),
                 transitionsBuilder:
                     (context, animation, secondaryAnimation, child) {
                   return FadeTransition(
@@ -192,7 +210,7 @@ class GoRouteProvider {
             pageBuilder: (context, state) {
               return CustomTransitionPage(
                 key: state.pageKey,
-                child: const CompletePage(),
+                child: CompletePage(),
                 transitionsBuilder:
                     (context, animation, secondaryAnimation, child) {
                   return FadeTransition(

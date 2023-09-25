@@ -1,3 +1,5 @@
+
+
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 class Monitoring {
   final String id;
@@ -28,5 +30,31 @@ class Monitoring {
       publish: publish ?? this.publish,
       closedata: closedata ?? this.closedata,
     );
+  }
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'id': id,
+      'agency': agency,
+      'responsible': responsible,
+      'publish': publish,
+      'closedata': closedata,
+    };
+  }
+
+  factory Monitoring.fromMap(Map<String, dynamic> map) {
+    return Monitoring(
+      id: map['id'] as String,
+      agency: map['agency'] as String,
+      responsible: map['responsible'] as String,
+      publish: map['publish'] as String,
+      closedata: map['closedata'] as String,
+    );
+  }
+
+
+  @override
+  String toString() {
+    return 'Monitoring(id: $id, agency: $agency, responsible: $responsible, publish: $publish, closedata: $closedata)';
   }
 }

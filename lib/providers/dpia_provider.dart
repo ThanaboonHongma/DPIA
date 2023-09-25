@@ -3,6 +3,7 @@ import 'package:dpia_project/models/activity.dart';
 import 'package:dpia_project/models/consultation/consultation.dart';
 import 'package:dpia_project/models/descriptions/checkboxlist.dart';
 import 'package:dpia_project/models/descriptions/description.dart';
+import 'package:dpia_project/models/dpia_determine_the_risk/determinetherisk.dart';
 import 'package:dpia_project/models/monitoring/monitoring.dart';
 import 'package:dpia_project/models/riskassessment/risklist.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +15,7 @@ class DpiaProvider extends ChangeNotifier {
   List<Consultation> _consultations = [];
   List<Monitoring> _monitoring = [];
   List<NecessityandProportionlity> _necessityandProportionlitys = [];
+  List<Determine> _determine = [];
   bool _checkboxValue1 = false;
   bool _checkboxValue2 = false;
 
@@ -23,6 +25,7 @@ class DpiaProvider extends ChangeNotifier {
   List<Consultation> get consultations => _consultations;
   List<NecessityandProportionlity> get necessityandProportionlitys =>
       _necessityandProportionlitys;
+  List<Determine> get determine => _determine;
   List<Monitoring> get monitoring => _monitoring;
   bool get checkboxValue1 => _checkboxValue1;
   bool get checkboxValue2 => _checkboxValue2;
@@ -412,7 +415,20 @@ class DpiaProvider extends ChangeNotifier {
     ];
   }
 
-  //หน้า Identification (ขั้นตอนที่1)
+  
+  //หน้า Identification (ขั้นตอนที่1.1-1.2)
+    void saveDetermine(Determine determine) {
+    final index =
+        _monitoring.indexWhere((monitoring) => monitoring.id == determine.id);
+    if (index != -1) {
+      _determine[index] = determine;
+    } else {
+      _determine.add(determine);
+    }
+
+    notifyListeners();
+  }
+  
   void checkActivity(int index, bool value) {
     List<Activity> temp = [
       for (Activity activity in _activities)
@@ -480,11 +496,11 @@ class DpiaProvider extends ChangeNotifier {
         temp.add(nec);
       }
     }
-
     _necessityandProportionlitys = temp;
-
     notifyListeners();
   }
+
+  //หน้า RiskData (ขั้นตอนที่5-6)
 
   void saveRiskAssessment(RiskData riskdata) {
     final index = _riskAssessments.indexWhere((risk) => risk.id == riskdata.id);
@@ -492,17 +508,6 @@ class DpiaProvider extends ChangeNotifier {
       _riskAssessments[index] = riskdata;
     } else {
       _riskAssessments.add(riskdata);
-    }
-
-    notifyListeners();
-  }
-
-  void saveMonitoring(Monitoring mouseRegion) {
-    final index = _monitoring.indexWhere((monitoring) => monitoring.id == mouseRegion.id);
-    if (index != -1) {
-      _monitoring[index] = mouseRegion;
-    } else {
-      _monitoring.add(mouseRegion);
     }
 
     notifyListeners();
@@ -521,4 +526,20 @@ class DpiaProvider extends ChangeNotifier {
     _riskAssessments = temp;
     notifyListeners();
   }
+
+  //หน้า Monitoring (ขั้นตอนที่7)
+
+  void saveMonitoring(Monitoring mouseRegion) {
+    final index =
+        _monitoring.indexWhere((monitoring) => monitoring.id == mouseRegion.id);
+    if (index != -1) {
+      _monitoring[index] = mouseRegion;
+    } else {
+      _monitoring.add(mouseRegion);
+    }
+
+    notifyListeners();
+  }
+
+
 }

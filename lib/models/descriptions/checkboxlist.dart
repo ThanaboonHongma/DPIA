@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 class CheckBoxList {
   final int id;
@@ -23,4 +25,20 @@ class CheckBoxList {
 
   @override
   String toString() => 'CheckBoxList(id: $id, name: $name, isChecked: $isChecked)';
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'id': id,
+      'name': name,
+      'isChecked': isChecked,
+    };
+  }
+
+  factory CheckBoxList.fromMap(Map<String, dynamic> map) {
+    return CheckBoxList(
+      id: map['id'] as int,
+      name: map['name'] as String,
+      isChecked: map['isChecked'] as bool,
+    );
+  }
 }

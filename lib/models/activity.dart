@@ -1,5 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-//create Activity model class with the following properties (id,title, subtitle, description, isChecked) and constructor, copyWith.
 class Activity {
   final int id;
   final String title;
@@ -34,6 +32,26 @@ class Activity {
   @override
   String toString() {
     return 'Activity(id: $id, title: $title, subtitle: $subtitle, description: $description, isChecked: $isChecked)';
+  }
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'id': id,
+      'title': title,
+      'subtitle': subtitle,
+      'description': description,
+      'isChecked': isChecked,
+    };
+  }
+
+  factory Activity.fromMap(Map<String, dynamic> map) {
+    return Activity(
+      id: map['id'] as int,
+      title: map['title'] as String,
+      subtitle: map['subtitle'] as String,
+      description: map['description'] as String,
+      isChecked: map['isChecked'] as bool,
+    );
   }
 }
 

@@ -1,3 +1,4 @@
+
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 //create Consultation model class with the following properties (id,title, subtitle, description, isChecked) and constructor, copyWith.
 class Consultation {
@@ -35,6 +36,27 @@ class Consultation {
   String toString() {
     return 'Consultation(id: $id, title: $title, subtitle: $subtitle, description: $description, isChecked: $isChecked)';
   }
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'id': id,
+      'title': title,
+      'subtitle': subtitle,
+      'description': description,
+      'isChecked': isChecked,
+    };
+  }
+
+  factory Consultation.fromMap(Map<String, dynamic> map) {
+    return Consultation(
+      id: map['id'] as int,
+      title: map['title'] as String,
+      subtitle: map['subtitle'] as String,
+      description: map['description'] as String,
+      isChecked: map['isChecked'] as bool,
+    );
+  }
+
 }
 
 
