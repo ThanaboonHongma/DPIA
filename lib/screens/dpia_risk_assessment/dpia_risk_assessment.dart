@@ -13,6 +13,7 @@ class RiskAssessmentPage extends StatefulWidget {
 
 class _RiskAssessmentPageState extends State<RiskAssessmentPage> {
   final TextEditingController _impactTextController = TextEditingController();
+  int _expandedTileIndex = -1;
 
   @override
   void dispose() {
@@ -95,8 +96,10 @@ class _RiskAssessmentPageState extends State<RiskAssessmentPage> {
                           ),
                         ),
                         const Divider(
-                          color: Colors.black,
                           thickness: 1,
+                          indent: 0,
+                          endIndent: 0,
+                          color: Colors.grey,
                         ),
                         Align(
                           alignment: Alignment.centerLeft,
@@ -157,7 +160,7 @@ class _RiskAssessmentPageState extends State<RiskAssessmentPage> {
                               ),
                             )
                           : SizedBox(
-                              height: 400,
+                              height: 300,
                               child: ListView.builder(
                                 itemCount: dpiaProvider.riskAssessments.length,
                                 itemBuilder: (BuildContext context, int index) {
@@ -178,89 +181,135 @@ class _RiskAssessmentPageState extends State<RiskAssessmentPage> {
                                             ),
                                           ],
                                         ),
-                                        child: ExpansionTile(
-                                          title: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Row(
-                                                children: [
-                                                  Container(
-                                                    width: 90,
-                                                    decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              20),
-                                                      color: dpiaProvider
-                                                                  .riskAssessments[
-                                                                      index]
-                                                                  .riskLevel ==
-                                                              "ระดับต่ำ"
-                                                          ? const Color(
-                                                              0xffA2EDCE)
-                                                          : dpiaProvider
-                                                                      .riskAssessments[
-                                                                          index]
-                                                                      .riskLevel ==
-                                                                  "ระดับกลาง"
-                                                              ? const Color(
-                                                                  0xffEDCFA2)
-                                                              : const Color(
-                                                                  0xffFFA8B8),
-                                                    ),
-                                                    padding:
-                                                        const EdgeInsets.all(5),
-                                                    child: Center(
-                                                      child: Text(
-                                                        ' ${dpiaProvider.riskAssessments[index].riskLevel} ',
-                                                        style: TextStyle(
-                                                          color: dpiaProvider
-                                                                      .riskAssessments[
-                                                                          index]
-                                                                      .riskLevel ==
-                                                                  "ระดับต่ำ"
-                                                              ? const Color(
-                                                                  0xff0A5134)
-                                                              : dpiaProvider
-                                                                          .riskAssessments[
-                                                                              index]
-                                                                          .riskLevel ==
-                                                                      "ระดับกลาง"
-                                                                  ? const Color(
-                                                                      0xff735323)
-                                                                  : const Color(
-                                                                      0xffAF3232),
+                                        child: Theme(
+                                          data: ThemeData(
+                                              dividerColor: Colors.transparent),
+                                          child: ExpansionTile(
+                                            onExpansionChanged:
+                                                (bool isExpanded) {
+                                              // เมื่อมีการ expand หรือ collapse ExpansionTile
+                                              setState(() {
+                                                _expandedTileIndex =
+                                                    isExpanded ? index : -1;
+                                              });
+                                            },
+                                            title: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Row(
+                                                  children: [
+                                                    Container(
+                                                      width: 90,
+                                                      decoration:
+                                                          _expandedTileIndex ==
+                                                                  index
+                                                              ? BoxDecoration(
+                                                                  border: Border
+                                                                      .all(
+                                                                    color: dpiaProvider.riskAssessments[index].riskLevel ==
+                                                                            "ระดับต่ำ"
+                                                                        ? const Color(
+                                                                            0xff00FF96)
+                                                                        : dpiaProvider.riskAssessments[index].riskLevel ==
+                                                                                "ระดับกลาง"
+                                                                            ? const Color(0xffFF8700)
+                                                                            : const Color(0xffFF0000),
+                                                                  ),
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              20),
+                                                                  color: dpiaProvider
+                                                                              .riskAssessments[
+                                                                                  index]
+                                                                              .riskLevel ==
+                                                                          "ระดับต่ำ"
+                                                                      ? const Color(
+                                                                          0xffA2EDCE)
+                                                                      : dpiaProvider.riskAssessments[index].riskLevel ==
+                                                                              "ระดับกลาง"
+                                                                          ? const Color(
+                                                                              0xffEDCFA2)
+                                                                          : const Color(
+                                                                              0xffFFA8B8),
+                                                                )
+                                                              : BoxDecoration(
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              20),
+                                                                  color: dpiaProvider
+                                                                              .riskAssessments[
+                                                                                  index]
+                                                                              .riskLevel ==
+                                                                          "ระดับต่ำ"
+                                                                      ? const Color(
+                                                                          0xffA2EDCE)
+                                                                      : dpiaProvider.riskAssessments[index].riskLevel ==
+                                                                              "ระดับกลาง"
+                                                                          ? const Color(
+                                                                              0xffEDCFA2)
+                                                                          : const Color(
+                                                                              0xffFFA8B8),
+                                                                ),
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              5),
+                                                      child: Center(
+                                                        child: Text(
+                                                          ' ${dpiaProvider.riskAssessments[index].riskLevel} ',
+                                                          style: TextStyle(
+                                                            color: dpiaProvider
+                                                                        .riskAssessments[
+                                                                            index]
+                                                                        .riskLevel ==
+                                                                    "ระดับต่ำ"
+                                                                ? const Color(
+                                                                    0xff0A5134)
+                                                                : dpiaProvider
+                                                                            .riskAssessments[
+                                                                                index]
+                                                                            .riskLevel ==
+                                                                        "ระดับกลาง"
+                                                                    ? const Color(
+                                                                        0xff735323)
+                                                                    : const Color(
+                                                                        0xffAF3232),
+                                                          ),
                                                         ),
                                                       ),
                                                     ),
-                                                  ),
-                                                  const SizedBox(width: 8),
-                                                  Text(
-                                                    'ความเสี่ยงที่ ${index + 1}',
-                                                  ),
-                                                ],
+                                                    const SizedBox(
+                                                      width: 8,
+                                                    ),
+                                                    Text(
+                                                      'ความเสี่ยงที่ ${index + 1}',
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                            children: [
+                                              ListTile(
+                                                subtitle: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      'ผลกระทบ: ${dpiaProvider.riskAssessments[index].effect}',
+                                                    ),
+                                                    Text(
+                                                      'ความน่าจะเป็น: ${dpiaProvider.riskAssessments[index].probability}',
+                                                    ),
+                                                    Text(
+                                                      'ความร้ายแรง: ${dpiaProvider.riskAssessments[index].severity}',
+                                                    ),
+                                                  ],
+                                                ),
                                               ),
                                             ],
                                           ),
-                                          children: [
-                                            ListTile(
-                                              subtitle: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    'ผลกระทบ: ${dpiaProvider.riskAssessments[index].effect}',
-                                                  ),
-                                                  Text(
-                                                    'ความน่าจะเป็น: ${dpiaProvider.riskAssessments[index].probability}',
-                                                  ),
-                                                  Text(
-                                                    'ความร้ายแรง: ${dpiaProvider.riskAssessments[index].severity}',
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ],
                                         ),
                                       ),
                                       const SizedBox(
@@ -283,7 +332,7 @@ class _RiskAssessmentPageState extends State<RiskAssessmentPage> {
                               isScrollControlled: true,
                               context: context,
                               builder: (BuildContext context) {
-                                return const DpiaAddRisk();
+                                return DpiaAddRisk();
                               },
                             );
                           },

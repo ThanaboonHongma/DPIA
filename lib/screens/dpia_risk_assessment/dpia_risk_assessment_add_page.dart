@@ -5,14 +5,13 @@ import 'package:provider/provider.dart';
 import 'package:uuid/uuid.dart';
 
 class DpiaAddRisk extends StatefulWidget {
-  const DpiaAddRisk({super.key});
+  DpiaAddRisk({super.key});
 
   @override
   State<DpiaAddRisk> createState() => _DpiaAddRiskState();
 }
 
 class _DpiaAddRiskState extends State<DpiaAddRisk> {
-
   // This variable tracks whether the modal bottom sheet is open or closed.
   String _probability = "โอกาสต่ำ";
   String _severity = "ร้ายแรงน้อย";
@@ -80,6 +79,7 @@ class _DpiaAddRiskState extends State<DpiaAddRisk> {
                 padding: const EdgeInsets.only(left: 1.0),
                 child: Text(
                   'ความเสี่ยงที่ ${dpiaProvider.riskAssessments.length + 1}',
+                  style: Theme.of(context).textTheme.titleLarge,
                 ),
               ),
             ),
@@ -87,14 +87,18 @@ class _DpiaAddRiskState extends State<DpiaAddRisk> {
               color: Colors.black.withOpacity(0.44),
               thickness: 1,
             ),
-            const Align(
+            Align(
               alignment: Alignment.centerLeft,
               child: Padding(
-                padding: EdgeInsets.only(left: 1.0),
+                padding: const EdgeInsets.only(left: 1.0),
                 child: Text(
                   'ผลกระทบ ',
+                  style: Theme.of(context).textTheme.titleMedium,
                 ),
               ),
+            ),
+            const SizedBox(
+              height: 10,
             ),
             SizedBox(
               height: 40,
@@ -117,12 +121,13 @@ class _DpiaAddRiskState extends State<DpiaAddRisk> {
             const SizedBox(
               height: 10,
             ),
-            const Align(
+            Align(
               alignment: Alignment.centerLeft,
               child: Padding(
-                padding: EdgeInsets.only(left: 1.0),
+                padding: const EdgeInsets.only(left: 1.0),
                 child: Text(
                   'ความเสี่ยงเบื้องต้น',
+                  style: Theme.of(context).textTheme.titleMedium,
                 ),
               ),
             ),
@@ -140,11 +145,13 @@ class _DpiaAddRiskState extends State<DpiaAddRisk> {
                 Column(
                   children: [
                     ListTile(
-                      title: const Text("ความน่าจะเป็น"),
+                      title: Text("ความน่าจะเป็น",
+                          style: Theme.of(context).textTheme.titleMedium),
                       subtitle: Wrap(
                         children: <Widget>[
                           RadioListTile(
-                            title: const Text("โอกาสต่ำ"),
+                            title: Text("โอกาสต่ำ",
+                                style: Theme.of(context).textTheme.titleSmall),
                             value: "โอกาสต่ำ",
                             groupValue: _probability,
                             onChanged: (value) {
@@ -155,7 +162,8 @@ class _DpiaAddRiskState extends State<DpiaAddRisk> {
                             },
                           ),
                           RadioListTile(
-                            title: const Text("โอกาสพอสมควร"),
+                            title: Text("โอกาสพอสมควร",
+                                style: Theme.of(context).textTheme.titleSmall),
                             value: "โอกาสพอสมควร",
                             groupValue: _probability,
                             onChanged: (value) {
@@ -166,7 +174,8 @@ class _DpiaAddRiskState extends State<DpiaAddRisk> {
                             },
                           ),
                           RadioListTile(
-                            title: const Text("โอกาสสูง"),
+                            title: Text("โอกาสสูง",
+                                style: Theme.of(context).textTheme.titleSmall),
                             value: "โอกาสสูง",
                             groupValue: _probability,
                             onChanged: (value) {
@@ -182,11 +191,13 @@ class _DpiaAddRiskState extends State<DpiaAddRisk> {
                   ],
                 ),
                 ListTile(
-                  title: const Text("ความร้ายแรง"),
+                  title: Text("ความร้ายแรง",
+                      style: Theme.of(context).textTheme.titleMedium),
                   subtitle: Column(
                     children: <Widget>[
                       RadioListTile(
-                        title: const Text("ร้ายแรงน้อย"),
+                        title: Text("ร้ายแรงน้อย",
+                            style: Theme.of(context).textTheme.titleSmall),
                         value: "ร้ายแรงน้อย",
                         groupValue: _severity,
                         onChanged: (value) {
@@ -197,7 +208,8 @@ class _DpiaAddRiskState extends State<DpiaAddRisk> {
                         },
                       ),
                       RadioListTile(
-                        title: const Text("ร้ายแรงพอสมควร"),
+                        title: Text("ร้ายแรงพอสมควร",
+                            style: Theme.of(context).textTheme.titleSmall),
                         value: "ร้ายแรงพอสมควร",
                         groupValue: _severity,
                         onChanged: (value) {
@@ -208,7 +220,8 @@ class _DpiaAddRiskState extends State<DpiaAddRisk> {
                         },
                       ),
                       RadioListTile(
-                        title: const Text("ร้ายแรงมาก"),
+                        title: Text("ร้ายแรงมาก",
+                            style: Theme.of(context).textTheme.titleSmall),
                         value: "ร้ายแรงมาก",
                         groupValue: _severity,
                         onChanged: (value) {
@@ -221,55 +234,104 @@ class _DpiaAddRiskState extends State<DpiaAddRisk> {
                     ],
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Wrap(
-                    spacing: 16,
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: _riskLevel == "ระดับต่ำ"
-                              ? const Color(0xffA2EDCE)
-                              : const Color(0xffA2EDCE).withOpacity(0.3),
-                        ),
-                        child: const Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Text(
-                            "ระดับต่ำ",
-                          ),
-                        ),
-                      ),
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: _riskLevel == "ระดับกลาง"
-                              ? const Color(0xffEDCFA2)
-                              : const Color(0xffEDCFA2).withOpacity(0.3),
-                        ),
-                        child: const Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Text(
-                            "ระดับกลาง",
-                          ),
-                        ),
-                      ),
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: _riskLevel == "ระดับสูง"
-                              ? const Color(0xffFFA8B8)
-                              : const Color(0xffFFA8B8).withOpacity(0.3),
-                        ),
-                        child: const Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Text(
-                            "ระดับสูง",
-                          ),
-                        ),
-                      ),
-                    ],
+                 const Divider(
+                  thickness: 1,
+                  indent: 0,
+                  endIndent: 0,
+                  color: Colors.grey,
+                ),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Padding(
+                    padding:  const EdgeInsets.only(left: 1.0),
+                    child: Text(
+                      'ผลการประเมินความเสี่ยง',
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
                   ),
+                ),
+                Padding(
+                  padding:  const EdgeInsets.only(top: 16, bottom: 16),
+                  child: SizedBox(
+                      width: double.infinity,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment
+                            .spaceEvenly, // จัดการชิดขวาและซ้าย
+                        children: [
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.all(
+                                  2.0), // ความห่างระหว่าง Container แต่ละตัว (2 ความหนา)
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color:  const Color(0xffA2EDCE),
+                                  border: _riskLevel == "ระดับต่ำ"
+                                      ? Border.all(
+                                          color: const Color(0xff00FF96), width: 2)
+                                      : null,
+                                ),
+                                child: const Center(
+                                  child:  Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text(
+                                      "ระดับต่ำ",
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: Center(
+                              child: Padding(
+                                padding: const EdgeInsets.all(2.0),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color:  const Color(0xffEDCFA2),
+                                    border: _riskLevel == "ระดับกลาง"
+                                        ? Border.all(
+                                            color: const Color(0xffFF8700), width: 2)
+                                        : null,
+                                  ),
+                                  child: const Center(
+                                    child:  Padding(
+                                      padding: EdgeInsets.all(8.0),
+                                      child: Text(
+                                        "ระดับกลาง",
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.all(2.0),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color:  const Color(0xffFFA8B8),
+                                  border: _riskLevel == "ระดับสูง"
+                                      ? Border.all(
+                                          color: const Color(0xffFF0000), width: 2)
+                                      : null,
+                                ),
+                                child: const Center(
+                                  child:  Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text(
+                                      "ระดับสูง",
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      )),
                 ),
                 Divider(
                   color: Colors.black.withOpacity(0.44),

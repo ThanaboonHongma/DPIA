@@ -23,7 +23,7 @@ class _Consultation1State extends State<Consultation1> {
           children: [
             Text(
               'แบบฟอร์มประเมิน DPIA',
-              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+              style: Theme.of(context).textTheme.titleLarge?.copyWith(
                     color: Theme.of(context).colorScheme.tertiary,
                   ),
             ),
@@ -44,58 +44,72 @@ class _Consultation1State extends State<Consultation1> {
         child: Column(
           children: [
             Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.1),
-                    spreadRadius: 5,
-                    blurRadius: 7,
-                    offset: const Offset(0, 8),
-                  ),
-                ],
-              ),
-              margin: const EdgeInsets.all(
-                10,
-              ),
-              child: const Padding(
-                padding: EdgeInsets.all(15.0),
-                child: Column(
-                  children: [
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: Text('ขั้นตอนที่ 3 DPIA Consultation',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w400,
-                              color: Color.fromRGBO(35, 169, 225, 1),
-                              fontSize: 16)),
-                    ),
-                    Divider(
-                      thickness: 1,
-                      indent: 0,
-                      endIndent: 0,
-                      color: Colors.grey,
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: Text('[DPIA Consultation]'),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: Text(
-                          'ระบุเหตุผล, วิธีการ, และช่วงเวลาที่จะปรึกษาหารือและรับฟังความเห็น รวมถึงกรณีที่จะไม่ปรึกษาหารือและรับฟังความเห็นด้วย อย่างน้อยจากผู้เกี่ยวข้องต่อไปนี้'),
-                    ),
-                    SizedBox(
-                      height: 10,
+              height: 8,
+              width: double.infinity,
+              color: const Color(0xffDEDEDE),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.1),
+                      spreadRadius: 5,
+                      blurRadius: 7,
+                      offset: const Offset(0, 8),
                     ),
                   ],
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Column(
+                    children: [
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          'ขั้นตอนที่ 3 DPIA Consultation',
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleLarge
+                              ?.copyWith(
+                                color: const Color.fromRGBO(35, 169, 225, 1),
+                              ),
+                        ),
+                      ),
+                      const Divider(
+                        thickness: 1,
+                        indent: 0,
+                        endIndent: 0,
+                        color: Colors.grey,
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          '[DPIA Consultation]',
+                          style: Theme.of(context).textTheme.titleMedium,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          'ระบุเหตุผล, วิธีการ, และช่วงเวลาที่จะปรึกษาหารือและรับฟังความเห็น รวมถึงกรณีที่จะไม่ปรึกษาหารือและรับฟังความเห็นด้วย อย่างน้อยจากผู้เกี่ยวข้องต่อไปนี้',
+                          style: Theme.of(context).textTheme.titleMedium,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -119,6 +133,7 @@ class _Consultation1State extends State<Consultation1> {
                 child: Column(
                   children: <Widget>[
                     CheckboxListTile(
+                      side: const BorderSide(color: Color(0xff2684FF)),
                       controlAffinity: ListTileControlAffinity.leading,
                       title: Transform.translate(
                         offset: const Offset(-16, 0),
@@ -136,7 +151,7 @@ class _Consultation1State extends State<Consultation1> {
                       const Padding(
                         padding: EdgeInsets.all(16.0),
                         child: TextField(
-                          decoration: InputDecoration(hintText: "โปรดกรอก"),
+                          decoration: InputDecoration(hintText: "ระบุข้อมูล"),
                         ),
                       ),
                   ],
@@ -223,43 +238,50 @@ class _ConsultationListviewState extends State<ConsultationListview> {
           ],
         ),
         margin: const EdgeInsets.all(
-          10,
+          5,
         ),
-        child: ExpansionTile(
-          title: CheckboxListTile(
-            contentPadding: EdgeInsets.zero,
-            title: Transform.translate(
-              offset: const Offset(-16, 0),
-              child: Text(consultations[index].title),
+        child: Theme(
+          data: ThemeData(dividerColor: Colors.transparent),
+          child: ExpansionTile(
+            
+            title: CheckboxListTile(
+              side: const BorderSide(color: Color(0xff2684FF)),
+              contentPadding: EdgeInsets.zero,
+              title: Transform.translate(
+                offset: const Offset(-16, 0),
+                child: Text(consultations[index].title),
+              ),
+              controlAffinity:
+                  ListTileControlAffinity.leading, //  <-- leading Checkbox
+              value: consultations[index].isChecked,
+              onChanged: (bool? value) {
+                List<Consultation> temp = [
+                  for (Consultation consultation in consultations)
+                    consultation == consultations[index]
+                        ? consultation.copyWith(isChecked: value)
+                        : consultation
+                ];
+                setState(() {
+                  consultations = temp;
+                });
+              },
             ),
-            controlAffinity:
-                ListTileControlAffinity.leading, //  <-- leading Checkbox
-            value: consultations[index].isChecked,
-            onChanged: (bool? value) {
-              List<Consultation> temp = [
-                for (Consultation consultation in consultations)
-                  consultation == consultations[index]
-                      ? consultation.copyWith(isChecked: value)
-                      : consultation
-              ];
-              setState(() {
-                consultations = temp;
-              });
-            },
+            children: <Widget>[
+              const Divider(
+                thickness: 1,
+                indent: 0,
+                endIndent: 0,
+                color: Colors.grey,
+              ),
+              ListTile(title: Text(consultations[index].subtitle)),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 20),
+                child: ListTile(
+                    title: Text(consultations[index].description,
+                        style: Theme.of(context).textTheme.titleSmall)),
+              ),
+            ],
           ),
-          children: <Widget>[
-            const Divider(
-              thickness: 1,
-              indent: 0,
-              endIndent: 0,
-              color: Colors.grey,
-            ),
-            ListTile(title: Text(consultations[index].subtitle)),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 20),
-              child: ListTile(title: Text(consultations[index].description)),
-            ),
-          ],
         ),
       ),
       itemCount: consultations.length,

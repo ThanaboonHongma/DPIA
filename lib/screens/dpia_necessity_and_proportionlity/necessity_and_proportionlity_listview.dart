@@ -21,12 +21,11 @@ class _NecessityandProportionlityListviewState
       physics: const NeverScrollableScrollPhysics(),
       itemBuilder: (BuildContext context, int index) {
         return Column(children: [
-          
           ...necessityandproportionlitys[index]
               .list
               .map(
                 (checkbox) => CheckboxListTile(
-                  contentPadding: const EdgeInsets.symmetric(vertical: 5),
+                  contentPadding: EdgeInsets.zero,
                   side: const BorderSide(color: Color(0xff2684FF)),
                   controlAffinity: ListTileControlAffinity.leading,
                   value: checkbox.isChecked,
@@ -53,7 +52,7 @@ class _NecessityandProportionlityListviewState
                     offset: const Offset(-16, 0),
                     child: Text(
                       checkbox.name,
-                      style: Theme.of(context).textTheme.titleMedium,
+                      style: Theme.of(context).textTheme.titleSmall,
                     ),
                   ),
                 ),

@@ -20,7 +20,7 @@ class _DpiaDescriptionPageState extends State<DpiaDescriptionPage> {
           children: [
             Text(
               'แบบฟอร์มประเมิน DPIA ',
-              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+              style: Theme.of(context).textTheme.titleLarge?.copyWith(
                     color: Theme.of(context).colorScheme.tertiary,
                   ),
             ),
@@ -63,30 +63,26 @@ class _DpiaDescriptionPageState extends State<DpiaDescriptionPage> {
                   child: Padding(
                     padding: const EdgeInsets.only(right: 20),
                     child: Padding(
-                      padding: const EdgeInsets.only(
-                          left: 20, top: 20, bottom: 20, right: 10),
+                      padding: const EdgeInsets.all(15.0),
                       child: Column(
                         children: [
                           Align(
                             alignment: Alignment.centerLeft,
-                            child: Padding(
-                              padding: const EdgeInsets.only(left: 1.0),
-                              child: Text(
-                                'ขั้นตอนที่ 2 DPIA Description',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .titleMedium
-                                    ?.copyWith(
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .tertiary,
-                                    ),
-                              ),
+                            child: Text(
+                              'ขั้นตอนที่ 2 DPIA Description',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleLarge
+                                  ?.copyWith(
+                                    color: Color.fromRGBO(35, 169, 225, 1),
+                                  ),
                             ),
                           ),
                           const Divider(
-                            color: Colors.black,
                             thickness: 1,
+                            indent: 0,
+                            endIndent: 0,
+                            color: Colors.grey,
                           ),
                           Align(
                             alignment: Alignment.centerLeft,
@@ -94,7 +90,7 @@ class _DpiaDescriptionPageState extends State<DpiaDescriptionPage> {
                               padding: const EdgeInsets.only(left: 1.0),
                               child: Text(
                                 '[DPIA Description]',
-                                style: Theme.of(context).textTheme.bodyMedium,
+                                style: Theme.of(context).textTheme.titleMedium,
                               ),
                             ),
                           ),
@@ -106,8 +102,8 @@ class _DpiaDescriptionPageState extends State<DpiaDescriptionPage> {
                             child: Padding(
                               padding: const EdgeInsets.only(left: 1.0),
                               child: Text(
-                                "อธิบายรายละเอียดของกระบวนการประมวลผลข้อมูล\nส่วนบุคคลอย่างน้อยต้องประกอบด้วยสภาพ\n(nature),ขอบเขต(scope),บริบท(cpntext)\nและวัตถุประสงค์(purpose)ของการประมวลผล",
-                                style: Theme.of(context).textTheme.bodyMedium,
+                                "อธิบายรายละเอียดของกระบวนการประมวลผลข้อมูลส่วนบุคคลอย่างน้อยต้องประกอบด้วย\nสภาพ(nature),ขอบเขต(scope),บริบท(cpntext)และวัตถุประสงค์(purpose)ของการประมวลผล",
+                                style: Theme.of(context).textTheme.titleMedium,
                               ),
                             ),
                           ),
