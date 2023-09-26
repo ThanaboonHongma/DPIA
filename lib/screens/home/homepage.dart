@@ -140,7 +140,6 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
-
             Column(
               children: [
                 Padding(
@@ -173,18 +172,6 @@ class _HomePageState extends State<HomePage> {
                 ),
               ],
             ),
-            // Padding(
-            //   padding: const EdgeInsets.symmetric(horizontal: 20),
-            //   child: Column(
-            //     children: [
-            //       ..._dpiais(),
-            //       const SizedBox(
-            //         height: 25,
-            //       ),
-            //       ..._dpialistview(dpiaProvider),
-            //     ],
-            //   ),
-            // ),
           ],
         ),
       ),
@@ -229,6 +216,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   _dpialistview(DpiaProvider dpiaProvider) {
+    DateTime selectedDate = DateTime.now();
     return [
       Column(
         children: [
@@ -319,7 +307,11 @@ class _HomePageState extends State<HomePage> {
                       print('');
                       print('risk');
                       print(summary[index].risks.length);
-                      final divider = summary[index].risks.where((element) => element.riskLevel == 'ระดับสูง').toList().length;
+                      final divider = summary[index]
+                          .risks
+                          .where((element) => element.riskLevel == 'ระดับสูง')
+                          .toList()
+                          .length;
                       for (RiskData risk in summary[index].risks) {
                         if (risk.measures.isEmpty) continue;
                         print('start');
@@ -359,18 +351,32 @@ class _HomePageState extends State<HomePage> {
                                         style: Theme.of(context)
                                             .textTheme
                                             .titleMedium),
-                                    Text(
-                                      '${summary[index].risks.last.date.day.toString()}/'
-                                      '${summary[index].risks.last.date.month.toString()}/'
-                                      '${summary[index].risks.last.date.year.toString()}',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodySmall
-                                          ?.copyWith(
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .onSurface,
-                                          ),
+                                    Container(
+                                      child: summary[index].risks.isEmpty
+                                          ? Text(
+                                              '${selectedDate.day.toString()}/${selectedDate.month.toString()}/${selectedDate.year.toString()}',
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .bodySmall
+                                                  ?.copyWith(
+                                                    color: Theme.of(context)
+                                                        .colorScheme
+                                                        .onSurface,
+                                                  ),
+                                            )
+                                          : Text(
+                                              '${summary[index].risks.last.date.day.toString()}/'
+                                              '${summary[index].risks.last.date.month.toString()}/'
+                                              '${summary[index].risks.last.date.year.toString()}',
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .bodySmall
+                                                  ?.copyWith(
+                                                    color: Theme.of(context)
+                                                        .colorScheme
+                                                        .onSurface,
+                                                  ),
+                                            ),
                                     )
                                   ],
                                 ),
@@ -401,12 +407,14 @@ class _HomePageState extends State<HomePage> {
                                     Row(
                                       children: [
                                         Container(
-                                          child: summary[index].risks.isEmpty? Text('') :Text(
-                                              // ${productList.riskAssessments[index].measures[index].percent.toString()}
-                                              'สถานะดำเนินการ : ${progress ~/ divider}%',
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .bodyMedium),
+                                          child: summary[index].risks.isEmpty
+                                              ? Text('')
+                                              : Text(
+                                                  // ${productList.riskAssessments[index].measures[index].percent.toString()}
+                                                  'สถานะดำเนินการ : ${progress ~/ divider}%',
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .bodyMedium),
                                         )
                                       ],
                                     ),
