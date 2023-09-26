@@ -89,16 +89,7 @@ class _Consultation1State extends State<Consultation1> {
                       const SizedBox(
                         height: 10,
                       ),
-                      Align(
-                        alignment: Alignment.topLeft,
-                        child: Text(
-                          '[DPIA Consultation]',
-                          style: Theme.of(context).textTheme.titleMedium,
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
+                      
                       Align(
                         alignment: Alignment.topLeft,
                         child: Text(

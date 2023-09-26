@@ -94,16 +94,7 @@ class _Identification1State extends State<Identification1> {
                       const SizedBox(
                         height: 10,
                       ),
-                      Align(
-                        alignment: Alignment.topLeft,
-                        child: Text(
-                          '[DPIA Identification]',
-                          style: Theme.of(context).textTheme.titleMedium,
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
+                      
                       Align(
                         alignment: Alignment.topLeft,
                         child: Text(

@@ -244,6 +244,7 @@ class _IdentificationPage1State extends State<IdentificationPage1> {
                           }).toList(),
                         ),
                       ),
+                      SizedBox(),
                       const SizedBox(
                         height: 10,
                       ),
@@ -307,8 +308,6 @@ class _IdentificationPage1State extends State<IdentificationPage1> {
           const SizedBox(
             width: 100,
             height: 40,
-            // child: ElevatedButton(
-            //     onPressed: () {}, child: const Text('ย้อนกลับ')),
           ),
           const Text(
             '1 / 7',

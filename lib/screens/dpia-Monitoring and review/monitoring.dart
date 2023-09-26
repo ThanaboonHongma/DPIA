@@ -103,16 +103,7 @@ class _MonitoringPage extends State<MonitoringPage> {
                         const SizedBox(
                           height: 10,
                         ),
-                        Align(
-                          alignment: Alignment.topLeft,
-                          child: Text(
-                            '[MonitoringPage and review]',
-                            style: Theme.of(context).textTheme.titleMedium,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
+                        
                         Align(
                           alignment: Alignment.topLeft,
                           child: Text(
@@ -276,7 +267,7 @@ class _MonitoringPage extends State<MonitoringPage> {
             style: TextStyle(color: Colors.black),
           ),
           SizedBox(
-              width: 100,
+              width: 150,
               height: 40,
               child: ElevatedButton(
                   onPressed: () {
@@ -288,7 +279,7 @@ class _MonitoringPage extends State<MonitoringPage> {
                         closedata: textController4.text));
                     context.go('/CompletePage');
                   },
-                  child: const Text('ถัดไป'))),
+                  child: const Text('สิ้นสุดแบบประเมิน'))),
         ],
       ),
     );

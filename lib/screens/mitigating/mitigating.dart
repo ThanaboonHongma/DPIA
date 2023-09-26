@@ -67,12 +67,15 @@ class _MitigatingMeasuresState extends State<MitigatingMeasures> {
     final riskAssessments = dpiaProvider.riskAssessments
         .where((risk) => risk.riskLevel == 'ระดับสูง')
         .toList();
-
+    String warningMessage = '';
     return ListView.builder(
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       itemCount: riskAssessments.length,
       itemBuilder: (context, index) {
+        if (riskAssessments[index].measures.isEmpty) {
+          warningMessage = 'ต้องทําการเพิ่มมาตรการสำหรับความเสี่ยงนี้';
+        }
         return Column(
           children: [
             Padding(
@@ -80,6 +83,9 @@ class _MitigatingMeasuresState extends State<MitigatingMeasures> {
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
+                  border: warningMessage.isNotEmpty
+                      ? Border.all(color: const Color(0xffFF0000))
+                      : null,
                   color: Colors.white,
                   boxShadow: [
                     BoxShadow(
@@ -177,6 +183,19 @@ class _MitigatingMeasuresState extends State<MitigatingMeasures> {
                 ),
               ),
             ),
+            const SizedBox(
+              height: 10,
+            ),
+            if (warningMessage.isNotEmpty)
+              Text(
+                warningMessage,
+                style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                      color: Theme.of(context).colorScheme.error,
+                    ),
+              ),
+            const SizedBox(
+              height: 10,
+            ),
           ],
         );
       },
@@ -184,6 +203,10 @@ class _MitigatingMeasuresState extends State<MitigatingMeasures> {
   }
 
   Container buildMyNavBar(BuildContext context) {
+    final dpiaProvider = Provider.of<DpiaProvider>(context);
+    final riskAssessments = dpiaProvider.riskAssessments
+        .where((risk) => risk.riskLevel == 'ระดับสูง')
+        .toList();
     return Container(
       height: 60,
       decoration: BoxDecoration(
@@ -214,13 +237,17 @@ class _MitigatingMeasuresState extends State<MitigatingMeasures> {
             style: TextStyle(color: Colors.black),
           ),
           SizedBox(
-              width: 100,
-              height: 40,
-              child: ElevatedButton(
-                  onPressed: () {
-                    context.go('/MonitoringPage');
-                  },
-                  child: const Text('ถัดไป'))),
+            width: 100,
+            height: 40,
+            child: ElevatedButton(
+              onPressed: riskAssessments.any((risk) => risk.measures.isEmpty)
+                    ? null
+                    : () {
+                        context.go('/MonitoringPage');
+                      },
+                child: const Text('ถัดไป')
+            ),
+          ),
         ],
       ),
     );
@@ -254,7 +281,7 @@ class _MitigatingMeasuresState extends State<MitigatingMeasures> {
                       child: Text(
                         'ขั้นตอนที่ 6 Mitigating measures',
                         style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                              color: Color.fromRGBO(35, 169, 225, 1),
+                              color: const Color.fromRGBO(35, 169, 225, 1),
                             ),
                       ),
                     ),
@@ -262,16 +289,6 @@ class _MitigatingMeasuresState extends State<MitigatingMeasures> {
                   const Divider(
                     color: Colors.grey,
                     thickness: 1,
-                  ),
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 1.0),
-                      child: Text(
-                        '[Mitigating measures]',
-                        style: Theme.of(context).textTheme.titleMedium,
-                      ),
-                    ),
                   ),
                   const SizedBox(
                     height: 10,
