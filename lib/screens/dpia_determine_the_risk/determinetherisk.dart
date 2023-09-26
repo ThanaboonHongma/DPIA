@@ -331,7 +331,7 @@ class _IdentificationPage1State extends State<IdentificationPage1> {
                     if (dropdownValue != '-- Select --') {
                       context.go('/Identification');
                     }else {
-                      context.go('/CompletePageNoRisk');
+                      context.go('/CompletePage');
                     }
                   },
                   child: const Text('ถัดไป'))),

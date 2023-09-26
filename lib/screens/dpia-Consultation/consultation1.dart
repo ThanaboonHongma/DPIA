@@ -255,19 +255,12 @@ class _ConsultationListviewState extends State<ConsultationListview> {
                   ListTileControlAffinity.leading, //  <-- leading Checkbox
               value: provider.consultations[index].isChecked,
               onChanged: (bool? value) {
-                if(value != null){
-                provider.checkConsultations(index, value);
+                if (value != null) {
+                  provider.checkConsultations(index, value);
                 }
               },
             ),
             children: <Widget>[
-              const Divider(
-                thickness: 1,
-                indent: 0,
-                endIndent: 0,
-                color: Colors.grey,
-              ),
-              
               Padding(
                 padding: const EdgeInsets.only(bottom: 20),
                 child: ListTile(

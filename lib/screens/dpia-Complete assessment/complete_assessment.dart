@@ -148,7 +148,10 @@ class CompletePage extends StatelessWidget {
                     print('หน้าที่ 5');
                     List<Map<String, dynamic>> page5 = [];
                     for (RiskData riskData in provider.riskAssessments) {
-                      page5.add(riskData.toMap());
+                      if (provider.riskAssessments.first.riskLevel == '') {
+                      } else {
+                        page5.add(riskData.toMap());
+                      }
                     }
                     map.addAll({'riskData': page5});
                     print(page5);
@@ -191,7 +194,6 @@ class CompletePage extends StatelessWidget {
                             .reset();
                         Provider.of<DpiaProvider>(context, listen: false)
                             .setupData();
-                            
                       });
                     }
                   },

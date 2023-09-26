@@ -166,7 +166,6 @@ class _Identification1State extends State<Identification1> {
 Container buildMyNavBar(BuildContext context) {
   final provider = Provider.of<DpiaProvider>(context);
   int count1 = 0;
-  int count2 = 0;
   List countTEST = [];
   List countTEST2 = [];
   return Container(
@@ -221,7 +220,7 @@ Container buildMyNavBar(BuildContext context) {
                       provider.checkboxValue2 == true) {
                     context.go('/DpiaDescriptionPage');
                   }else if (countTEST.length == 1 ){
-                    context.go('/CompletePageNoRisk');
+                    context.go('/CompletePage');
                   }
                 },
                 child: const Text('ถัดไป'))),

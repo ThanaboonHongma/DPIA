@@ -225,21 +225,6 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          TextButton(
-              onPressed: () {
-                context.go('/IdentificationPage1');
-              },
-              child: Text(
-                'อ่านเพิ่มเติม',
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: Theme.of(context).colorScheme.tertiary,
-                    ),
-              )),
-        ],
-      )
     ];
   }
 
@@ -334,7 +319,7 @@ class _HomePageState extends State<HomePage> {
                       print('');
                       print('risk');
                       print(summary[index].risks.length);
-                      final divider = summary[index].risks.length;
+                      final divider = summary[index].risks.where((element) => element.riskLevel == 'ระดับสูง').toList().length;
                       for (RiskData risk in summary[index].risks) {
                         if (risk.measures.isEmpty) continue;
                         print('start');
@@ -344,7 +329,12 @@ class _HomePageState extends State<HomePage> {
                         int sumMeasurProgress = 0;
 
                         for (Measure measure in risk.measures) {
-                          sumMeasurProgress += int.parse(measure.percent);
+                          if (measure.percent == '') {
+                            const precent = 0;
+                            sumMeasurProgress += precent;
+                          } else {
+                            sumMeasurProgress += int.parse(measure.percent);
+                          }
                         }
                         print('allMeasures $allMeasures');
                         print('sumMeasurProgress $sumMeasurProgress');
@@ -396,7 +386,7 @@ class _HomePageState extends State<HomePage> {
                                                   .textTheme
                                                   .bodyMedium)
                                           : Text(
-                                              '${summary[index].risks.length} ความเสี่ยงสูง',
+                                              '${summary[index].risks.where((element) => element.riskLevel == 'ระดับสูง').toList().length} ความเสี่ยงสูง',
                                               style: Theme.of(context)
                                                   .textTheme
                                                   .bodyMedium),
@@ -410,7 +400,7 @@ class _HomePageState extends State<HomePage> {
                                     ),
                                     Row(
                                       children: [
-                                        Container( 
+                                        Container(
                                           child: summary[index].risks.isEmpty? Text('') :Text(
                                               // ${productList.riskAssessments[index].measures[index].percent.toString()}
                                               'สถานะดำเนินการ : ${progress ~/ divider}%',
