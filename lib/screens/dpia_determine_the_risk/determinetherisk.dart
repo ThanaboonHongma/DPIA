@@ -1,6 +1,7 @@
 // ignore_for_file: file_names
 import 'package:dpia_project/models/dpia_determine_the_risk/determinetherisk.dart';
 import 'package:dpia_project/providers/dpia_provider.dart';
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -13,12 +14,13 @@ class IdentificationPage1 extends StatefulWidget {
   State<IdentificationPage1> createState() => _IdentificationPage1State();
 }
 
-const List<String> list = <String>[
-  '-- Select --',
+
+final List<String> items = [
   'Systematic and extensive profiling with significant effects',
   'Processing of sensitive data on a large scale',
-  'Public monitoring on a large scale'
+  'Public monitoring on a large scale',
 ];
+List<String> selectedItems = [];
 
 class _IdentificationPage1State extends State<IdentificationPage1> {
   final textController1 = TextEditingController();
@@ -27,7 +29,7 @@ class _IdentificationPage1State extends State<IdentificationPage1> {
   final textController4 = TextEditingController();
   final textController5 = TextEditingController();
   final textController6 = TextEditingController();
-  String dropdownValue = list.first;
+  String dropdownValue = 'Select Items';
   @override
   void dispose() {
     textController1.dispose();
@@ -228,21 +230,92 @@ class _IdentificationPage1State extends State<IdentificationPage1> {
                         height: 10,
                       ),
                       SizedBox(
-                        child: DropdownMenu<String>(
-                          width: 340,
-                          initialSelection: list.first,
-                          onSelected: (String? value) {
-                            // This is called when the user selects an item.
-                            setState(() {
-                              dropdownValue = value!;
-                            });
-                          },
-                          dropdownMenuEntries: list
-                              .map<DropdownMenuEntry<String>>((String value) {
-                            return DropdownMenuEntry<String>(
-                                value: value, label: value);
-                          }).toList(),
-                        ),
+                        child: DropdownButtonHideUnderline(
+        child: DropdownButton2<String>(
+          isExpanded: true,
+          hint: Text(
+            'Select Items',
+            style: TextStyle(
+              fontSize: 14,
+              color: Theme.of(context).hintColor,
+            ),
+          ),
+          items: items.map((item) {
+            return DropdownMenuItem(
+              value: item,
+              //disable default onTap to avoid closing menu when selecting an item
+              enabled: false,
+              child: StatefulBuilder(
+                builder: (context, menuSetState) {
+                  final isSelected = selectedItems.contains(item);
+                  return InkWell(
+                    onTap: () {
+                      isSelected ? selectedItems.remove(item) : selectedItems.add(item);
+                      //This rebuilds the StatefulWidget to update the button's text
+                      setState(() {});
+                      //This rebuilds the dropdownMenu Widget to update the check mark
+                      menuSetState(() {});
+
+                      dropdownValue = item;
+                      print(selectedItems);
+                    },
+                    child: Container(
+                      height: double.infinity,
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: Row(
+                        children: [
+                          if (isSelected)
+                            const Icon(Icons.check_box_outlined)
+                          else
+                            const Icon(Icons.check_box_outline_blank),
+                          const SizedBox(width: 16),
+                          Expanded(
+                            child: Text(
+                              item,
+                              style: const TextStyle(
+                                fontSize: 14,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
+              ),
+            );
+          }).toList(),
+          //Use last selected item as the current value so if we've limited menu height, it scroll to last item.
+          value: selectedItems.isEmpty ? null : selectedItems.last,
+          onChanged: (value) {},
+          selectedItemBuilder: (context) {
+            return items.map(
+              (item) {
+                return Container(
+                  alignment: AlignmentDirectional.center,
+                  child: Text(
+                    selectedItems.join(', '),
+                    style: const TextStyle(
+                      fontSize: 14,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    maxLines: 1,
+                  ),
+                );
+              },
+            ).toList();
+          },
+          buttonStyleData: const ButtonStyleData(
+            padding: EdgeInsets.only(left: 16, right: 8),
+            height: 40,
+            width: 400,
+          ),
+          menuItemStyleData: const MenuItemStyleData(
+            height: 40,
+            padding: EdgeInsets.zero,
+          ),
+        ),
+      ),
                       ),
                       SizedBox(),
                       const SizedBox(
@@ -327,7 +400,7 @@ class _IdentificationPage1State extends State<IdentificationPage1> {
                         dropdown: dropdownValue,
                         datasubjects: textController5.text,
                         organization: textController6.text));
-                    if (dropdownValue != '-- Select --') {
+                    if (selectedItems.isNotEmpty) {
                       context.go('/Identification');
                     }else {
                       context.go('/CompletePage');
