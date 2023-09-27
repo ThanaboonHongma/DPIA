@@ -144,28 +144,14 @@ class _HomePageState extends State<HomePage> {
               children: [
                 Padding(
                   padding: const EdgeInsets.all(10.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: Colors.white,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.1),
-                          spreadRadius: 5,
-                          blurRadius: 7,
-                          offset: const Offset(0, 8),
-                        ),
-                      ],
-                    ),
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 20),
                     child: Padding(
-                      padding: const EdgeInsets.only(right: 20),
-                      child: Padding(
-                        padding: const EdgeInsets.all(15.0),
-                        child: Column(
-                          children: [
-                            ..._dpialistview(dpiaProvider),
-                          ],
-                        ),
+                      padding: const EdgeInsets.all(15.0),
+                      child: Column(
+                        children: [
+                          ..._dpialistview(dpiaProvider),
+                        ],
                       ),
                     ),
                   ),
@@ -338,89 +324,102 @@ class _HomePageState extends State<HomePage> {
 
                       return Column(
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.all(15.0),
-                            child: Column(
-                              children: [
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                        'แบบประเมิน DPIA ${summary.length - index}',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .titleMedium),
-                                    Container(
-                                      child: summary[index].risks.isEmpty
-                                          ? Text(
-                                              '${selectedDate.day.toString()}/${selectedDate.month.toString()}/${selectedDate.year.toString()}',
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .bodySmall
-                                                  ?.copyWith(
-                                                    color: Theme.of(context)
-                                                        .colorScheme
-                                                        .onSurface,
-                                                  ),
-                                            )
-                                          : Text(
-                                              '${summary[index].risks.last.date.day.toString()}/'
-                                              '${summary[index].risks.last.date.month.toString()}/'
-                                              '${summary[index].risks.last.date.year.toString()}',
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .bodySmall
-                                                  ?.copyWith(
-                                                    color: Theme.of(context)
-                                                        .colorScheme
-                                                        .onSurface,
-                                                  ),
-                                            ),
-                                    )
-                                  ],
-                                ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                Row(
-                                  children: [
-                                    Container(
-                                      child: summary[index].risks.isEmpty
-                                          ? Text('ไม่มีความเสี่ยง',
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .bodyMedium)
-                                          : Text(
-                                              '${summary[index].risks.where((element) => element.riskLevel == 'ระดับสูง').toList().length} ความเสี่ยงสูง',
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .bodyMedium),
-                                    )
-                                  ],
-                                ),
-                                Column(
-                                  children: [
-                                    const SizedBox(
-                                      height: 10,
-                                    ),
-                                    Row(
-                                      children: [
-                                        Container(
-                                          child: summary[index].risks.isEmpty
-                                              ? Text('')
-                                              : Text(
-                                                  // ${productList.riskAssessments[index].measures[index].percent.toString()}
-                                                  'สถานะดำเนินการ : ${progress ~/ divider}%',
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .bodyMedium),
-                                        )
-                                      ],
-                                    ),
-                                  ],
+                          Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: Colors.white,
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.1),
+                                  spreadRadius: 5,
+                                  blurRadius: 7,
+                                  offset: const Offset(0, 8),
                                 ),
                               ],
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(15.0),
+                              child: Column(
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                          'แบบประเมิน DPIA ${summary.length - index}',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .titleMedium),
+                                      Container(
+                                        child: summary[index].risks.isEmpty
+                                            ? Text(
+                                                '${selectedDate.day.toString()}/${selectedDate.month.toString()}/${selectedDate.year.toString()}',
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .bodySmall
+                                                    ?.copyWith(
+                                                      color: Theme.of(context)
+                                                          .colorScheme
+                                                          .onSurface,
+                                                    ),
+                                              )
+                                            : Text(
+                                                '${summary[index].risks.last.date.day.toString()}/'
+                                                '${summary[index].risks.last.date.month.toString()}/'
+                                                '${summary[index].risks.last.date.year.toString()}',
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .bodySmall
+                                                    ?.copyWith(
+                                                      color: Theme.of(context)
+                                                          .colorScheme
+                                                          .onSurface,
+                                                    ),
+                                              ),
+                                      )
+                                    ],
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  Row(
+                                    children: [
+                                      Container(
+                                        child: summary[index].risks.isEmpty
+                                            ? Text('ไม่มีความเสี่ยง',
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .bodyMedium)
+                                            : Text(
+                                                '${summary[index].risks.where((element) => element.riskLevel == 'ระดับสูง').toList().length} ความเสี่ยงสูง',
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .bodyMedium),
+                                      )
+                                    ],
+                                  ),
+                                  Column(
+                                    children: [
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
+                                      Row(
+                                        children: [
+                                          Container(
+                                            child: summary[index].risks.isEmpty
+                                                ? Text('')
+                                                : Text(
+                                                    'สถานะดำเนินการ : ${progress ~/ divider}%',
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .bodyMedium),
+                                          )
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                           const SizedBox(
