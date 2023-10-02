@@ -55,7 +55,7 @@ class _LoginPageState extends State<LoginPage> {
 
   void getCurrentUser() {
     final user = FirebaseAuth.instance.currentUser;
-    if(user != null){
+    if (user != null) {
       context.go('/HomePage');
     }
   }
@@ -96,22 +96,19 @@ class _LoginPageState extends State<LoginPage> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const SizedBox(
-                          height: 10,
-                        ),
                         Image.asset(
-                          "assets/images/LoginPage/logo.png",
-                          width: 232,
-                          height: 85,
+                          "assets/dpo_online.png",
+                          width: 300,
+                          height: 100,
                         ),
                         const SizedBox(
-                          height: 50,
+                          height: 30,
                         ),
                         Text(
                           "ยินดีต้อนรับสู่ DPIA Lite",
                           style: Theme.of(context)
                               .textTheme
-                              .titleMedium
+                              .titleLarge
                               ?.copyWith(
                                 color: Theme.of(context).colorScheme.onPrimary,
                               ),
@@ -149,7 +146,7 @@ class _LoginPageState extends State<LoginPage> {
                                       'เข้าสู่ระบบ',
                                       style: Theme.of(context)
                                           .textTheme
-                                          .headlineSmall,
+                                          .titleMedium,
                                     ),
                                   ),
                                 ),
@@ -205,20 +202,24 @@ class _LoginPageState extends State<LoginPage> {
               height: 5,
             ),
             SizedBox(
-              height: 40,
-              child: TextFormField(
-                onSaved: (String? username) {
-                  modelDPIA.username = username!;
-                },
-                textAlignVertical: TextAlignVertical.center,
-                decoration: const InputDecoration(
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blue),
+              child: Container(
+                child: TextFormField(
+                  onSaved: (String? username) {
+                    modelDPIA.username = username!;
+                  },
+                  textAlignVertical: TextAlignVertical.center,
+                  decoration: const InputDecoration(
+                    contentPadding:
+                        EdgeInsets.only(left: 10, top: 5.0, bottom: 5.0),
+                    hintText: 'กรอกชื่อผู้ใช้',
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.blue),
+                    ),
+                    enabledBorder:
+                        OutlineInputBorder(borderSide: BorderSide.none),
+                    filled: true,
+                    fillColor: Colors.white,
                   ),
-                  enabledBorder:
-                      OutlineInputBorder(borderSide: BorderSide.none),
-                  filled: true,
-                  fillColor: Colors.white,
                 ),
               ),
             ),
@@ -239,13 +240,15 @@ class _LoginPageState extends State<LoginPage> {
             const SizedBox(
               height: 5,
             ),
-            SizedBox(
-              height: 40,
+            Container(
               child: TextFormField(
                 onSaved: (String? company) {
                   modelDPIA.company = company!;
                 },
                 decoration: const InputDecoration(
+                  contentPadding:
+                      EdgeInsets.only(left: 10, top: 5.0, bottom: 5.0),
+                  hintText: 'กรอกชื่อบริษัท',
                   focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.blue),
                   ),
@@ -273,8 +276,7 @@ class _LoginPageState extends State<LoginPage> {
             const SizedBox(
               height: 5,
             ),
-            SizedBox(
-              height: 40,
+            Container(
               child: TextFormField(
                 inputFormatters: [MaskTextInputFormatter(mask: "###-###-####")],
                 keyboardType: TextInputType.phone,
@@ -282,6 +284,9 @@ class _LoginPageState extends State<LoginPage> {
                   modelDPIA.phonenumber = phone!;
                 },
                 decoration: const InputDecoration(
+                  contentPadding:
+                      EdgeInsets.only(left: 10, top: 5.0, bottom: 5.0),
+                  hintText: 'กรอกเบอร์โทรศัพท์',
                   focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.blue),
                   ),
@@ -309,13 +314,25 @@ class _LoginPageState extends State<LoginPage> {
             const SizedBox(
               height: 5,
             ),
-            SizedBox(
-              height: 40,
+            Container(
               child: TextFormField(
                 onSaved: (String? email) {
                   modelDPIA.email = email!;
                 },
-                decoration: const InputDecoration(
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'กรุณากรอกอีเมล';
+                  }
+                  if (!RegExp(r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$')
+                      .hasMatch(value)) {
+                    return 'รูปแบบอีเมลไม่ถูกต้อง';
+                  }
+                  return null;
+                },
+                decoration: InputDecoration(
+                  contentPadding:
+                      EdgeInsets.only(left: 10, top: 5.0, bottom: 5.0),
+                  hintText: 'กรอกอีเมล',
                   focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.blue),
                   ),
@@ -335,7 +352,8 @@ class _LoginPageState extends State<LoginPage> {
   _buildButtons() {
     return [
       SizedBox(
-        width: 500,
+        height: 50,
+        width: double.infinity,
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
             backgroundColor: const Color(0xff23A9E1), // Background color
