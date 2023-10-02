@@ -1,7 +1,7 @@
 import 'package:dpia_project/providers/dpia_provider.dart';
-// import 'package:dpia_project/models/mitigatingdescription/mitigatingdescription.dart';
 import 'package:dpia_project/models/riskassessment/risklist.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
@@ -28,7 +28,10 @@ class _AddMeasureState extends State<AddMeasure> {
   final TextEditingController rick2 = TextEditingController();
   final TextEditingController rick3 = TextEditingController();
   final TextEditingController checkmanage = TextEditingController();
+
+  String? _hintTextcheckmanage = 'กรอกเปอร์เซ็น %';
   String? _errorcheckmanage;
+  String? _errormeasures1;
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
@@ -112,9 +115,17 @@ class _AddMeasureState extends State<AddMeasure> {
                 child: ElevatedButton(
                   onPressed: () {
                     if (checkmanage.text.isEmpty) {
+                      if (!dpoagree[0]||!dpoagree[1]) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text("กรุณาเลือกความเห็นของ DPO ก่อน"),
+                          ),
+                        );
+                      }
                       setState(() {
-                        _errorcheckmanage =
-                            'กรุณากรอกเปอร์เซ็น'; // Set error message
+                        _hintTextcheckmanage = '';
+                        _errorcheckmanage = 'กรุณากรอกเปอร์เซ็น % (เป็นตัวเลข)';
+                        _errormeasures1 = 'กรุณากรอกมาตรการ';
                       });
                     } else {
                       final riskData = context
@@ -363,7 +374,7 @@ class _AddMeasureState extends State<AddMeasure> {
                                   height: 10,
                                 ),
                                 SizedBox(
-                                  height: 40,
+                                  height: 70,
                                   width: double.infinity,
                                   child: TextField(
                                     controller: checkmanage,
@@ -373,9 +384,15 @@ class _AddMeasureState extends State<AddMeasure> {
                                       });
                                     },
                                     keyboardType: TextInputType.number,
+                                    inputFormatters: <TextInputFormatter>[
+                                      FilteringTextInputFormatter
+                                          .digitsOnly, // Allow only digits
+                                    ],
                                     decoration: InputDecoration(
-                                      hintText: 'กรอกเปอร์เซ็น %',
-                                      border: OutlineInputBorder(),
+                                      hintText: _hintTextcheckmanage
+                                      // 'กรอกเปอร์เซ็น %'
+                                      ,
+                                      border: const OutlineInputBorder(),
                                       errorText: _errorcheckmanage,
                                     ),
                                   ),
@@ -445,12 +462,17 @@ class _AddMeasureState extends State<AddMeasure> {
                                       padding: const EdgeInsets.symmetric(
                                           vertical: 5),
                                       child: SizedBox(
-                                        height: 40,
                                         width: double.infinity,
                                         child: TextField(
+                                          onChanged: (String value) {
+                                            setState(() {
+                                              _errormeasures1 = null;
+                                            });
+                                          },
                                           controller: measures1,
-                                          decoration: const InputDecoration(
-                                            border: OutlineInputBorder(),
+                                          decoration: InputDecoration(
+                                            border: const OutlineInputBorder(),
+                                            errorText: _errormeasures1,
                                           ),
                                         ),
                                       ),
@@ -694,6 +716,7 @@ class _AddMeasureState extends State<AddMeasure> {
                                                 _updateDPO();
                                               });
                                             },
+                                            isError: !dpoagree[0],
                                             activeColor: Colors.blue,
                                             checkColor: Colors.white,
                                             controlAffinity:
@@ -712,6 +735,7 @@ class _AddMeasureState extends State<AddMeasure> {
                                                 _updateDPO();
                                               });
                                             },
+                                            isError: !!dpoagree[1],
                                             activeColor: Colors.blue,
                                             checkColor: Colors.white,
                                             controlAffinity:
