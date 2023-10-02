@@ -317,7 +317,7 @@ class _RiskAssessmentPageState extends State<RiskAssessmentPage> {
                             ),
                             SizedBox(height: 20,),
                       SizedBox(
-                        height: 30,
+                        height: 40,
                         width: 150,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(

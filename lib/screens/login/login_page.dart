@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dpia_project/models/login/loginmodel.dart';
+import 'package:dpia_project/utilities/responsive.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -77,6 +78,7 @@ class _LoginPageState extends State<LoginPage> {
         } else if (snapshot.connectionState == ConnectionState.done) {
           return Scaffold(
             body: Container(
+              
               decoration: const BoxDecoration(
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
@@ -130,6 +132,7 @@ class _LoginPageState extends State<LoginPage> {
                           height: 20,
                         ),
                         Container(
+                          width: Responsive.isMobile(context)? 460 : Responsive.isTablet(context)? 900 : 1400,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
                             color: Colors.white.withOpacity(0.44),
@@ -353,7 +356,7 @@ class _LoginPageState extends State<LoginPage> {
     return [
       SizedBox(
         height: 50,
-        width: 500,
+        width: double.infinity,
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
             backgroundColor: const Color(0xff23A9E1), // Background color
