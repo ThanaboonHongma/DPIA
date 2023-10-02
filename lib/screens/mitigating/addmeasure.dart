@@ -115,25 +115,34 @@ class _AddMeasureState extends State<AddMeasure> {
                 child: ElevatedButton(
                   onPressed: () {
                     if (checkmanage.text.isEmpty) {
-                      if (!dpoagree[0]||!dpoagree[1]) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text("กรุณาเลือกความเห็นของ DPO ก่อน"),
-                          ),
-                        );
-                      }
                       setState(() {
                         _hintTextcheckmanage = '';
                         _errorcheckmanage = 'กรุณากรอกเปอร์เซ็น % (เป็นตัวเลข)';
+                      });
+                    }
+                    if (measures1.text.isEmpty) {
+                      setState(() {
                         _errormeasures1 = 'กรุณากรอกมาตรการ';
                       });
-                    } else {
+                    }
+                    if ((dpoagree[0] == false)) {
+                      if (dpoagree[1] == false) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content:
+                                Text('กรุณาเลือกความเห็นของ DPO เพื่อยืนยัน'),
+                          ),
+                        );
+                      }
+                    }
+                    if ((checkmanage.text.isNotEmpty &&
+                            measures1.text.isNotEmpty) &&
+                        (dpoagree[0] == true || dpoagree[1] == true)) {
                       final riskData = context
                           .read<DpiaProvider>()
                           .riskAssessments
                           .where((risk) => risk.id == widget.id)
                           .first;
-
                       final newMeasure = Measure(
                         measure1: measures1.text,
                         measure2: measures2.text,
@@ -487,7 +496,6 @@ class _AddMeasureState extends State<AddMeasure> {
                                       padding: const EdgeInsets.symmetric(
                                           vertical: 5),
                                       child: SizedBox(
-                                        height: 40,
                                         width: double.infinity,
                                         child: TextField(
                                           controller: measures2,
@@ -507,7 +515,6 @@ class _AddMeasureState extends State<AddMeasure> {
                                       padding: const EdgeInsets.symmetric(
                                           vertical: 5),
                                       child: SizedBox(
-                                        height: 40,
                                         width: double.infinity,
                                         child: TextField(
                                           controller: measures3,
@@ -527,7 +534,6 @@ class _AddMeasureState extends State<AddMeasure> {
                                       padding: const EdgeInsets.symmetric(
                                           vertical: 5),
                                       child: SizedBox(
-                                        height: 40,
                                         width: double.infinity,
                                         child: TextField(
                                           controller: project,
@@ -586,7 +592,6 @@ class _AddMeasureState extends State<AddMeasure> {
                                       padding: const EdgeInsets.symmetric(
                                           vertical: 5),
                                       child: SizedBox(
-                                        height: 40,
                                         width: double.infinity,
                                         child: TextField(
                                           controller: responsible,
@@ -632,7 +637,6 @@ class _AddMeasureState extends State<AddMeasure> {
                                       height: 5,
                                     ),
                                     SizedBox(
-                                      height: 40,
                                       width: double.infinity,
                                       child: TextField(
                                         controller: rick1,
@@ -654,7 +658,6 @@ class _AddMeasureState extends State<AddMeasure> {
                                       height: 5,
                                     ),
                                     SizedBox(
-                                      height: 40,
                                       width: double.infinity,
                                       child: TextField(
                                         controller: rick2,
@@ -676,7 +679,6 @@ class _AddMeasureState extends State<AddMeasure> {
                                       height: 5,
                                     ),
                                     SizedBox(
-                                      height: 40,
                                       width: double.infinity,
                                       child: TextField(
                                         controller: rick3,
@@ -716,7 +718,6 @@ class _AddMeasureState extends State<AddMeasure> {
                                                 _updateDPO();
                                               });
                                             },
-                                            isError: !dpoagree[0],
                                             activeColor: Colors.blue,
                                             checkColor: Colors.white,
                                             controlAffinity:
@@ -735,7 +736,6 @@ class _AddMeasureState extends State<AddMeasure> {
                                                 _updateDPO();
                                               });
                                             },
-                                            isError: !!dpoagree[1],
                                             activeColor: Colors.blue,
                                             checkColor: Colors.white,
                                             controlAffinity:
