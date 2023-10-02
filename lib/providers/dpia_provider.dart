@@ -18,6 +18,7 @@ class DpiaProvider extends ChangeNotifier {
   List<Determine> _determine = [];
   bool _checkboxValue1 = false;
   bool _checkboxValue2 = false;
+  List<String> _checkselectedItems = [];
 
   List<RiskData> get riskAssessments => _riskAssessments;
   List<Activity> get activities => _activities;
@@ -27,6 +28,7 @@ class DpiaProvider extends ChangeNotifier {
       _necessityandProportionlitys;
   List<Determine> get determine => _determine;
   List<Monitoring> get monitoring => _monitoring;
+  List<String> get checkselectedItems => _checkselectedItems;
   bool get checkboxValue1 => _checkboxValue1;
   bool get checkboxValue2 => _checkboxValue2;
 
@@ -547,6 +549,10 @@ class DpiaProvider extends ChangeNotifier {
      _checkboxValue1 = false;
      _checkboxValue2 = false;
     notifyListeners();
+  }
+
+  void setcheckselectedItems(value){
+    _checkselectedItems = value;
   }
 
 }

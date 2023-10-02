@@ -1,4 +1,3 @@
-// ignore_for_file: file_names
 import 'package:dpia_project/models/dpia_determine_the_risk/determinetherisk.dart';
 import 'package:dpia_project/providers/dpia_provider.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
@@ -29,6 +28,7 @@ class _IdentificationPage1State extends State<IdentificationPage1> {
   final textController5 = TextEditingController();
   final textController6 = TextEditingController();
   String dropdownValue = 'Select Items';
+  bool isButtonPressed = false;
   @override
   void dispose() {
     textController1.dispose();
@@ -38,6 +38,19 @@ class _IdentificationPage1State extends State<IdentificationPage1> {
     textController5.dispose();
     textController6.dispose();
     super.dispose();
+  }
+
+  void resetPage() {
+    setState(() {
+      textController1.clear();
+      textController2.clear();
+      textController3.clear();
+      textController4.clear();
+      textController5.clear();
+      textController6.clear();
+      selectedItems.clear();
+      dropdownValue = 'Select Items';
+    });
   }
 
   @override
@@ -67,6 +80,7 @@ class _IdentificationPage1State extends State<IdentificationPage1> {
             color: Theme.of(context).colorScheme.tertiary,
           ),
           onTap: () {
+            resetPage();
             context.go('/HomePage');
           },
         ),
@@ -109,7 +123,7 @@ class _IdentificationPage1State extends State<IdentificationPage1> {
                                 .textTheme
                                 .titleLarge
                                 ?.copyWith(
-                                  color: Color.fromRGBO(35, 169, 225, 1),
+                                  color: Theme.of(context).colorScheme.tertiary,
                                 ),
                           ),
                         ),
@@ -165,7 +179,7 @@ class _IdentificationPage1State extends State<IdentificationPage1> {
                         height: 10,
                       ),
                       const Text('Identifiable'),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       SizedBox(
@@ -176,11 +190,11 @@ class _IdentificationPage1State extends State<IdentificationPage1> {
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       const Text('Access'),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       SizedBox(
@@ -195,7 +209,7 @@ class _IdentificationPage1State extends State<IdentificationPage1> {
                         height: 10,
                       ),
                       const Text('Activity'),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       SizedBox(
@@ -210,7 +224,7 @@ class _IdentificationPage1State extends State<IdentificationPage1> {
                         height: 10,
                       ),
                       const Text('Volume'),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       SizedBox(
@@ -225,7 +239,7 @@ class _IdentificationPage1State extends State<IdentificationPage1> {
                         height: 10,
                       ),
                       const Text('Volume options'),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       SizedBox(
@@ -242,7 +256,6 @@ class _IdentificationPage1State extends State<IdentificationPage1> {
                             items: items.map((item) {
                               return DropdownMenuItem(
                                 value: item,
-                                //disable default onTap to avoid closing menu when selecting an item
                                 enabled: false,
                                 child: StatefulBuilder(
                                   builder: (context, menuSetState) {
@@ -253,9 +266,7 @@ class _IdentificationPage1State extends State<IdentificationPage1> {
                                         isSelected
                                             ? selectedItems.remove(item)
                                             : selectedItems.add(item);
-                                        //This rebuilds the StatefulWidget to update the button's text
                                         setState(() {});
-                                        //This rebuilds the dropdownMenu Widget to update the check mark
                                         menuSetState(() {});
 
                                         dropdownValue = item;
@@ -269,10 +280,14 @@ class _IdentificationPage1State extends State<IdentificationPage1> {
                                           children: [
                                             if (isSelected)
                                               const Icon(
-                                                  Icons.check_box_outlined,color: Colors.blue,)
+                                                Icons.check_box_outlined,
+                                                color: Colors.blue,
+                                              )
                                             else
-                                              const Icon(Icons
-                                                  .check_box_outline_blank,color: Colors.grey,),
+                                              const Icon(
+                                                Icons.check_box_outline_blank,
+                                                color: Colors.grey,
+                                              ),
                                             const SizedBox(width: 16),
                                             Expanded(
                                               child: Text(
@@ -290,7 +305,6 @@ class _IdentificationPage1State extends State<IdentificationPage1> {
                                 ),
                               );
                             }).toList(),
-                            //Use last selected item as the current value so if we've limited menu height, it scroll to last item.
                             value: selectedItems.isEmpty
                                 ? null
                                 : selectedItems.last,
@@ -319,7 +333,8 @@ class _IdentificationPage1State extends State<IdentificationPage1> {
                                   color: Colors.black26,
                                 ),
                               ),
-                              padding: EdgeInsets.only(left: 16, right: 8),
+                              padding:
+                                  const EdgeInsets.only(left: 16, right: 8),
                               height: 40,
                               width: 400,
                             ),
@@ -330,12 +345,11 @@ class _IdentificationPage1State extends State<IdentificationPage1> {
                           ),
                         ),
                       ),
-                      SizedBox(),
                       const SizedBox(
                         height: 10,
                       ),
                       const Text('Adverse Effects to Data Subjects'),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       SizedBox(
@@ -350,7 +364,7 @@ class _IdentificationPage1State extends State<IdentificationPage1> {
                         height: 10,
                       ),
                       const Text('Adverse Effects to Organization'),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       SizedBox(
@@ -400,26 +414,31 @@ class _IdentificationPage1State extends State<IdentificationPage1> {
             style: TextStyle(color: Colors.black),
           ),
           SizedBox(
-              width: 100,
-              height: 40,
-              child: ElevatedButton(
-                  onPressed: () {
-                    dpiaProvider.saveDetermine(Determine(
-                        id: const Uuid().v4(),
-                        identifiable: textController1.text,
-                        access: textController2.text,
-                        activity: textController3.text,
-                        volume: textController4.text,
-                        dropdown: selectedItems,
-                        datasubjects: textController5.text,
-                        organization: textController6.text));
-                    if (selectedItems.isNotEmpty) {
+            width: 100,
+            height: 40,
+            child: ElevatedButton(
+              onPressed: isButtonPressed
+                  ? null
+                  : () async {
+                      setState(() {
+                        isButtonPressed = true;
+                      });
+
+                      dpiaProvider.saveDetermine(Determine(
+                          id: const Uuid().v4(),
+                          identifiable: textController1.text,
+                          access: textController2.text,
+                          activity: textController3.text,
+                          volume: textController4.text,
+                          dropdown: selectedItems,
+                          datasubjects: textController5.text,
+                          organization: textController6.text));
+                      dpiaProvider.setcheckselectedItems(selectedItems);
                       context.go('/Identification');
-                    } else {
-                      context.go('/CompletePage');
-                    }
-                  },
-                  child: const Text('ถัดไป'))),
+                    },
+              child: const Text('ถัดไป'),
+            ),
+          ),
         ],
       ),
     );

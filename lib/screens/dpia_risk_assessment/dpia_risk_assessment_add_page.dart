@@ -46,6 +46,7 @@ class _DpiaAddRiskState extends State<DpiaAddRisk> {
   }
 
   final TextEditingController _impactTextController = TextEditingController();
+  String? _errorText;
 
   @override
   void dispose() {
@@ -101,20 +102,26 @@ class _DpiaAddRiskState extends State<DpiaAddRisk> {
               height: 10,
             ),
             SizedBox(
-              height: 40,
+              height: 70,
               child: TextField(
                 controller: _impactTextController, // กำหนด Controller
+                onChanged: (String value) {
+                  setState(() {
+                    _errorText = null;
+                  });
+                },
                 textAlignVertical:
                     TextAlignVertical.center, // กำหนดการจัดวางแนวดิ่งเป็นกลาง
-                decoration: const InputDecoration(
-                  focusedBorder: OutlineInputBorder(
+                decoration: InputDecoration(
+                  focusedBorder: const OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.blue),
                   ),
-                  enabledBorder: OutlineInputBorder(
+                  enabledBorder: const OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.black, width: 0.5),
                   ),
                   filled: true,
                   fillColor: Colors.white,
+                  errorText: _errorText,
                 ),
               ),
             ),
@@ -234,7 +241,7 @@ class _DpiaAddRiskState extends State<DpiaAddRisk> {
                     ],
                   ),
                 ),
-                 const Divider(
+                const Divider(
                   thickness: 1,
                   indent: 0,
                   endIndent: 0,
@@ -243,7 +250,7 @@ class _DpiaAddRiskState extends State<DpiaAddRisk> {
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Padding(
-                    padding:  const EdgeInsets.only(left: 1.0),
+                    padding: const EdgeInsets.only(left: 1.0),
                     child: Text(
                       'ผลการประเมินความเสี่ยง',
                       style: Theme.of(context).textTheme.titleMedium,
@@ -251,7 +258,7 @@ class _DpiaAddRiskState extends State<DpiaAddRisk> {
                   ),
                 ),
                 Padding(
-                  padding:  const EdgeInsets.only(top: 16, bottom: 16),
+                  padding: const EdgeInsets.only(top: 16, bottom: 16),
                   child: SizedBox(
                       width: double.infinity,
                       child: Row(
@@ -265,14 +272,15 @@ class _DpiaAddRiskState extends State<DpiaAddRisk> {
                               child: Container(
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
-                                  color:  const Color(0xffA2EDCE),
+                                  color: const Color(0xffA2EDCE),
                                   border: _riskLevel == "ระดับต่ำ"
                                       ? Border.all(
-                                          color: const Color(0xff00FF96), width: 2)
+                                          color: const Color(0xff00FF96),
+                                          width: 2)
                                       : null,
                                 ),
                                 child: const Center(
-                                  child:  Padding(
+                                  child: Padding(
                                     padding: EdgeInsets.all(8.0),
                                     child: Text(
                                       "ระดับต่ำ",
@@ -289,14 +297,15 @@ class _DpiaAddRiskState extends State<DpiaAddRisk> {
                                 child: Container(
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
-                                    color:  const Color(0xffEDCFA2),
+                                    color: const Color(0xffEDCFA2),
                                     border: _riskLevel == "ระดับกลาง"
                                         ? Border.all(
-                                            color: const Color(0xffFF8700), width: 2)
+                                            color: const Color(0xffFF8700),
+                                            width: 2)
                                         : null,
                                   ),
                                   child: const Center(
-                                    child:  Padding(
+                                    child: Padding(
                                       padding: EdgeInsets.all(8.0),
                                       child: Text(
                                         "ระดับกลาง",
@@ -313,14 +322,15 @@ class _DpiaAddRiskState extends State<DpiaAddRisk> {
                               child: Container(
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
-                                  color:  const Color(0xffFFA8B8),
+                                  color: const Color(0xffFFA8B8),
                                   border: _riskLevel == "ระดับสูง"
                                       ? Border.all(
-                                          color: const Color(0xffFF0000), width: 2)
+                                          color: const Color(0xffFF0000),
+                                          width: 2)
                                       : null,
                                 ),
                                 child: const Center(
-                                  child:  Padding(
+                                  child: Padding(
                                     padding: EdgeInsets.all(8.0),
                                     child: Text(
                                       "ระดับสูง",
@@ -339,18 +349,24 @@ class _DpiaAddRiskState extends State<DpiaAddRisk> {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.pop(context);
-                    dpiaProvider.saveRiskAssessment(
-                      RiskData(
-                        id: const Uuid().v4(),
-                        effect: _impactTextController.text,
-                        probability: _probability,
-                        date: selectedDate,
-                        severity: _severity,
-                        riskLevel: _riskLevel,
-                        measures: [],
-                      ),
-                    );
+                    if (_impactTextController.text.isEmpty) {
+                      setState(() {
+                        _errorText = 'กรุณากรอกผลกระทบ'; // Set error message
+                      });
+                    } else {
+                      Navigator.pop(context);
+                      dpiaProvider.saveRiskAssessment(
+                        RiskData(
+                          id: const Uuid().v4(),
+                          effect: _impactTextController.text,
+                          probability: _probability,
+                          date: selectedDate,
+                          severity: _severity,
+                          riskLevel: _riskLevel,
+                          measures: [],
+                        ),
+                      );
+                    }
                   },
                   child: const Text('บันทึกความเสี่ยง'),
                 ),

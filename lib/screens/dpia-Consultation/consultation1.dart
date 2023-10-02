@@ -1,4 +1,5 @@
 import 'package:dpia_project/providers/dpia_provider.dart';
+import 'package:dpia_project/utilities/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -52,6 +53,11 @@ class _Consultation1State extends State<Consultation1> {
             Padding(
               padding: const EdgeInsets.all(10.0),
               child: Container(
+                width: Responsive.isMobile(context)
+                    ? 540
+                    : Responsive.isTablet(context)
+                        ? 980
+                        : 1480,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
                   color: Colors.white,
@@ -76,7 +82,7 @@ class _Consultation1State extends State<Consultation1> {
                               .textTheme
                               .titleLarge
                               ?.copyWith(
-                                color: const Color.fromRGBO(35, 169, 225, 1),
+                                color: Theme.of(context).colorScheme.tertiary,
                               ),
                         ),
                       ),
@@ -89,7 +95,6 @@ class _Consultation1State extends State<Consultation1> {
                       const SizedBox(
                         height: 10,
                       ),
-                      
                       Align(
                         alignment: Alignment.topLeft,
                         child: Text(
@@ -105,7 +110,13 @@ class _Consultation1State extends State<Consultation1> {
                 ),
               ),
             ),
-            const ConsultationListview(),
+            SizedBox(
+                width: Responsive.isMobile(context)
+                    ? 540
+                    : Responsive.isTablet(context)
+                        ? 980
+                        : 1480,
+                child: const ConsultationListview()),
             Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
@@ -120,8 +131,8 @@ class _Consultation1State extends State<Consultation1> {
                 ],
               ),
               margin: const EdgeInsets.all(10),
-              child: Padding(
-                padding: const EdgeInsets.all(0),
+              child: SizedBox(
+                width: Responsive.isMobile(context)? 540 : Responsive.isTablet(context)? 980 : 1480,
                 child: Column(
                   children: <Widget>[
                     CheckboxListTile(

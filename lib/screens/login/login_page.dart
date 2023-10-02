@@ -335,7 +335,7 @@ class _LoginPageState extends State<LoginPage> {
   _buildButtons() {
     return [
       SizedBox(
-        width: 500,
+        width: double.infinity,
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
             backgroundColor: const Color(0xff23A9E1), // Background color

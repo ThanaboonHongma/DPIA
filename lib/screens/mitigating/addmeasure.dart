@@ -28,6 +28,7 @@ class _AddMeasureState extends State<AddMeasure> {
   final TextEditingController rick2 = TextEditingController();
   final TextEditingController rick3 = TextEditingController();
   final TextEditingController checkmanage = TextEditingController();
+  String? _errorcheckmanage;
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
@@ -110,37 +111,44 @@ class _AddMeasureState extends State<AddMeasure> {
                 width: 70,
                 child: ElevatedButton(
                   onPressed: () {
-                    final riskData = context
-                        .read<DpiaProvider>()
-                        .riskAssessments
-                        .where((risk) => risk.id == widget.id)
-                        .first;
+                    if (checkmanage.text.isEmpty) {
+                      setState(() {
+                        _errorcheckmanage =
+                            'กรุณากรอกเปอร์เซ็น'; // Set error message
+                      });
+                    } else {
+                      final riskData = context
+                          .read<DpiaProvider>()
+                          .riskAssessments
+                          .where((risk) => risk.id == widget.id)
+                          .first;
 
-                    final newMeasure = Measure(
-                      measure1: measures1.text,
-                      measure2: measures2.text,
-                      measure3: measures3.text,
-                      project: project.text,
-                      responsible: responsible.text,
-                      rick1: rick1.text,
-                      rick2: rick2.text,
-                      rick3: rick3.text,
-                      dpo: _checkdpo,
-                      results: _checkresults,
-                      percent: checkmanage.text,
-                    );
+                      final newMeasure = Measure(
+                        measure1: measures1.text,
+                        measure2: measures2.text,
+                        measure3: measures3.text,
+                        project: project.text,
+                        responsible: responsible.text,
+                        rick1: rick1.text,
+                        rick2: rick2.text,
+                        rick3: rick3.text,
+                        dpo: _checkdpo,
+                        results: _checkresults,
+                        percent: checkmanage.text,
+                      );
 
-                    List<Measure> measures = riskData.measures
-                        .map((measure) => measure)
-                        .toList()
-                      ..add(newMeasure);
+                      List<Measure> measures = riskData.measures
+                          .map((measure) => measure)
+                          .toList()
+                        ..add(newMeasure);
 
-                    final updated = riskData.copyWith(
-                      measures: measures,
-                    );
+                      final updated = riskData.copyWith(
+                        measures: measures,
+                      );
 
-                    context.read<DpiaProvider>().saveRiskHighLevel(updated);
-                    context.go('/MitigatingMeasuresPage');
+                      context.read<DpiaProvider>().saveRiskHighLevel(updated);
+                      context.go('/MitigatingMeasuresPage');
+                    }
                   },
                   style: ButtonStyle(
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -359,10 +367,16 @@ class _AddMeasureState extends State<AddMeasure> {
                                   width: double.infinity,
                                   child: TextField(
                                     controller: checkmanage,
+                                    onChanged: (String value) {
+                                      setState(() {
+                                        _errorcheckmanage = null;
+                                      });
+                                    },
                                     keyboardType: TextInputType.number,
-                                    decoration: const InputDecoration(
+                                    decoration: InputDecoration(
                                       hintText: 'กรอกเปอร์เซ็น %',
                                       border: OutlineInputBorder(),
+                                      errorText: _errorcheckmanage,
                                     ),
                                   ),
                                 ),

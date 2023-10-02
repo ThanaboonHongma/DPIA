@@ -3,6 +3,7 @@ import 'package:dpia_project/models/dpia_summary.dart';
 import 'package:dpia_project/models/riskassessment/risklist.dart';
 import 'package:dpia_project/providers/dpia_provider.dart';
 import 'package:dpia_project/models/home/homedescription.dart';
+import 'package:dpia_project/utilities/responsive.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -113,8 +114,9 @@ class _HomePageState extends State<HomePage> {
               color: const Color(0xffDEDEDE),
             ),
             Padding(
-              padding: const EdgeInsets.all(10.0),
+              padding: const EdgeInsets.all(25.0),
               child: Container(
+                width: Responsive.isMobile(context)? 460 : Responsive.isTablet(context)? 900 : 1400,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
                   color: Colors.white,
@@ -128,14 +130,11 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.only(right: 20),
-                  child: Padding(
-                    padding: const EdgeInsets.all(15.0),
-                    child: Column(
-                      children: [
-                        ..._dpiais(),
-                      ],
-                    ),
+                  padding: const EdgeInsets.all(15.0),
+                  child: Column(
+                    children: [
+                      ..._dpiais(),
+                    ],
                   ),
                 ),
               ),
@@ -145,14 +144,11 @@ class _HomePageState extends State<HomePage> {
                 Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: Padding(
-                    padding: const EdgeInsets.only(right: 20),
-                    child: Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child: Column(
-                        children: [
-                          ..._dpialistview(dpiaProvider),
-                        ],
-                      ),
+                    padding: const EdgeInsets.all(15.0),
+                    child: Column(
+                      children: [
+                        ..._dpialistview(dpiaProvider),
+                      ],
                     ),
                   ),
                 ),
@@ -180,7 +176,7 @@ class _HomePageState extends State<HomePage> {
           child: Text(
             'DPIA',
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                  color: const Color.fromRGBO(35, 169, 225, 1),
+                  color: Theme.of(context).colorScheme.tertiary,
                 ),
           ),
         ),
@@ -206,15 +202,14 @@ class _HomePageState extends State<HomePage> {
     return [
       Column(
         children: [
-          Row(
-            children: [
-              Text(
-                'รายการประเมิน DPIA',
-                style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                      color: Theme.of(context).colorScheme.tertiary,
-                    ),
-              ),
-            ],
+          SizedBox(
+            width: Responsive.isMobile(context)? 440 : Responsive.isTablet(context)? 880 : 1380,
+            child: Text(
+              'รายการประเมิน DPIA',
+              style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                    color: Theme.of(context).colorScheme.tertiary,
+                  ),
+            ),
           ),
           const SizedBox(
             height: 15,
@@ -245,6 +240,7 @@ class _HomePageState extends State<HomePage> {
                               height: 25,
                             ),
                             SizedBox(
+                                height: 40,
                                 width: 300,
                                 child: ElevatedButton(
                                     style: ButtonStyle(
@@ -322,6 +318,7 @@ class _HomePageState extends State<HomePage> {
                       return Column(
                         children: [
                           Container(
+                            width: Responsive.isMobile(context)? 460 : Responsive.isTablet(context)? 900 : 1400,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
                               color: Colors.white,
@@ -420,7 +417,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                           const SizedBox(
-                            height: 10,
+                            height: 15,
                           ),
                         ],
                       );

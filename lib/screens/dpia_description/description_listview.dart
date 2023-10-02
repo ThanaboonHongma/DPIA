@@ -41,7 +41,7 @@ class _DescriptionListviewState extends State<DescriptionListview> {
                   title: Text(
                     provider.descriptions[index].title,
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          color: Color.fromRGBO(35, 169, 225, 1),
+                          color: Theme.of(context).colorScheme.tertiary,
                         ),
                   ),
                   children: [

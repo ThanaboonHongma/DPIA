@@ -1,4 +1,5 @@
 import 'package:dpia_project/screens/dpia_description/description_listview.dart';
+import 'package:dpia_project/utilities/responsive.dart';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -48,6 +49,7 @@ class _DpiaDescriptionPageState extends State<DpiaDescriptionPage> {
             Padding(
               padding: const EdgeInsets.all(10.0),
               child: Container(
+                width: Responsive.isMobile(context)? 540 : Responsive.isTablet(context)? 980 : 1480,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
                     color: Colors.white,
@@ -74,7 +76,7 @@ class _DpiaDescriptionPageState extends State<DpiaDescriptionPage> {
                                   .textTheme
                                   .titleLarge
                                   ?.copyWith(
-                                    color: Color.fromRGBO(35, 169, 225, 1),
+                                    color: Theme.of(context).colorScheme.tertiary,
                                   ),
                             ),
                           ),
@@ -92,7 +94,7 @@ class _DpiaDescriptionPageState extends State<DpiaDescriptionPage> {
                             child: Padding(
                               padding: const EdgeInsets.only(left: 1.0),
                               child: Text(
-                                "อธิบายรายละเอียดของกระบวนการประมวลผลข้อมูลส่วนบุคคลอย่างน้อยต้องประกอบด้วย\nสภาพ(nature),ขอบเขต(scope),บริบท(cpntext)และวัตถุประสงค์(purpose)ของการประมวลผล",
+                                "อธิบายรายละเอียดของกระบวนการประมวลผลข้อมูลส่วนบุคคลอย่างน้อยต้องประกอบด้วยสภาพ(nature),ขอบเขต(scope),บริบท(cpntext)และวัตถุประสงค์(purpose)ของการประมวลผล",
                                 style: Theme.of(context).textTheme.titleMedium,
                               ),
                             ),
@@ -102,7 +104,9 @@ class _DpiaDescriptionPageState extends State<DpiaDescriptionPage> {
                     ),
                   )),
             ),
-            const DescriptionListview(),
+            SizedBox(
+              width: Responsive.isMobile(context)? 540 : Responsive.isTablet(context)? 980 : 1480,
+              child: const DescriptionListview()),
           ],
         ),
       ),

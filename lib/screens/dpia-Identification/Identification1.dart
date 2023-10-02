@@ -1,5 +1,7 @@
 // ignore_for_file: file_names
 import 'package:dpia_project/providers/dpia_provider.dart';
+import 'package:dpia_project/utilities/responsive.dart';
+import 'package:dpia_project/utilities/savedata.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -12,8 +14,6 @@ class Identification1 extends StatefulWidget {
 }
 
 class _Identification1State extends State<Identification1> {
-      
-
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<DpiaProvider>(context);
@@ -43,7 +43,7 @@ class _Identification1State extends State<Identification1> {
             color: Theme.of(context).colorScheme.tertiary,
           ),
           onTap: () {
-            context.go('/HomePage');
+            context.go('/IdentificationPage1');
           },
         ),
         backgroundColor: Theme.of(context).colorScheme.onPrimary,
@@ -59,6 +59,11 @@ class _Identification1State extends State<Identification1> {
             Padding(
               padding: const EdgeInsets.all(10.0),
               child: Container(
+                width: Responsive.isMobile(context)
+                    ? 540
+                    : Responsive.isTablet(context)
+                        ? 980
+                        : 1480,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
                   color: Colors.white,
@@ -79,10 +84,12 @@ class _Identification1State extends State<Identification1> {
                         alignment: Alignment.topLeft,
                         child: Text(
                           'ขั้นตอนที่ 1 DPIA Identification',
-                          style:
-                              Theme.of(context).textTheme.titleLarge?.copyWith(
-                                    color: Color.fromRGBO(35, 169, 225, 1),
-                                  ),
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleLarge
+                              ?.copyWith(
+                                color: Theme.of(context).colorScheme.tertiary,
+                              ),
                         ),
                       ),
                       const Divider(
@@ -94,7 +101,6 @@ class _Identification1State extends State<Identification1> {
                       const SizedBox(
                         height: 10,
                       ),
-                      
                       Align(
                         alignment: Alignment.topLeft,
                         child: Text(
@@ -117,7 +123,8 @@ class _Identification1State extends State<Identification1> {
                         },
                         title: Transform.translate(
                           offset: const Offset(-16, 0),
-                          child: Text("จำเป็น อ้างอิงตาม",
+                          child: Text(
+                              "ประกาศหรือบัญชีรายชื่อการประมวลผลข้อมูลส่วนบุคคลของสำนักงานคุ้มครองข้อมูลส่วนบุคคลที่จำเป็นต้องจักทำ DPIA",
                               style: Theme.of(context).textTheme.titleSmall),
                         ),
                       ),
@@ -135,7 +142,8 @@ class _Identification1State extends State<Identification1> {
                           },
                           title: Transform.translate(
                             offset: const Offset(-16, 0),
-                            child: Text("ประกาศหรือบัญชีรายชื่อ",
+                            child: Text(
+                                "Thailand Data Protection Guidelines 2.0 ส่วนที่ E1",
                                 style: Theme.of(context).textTheme.titleSmall),
                           ),
                         ),
@@ -145,8 +153,15 @@ class _Identification1State extends State<Identification1> {
                 ),
               ),
             ),
-            ActivityListview(
-              provider: provider,
+            SizedBox(
+              width: Responsive.isMobile(context)
+                  ? 540
+                  : Responsive.isTablet(context)
+                      ? 980
+                      : 1480,
+              child: ActivityListview(
+                provider: provider,
+              ),
             ),
           ],
         ),
@@ -154,72 +169,83 @@ class _Identification1State extends State<Identification1> {
       bottomNavigationBar: buildMyNavBar(context),
     );
   }
-}
 
-Container buildMyNavBar(BuildContext context) {
-  final provider = Provider.of<DpiaProvider>(context);
-  int count1 = 0;
-  List countTEST = [];
-  List countTEST2 = [];
-  return Container(
-    height: 60,
-    decoration: BoxDecoration(
-      color: Colors.white,
-      boxShadow: [
-        BoxShadow(
-          color: Colors.grey.withOpacity(0.3),
-          spreadRadius: 5,
-          blurRadius: 7,
-          offset: const Offset(0, -8),
-        ),
-      ],
-    ),
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [
-        const SizedBox(
-          width: 100,
-          height: 40,
-          // child: ElevatedButton(
-          //     onPressed: () {}, child: const Text('ย้อนกลับ')),
-        ),
-        const Text(
-          '1 / 7',
-          style: TextStyle(color: Colors.black),
-        ),
-        SizedBox(
+  Container buildMyNavBar(BuildContext context) {
+    bool isButtonPressed = false;
+    final provider = Provider.of<DpiaProvider>(context);
+    int count1 = 0;
+    List countTEST = [];
+    List countTEST2 = [];
+    return Container(
+      height: 60,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.3),
+            spreadRadius: 5,
+            blurRadius: 7,
+            offset: const Offset(0, -8),
+          ),
+        ],
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          const SizedBox(
             width: 100,
             height: 40,
-            child: ElevatedButton(
-                onPressed: () {
-                  print(count1);
+          ),
+          const Text(
+            '1 / 7',
+            style: TextStyle(color: Colors.black),
+          ),
+          SizedBox(
+              width: 100,
+              height: 40,
+              child: ElevatedButton(
+                  onPressed: isButtonPressed
+                      // ignore: dead_code
+                      ? null
+                      : () async {
+                          setState(() {
+                            isButtonPressed = true;
+                          });
+                          print(count1);
 
-                  for (int i = 0; i <= 8; i++) {
-                    if (provider.activities[i].isChecked == true) {
-                      countTEST.add(provider.activities[i]);
-                      print(countTEST.length);
-                    }
-                  }
-                  for (int j = 9; j <= 18; j++) {
-                    if (provider.activities[j].isChecked == true) {
-                     countTEST2.add(provider.activities[j]);
-                                           print(countTEST2.length);
-
-                    }
-                  }
-
-                  if (countTEST.isNotEmpty && countTEST.length >= 2 ||
-                      countTEST2.isNotEmpty ||
-                      provider.checkboxValue2 == true) {
-                    context.go('/DpiaDescriptionPage');
-                  }else if (countTEST.length == 1 ){
-                    context.go('/CompletePage');
-                  }
-                },
-                child: const Text('ถัดไป'))),
-      ],
-    ),
-  );
+                          for (int i = 0; i <= 8; i++) {
+                            if (provider.activities[i].isChecked == true) {
+                              countTEST.add(provider.activities[i]);
+                              print(countTEST.length);
+                            }
+                          }
+                          for (int j = 9; j <= 18; j++) {
+                            if (provider.activities[j].isChecked == true) {
+                              countTEST2.add(provider.activities[j]);
+                              print(countTEST2.length);
+                            }
+                          }
+                          if ((countTEST.isNotEmpty && countTEST.length >= 2) ||
+                              countTEST2.isNotEmpty ||
+                              (provider.checkboxValue2 == true ||
+                                  provider.checkboxValue1 == true)|| provider.checkselectedItems.isNotEmpty) {
+                            context.go('/DpiaDescriptionPage');
+                          } else if (countTEST.length == 1 ||
+                              (provider.checkboxValue2 == false ||
+                                  provider.checkboxValue1 == false)) {
+                            savedata(context);
+                            Provider.of<DpiaProvider>(context, listen: false)
+                                .reset();
+                            Provider.of<DpiaProvider>(context, listen: false)
+                                .setupData();
+                            context.go('/CompletePage');
+                          }
+                        },
+                  child: const Text('ถัดไป'))),
+        ],
+      ),
+    );
+  }
 }
 
 class ActivityListview extends StatefulWidget {

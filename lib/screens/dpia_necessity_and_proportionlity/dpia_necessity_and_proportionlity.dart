@@ -1,4 +1,5 @@
 import 'package:dpia_project/screens/dpia_necessity_and_proportionlity/necessity_and_proportionlity_listview.dart';
+import 'package:dpia_project/utilities/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -49,6 +50,7 @@ class _NecessityandProportionlityPageState
             Padding(
               padding: const EdgeInsets.all(10.0),
               child: Container(
+                width: Responsive.isMobile(context)? 540 : Responsive.isTablet(context)? 980 : 1480,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
                     color: Colors.white,
@@ -77,7 +79,7 @@ class _NecessityandProportionlityPageState
                                     .textTheme
                                     .titleLarge
                                     ?.copyWith(
-                                      color: Color.fromRGBO(35, 169, 225, 1),
+                                      color: Theme.of(context).colorScheme.tertiary,
                                     ),
                               ),
                             ),

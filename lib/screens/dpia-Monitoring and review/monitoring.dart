@@ -1,5 +1,7 @@
 import 'package:dpia_project/models/monitoring/monitoring.dart';
 import 'package:dpia_project/providers/dpia_provider.dart';
+import 'package:dpia_project/utilities/responsive.dart';
+import 'package:dpia_project/utilities/savedata.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -17,6 +19,7 @@ class _MonitoringPage extends State<MonitoringPage> {
   final textController2 = TextEditingController();
   final textController3 = TextEditingController();
   final textController4 = TextEditingController();
+  bool isButtonPressed = false;
 
   @override
   void dispose() {
@@ -64,6 +67,11 @@ class _MonitoringPage extends State<MonitoringPage> {
             Padding(
               padding: const EdgeInsets.all(10.0),
               child: Container(
+                width: Responsive.isMobile(context)
+                    ? 540
+                    : Responsive.isTablet(context)
+                        ? 980
+                        : 1480,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
                   color: Colors.white,
@@ -90,7 +98,7 @@ class _MonitoringPage extends State<MonitoringPage> {
                                 .textTheme
                                 .titleLarge
                                 ?.copyWith(
-                                  color: const Color.fromRGBO(35, 169, 225, 1),
+                                  color: Theme.of(context).colorScheme.tertiary,
                                 ),
                           ),
                         ),
@@ -103,7 +111,6 @@ class _MonitoringPage extends State<MonitoringPage> {
                         const SizedBox(
                           height: 10,
                         ),
-                        
                         Align(
                           alignment: Alignment.topLeft,
                           child: Text(
@@ -121,6 +128,11 @@ class _MonitoringPage extends State<MonitoringPage> {
               ),
             ),
             Container(
+              width: Responsive.isMobile(context)
+                  ? 540
+                  : Responsive.isTablet(context)
+                      ? 980
+                      : 1480,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
                 color: Colors.white,
@@ -146,7 +158,7 @@ class _MonitoringPage extends State<MonitoringPage> {
                       Text(
                         'ให้ติดตามตรวจสอบโดย',
                         style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                              color: const Color.fromRGBO(35, 169, 225, 1),
+                              color: Theme.of(context).colorScheme.tertiary,
                             ),
                       ),
                       const SizedBox(
@@ -186,7 +198,7 @@ class _MonitoringPage extends State<MonitoringPage> {
                       Text(
                         'การเผยแพร่เอกสาร DPIA ฉบับนี้',
                         style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                              color: const Color.fromRGBO(35, 169, 225, 1),
+                              color: Theme.of(context).colorScheme.tertiary,
                             ),
                       ),
                       const Divider(
@@ -258,7 +270,11 @@ class _MonitoringPage extends State<MonitoringPage> {
             height: 40,
             child: ElevatedButton(
                 onPressed: () {
-                  context.go('/MitigatingMeasuresPage');
+                  if (dpiaProvider.riskAssessments.isEmpty) {
+                    context.go('/RiskAssessmentPage');
+                  } else {
+                    context.go('/MitigatingMeasuresPage');
+                  }
                 },
                 child: const Text('ย้อนกลับ')),
           ),
@@ -270,15 +286,25 @@ class _MonitoringPage extends State<MonitoringPage> {
               width: 150,
               height: 40,
               child: ElevatedButton(
-                  onPressed: () {
-                    dpiaProvider.saveMonitoring(Monitoring(
-                        id: const Uuid().v4(),
-                        agency: textController1.text,
-                        responsible: textController2.text,
-                        publish: textController3.text,
-                        closedata: textController4.text));
-                    context.go('/CompletePage');
-                  },
+                  onPressed: isButtonPressed
+                      ? null
+                      : () async {
+                          setState(() {
+                            isButtonPressed = true;
+                          });
+                          dpiaProvider.saveMonitoring(Monitoring(
+                              id: const Uuid().v4(),
+                              agency: textController1.text,
+                              responsible: textController2.text,
+                              publish: textController3.text,
+                              closedata: textController4.text));
+                          savedata(context);
+                          context.go('/CompletePage');
+                          Provider.of<DpiaProvider>(context, listen: false)
+                              .reset();
+                          Provider.of<DpiaProvider>(context, listen: false)
+                              .setupData();
+                        },
                   child: const Text('สิ้นสุดแบบประเมิน'))),
         ],
       ),

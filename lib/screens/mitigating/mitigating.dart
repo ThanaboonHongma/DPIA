@@ -1,4 +1,5 @@
 import 'package:dpia_project/providers/dpia_provider.dart';
+import 'package:dpia_project/utilities/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -81,6 +82,11 @@ class _MitigatingMeasuresState extends State<MitigatingMeasures> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Container(
+                width: Responsive.isMobile(context)
+                    ? 540
+                    : Responsive.isTablet(context)
+                        ? 980
+                        : 1480,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
                   border: warningMessage.isNotEmpty
@@ -106,9 +112,14 @@ class _MitigatingMeasuresState extends State<MitigatingMeasures> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
-                            riskAssessments[index].effect,
-                            style: Theme.of(context).textTheme.labelLarge,
+                          Container(
+                            child: riskAssessments[index].effect.isEmpty
+                                ? Text('ความเสี่ยงที่ ${index + 1}')
+                                : Text(
+                                    riskAssessments[index].effect,
+                                    style:
+                                        Theme.of(context).textTheme.labelLarge,
+                                  ),
                           ),
                           Container(
                             width: 80,
@@ -240,13 +251,12 @@ class _MitigatingMeasuresState extends State<MitigatingMeasures> {
             width: 100,
             height: 40,
             child: ElevatedButton(
-              onPressed: riskAssessments.any((risk) => risk.measures.isEmpty)
+                onPressed: riskAssessments.any((risk) => risk.measures.isEmpty)
                     ? null
                     : () {
                         context.go('/MonitoringPage');
                       },
-                child: const Text('ถัดไป')
-            ),
+                child: const Text('ถัดไป')),
           ),
         ],
       ),
@@ -258,6 +268,11 @@ class _MitigatingMeasuresState extends State<MitigatingMeasures> {
       Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: Container(
+            width: Responsive.isMobile(context)
+                ? 540
+                : Responsive.isTablet(context)
+                    ? 980
+                    : 1480,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
               color: Colors.white,
@@ -281,7 +296,7 @@ class _MitigatingMeasuresState extends State<MitigatingMeasures> {
                       child: Text(
                         'ขั้นตอนที่ 6 Mitigating measures',
                         style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                              color: const Color.fromRGBO(35, 169, 225, 1),
+                              color: Theme.of(context).colorScheme.tertiary,
                             ),
                       ),
                     ),
