@@ -352,6 +352,7 @@ class _LoginPageState extends State<LoginPage> {
   _buildButtons() {
     return [
       SizedBox(
+        height: 50,
         width: 500,
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
