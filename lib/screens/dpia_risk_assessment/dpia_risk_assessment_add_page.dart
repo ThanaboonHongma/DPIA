@@ -272,10 +272,12 @@ class _DpiaAddRiskState extends State<DpiaAddRisk> {
                               child: Container(
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
-                                  color: const Color(0xffA2EDCE),
+                                  color: _riskLevel == "ระดับต่ำ"
+                                      ? const Color(0xffA2EDCE)
+                                      : Color(0xffA2EDCE).withOpacity(0.3),
                                   border: _riskLevel == "ระดับต่ำ"
                                       ? Border.all(
-                                          color: const Color(0xff00FF96),
+                                          color: Color.fromARGB(255, 0, 70, 42),
                                           width: 2)
                                       : null,
                                 ),
@@ -297,10 +299,13 @@ class _DpiaAddRiskState extends State<DpiaAddRisk> {
                                 child: Container(
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
-                                    color: const Color(0xffEDCFA2),
+                                    color: _riskLevel == "ระดับกลาง"
+                                        ? const Color(0xffEDCFA2)
+                                        : Color(0xffEDCFA2).withOpacity(0.3),
                                     border: _riskLevel == "ระดับกลาง"
                                         ? Border.all(
-                                            color: const Color(0xffFF8700),
+                                            color:
+                                                Color.fromARGB(255, 82, 44, 0),
                                             width: 2)
                                         : null,
                                   ),
@@ -322,10 +327,12 @@ class _DpiaAddRiskState extends State<DpiaAddRisk> {
                               child: Container(
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
-                                  color: const Color(0xffFFA8B8),
+                                  color: _riskLevel == "ระดับสูง"
+                                      ? const Color(0xffFFA8B8)
+                                      : Color(0xffFFA8B8).withOpacity(0.3),
                                   border: _riskLevel == "ระดับสูง"
                                       ? Border.all(
-                                          color: const Color(0xffFF0000),
+                                          color: Color.fromARGB(255, 102, 0, 0),
                                           width: 2)
                                       : null,
                                 ),
@@ -347,29 +354,39 @@ class _DpiaAddRiskState extends State<DpiaAddRisk> {
                   color: Colors.black.withOpacity(0.44),
                   thickness: 1,
                 ),
-                ElevatedButton(
-                  onPressed: () {
-                    if (_impactTextController.text.isEmpty) {
-                      setState(() {
-                        _errorText = 'กรุณากรอกผลกระทบ'; // Set error message
-                      });
-                    } else {
-                      Navigator.pop(context);
-                      dpiaProvider.saveRiskAssessment(
-                        RiskData(
-                          id: const Uuid().v4(),
-                          effect: _impactTextController.text,
-                          probability: _probability,
-                          date: selectedDate,
-                          severity: _severity,
-                          riskLevel: _riskLevel,
-                          measures: [],
-                        ),
-                      );
-                    }
-                  },
-                  child: const Text('บันทึกความเสี่ยง'),
+                SizedBox(
+                  height: 30,
                 ),
+                Container(
+                  height: 50,
+                  width: 200,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      if (_impactTextController.text.isEmpty) {
+                        setState(() {
+                          _errorText = 'กรุณากรอกผลกระทบ'; // Set error message
+                        });
+                      } else {
+                        Navigator.pop(context);
+                        dpiaProvider.saveRiskAssessment(
+                          RiskData(
+                            id: const Uuid().v4(),
+                            effect: _impactTextController.text,
+                            probability: _probability,
+                            date: selectedDate,
+                            severity: _severity,
+                            riskLevel: _riskLevel,
+                            measures: [],
+                          ),
+                        );
+                      }
+                    },
+                    child: const Text('บันทึกความเสี่ยง'),
+                  ),
+                ),
+                SizedBox(
+                  height: 30,
+                )
               ],
             ),
           ],
