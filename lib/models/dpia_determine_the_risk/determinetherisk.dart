@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:flutter/foundation.dart';
 
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 class Determine {
@@ -6,7 +9,7 @@ class Determine {
   final String access;
   final String activity;
   final String volume;
-  final String dropdown;
+  final List<String> dropdown;
   final String datasubjects;
   final String organization;
   Determine({
@@ -26,7 +29,7 @@ class Determine {
     String? access,
     String? activity,
     String? volume,
-    String? dropdown,
+    List<String>? dropdown,
     String? datasubjects,
     String? organization,
   }) {
@@ -40,6 +43,11 @@ class Determine {
       datasubjects: datasubjects ?? this.datasubjects,
       organization: organization ?? this.organization,
     );
+  }
+
+  @override
+  String toString() {
+    return 'Determine(id: $id, identifiable: $identifiable, access: $access, activity: $activity, volume: $volume, dropdown: $dropdown, datasubjects: $datasubjects, organization: $organization)';
   }
 
   Map<String, dynamic> toMap() {
@@ -62,14 +70,42 @@ class Determine {
       access: map['access'] as String,
       activity: map['activity'] as String,
       volume: map['volume'] as String,
-      dropdown: map['dropdown'] as String,
+      dropdown: List<String>.from(
+        (map['dropdown'] as List<String>),
+      ),
       datasubjects: map['datasubjects'] as String,
       organization: map['organization'] as String,
     );
   }
 
+  String toJson() => json.encode(toMap());
+
+  factory Determine.fromJson(String source) =>
+      Determine.fromMap(json.decode(source) as Map<String, dynamic>);
+
   @override
-  String toString() {
-    return 'Determine(id: $id, identifiable: $identifiable, access: $access, activity: $activity, volume: $volume, dropdown: $dropdown, datasubjects: $datasubjects, organization: $organization)';
+  bool operator ==(covariant Determine other) {
+    if (identical(this, other)) return true;
+
+    return other.id == id &&
+        other.identifiable == identifiable &&
+        other.access == access &&
+        other.activity == activity &&
+        other.volume == volume &&
+        listEquals(other.dropdown, dropdown) &&
+        other.datasubjects == datasubjects &&
+        other.organization == organization;
+  }
+
+  @override
+  int get hashCode {
+    return id.hashCode ^
+        identifiable.hashCode ^
+        access.hashCode ^
+        activity.hashCode ^
+        volume.hashCode ^
+        dropdown.hashCode ^
+        datasubjects.hashCode ^
+        organization.hashCode;
   }
 }

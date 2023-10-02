@@ -14,7 +14,6 @@ class IdentificationPage1 extends StatefulWidget {
   State<IdentificationPage1> createState() => _IdentificationPage1State();
 }
 
-
 final List<String> items = [
   'Systematic and extensive profiling with significant effects',
   'Processing of sensitive data on a large scale',
@@ -231,91 +230,105 @@ class _IdentificationPage1State extends State<IdentificationPage1> {
                       ),
                       SizedBox(
                         child: DropdownButtonHideUnderline(
-        child: DropdownButton2<String>(
-          isExpanded: true,
-          hint: Text(
-            'Select Items',
-            style: TextStyle(
-              fontSize: 14,
-              color: Theme.of(context).hintColor,
-            ),
-          ),
-          items: items.map((item) {
-            return DropdownMenuItem(
-              value: item,
-              //disable default onTap to avoid closing menu when selecting an item
-              enabled: false,
-              child: StatefulBuilder(
-                builder: (context, menuSetState) {
-                  final isSelected = selectedItems.contains(item);
-                  return InkWell(
-                    onTap: () {
-                      isSelected ? selectedItems.remove(item) : selectedItems.add(item);
-                      //This rebuilds the StatefulWidget to update the button's text
-                      setState(() {});
-                      //This rebuilds the dropdownMenu Widget to update the check mark
-                      menuSetState(() {});
-
-                      dropdownValue = item;
-                      print(selectedItems);
-                    },
-                    child: Container(
-                      height: double.infinity,
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                      child: Row(
-                        children: [
-                          if (isSelected)
-                            const Icon(Icons.check_box_outlined)
-                          else
-                            const Icon(Icons.check_box_outline_blank),
-                          const SizedBox(width: 16),
-                          Expanded(
-                            child: Text(
-                              item,
-                              style: const TextStyle(
+                          child: DropdownButton2<String>(
+                            isExpanded: true,
+                            hint: Text(
+                              'Select Items',
+                              style: TextStyle(
                                 fontSize: 14,
+                                color: Theme.of(context).hintColor,
                               ),
                             ),
+                            items: items.map((item) {
+                              return DropdownMenuItem(
+                                value: item,
+                                //disable default onTap to avoid closing menu when selecting an item
+                                enabled: false,
+                                child: StatefulBuilder(
+                                  builder: (context, menuSetState) {
+                                    final isSelected =
+                                        selectedItems.contains(item);
+                                    return InkWell(
+                                      onTap: () {
+                                        isSelected
+                                            ? selectedItems.remove(item)
+                                            : selectedItems.add(item);
+                                        //This rebuilds the StatefulWidget to update the button's text
+                                        setState(() {});
+                                        //This rebuilds the dropdownMenu Widget to update the check mark
+                                        menuSetState(() {});
+
+                                        dropdownValue = item;
+                                        // print(selectedItems);
+                                      },
+                                      child: Container(
+                                        height: double.infinity,
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 16.0),
+                                        child: Row(
+                                          children: [
+                                            if (isSelected)
+                                              const Icon(
+                                                  Icons.check_box_outlined,color: Colors.blue,)
+                                            else
+                                              const Icon(Icons
+                                                  .check_box_outline_blank,color: Colors.grey,),
+                                            const SizedBox(width: 16),
+                                            Expanded(
+                                              child: Text(
+                                                item,
+                                                style: const TextStyle(
+                                                  fontSize: 14,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                ),
+                              );
+                            }).toList(),
+                            //Use last selected item as the current value so if we've limited menu height, it scroll to last item.
+                            value: selectedItems.isEmpty
+                                ? null
+                                : selectedItems.last,
+                            onChanged: (value) {},
+                            selectedItemBuilder: (context) {
+                              return items.map(
+                                (item) {
+                                  return Container(
+                                    alignment: AlignmentDirectional.centerStart,
+                                    child: Text(
+                                      selectedItems.join(', '),
+                                      style: const TextStyle(
+                                        fontSize: 14,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                      maxLines: 1,
+                                    ),
+                                  );
+                                },
+                              ).toList();
+                            },
+                            buttonStyleData: ButtonStyleData(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(5),
+                                border: Border.all(
+                                  color: Colors.black26,
+                                ),
+                              ),
+                              padding: EdgeInsets.only(left: 16, right: 8),
+                              height: 40,
+                              width: 400,
+                            ),
+                            menuItemStyleData: const MenuItemStyleData(
+                              height: 40,
+                              padding: EdgeInsets.zero,
+                            ),
                           ),
-                        ],
-                      ),
-                    ),
-                  );
-                },
-              ),
-            );
-          }).toList(),
-          //Use last selected item as the current value so if we've limited menu height, it scroll to last item.
-          value: selectedItems.isEmpty ? null : selectedItems.last,
-          onChanged: (value) {},
-          selectedItemBuilder: (context) {
-            return items.map(
-              (item) {
-                return Container(
-                  alignment: AlignmentDirectional.center,
-                  child: Text(
-                    selectedItems.join(', '),
-                    style: const TextStyle(
-                      fontSize: 14,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    maxLines: 1,
-                  ),
-                );
-              },
-            ).toList();
-          },
-          buttonStyleData: const ButtonStyleData(
-            padding: EdgeInsets.only(left: 16, right: 8),
-            height: 40,
-            width: 400,
-          ),
-          menuItemStyleData: const MenuItemStyleData(
-            height: 40,
-            padding: EdgeInsets.zero,
-          ),
-        ),
-      ),
+                        ),
                       ),
                       SizedBox(),
                       const SizedBox(
@@ -397,12 +410,12 @@ class _IdentificationPage1State extends State<IdentificationPage1> {
                         access: textController2.text,
                         activity: textController3.text,
                         volume: textController4.text,
-                        dropdown: dropdownValue,
+                        dropdown: selectedItems,
                         datasubjects: textController5.text,
                         organization: textController6.text));
                     if (selectedItems.isNotEmpty) {
                       context.go('/Identification');
-                    }else {
+                    } else {
                       context.go('/CompletePage');
                     }
                   },

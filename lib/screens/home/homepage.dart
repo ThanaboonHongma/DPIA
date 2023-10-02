@@ -223,13 +223,10 @@ class _HomePageState extends State<HomePage> {
             future: getRiskData(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                // While the Future is still running (waiting for data), display a loading indicator.
                 return const CircularProgressIndicator();
               } else if (snapshot.hasError) {
-                // If an error occurred, display an error message.
                 return Text('Error: ${snapshot.error}');
               } else {
-                // If the Future has completed successfully, display the user's information.
                 final summary = snapshot.data ?? [];
 
                 if (summary.isEmpty) {
@@ -438,4 +435,3 @@ class _HomePageState extends State<HomePage> {
     ];
   }
 }
-// }
