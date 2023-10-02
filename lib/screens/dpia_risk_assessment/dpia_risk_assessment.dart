@@ -315,6 +315,7 @@ class _RiskAssessmentPageState extends State<RiskAssessmentPage> {
                                 },
                               ),
                             ),
+                            SizedBox(height: 20,),
                       SizedBox(
                         height: 40,
                         width: 150,
@@ -338,7 +339,7 @@ class _RiskAssessmentPageState extends State<RiskAssessmentPage> {
                         ),
                       ),
                       const SizedBox(
-                        height: 20,
+                        height: 10,
                       ),
                     ],
                   ),
