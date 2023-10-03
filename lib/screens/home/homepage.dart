@@ -33,8 +33,8 @@ class _HomePageState extends State<HomePage> {
 
       for (var doc in documents.docs) {
         final list = doc['riskData'] as List<dynamic>;
+                DateTime date = DateTime.fromMicrosecondsSinceEpoch(0);
 
-        DateTime date = DateTime.fromMicrosecondsSinceEpoch(0);
 
         List<RiskData> risks = [];
         for (var item in list) {
@@ -228,7 +228,6 @@ class _HomePageState extends State<HomePage> {
                 return Text('Error: ${snapshot.error}');
               } else {
                 final summary = snapshot.data ?? [];
-                print('==${summary}');
 
                 if (summary.isEmpty) {
                   return Column(
@@ -289,9 +288,7 @@ class _HomePageState extends State<HomePage> {
                     itemCount: summary.length,
                     itemBuilder: (BuildContext context, int index) {
                       double progress = 0;
-                      // print('');
-                      // print('risk');
-                      // print(summary[index].risks.length);
+              
                       final divider = summary[index]
                           .risks
                           .where((element) => element.riskLevel == 'ระดับสูง')
@@ -299,13 +296,7 @@ class _HomePageState extends State<HomePage> {
                           .length;
                       for (RiskData risk in summary[index].risks) {
                         if (risk.measures.isEmpty) continue;
-<<<<<<< HEAD
                     
-=======
-                        // print('start');
-                        // print(risk.measures.length);
-
->>>>>>> 02727914a66cff8d938de6f358c86d2bf9cabd4c
                         final allMeasures = risk.measures.length;
                         int sumMeasurProgress = 0;
 
@@ -317,16 +308,10 @@ class _HomePageState extends State<HomePage> {
                             sumMeasurProgress += int.parse(measure.percent);
                           }
                         }
-<<<<<<< HEAD
-=======
-                        // print('allMeasures $allMeasures');
-                        // print('sumMeasurProgress $sumMeasurProgress');
->>>>>>> 02727914a66cff8d938de6f358c86d2bf9cabd4c
 
                         progress += (sumMeasurProgress / allMeasures);
                       }
-                      // print('divider $divider');
-                      // print('progress ${progress / divider}');
+                  
 
                       return Column(
                         children: [
