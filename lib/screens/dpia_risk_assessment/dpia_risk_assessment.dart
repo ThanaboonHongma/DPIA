@@ -225,8 +225,7 @@ class _RiskAssessmentPageState extends State<RiskAssessmentPage> {
                                                                         0xffA2EDCE)
                                                                     : dpiaProvider.riskAssessments[index].riskLevel ==
                                                                             "ระดับกลาง"
-                                                                        ? const Color(
-                                                                            0xffEDCFA2)
+                                                                        ? Colors.yellow.shade200
                                                                         : const Color(
                                                                             0xffFFA8B8),
                                                               )
@@ -244,8 +243,7 @@ class _RiskAssessmentPageState extends State<RiskAssessmentPage> {
                                                                         0xffA2EDCE)
                                                                     : dpiaProvider.riskAssessments[index].riskLevel ==
                                                                             "ระดับกลาง"
-                                                                        ? const Color(
-                                                                            0xffEDCFA2)
+                                                                        ? Colors.yellow.shade200
                                                                         : const Color(
                                                                             0xffFFA8B8),
                                                               ),
