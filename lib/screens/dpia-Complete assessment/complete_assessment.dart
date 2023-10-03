@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class CompletePage extends StatelessWidget {
-  CompletePage({Key? key}) : super(key: key);
+  const CompletePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -46,12 +46,13 @@ dependencies:
   mask_text_input_formatter: ^2.5.0
   dropdown_button2: ^2.3.9
   flutter_launcher_icons: ^0.13.1
+  animated_splash_screen: ^1.3.0
 
 flutter_icon:
   android: true
   ios: true
   image_path: "assets/dpo_online.png"
-
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -14,20 +14,20 @@ void savedata(context) async {
   final provider = Provider.of<DpiaProvider>(context, listen: false);
   Map<String, dynamic> map = {};
 
-  print('หน้าที่ 1.1');
+  // print('หน้าที่ 1.1');
   List<Map<String, dynamic>> page0 = [];
   for (Determine determine in provider.determine) {
     page0.add(determine.toMap());
   }
-  print(page0);
+  // print(page0);
   List<Determine> dataDetermine = [];
   for (var item in page0) {
-    final determinedata = Determine.fromMap(item as Map<String, dynamic>);
+    final determinedata = Determine.fromMap(item);
     dataDetermine.add(determinedata);
   }
-  print(dataDetermine);
+  // print(dataDetermine);
   map.addAll({'determine': page0});
-  print('หน้าที่ 1.2');
+  // print('หน้าที่ 1.2');
   List<Map<String, dynamic>> page1 = [];
   for (Activity activity in provider.activities) {
     page1.add(activity.toMap());
@@ -41,14 +41,14 @@ void savedata(context) async {
   //ดึงกับมาใช้-----
   List<Activity> dataActivity = [];
   for (var item in page1) {
-    final activitdata = Activity.fromMap(item as Map<String, dynamic>);
+    final activitdata = Activity.fromMap(item);
     dataActivity.add(activitdata);
   }
 
-  print(checkboxValue1['necessaryCheckbox'] as bool);
+  // print(checkboxValue1['necessaryCheckbox'] as bool);
   // print(dataActivity);
   //--------------------
-  print('หน้าที่ 2');
+  // print('หน้าที่ 2');
   List<Map<String, dynamic>> page2 = [];
   for (Description descriptionData in provider.descriptions) {
     page2.add(descriptionData.toMap());
@@ -58,11 +58,11 @@ void savedata(context) async {
   //ดึงกับมาใช้-----
   List<Description> dataDescription = [];
   for (var item in page2) {
-    final desdata = Description.fromMap(item as Map<String, dynamic>);
+    final desdata = Description.fromMap(item);
     dataDescription.add(desdata);
   }
   //--------------------
-  print('หน้าที่ 3');
+  // print('หน้าที่ 3');
   List<Map<String, dynamic>> page3 = [];
   for (Consultation consultations in provider.consultations) {
     page3.add(consultations.toMap());
@@ -72,12 +72,12 @@ void savedata(context) async {
   //ดึงกับมาใช้-----
   List<Consultation> dataconsultations = [];
   for (var item in page3) {
-    final consultations = Consultation.fromMap(item as Map<String, dynamic>);
+    final consultations = Consultation.fromMap(item);
     dataconsultations.add(consultations);
   }
   // print(dataconsultations);
   //--------------------
-  print('หน้าที่ 4');
+  // print('หน้าที่ 4');
   List<Map<String, dynamic>> page4 = [];
   for (NecessityandProportionlity necessity
       in provider.necessityandProportionlitys) {
@@ -90,13 +90,13 @@ void savedata(context) async {
   List<NecessityandProportionlity> datanecessity = [];
   for (var item in page4) {
     final necessitys =
-        NecessityandProportionlity.fromMap(item as Map<String, dynamic>);
+        NecessityandProportionlity.fromMap(item);
     datanecessity.add(necessitys);
   }
   // print(datanecessity);
 
   //--------------------
-  print('หน้าที่ 5');
+  // print('หน้าที่ 5');
   List<Map<String, dynamic>> page5 = [];
   for (RiskData riskData in provider.riskAssessments) {
     if (provider.riskAssessments.first.riskLevel == '') {
@@ -105,17 +105,17 @@ void savedata(context) async {
     }
   }
   map.addAll({'riskData': page5});
-  print(page5);
-  //ดึงกับมาใช้-----
+  // print(page5);
+  // //ดึงกับมาใช้-----
   List<RiskData> datarisk = [];
   for (var item in page5) {
-    final riskdatas = RiskData.fromMap(item as Map<String, dynamic>);
+    final riskdatas = RiskData.fromMap(item);
     datarisk.add(riskdatas);
   }
-  print(datarisk);
+  // print(datarisk);
 
   //--------------------
-  print('หน้าที่ 7');
+  // print('หน้าที่ 7');
   List<Map<String, dynamic>> page7 = [];
   for (Monitoring monitoring in provider.monitoring) {
     page7.add(monitoring.toMap());
@@ -125,7 +125,7 @@ void savedata(context) async {
   //ดึงกับมาใช้-----
   List<Monitoring> datamonitoring = [];
   for (var item in page7) {
-    final monitorings = Monitoring.fromMap(item as Map<String, dynamic>);
+    final monitorings = Monitoring.fromMap(item);
     datamonitoring.add(monitorings);
   }
   // print(datamonitoring.toString());

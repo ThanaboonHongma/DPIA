@@ -173,7 +173,6 @@ class _Identification1State extends State<Identification1> {
   Container buildMyNavBar(BuildContext context) {
     bool isButtonPressed = false;
     final provider = Provider.of<DpiaProvider>(context);
-    int count1 = 0;
     List countTEST = [];
     List countTEST2 = [];
     return Container(
@@ -211,18 +210,15 @@ class _Identification1State extends State<Identification1> {
                           setState(() {
                             isButtonPressed = true;
                           });
-                          print(count1);
 
                           for (int i = 0; i <= 8; i++) {
                             if (provider.activities[i].isChecked == true) {
                               countTEST.add(provider.activities[i]);
-                              print(countTEST.length);
                             }
                           }
                           for (int j = 9; j <= 18; j++) {
                             if (provider.activities[j].isChecked == true) {
                               countTEST2.add(provider.activities[j]);
-                              print(countTEST2.length);
                             }
                           }
                           if ((countTEST.isNotEmpty && countTEST.length >= 2) ||

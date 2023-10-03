@@ -47,10 +47,10 @@ class _LoginPageState extends State<LoginPage> {
     try {
       await FirebaseAuth.instance.signInAnonymously();
       // The user is signed in as a guest
-      print('Signed in as a guest');
+      // print('Signed in as a guest');
     } catch (e) {
       // Handle any errors that occur during guest sign-in
-      print('Error signing in as a guest: $e');
+      // print('Error signing in as a guest: $e');
     }
   }
 
@@ -205,24 +205,22 @@ class _LoginPageState extends State<LoginPage> {
               height: 5,
             ),
             SizedBox(
-              child: Container(
-                child: TextFormField(
-                  onSaved: (String? username) {
-                    modelDPIA.username = username!;
-                  },
-                  textAlignVertical: TextAlignVertical.center,
-                  decoration: const InputDecoration(
-                    contentPadding:
-                        EdgeInsets.only(left: 10, top: 5.0, bottom: 5.0),
-                    hintText: 'กรอกชื่อผู้ใช้',
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blue),
-                    ),
-                    enabledBorder:
-                        OutlineInputBorder(borderSide: BorderSide.none),
-                    filled: true,
-                    fillColor: Colors.white,
+              child: TextFormField(
+                onSaved: (String? username) {
+                  modelDPIA.username = username!;
+                },
+                textAlignVertical: TextAlignVertical.center,
+                decoration: const InputDecoration(
+                  contentPadding:
+                      EdgeInsets.only(left: 10, top: 5.0, bottom: 5.0),
+                  hintText: 'กรอกชื่อผู้ใช้',
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.blue),
                   ),
+                  enabledBorder:
+                      OutlineInputBorder(borderSide: BorderSide.none),
+                  filled: true,
+                  fillColor: Colors.white,
                 ),
               ),
             ),
@@ -243,23 +241,21 @@ class _LoginPageState extends State<LoginPage> {
             const SizedBox(
               height: 5,
             ),
-            Container(
-              child: TextFormField(
-                onSaved: (String? company) {
-                  modelDPIA.company = company!;
-                },
-                decoration: const InputDecoration(
-                  contentPadding:
-                      EdgeInsets.only(left: 10, top: 5.0, bottom: 5.0),
-                  hintText: 'กรอกชื่อบริษัท',
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blue),
-                  ),
-                  enabledBorder:
-                      OutlineInputBorder(borderSide: BorderSide.none),
-                  filled: true,
-                  fillColor: Colors.white,
+            TextFormField(
+              onSaved: (String? company) {
+                modelDPIA.company = company!;
+              },
+              decoration: const InputDecoration(
+                contentPadding:
+                    EdgeInsets.only(left: 10, top: 5.0, bottom: 5.0),
+                hintText: 'กรอกชื่อบริษัท',
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.blue),
                 ),
+                enabledBorder:
+                    OutlineInputBorder(borderSide: BorderSide.none),
+                filled: true,
+                fillColor: Colors.white,
               ),
             ),
             const SizedBox(
@@ -279,25 +275,23 @@ class _LoginPageState extends State<LoginPage> {
             const SizedBox(
               height: 5,
             ),
-            Container(
-              child: TextFormField(
-                inputFormatters: [MaskTextInputFormatter(mask: "###-###-####")],
-                keyboardType: TextInputType.phone,
-                onSaved: (String? phone) {
-                  modelDPIA.phonenumber = phone!;
-                },
-                decoration: const InputDecoration(
-                  contentPadding:
-                      EdgeInsets.only(left: 10, top: 5.0, bottom: 5.0),
-                  hintText: 'กรอกเบอร์โทรศัพท์',
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blue),
-                  ),
-                  enabledBorder:
-                      OutlineInputBorder(borderSide: BorderSide.none),
-                  filled: true,
-                  fillColor: Colors.white,
+            TextFormField(
+              inputFormatters: [MaskTextInputFormatter(mask: "###-###-####")],
+              keyboardType: TextInputType.phone,
+              onSaved: (String? phone) {
+                modelDPIA.phonenumber = phone!;
+              },
+              decoration: const InputDecoration(
+                contentPadding:
+                    EdgeInsets.only(left: 10, top: 5.0, bottom: 5.0),
+                hintText: 'กรอกเบอร์โทรศัพท์',
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.blue),
                 ),
+                enabledBorder:
+                    OutlineInputBorder(borderSide: BorderSide.none),
+                filled: true,
+                fillColor: Colors.white,
               ),
             ),
             const SizedBox(
@@ -317,33 +311,31 @@ class _LoginPageState extends State<LoginPage> {
             const SizedBox(
               height: 5,
             ),
-            Container(
-              child: TextFormField(
-                onSaved: (String? email) {
-                  modelDPIA.email = email!;
-                },
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'กรุณากรอกอีเมล';
-                  }
-                  if (!RegExp(r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$')
-                      .hasMatch(value)) {
-                    return 'รูปแบบอีเมลไม่ถูกต้อง';
-                  }
-                  return null;
-                },
-                decoration: InputDecoration(
-                  contentPadding:
-                      EdgeInsets.only(left: 10, top: 5.0, bottom: 5.0),
-                  hintText: 'กรอกอีเมล',
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blue),
-                  ),
-                  enabledBorder:
-                      OutlineInputBorder(borderSide: BorderSide.none),
-                  filled: true,
-                  fillColor: Colors.white,
+            TextFormField(
+              onSaved: (String? email) {
+                modelDPIA.email = email!;
+              },
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'กรุณากรอกอีเมล';
+                }
+                if (!RegExp(r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$')
+                    .hasMatch(value)) {
+                  return 'รูปแบบอีเมลไม่ถูกต้อง';
+                }
+                return null;
+              },
+              decoration: const InputDecoration(
+                contentPadding:
+                    EdgeInsets.only(left: 10, top: 5.0, bottom: 5.0),
+                hintText: 'กรอกอีเมล',
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.blue),
                 ),
+                enabledBorder:
+                    OutlineInputBorder(borderSide: BorderSide.none),
+                filled: true,
+                fillColor: Colors.white,
               ),
             ),
           ],

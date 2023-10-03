@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:uuid/uuid.dart';
 
 class DpiaAddRisk extends StatefulWidget {
-  DpiaAddRisk({super.key});
+  const DpiaAddRisk({super.key});
 
   @override
   State<DpiaAddRisk> createState() => _DpiaAddRiskState();
@@ -274,10 +274,10 @@ class _DpiaAddRiskState extends State<DpiaAddRisk> {
                                   borderRadius: BorderRadius.circular(10),
                                   color: _riskLevel == "ระดับต่ำ"
                                       ? const Color(0xffA2EDCE)
-                                      : Color(0xffA2EDCE).withOpacity(0.3),
+                                      : const Color(0xffA2EDCE).withOpacity(0.3),
                                   border: _riskLevel == "ระดับต่ำ"
                                       ? Border.all(
-                                          color: Color.fromARGB(255, 0, 70, 42),
+                                          color: const Color.fromARGB(255, 0, 70, 42),
                                           width: 2)
                                       : null,
                                 ),
@@ -301,11 +301,11 @@ class _DpiaAddRiskState extends State<DpiaAddRisk> {
                                     borderRadius: BorderRadius.circular(10),
                                     color: _riskLevel == "ระดับกลาง"
                                         ? const Color(0xffEDCFA2)
-                                        : Color(0xffEDCFA2).withOpacity(0.3),
+                                        : const Color(0xffEDCFA2).withOpacity(0.3),
                                     border: _riskLevel == "ระดับกลาง"
                                         ? Border.all(
                                             color:
-                                                Color.fromARGB(255, 82, 44, 0),
+                                                const Color.fromARGB(255, 82, 44, 0),
                                             width: 2)
                                         : null,
                                   ),
@@ -329,10 +329,10 @@ class _DpiaAddRiskState extends State<DpiaAddRisk> {
                                   borderRadius: BorderRadius.circular(10),
                                   color: _riskLevel == "ระดับสูง"
                                       ? const Color(0xffFFA8B8)
-                                      : Color(0xffFFA8B8).withOpacity(0.3),
+                                      : const Color(0xffFFA8B8).withOpacity(0.3),
                                   border: _riskLevel == "ระดับสูง"
                                       ? Border.all(
-                                          color: Color.fromARGB(255, 102, 0, 0),
+                                          color: const Color.fromARGB(255, 102, 0, 0),
                                           width: 2)
                                       : null,
                                 ),
@@ -354,10 +354,10 @@ class _DpiaAddRiskState extends State<DpiaAddRisk> {
                   color: Colors.black.withOpacity(0.44),
                   thickness: 1,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 30,
                 ),
-                Container(
+                SizedBox(
                   height: 50,
                   width: 200,
                   child: ElevatedButton(
@@ -384,7 +384,7 @@ class _DpiaAddRiskState extends State<DpiaAddRisk> {
                     child: const Text('บันทึกความเสี่ยง'),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 30,
                 )
               ],

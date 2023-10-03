@@ -37,7 +37,7 @@ class _DescriptionListviewState extends State<DescriptionListview> {
             child: Theme(
               data: ThemeData(dividerColor: Colors.transparent),
               child: ExpansionTile(
-                  tilePadding: EdgeInsets.all(10),
+                  tilePadding: const EdgeInsets.all(10),
                   title: Text(
                     provider.descriptions[index].title,
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
