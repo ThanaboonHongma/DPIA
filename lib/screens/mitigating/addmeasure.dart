@@ -115,6 +115,13 @@ class _AddMeasureState extends State<AddMeasure> {
                 child: ElevatedButton(
                   onPressed: () {
                     if (checkmanage.text.isEmpty) {
+                      if (!dpoagree[0] || !dpoagree[1]) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text("กรุณาเลือกความเห็นของ DPO ก่อน"),
+                          ),
+                        );
+                      }
                       setState(() {
                         _hintTextcheckmanage = '';
                         _errorcheckmanage = 'กรุณากรอกเปอร์เซ็น % (เป็นตัวเลข)';
@@ -124,20 +131,19 @@ class _AddMeasureState extends State<AddMeasure> {
                       setState(() {
                         _errormeasures1 = 'กรุณากรอกมาตรการ';
                       });
-                    }
-                    if ((dpoagree[0] == false)) {
-                      if (dpoagree[1] == false) {
+                    } else {
+                      int? number = int.tryParse(checkmanage.text);
+                      if (number == null || number < 0 || number > 100) {
+                        // ถ้าค่าไม่ได้อยู่ในช่วง 0-100
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
                             content:
-                                Text('กรุณาเลือกความเห็นของ DPO เพื่อยืนยัน'),
+                                Text("กรุณากรอกเปอร์เซ็น % ระหว่าง 0 ถึง 100"),
                           ),
                         );
+                        return; // ออกจาก onPressed โดยไม่ทำอะไรเพิ่ม
                       }
-                    }
-                    if ((checkmanage.text.isNotEmpty &&
-                            measures1.text.isNotEmpty) &&
-                        (dpoagree[0] == true || dpoagree[1] == true)) {
+
                       final riskData = context
                           .read<DpiaProvider>()
                           .riskAssessments
@@ -387,11 +393,19 @@ class _AddMeasureState extends State<AddMeasure> {
                                 SizedBox(
                                   height: 70,
                                   width: double.infinity,
-                                  child: TextField(
+                                  child: TextFormField(
                                     controller: checkmanage,
                                     onChanged: (String value) {
                                       setState(() {
-                                        _errorcheckmanage = null;
+                                        int? number = int.tryParse(value);
+                                        if (number == null ||
+                                            number < 0 ||
+                                            number > 100) {
+                                          _errorcheckmanage =
+                                              'กรุณากรอกค่าระหว่าง 0 ถึง 100';
+                                        } else {
+                                          _errorcheckmanage = null;
+                                        }
                                       });
                                     },
                                     keyboardType: TextInputType.number,
@@ -400,9 +414,7 @@ class _AddMeasureState extends State<AddMeasure> {
                                           .digitsOnly, // Allow only digits
                                     ],
                                     decoration: InputDecoration(
-                                      hintText: _hintTextcheckmanage
-                                      // 'กรอกเปอร์เซ็น %'
-                                      ,
+                                      hintText: _hintTextcheckmanage,
                                       border: const OutlineInputBorder(),
                                       errorText: _errorcheckmanage,
                                     ),

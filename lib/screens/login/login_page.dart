@@ -17,6 +17,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final AutovalidateMode _autovalidateMode = AutovalidateMode.onUserInteraction;
   final formKey = GlobalKey<FormState>();
+  
 
   final Future<FirebaseApp> firebase = Firebase.initializeApp();
   final CollectionReference _dpiaCollection =
