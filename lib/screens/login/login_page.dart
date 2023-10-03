@@ -15,6 +15,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final AutovalidateMode _autovalidateMode = AutovalidateMode.onUserInteraction;
   final formKey = GlobalKey<FormState>();
 
   final Future<FirebaseApp> firebase = Firebase.initializeApp();
@@ -78,14 +79,13 @@ class _LoginPageState extends State<LoginPage> {
         } else if (snapshot.connectionState == ConnectionState.done) {
           return Scaffold(
             body: Container(
-              
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    Color(0xff3D85AD),
-                    Color(0xff23A9E1),
+                    Colors.white,
+                    Colors.grey.shade100,
                   ],
                 ),
               ),
@@ -112,7 +112,7 @@ class _LoginPageState extends State<LoginPage> {
                               .textTheme
                               .titleLarge
                               ?.copyWith(
-                                color: Theme.of(context).colorScheme.onPrimary,
+                                color: Theme.of(context).colorScheme.tertiary,
                               ),
                         ),
                         const SizedBox(
@@ -125,17 +125,29 @@ class _LoginPageState extends State<LoginPage> {
                               .textTheme
                               .titleMedium
                               ?.copyWith(
-                                color: Theme.of(context).colorScheme.onPrimary,
+                                color: Theme.of(context).colorScheme.tertiary,
                               ),
                         ),
                         const SizedBox(
                           height: 20,
                         ),
                         Container(
-                          width: Responsive.isMobile(context)? 460 : Responsive.isTablet(context)? 900 : 1400,
+                          width: Responsive.isMobile(context)
+                              ? 460
+                              : Responsive.isTablet(context)
+                                  ? 900
+                                  : 1400,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
                             color: Colors.white.withOpacity(0.44),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.2),
+                                spreadRadius: 5,
+                                blurRadius: 7,
+                                offset: const Offset(0, 8),
+                              ),
+                            ],
                           ),
                           child: Padding(
                             padding: const EdgeInsets.all(15.0),
@@ -189,6 +201,7 @@ class _LoginPageState extends State<LoginPage> {
     return [
       Form(
         key: formKey,
+        autovalidateMode: _autovalidateMode,
         child: Column(
           children: [
             Row(
@@ -252,8 +265,7 @@ class _LoginPageState extends State<LoginPage> {
                 focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.blue),
                 ),
-                enabledBorder:
-                    OutlineInputBorder(borderSide: BorderSide.none),
+                enabledBorder: OutlineInputBorder(borderSide: BorderSide.none),
                 filled: true,
                 fillColor: Colors.white,
               ),
@@ -288,8 +300,7 @@ class _LoginPageState extends State<LoginPage> {
                 focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.blue),
                 ),
-                enabledBorder:
-                    OutlineInputBorder(borderSide: BorderSide.none),
+                enabledBorder: OutlineInputBorder(borderSide: BorderSide.none),
                 filled: true,
                 fillColor: Colors.white,
               ),
@@ -332,8 +343,7 @@ class _LoginPageState extends State<LoginPage> {
                 focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.blue),
                 ),
-                enabledBorder:
-                    OutlineInputBorder(borderSide: BorderSide.none),
+                enabledBorder: OutlineInputBorder(borderSide: BorderSide.none),
                 filled: true,
                 fillColor: Colors.white,
               ),

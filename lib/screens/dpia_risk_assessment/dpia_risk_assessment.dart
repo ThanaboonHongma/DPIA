@@ -321,10 +321,6 @@ class _RiskAssessmentPageState extends State<RiskAssessmentPage> {
                         height: 40,
                         width: 150,
                         child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor:
-                                const Color(0xff23A9E1), // Background color
-                          ),
                           onPressed: () {
                             showModalBottomSheet<dynamic>(
                               isScrollControlled: true,

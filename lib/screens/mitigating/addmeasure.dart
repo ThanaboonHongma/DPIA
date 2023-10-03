@@ -157,10 +157,12 @@ class _AddMeasureState extends State<AddMeasure> {
                         percent: checkmanage.text,
                       );
 
-                      List<Measure> measures = riskData.measures
-                          .map((measure) => measure)
-                          .toList()
-                        ..add(newMeasure);
+                      // List<Measure> measures = riskData.measures
+                      //     .map((measure) => measure)
+                      //     .toList()
+                      //   ..add(newMeasure);
+
+                        List<Measure> measures = [newMeasure];
 
                       final updated = riskData.copyWith(
                         measures: measures,

@@ -274,10 +274,10 @@ class _DpiaAddRiskState extends State<DpiaAddRisk> {
                                   borderRadius: BorderRadius.circular(10),
                                   color: _riskLevel == "ระดับต่ำ"
                                       ? const Color(0xffA2EDCE)
-                                      : const Color(0xffA2EDCE).withOpacity(0.3),
+                                      : const Color(0xffCFC9CA),
                                   border: _riskLevel == "ระดับต่ำ"
                                       ? Border.all(
-                                          color: const Color.fromARGB(255, 0, 70, 42),
+                                          color: const Color.fromARGB(255, 0, 150, 42),
                                           width: 2)
                                       : null,
                                 ),
@@ -300,12 +300,12 @@ class _DpiaAddRiskState extends State<DpiaAddRisk> {
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
                                     color: _riskLevel == "ระดับกลาง"
-                                        ? const Color(0xffEDCFA2)
-                                        : const Color(0xffEDCFA2).withOpacity(0.3),
+                                        ? Colors.yellow.shade200
+                                        : const Color(0xffCFC9CA),
                                     border: _riskLevel == "ระดับกลาง"
                                         ? Border.all(
                                             color:
-                                                const Color.fromARGB(255, 82, 44, 0),
+                                                Color.fromARGB(255, 213, 196, 6),
                                             width: 2)
                                         : null,
                                   ),
@@ -329,10 +329,10 @@ class _DpiaAddRiskState extends State<DpiaAddRisk> {
                                   borderRadius: BorderRadius.circular(10),
                                   color: _riskLevel == "ระดับสูง"
                                       ? const Color(0xffFFA8B8)
-                                      : const Color(0xffFFA8B8).withOpacity(0.3),
+                                      : const Color(0xffCFC9CA),
                                   border: _riskLevel == "ระดับสูง"
                                       ? Border.all(
-                                          color: const Color.fromARGB(255, 102, 0, 0),
+                                          color: const Color.fromARGB(255, 202, 0, 0),
                                           width: 2)
                                       : null,
                                 ),

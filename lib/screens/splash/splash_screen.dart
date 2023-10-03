@@ -27,7 +27,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return  AnimatedSplashScreen(
             duration: 2000,
-            splash:  Image.asset('assets/images/LoginPage/logo.png'),
+            splash:  Image.asset('assets/dpo_online.png'),
             nextScreen: Container(),
             disableNavigation: false,
             splashTransition: SplashTransition.fadeTransition,

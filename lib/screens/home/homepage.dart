@@ -55,23 +55,10 @@ class _HomePageState extends State<HomePage> {
         automaticallyImplyLeading: false,
         title: Row(
           children: [
-            Text(
-              'DPIA LITE',
-              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                    color: Theme.of(context).colorScheme.tertiary,
-                  ),
-            ),
-            const SizedBox(
-              width: 10,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 10),
-              child: Text(
-                'By WiseWork',
-                style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                      color: Theme.of(context).colorScheme.tertiary,
-                    ),
-              ),
+            const SizedBox(width: 15,),
+            Image.asset(
+              'assets/dpo_online.png',
+              height: 40,
             ),
           ],
         ),
@@ -116,7 +103,11 @@ class _HomePageState extends State<HomePage> {
             Padding(
               padding: const EdgeInsets.all(25.0),
               child: Container(
-                width: Responsive.isMobile(context)? 460 : Responsive.isTablet(context)? 900 : 1400,
+                width: Responsive.isMobile(context)
+                    ? 460
+                    : Responsive.isTablet(context)
+                        ? 900
+                        : 1400,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
                   color: Colors.white,
@@ -203,7 +194,11 @@ class _HomePageState extends State<HomePage> {
       Column(
         children: [
           SizedBox(
-            width: Responsive.isMobile(context)? 440 : Responsive.isTablet(context)? 880 : 1380,
+            width: Responsive.isMobile(context)
+                ? 440
+                : Responsive.isTablet(context)
+                    ? 880
+                    : 1380,
             child: Text(
               'รายการประเมิน DPIA',
               style: Theme.of(context).textTheme.titleLarge?.copyWith(
@@ -223,6 +218,7 @@ class _HomePageState extends State<HomePage> {
                 return Text('Error: ${snapshot.error}');
               } else {
                 final summary = snapshot.data ?? [];
+                print('==${summary}');
 
                 if (summary.isEmpty) {
                   return Column(
@@ -292,7 +288,6 @@ class _HomePageState extends State<HomePage> {
                       for (RiskData risk in summary[index].risks) {
                         if (risk.measures.isEmpty) continue;
                     
-
                         final allMeasures = risk.measures.length;
                         int sumMeasurProgress = 0;
 
@@ -304,7 +299,6 @@ class _HomePageState extends State<HomePage> {
                             sumMeasurProgress += int.parse(measure.percent);
                           }
                         }
-                   
 
                         progress += (sumMeasurProgress / allMeasures);
                       }
@@ -313,7 +307,11 @@ class _HomePageState extends State<HomePage> {
                       return Column(
                         children: [
                           Container(
-                            width: Responsive.isMobile(context)? 460 : Responsive.isTablet(context)? 900 : 1400,
+                            width: Responsive.isMobile(context)
+                                ? 460
+                                : Responsive.isTablet(context)
+                                    ? 900
+                                    : 1400,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
                               color: Colors.white,
