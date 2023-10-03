@@ -34,17 +34,27 @@ class _HomePageState extends State<HomePage> {
       for (var doc in documents.docs) {
         final list = doc['riskData'] as List<dynamic>;
 
+        DateTime date = DateTime.fromMicrosecondsSinceEpoch(0);
+
         List<RiskData> risks = [];
         for (var item in list) {
           if (item is Map<String, dynamic>) {
-            risks.add(RiskData.fromMap(item));
+            final riskdatacheck = RiskData.fromMap(item);
+            risks.add(riskdatacheck);
+
+            if (riskdatacheck.date.isAfter(date)) {
+              date = riskdatacheck.date;
+            }
           }
         }
 
-        summary.add(DpiaSummary(risks: risks));
+        summary.add(DpiaSummary(risks: risks, date: date));
       }
     }
-    return summary;
+    return summary
+      ..sort(
+        (a, b) => b.date.compareTo(a.date),
+      );
   }
 
   @override
@@ -116,7 +126,11 @@ class _HomePageState extends State<HomePage> {
             Padding(
               padding: const EdgeInsets.all(25.0),
               child: Container(
-                width: Responsive.isMobile(context)? 460 : Responsive.isTablet(context)? 900 : 1400,
+                width: Responsive.isMobile(context)
+                    ? 460
+                    : Responsive.isTablet(context)
+                        ? 900
+                        : 1400,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
                   color: Colors.white,
@@ -203,7 +217,11 @@ class _HomePageState extends State<HomePage> {
       Column(
         children: [
           SizedBox(
-            width: Responsive.isMobile(context)? 440 : Responsive.isTablet(context)? 880 : 1380,
+            width: Responsive.isMobile(context)
+                ? 440
+                : Responsive.isTablet(context)
+                    ? 880
+                    : 1380,
             child: Text(
               'รายการประเมิน DPIA',
               style: Theme.of(context).textTheme.titleLarge?.copyWith(
@@ -223,8 +241,6 @@ class _HomePageState extends State<HomePage> {
                 return Text('Error: ${snapshot.error}');
               } else {
                 final summary = snapshot.data ?? [];
-
-                
 
                 if (summary.isEmpty) {
                   return Column(
@@ -320,7 +336,11 @@ class _HomePageState extends State<HomePage> {
                       return Column(
                         children: [
                           Container(
-                            width: Responsive.isMobile(context)? 460 : Responsive.isTablet(context)? 900 : 1400,
+                            width: Responsive.isMobile(context)
+                                ? 460
+                                : Responsive.isTablet(context)
+                                    ? 900
+                                    : 1400,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
                               color: Colors.white,
