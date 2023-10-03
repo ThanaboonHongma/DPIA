@@ -155,7 +155,7 @@ class _RiskAssessmentPageState extends State<RiskAssessmentPage> {
                               ),
                             )
                           : SizedBox(
-                              height: 300,
+                              height: 350,
                               child: ListView.builder(
                                 itemCount: dpiaProvider.riskAssessments.length,
                                 itemBuilder: (BuildContext context, int index) {

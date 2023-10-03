@@ -224,6 +224,8 @@ class _HomePageState extends State<HomePage> {
               } else {
                 final summary = snapshot.data ?? [];
 
+                
+
                 if (summary.isEmpty) {
                   return Column(
                     children: [
@@ -283,9 +285,9 @@ class _HomePageState extends State<HomePage> {
                     itemCount: summary.length,
                     itemBuilder: (BuildContext context, int index) {
                       double progress = 0;
-                      print('');
-                      print('risk');
-                      print(summary[index].risks.length);
+                      // print('');
+                      // print('risk');
+                      // print(summary[index].risks.length);
                       final divider = summary[index]
                           .risks
                           .where((element) => element.riskLevel == 'ระดับสูง')
@@ -293,8 +295,8 @@ class _HomePageState extends State<HomePage> {
                           .length;
                       for (RiskData risk in summary[index].risks) {
                         if (risk.measures.isEmpty) continue;
-                        print('start');
-                        print(risk.measures.length);
+                        // print('start');
+                        // print(risk.measures.length);
 
                         final allMeasures = risk.measures.length;
                         int sumMeasurProgress = 0;
@@ -307,13 +309,13 @@ class _HomePageState extends State<HomePage> {
                             sumMeasurProgress += int.parse(measure.percent);
                           }
                         }
-                        print('allMeasures $allMeasures');
-                        print('sumMeasurProgress $sumMeasurProgress');
+                        // print('allMeasures $allMeasures');
+                        // print('sumMeasurProgress $sumMeasurProgress');
 
                         progress += (sumMeasurProgress / allMeasures);
                       }
-                      print('divider $divider');
-                      print('progress ${progress / divider}');
+                      // print('divider $divider');
+                      // print('progress ${progress / divider}');
 
                       return Column(
                         children: [

@@ -15,7 +15,9 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final AutovalidateMode _autovalidateMode = AutovalidateMode.onUserInteraction;
   final formKey = GlobalKey<FormState>();
+  
 
   final Future<FirebaseApp> firebase = Firebase.initializeApp();
   final CollectionReference _dpiaCollection =
@@ -78,7 +80,6 @@ class _LoginPageState extends State<LoginPage> {
         } else if (snapshot.connectionState == ConnectionState.done) {
           return Scaffold(
             body: Container(
-              
               decoration: const BoxDecoration(
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
@@ -132,7 +133,11 @@ class _LoginPageState extends State<LoginPage> {
                           height: 20,
                         ),
                         Container(
-                          width: Responsive.isMobile(context)? 460 : Responsive.isTablet(context)? 900 : 1400,
+                          width: Responsive.isMobile(context)
+                              ? 460
+                              : Responsive.isTablet(context)
+                                  ? 900
+                                  : 1400,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
                             color: Colors.white.withOpacity(0.44),
@@ -189,6 +194,7 @@ class _LoginPageState extends State<LoginPage> {
     return [
       Form(
         key: formKey,
+        autovalidateMode: _autovalidateMode,
         child: Column(
           children: [
             Row(
@@ -319,6 +325,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
             Container(
               child: TextFormField(
+                
                 onSaved: (String? email) {
                   modelDPIA.email = email!;
                 },
