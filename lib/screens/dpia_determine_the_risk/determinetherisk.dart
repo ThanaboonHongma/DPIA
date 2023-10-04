@@ -29,16 +29,6 @@ class _IdentificationPage1State extends State<IdentificationPage1> {
   final textController6 = TextEditingController();
   String dropdownValue = 'Select Items';
   bool isButtonPressed = false;
-  @override
-  void dispose() {
-    textController1.dispose();
-    textController2.dispose();
-    textController3.dispose();
-    textController4.dispose();
-    textController5.dispose();
-    textController6.dispose();
-    super.dispose();
-  }
 
   void resetPage() {
     setState(() {

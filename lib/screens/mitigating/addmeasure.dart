@@ -15,6 +15,7 @@ class AddMeasure extends StatefulWidget {
 
 class _AddMeasureState extends State<AddMeasure> {
   DateTime selectedDate = DateTime.now();
+  String selectedDateSend = '';
   List<bool> dpoagree = [false, false];
   List<bool> listenagree = [false, false];
   String _checkdpo = '';
@@ -42,6 +43,7 @@ class _AddMeasureState extends State<AddMeasure> {
     if (picked != null && picked != selectedDate) {
       setState(() {
         selectedDate = picked;
+        selectedDateSend = '${selectedDate.day.toString()}/${selectedDate.month.toString()}/${selectedDate.year.toString()}';
       });
     }
   }
@@ -73,6 +75,7 @@ class _AddMeasureState extends State<AddMeasure> {
           measure2: measures2.toString(),
           measure3: measures3.toString(),
           project: project.toString(),
+          datetime: selectedDateSend,
           responsible: responsible.toString(),
           rick1: rick1.toString(),
           rick2: rick2.toString(),
@@ -154,6 +157,7 @@ class _AddMeasureState extends State<AddMeasure> {
                         measure2: measures2.text,
                         measure3: measures3.text,
                         project: project.text,
+                        datetime: selectedDateSend,
                         responsible: responsible.text,
                         rick1: rick1.text,
                         rick2: rick2.text,

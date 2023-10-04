@@ -111,6 +111,35 @@ class _Identification1State extends State<Identification1> {
                       const SizedBox(
                         height: 10,
                       ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 10, right: 10, bottom: 5),
+              child: Container(
+                width: Responsive.isMobile(context)
+                    ? 540
+                    : Responsive.isTablet(context)
+                        ? 980
+                        : 1480,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.1),
+                      spreadRadius: 5,
+                      blurRadius: 7,
+                      offset: const Offset(0, 8),
+                    ),
+                  ],
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Column(
+                    children: [
                       CheckboxListTile(
                         side: const BorderSide(color: Color(0xff2684FF)),
                         controlAffinity: ListTileControlAffinity
@@ -224,7 +253,8 @@ class _Identification1State extends State<Identification1> {
                           if ((countTEST.isNotEmpty && countTEST.length >= 2) ||
                               countTEST2.isNotEmpty ||
                               (provider.checkboxValue2 == true ||
-                                  provider.checkboxValue1 == true)|| provider.checkselectedItems.isNotEmpty) {
+                                  provider.checkboxValue1 == true) ||
+                              provider.checkselectedItems.isNotEmpty) {
                             context.go('/DpiaDescriptionPage');
                           } else if (countTEST.length == 1 ||
                               (provider.checkboxValue2 == false ||
@@ -260,56 +290,60 @@ class _ActivityListviewState extends State<ActivityListview> {
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       itemCount: widget.provider.activities.length,
-      itemBuilder: (context, index) => Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.1),
-              spreadRadius: 5,
-              blurRadius: 7,
-              offset: const Offset(0, 8),
-            ),
-          ],
-        ),
-        margin: const EdgeInsets.all(
-          5,
-        ),
-        child: Theme(
-          data: ThemeData(dividerColor: Colors.transparent),
-          child: ExpansionTile(
-            title: CheckboxListTile(
-              side: const BorderSide(color: Color(0xff2684FF)),
-              contentPadding: EdgeInsets.zero,
-              title: Transform.translate(
-                offset: const Offset(-16, 0),
-                child: Text(widget.provider.activities[index].title),
-              ),
-              controlAffinity:
-                  ListTileControlAffinity.leading, //  <-- leading Checkbox
-              value: widget.provider.activities[index].isChecked,
-              onChanged: (bool? value) {
-                if (value != null) {
-                  widget.provider.checkActivity(index, value);
-                }
-              },
-            ),
-            children: <Widget>[
-              const Divider(
-                thickness: 1,
-                indent: 0,
-                endIndent: 0,
-                color: Colors.grey,
-              ),
-              ListTile(title: Text(widget.provider.activities[index].subtitle)),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 20),
-                child: ListTile(
-                    title: Text(widget.provider.activities[index].description,
-                        style: Theme.of(context).textTheme.titleSmall)),
+      itemBuilder: (context, index) => Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 5),
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.1),
+                spreadRadius: 5,
+                blurRadius: 7,
+                offset: const Offset(0, 8),
               ),
             ],
+          ),
+          margin: const EdgeInsets.all(
+            5,
+          ),
+          child: Theme(
+            data: ThemeData(dividerColor: Colors.transparent),
+            child: ExpansionTile(
+              initiallyExpanded: true,
+              title: CheckboxListTile(
+                side: const BorderSide(color: Color(0xff2684FF)),
+                contentPadding: EdgeInsets.zero,
+                title: Transform.translate(
+                  offset: const Offset(-16, 0),
+                  child: Text(widget.provider.activities[index].title),
+                ),
+                controlAffinity:
+                    ListTileControlAffinity.leading, //  <-- leading Checkbox
+                value: widget.provider.activities[index].isChecked,
+                onChanged: (bool? value) {
+                  if (value != null) {
+                    widget.provider.checkActivity(index, value);
+                  }
+                },
+              ),
+              children: <Widget>[
+                const Divider(
+                  thickness: 1,
+                  indent: 0,
+                  endIndent: 0,
+                  color: Colors.grey,
+                ),
+                // ListTile(title: Text(widget.provider.activities[index].subtitle)),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 20, left: 30),
+                  child: ListTile(
+                      title: Text(widget.provider.activities[index].description,
+                          style: Theme.of(context).textTheme.titleSmall)),
+                ),
+              ],
+            ),
           ),
         ),
       ),

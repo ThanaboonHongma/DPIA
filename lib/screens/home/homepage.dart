@@ -33,8 +33,7 @@ class _HomePageState extends State<HomePage> {
 
       for (var doc in documents.docs) {
         final list = doc['riskData'] as List<dynamic>;
-                DateTime date = DateTime.fromMicrosecondsSinceEpoch(0);
-
+        DateTime date = DateTime.fromMicrosecondsSinceEpoch(0);
 
         List<RiskData> risks = [];
         for (var item in list) {
@@ -65,7 +64,9 @@ class _HomePageState extends State<HomePage> {
         automaticallyImplyLeading: false,
         title: Row(
           children: [
-            const SizedBox(width: 15,),
+            const SizedBox(
+              width: 15,
+            ),
             Image.asset(
               'assets/dpo_online.png',
               height: 40,
@@ -288,7 +289,7 @@ class _HomePageState extends State<HomePage> {
                     itemCount: summary.length,
                     itemBuilder: (BuildContext context, int index) {
                       double progress = 0;
-              
+
                       final divider = summary[index]
                           .risks
                           .where((element) => element.riskLevel == 'ระดับสูง')
@@ -296,7 +297,7 @@ class _HomePageState extends State<HomePage> {
                           .length;
                       for (RiskData risk in summary[index].risks) {
                         if (risk.measures.isEmpty) continue;
-                    
+
                         final allMeasures = risk.measures.length;
                         int sumMeasurProgress = 0;
 
@@ -311,7 +312,6 @@ class _HomePageState extends State<HomePage> {
 
                         progress += (sumMeasurProgress / allMeasures);
                       }
-                  
 
                       return Column(
                         children: [
@@ -347,7 +347,11 @@ class _HomePageState extends State<HomePage> {
                                               .textTheme
                                               .titleMedium),
                                       Container(
-                                        child: summary[index].risks.isEmpty
+                                        child: summary[index]
+                                                .risks[index]
+                                                .measures[0]
+                                                .datetime
+                                                .isEmpty
                                             ? Text(
                                                 '${selectedDate.day.toString()}/${selectedDate.month.toString()}/${selectedDate.year.toString()}',
                                                 style: Theme.of(context)
@@ -360,9 +364,10 @@ class _HomePageState extends State<HomePage> {
                                                     ),
                                               )
                                             : Text(
-                                                '${summary[index].risks.last.date.day.toString()}/'
-                                                '${summary[index].risks.last.date.month.toString()}/'
-                                                '${summary[index].risks.last.date.year.toString()}',
+                                                summary[index]
+                                                    .risks[index]
+                                                    .measures[0]
+                                                    .datetime,
                                                 style: Theme.of(context)
                                                     .textTheme
                                                     .bodySmall

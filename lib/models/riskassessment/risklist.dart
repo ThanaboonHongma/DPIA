@@ -1,5 +1,3 @@
-
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 class RiskData {
   final String id;
   final String effect;
@@ -77,6 +75,7 @@ class Measure {
   final String measure2;
   final String measure3;
   final String project;
+  final String datetime;
   final String responsible;
   final String rick1;
   final String rick2;
@@ -84,12 +83,12 @@ class Measure {
   final String dpo;
   final String results;
   final String percent;
-
   Measure({
     required this.measure1,
     required this.measure2,
     required this.measure3,
     required this.project,
+    required this.datetime,
     required this.responsible,
     required this.rick1,
     required this.rick2,
@@ -99,11 +98,13 @@ class Measure {
     required this.percent,
   });
 
+
   Measure copyWith({
     String? measure1,
     String? measure2,
     String? measure3,
     String? project,
+    String? datetime,
     String? responsible,
     String? rick1,
     String? rick2,
@@ -117,6 +118,7 @@ class Measure {
       measure2: measure2 ?? this.measure2,
       measure3: measure3 ?? this.measure3,
       project: project ?? this.project,
+      datetime: datetime ?? this.datetime,
       responsible: responsible ?? this.responsible,
       rick1: rick1 ?? this.rick1,
       rick2: rick2 ?? this.rick2,
@@ -127,17 +129,13 @@ class Measure {
     );
   }
 
-  @override
-  String toString() {
-    return 'Measure(measure1: $measure1, measure2: $measure2, measure3: $measure3, project: $project, responsible: $responsible, rick1: $rick1, rick2: $rick2, rick3: $rick3, dpo: $dpo, results: $results, percent: $percent)';
-  }
-
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'measure1': measure1,
       'measure2': measure2,
       'measure3': measure3,
       'project': project,
+      'datetime': datetime,
       'responsible': responsible,
       'rick1': rick1,
       'rick2': rick2,
@@ -154,6 +152,7 @@ class Measure {
       measure2: map['measure2'] as String,
       measure3: map['measure3'] as String,
       project: map['project'] as String,
+      datetime: map['datetime'] as String,
       responsible: map['responsible'] as String,
       rick1: map['rick1'] as String,
       rick2: map['rick2'] as String,
@@ -162,5 +161,10 @@ class Measure {
       results: map['results'] as String,
       percent: map['percent'] as String,
     );
+  }
+
+  @override
+  String toString() {
+    return 'Measure(measure1: $measure1, measure2: $measure2, measure3: $measure3, project: $project, datetime: $datetime, responsible: $responsible, rick1: $rick1, rick2: $rick2, rick3: $rick3, dpo: $dpo, results: $results, percent: $percent)';
   }
 }

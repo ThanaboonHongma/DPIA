@@ -246,6 +246,7 @@ class _ConsultationListviewState extends State<ConsultationListview> {
         child: Theme(
           data: ThemeData(dividerColor: Colors.transparent),
           child: ExpansionTile(
+            initiallyExpanded: true,
             title: CheckboxListTile(
               side: const BorderSide(color: Color(0xff2684FF)),
               contentPadding: EdgeInsets.zero,
@@ -263,8 +264,14 @@ class _ConsultationListviewState extends State<ConsultationListview> {
               },
             ),
             children: <Widget>[
+              const Divider(
+                  thickness: 1,
+                  indent: 0,
+                  endIndent: 0,
+                  color: Colors.grey,
+                ),
               Padding(
-                padding: const EdgeInsets.only(bottom: 20),
+                padding: const EdgeInsets.only(bottom: 20, left: 30),
                 child: ListTile(
                     title: Text(provider.consultations[index].description,
                         style: Theme.of(context).textTheme.titleSmall)),
