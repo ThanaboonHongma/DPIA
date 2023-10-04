@@ -305,7 +305,7 @@ class _DpiaAddRiskState extends State<DpiaAddRisk> {
                                     border: _riskLevel == "ระดับกลาง"
                                         ? Border.all(
                                             color:
-                                                Color.fromARGB(255, 213, 196, 6),
+                                                const Color.fromARGB(255, 213, 196, 6),
                                             width: 2)
                                         : null,
                                   ),

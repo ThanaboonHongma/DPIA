@@ -132,7 +132,11 @@ class _Consultation1State extends State<Consultation1> {
               ),
               margin: const EdgeInsets.all(10),
               child: SizedBox(
-                width: Responsive.isMobile(context)? 540 : Responsive.isTablet(context)? 980 : 1480,
+                width: Responsive.isMobile(context)
+                    ? 540
+                    : Responsive.isTablet(context)
+                        ? 980
+                        : 1480,
                 child: Column(
                   children: <Widget>[
                     CheckboxListTile(
@@ -245,36 +249,40 @@ class _ConsultationListviewState extends State<ConsultationListview> {
         ),
         child: Theme(
           data: ThemeData(dividerColor: Colors.transparent),
-          child: ExpansionTile(
-            initiallyExpanded: true,
-            title: CheckboxListTile(
-              side: const BorderSide(color: Color(0xff2684FF)),
-              contentPadding: EdgeInsets.zero,
-              title: Transform.translate(
-                offset: const Offset(-16, 0),
-                child: Text(provider.consultations[index].title),
-              ),
-              controlAffinity:
-                  ListTileControlAffinity.leading, //  <-- leading Checkbox
-              value: provider.consultations[index].isChecked,
-              onChanged: (bool? value) {
-                if (value != null) {
-                  provider.checkConsultations(index, value);
-                }
-              },
-            ),
-            children: <Widget>[
-              const Divider(
-                  thickness: 1,
-                  indent: 0,
-                  endIndent: 0,
-                  color: Colors.grey,
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left : 20 , top: 10),
+                child: CheckboxListTile(
+                  side: const BorderSide(color: Color(0xff2684FF)),
+                  contentPadding: EdgeInsets.zero,
+                  title: Transform.translate(
+                    offset: const Offset(-16, 0),
+                    child: Text(provider.consultations[index].title),
+                  ),
+                  controlAffinity: ListTileControlAffinity.leading,
+                  value: provider.consultations[index].isChecked,
+                  onChanged: (bool? value) {
+                    if (value != null) {
+                      provider.checkConsultations(index, value);
+                    }
+                  },
                 ),
+              ),
+              const Divider(
+                thickness: 1,
+                indent: 0,
+                endIndent: 0,
+                color: Colors.grey,
+              ),
               Padding(
                 padding: const EdgeInsets.only(bottom: 20, left: 30),
                 child: ListTile(
-                    title: Text(provider.consultations[index].description,
-                        style: Theme.of(context).textTheme.titleSmall)),
+                  title: Text(
+                    provider.consultations[index].description,
+                    style: Theme.of(context).textTheme.titleSmall,
+                  ),
+                ),
               ),
             ],
           ),

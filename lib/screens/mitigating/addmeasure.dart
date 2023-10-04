@@ -1,7 +1,6 @@
 import 'package:dpia_project/providers/dpia_provider.dart';
 import 'package:dpia_project/models/riskassessment/risklist.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
@@ -30,9 +29,9 @@ class _AddMeasureState extends State<AddMeasure> {
   final TextEditingController rick3 = TextEditingController();
   final TextEditingController checkmanage = TextEditingController();
 
-  String? _hintTextcheckmanage = 'กรอกเปอร์เซ็น %';
   String? _errorcheckmanage;
   String? _errormeasures1;
+  int? selectedPercentage;
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
@@ -43,7 +42,8 @@ class _AddMeasureState extends State<AddMeasure> {
     if (picked != null && picked != selectedDate) {
       setState(() {
         selectedDate = picked;
-        selectedDateSend = '${selectedDate.day.toString()}/${selectedDate.month.toString()}/${selectedDate.year.toString()}';
+        selectedDateSend =
+            '${selectedDate.day.toString()}/${selectedDate.month.toString()}/${selectedDate.year.toString()}';
       });
     }
   }
@@ -117,36 +117,21 @@ class _AddMeasureState extends State<AddMeasure> {
                 width: 70,
                 child: ElevatedButton(
                   onPressed: () {
-                    if (checkmanage.text.isEmpty) {
-                      if (!dpoagree[0] || !dpoagree[1]) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text("กรุณาเลือกความเห็นของ DPO ก่อน"),
-                          ),
-                        );
-                      }
-                      setState(() {
-                        _hintTextcheckmanage = '';
-                        _errorcheckmanage = 'กรุณากรอกเปอร์เซ็น % (เป็นตัวเลข)';
-                      });
+                    if (selectedPercentage == null) {
+                      // ตรวจสอบว่าผู้ใช้เลือก percentage หรือไม่
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text("กรุณาเลือกเปอร์เซ็นที่ถูกต้อง"),
+                        ),
+                      );
+                      return;
                     }
+
                     if (measures1.text.isEmpty) {
                       setState(() {
                         _errormeasures1 = 'กรุณากรอกมาตรการ';
                       });
                     } else {
-                      int? number = int.tryParse(checkmanage.text);
-                      if (number == null || number < 0 || number > 100) {
-                        // ถ้าค่าไม่ได้อยู่ในช่วง 0-100
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content:
-                                Text("กรุณากรอกเปอร์เซ็น % ระหว่าง 0 ถึง 100"),
-                          ),
-                        );
-                        return; // ออกจาก onPressed โดยไม่ทำอะไรเพิ่ม
-                      }
-
                       final riskData = context
                           .read<DpiaProvider>()
                           .riskAssessments
@@ -164,15 +149,10 @@ class _AddMeasureState extends State<AddMeasure> {
                         rick3: rick3.text,
                         dpo: _checkdpo,
                         results: _checkresults,
-                        percent: checkmanage.text,
+                        percent: selectedPercentage.toString(),
                       );
 
-                      // List<Measure> measures = riskData.measures
-                      //     .map((measure) => measure)
-                      //     .toList()
-                      //   ..add(newMeasure);
-
-                        List<Measure> measures = [newMeasure];
+                      List<Measure> measures = [newMeasure];
 
                       final updated = riskData.copyWith(
                         measures: measures,
@@ -394,36 +374,46 @@ class _AddMeasureState extends State<AddMeasure> {
                                 const SizedBox(
                                   height: 10,
                                 ),
-                                SizedBox(
-                                  height: 70,
-                                  width: double.infinity,
-                                  child: TextFormField(
-                                    controller: checkmanage,
-                                    onChanged: (String value) {
-                                      setState(() {
-                                        int? number = int.tryParse(value);
-                                        if (number == null ||
-                                            number < 0 ||
-                                            number > 100) {
-                                          _errorcheckmanage =
-                                              'กรุณากรอกค่าระหว่าง 0 ถึง 100';
-                                        } else {
-                                          _errorcheckmanage = null;
-                                        }
-                                      });
-                                    },
-                                    keyboardType: TextInputType.number,
-                                    inputFormatters: <TextInputFormatter>[
-                                      FilteringTextInputFormatter
-                                          .digitsOnly, // Allow only digits
-                                    ],
-                                    decoration: InputDecoration(
-                                      hintText: _hintTextcheckmanage,
-                                      border: const OutlineInputBorder(),
-                                      errorText: _errorcheckmanage,
-                                    ),
+                                DropdownButtonFormField<int>(
+                                  value: selectedPercentage,
+                                  onChanged: (int? value) {
+                                    setState(() {
+                                      selectedPercentage = value;
+                                    });
+                                  },
+                                  isExpanded: true,
+                                  decoration: InputDecoration(
+                                    border: const OutlineInputBorder(),
+                                    errorText: _errorcheckmanage,
                                   ),
-                                ),
+                                  items: const [
+                                    DropdownMenuItem<int>(
+                                      value:
+                                          null, // null value to represent the hint
+                                      child: Text('เลือกเปอร์เซ็น %' , style: TextStyle(color: Colors.grey),),
+                                    ),
+                                    DropdownMenuItem<int>(
+                                      value: 0,
+                                      child: Text('0%'),
+                                    ),
+                                    DropdownMenuItem<int>(
+                                      value: 25,
+                                      child: Text('25%'),
+                                    ),
+                                    DropdownMenuItem<int>(
+                                      value: 50,
+                                      child: Text('50%'),
+                                    ),
+                                    DropdownMenuItem<int>(
+                                      value: 75,
+                                      child: Text('75%'),
+                                    ),
+                                    DropdownMenuItem<int>(
+                                      value: 100,
+                                      child: Text('100%'),
+                                    ),
+                                  ],
+                                )
                               ],
                             ),
                           ),

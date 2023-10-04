@@ -264,7 +264,7 @@ class _Identification1State extends State<Identification1> {
                                 .reset();
                             Provider.of<DpiaProvider>(context, listen: false)
                                 .setupData();
-                            context.go('/CompletePage');
+                            context.go('/CompleteNoRiskPage');
                           }
                         },
                   child: const Text('ถัดไป'))),
@@ -310,37 +310,41 @@ class _ActivityListviewState extends State<ActivityListview> {
           ),
           child: Theme(
             data: ThemeData(dividerColor: Colors.transparent),
-            child: ExpansionTile(
-              initiallyExpanded: true,
-              title: CheckboxListTile(
-                side: const BorderSide(color: Color(0xff2684FF)),
-                contentPadding: EdgeInsets.zero,
-                title: Transform.translate(
-                  offset: const Offset(-16, 0),
-                  child: Text(widget.provider.activities[index].title),
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left : 20 , top: 10),
+                  child: CheckboxListTile(
+                    side: const BorderSide(color: Color(0xff2684FF)),
+                    contentPadding: EdgeInsets.zero,
+                    title: Transform.translate(
+                      offset: const Offset(-16, 0),
+                      child: Text(widget.provider.activities[index].title),
+                    ),
+                    controlAffinity: ListTileControlAffinity.leading,
+                    value: widget.provider.activities[index].isChecked,
+                    onChanged: (bool? value) {
+                      if (value != null) {
+                        widget.provider.checkActivity(index, value);
+                      }
+                    },
+                  ),
                 ),
-                controlAffinity:
-                    ListTileControlAffinity.leading, //  <-- leading Checkbox
-                value: widget.provider.activities[index].isChecked,
-                onChanged: (bool? value) {
-                  if (value != null) {
-                    widget.provider.checkActivity(index, value);
-                  }
-                },
-              ),
-              children: <Widget>[
                 const Divider(
                   thickness: 1,
                   indent: 0,
                   endIndent: 0,
                   color: Colors.grey,
                 ),
-                // ListTile(title: Text(widget.provider.activities[index].subtitle)),
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 20, left: 30),
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 8, horizontal: 16), // Adjust padding as needed
                   child: ListTile(
-                      title: Text(widget.provider.activities[index].description,
-                          style: Theme.of(context).textTheme.titleSmall)),
+                    title: Text(
+                      widget.provider.activities[index].description,
+                      style: Theme.of(context).textTheme.titleSmall,
+                    ),
+                  ),
                 ),
               ],
             ),
