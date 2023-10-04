@@ -140,6 +140,7 @@ class _Identification1State extends State<Identification1> {
                   padding: const EdgeInsets.all(15.0),
                   child: Column(
                     children: [
+                      
                       CheckboxListTile(
                         side: const BorderSide(color: Color(0xff2684FF)),
                         controlAffinity: ListTileControlAffinity
@@ -157,6 +158,7 @@ class _Identification1State extends State<Identification1> {
                               style: Theme.of(context).textTheme.titleSmall),
                         ),
                       ),
+                      
                       Padding(
                         padding: const EdgeInsets.only(left: 30),
                         child: CheckboxListTile(
@@ -175,6 +177,16 @@ class _Identification1State extends State<Identification1> {
                                 "Thailand Data Protection Guidelines 2.0 ส่วนที่ E1",
                                 style: Theme.of(context).textTheme.titleSmall),
                           ),
+                          
+                        ),
+                      ),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          ' หมายเหตุ** หากกำหนดตัวเลือกจะมีความเสี่ยงเป็นสูง',
+                          style: TextStyle(
+                              color: Colors.red.withOpacity(1), fontSize: 9 ,
+                              ),
                         ),
                       ),
                     ],
@@ -229,7 +241,6 @@ class _Identification1State extends State<Identification1> {
                 },
                 child: const Text('ย้อนกลับ')),
           ),
-          
           const Text(
             '1 / 7',
             style: TextStyle(color: Colors.black),
@@ -319,7 +330,7 @@ class _ActivityListviewState extends State<ActivityListview> {
             child: Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left : 20 , top: 10),
+                  padding: const EdgeInsets.only(left: 20, top: 10),
                   child: CheckboxListTile(
                     side: const BorderSide(color: Color(0xff2684FF)),
                     contentPadding: EdgeInsets.zero,
