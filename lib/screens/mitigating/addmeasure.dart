@@ -376,6 +376,13 @@ class _AddMeasureState extends State<AddMeasure> {
                                 ),
                                 DropdownButtonFormField<int>(
                                   value: selectedPercentage,
+                                  hint: Text(
+                                    'เลือกเปอร์เซ็น %',
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      color: Theme.of(context).hintColor,
+                                    ),
+                                  ),
                                   onChanged: (int? value) {
                                     setState(() {
                                       selectedPercentage = value;
@@ -387,11 +394,6 @@ class _AddMeasureState extends State<AddMeasure> {
                                     errorText: _errorcheckmanage,
                                   ),
                                   items: const [
-                                    DropdownMenuItem<int>(
-                                      value:
-                                          null, // null value to represent the hint
-                                      child: Text('เลือกเปอร์เซ็น %' , style: TextStyle(color: Colors.grey),),
-                                    ),
                                     DropdownMenuItem<int>(
                                       value: 0,
                                       child: Text('0%'),

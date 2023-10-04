@@ -33,10 +33,11 @@ class CompleteNoRiskPage extends StatelessWidget {
               height: 10,
             ),
             Text(
-              'จากการประเมินด้วยมาตรการเบื้องต้น ไม่พบผลกระทบเพียงพอที่จะประเมินความเสี่ยงในขั้นตอนต่อไป',
+              'จากการประเมินด้วยมาตรการเบื้องต้น\nไม่พบผลกระทบเพียงพอที่จะประเมินความเสี่ยงในขั้นตอนต่อไป',
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                     color: Theme.of(context).colorScheme.tertiary,
                   ),
+              textAlign: TextAlign.center, // Set text alignment to center
             ),
             const SizedBox(height: 16),
             SizedBox(
@@ -48,7 +49,7 @@ class CompleteNoRiskPage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
-                  onPressed: (){
+                  onPressed: () {
                     context.pushReplacement('/HomePage');
                   },
                   // onPressed: () async {
