@@ -20,6 +20,7 @@ class DpiaProvider extends ChangeNotifier {
   bool _checkboxValue2 = false;
   List<String> _checkselectedItems = [];
 
+
   List<RiskData> get riskAssessments => _riskAssessments;
   List<Activity> get activities => _activities;
   List<Description> get descriptions => _descriptions;
@@ -550,6 +551,7 @@ class DpiaProvider extends ChangeNotifier {
      _determine = [];
      _checkboxValue1 = false;
      _checkboxValue2 = false;
+     _checkselectedItems=[];
     notifyListeners();
   }
 

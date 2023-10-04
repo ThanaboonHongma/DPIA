@@ -45,6 +45,7 @@ class _IdentificationPage1State extends State<IdentificationPage1> {
 
   @override
   Widget build(BuildContext context) {
+    final dpiaProvider = Provider.of<DpiaProvider>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -249,13 +250,16 @@ class _IdentificationPage1State extends State<IdentificationPage1> {
                                 enabled: false,
                                 child: StatefulBuilder(
                                   builder: (context, menuSetState) {
-                                    final isSelected =
-                                        selectedItems.contains(item);
+                                    final isSelected = dpiaProvider
+                                        .checkselectedItems
+                                        .contains(item);
                                     return InkWell(
                                       onTap: () {
                                         isSelected
-                                            ? selectedItems.remove(item)
-                                            : selectedItems.add(item);
+                                            ? dpiaProvider.checkselectedItems
+                                                .remove(item)
+                                            : dpiaProvider.checkselectedItems
+                                                .add(item);
                                         setState(() {});
                                         menuSetState(() {});
 
@@ -295,9 +299,9 @@ class _IdentificationPage1State extends State<IdentificationPage1> {
                                 ),
                               );
                             }).toList(),
-                            value: selectedItems.isEmpty
+                            value: dpiaProvider.checkselectedItems.isEmpty
                                 ? null
-                                : selectedItems.last,
+                                : dpiaProvider.checkselectedItems.last,
                             onChanged: (value) {},
                             selectedItemBuilder: (context) {
                               return items.map(
@@ -305,7 +309,8 @@ class _IdentificationPage1State extends State<IdentificationPage1> {
                                   return Container(
                                     alignment: AlignmentDirectional.centerStart,
                                     child: Text(
-                                      selectedItems.join(', '),
+                                      dpiaProvider.checkselectedItems
+                                          .join(', '),
                                       style: const TextStyle(
                                         fontSize: 14,
                                         overflow: TextOverflow.ellipsis,
@@ -373,12 +378,11 @@ class _IdentificationPage1State extends State<IdentificationPage1> {
           ],
         ),
       ),
-      bottomNavigationBar: buildMyNavBar(context),
+      bottomNavigationBar: buildMyNavBar(context, dpiaProvider),
     );
   }
 
-  Container buildMyNavBar(BuildContext context) {
-    final dpiaProvider = Provider.of<DpiaProvider>(context, listen: false);
+  Container buildMyNavBar(BuildContext context, dpiaProvider) {
     return Container(
       height: 60,
       decoration: BoxDecoration(
