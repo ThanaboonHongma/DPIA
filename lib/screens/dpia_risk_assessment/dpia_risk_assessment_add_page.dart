@@ -104,6 +104,7 @@ class _DpiaAddRiskState extends State<DpiaAddRisk> {
             SizedBox(
               height: 70,
               child: TextField(
+                
                 controller: _impactTextController, // กำหนด Controller
                 onChanged: (String value) {
                   setState(() {
@@ -122,6 +123,7 @@ class _DpiaAddRiskState extends State<DpiaAddRisk> {
                   filled: true,
                   fillColor: Colors.white,
                   errorText: _errorText,
+                  hintText: 'กรอกผลกระทบ',
                 ),
               ),
             ),

@@ -229,7 +229,20 @@ class _IdentificationPage1State extends State<IdentificationPage1> {
                       const SizedBox(
                         height: 10,
                       ),
-                      const Text('Volume options'),
+                      RichText(
+                        text:  TextSpan(
+                          children: [
+                            const TextSpan(
+                              text: 'Volume options   ',
+                            ),
+                            TextSpan(
+                              text:
+                                  ' หมายเหตุ** หากกำหนดตัวเลือกจะมีความเสี่ยงเป็นสูง',
+                              style: TextStyle(color: Colors.red.withOpacity(1), fontSize: 9),
+                            ),
+                          ],
+                        ),
+                      ),
                       const SizedBox(
                         height: 10,
                       ),
@@ -378,11 +391,12 @@ class _IdentificationPage1State extends State<IdentificationPage1> {
           ],
         ),
       ),
-      bottomNavigationBar: buildMyNavBar(context, dpiaProvider),
+      bottomNavigationBar: buildMyNavBar(context),
     );
   }
 
-  Container buildMyNavBar(BuildContext context, dpiaProvider) {
+  Container buildMyNavBar(BuildContext context) {
+    final dpiaProvider = Provider.of<DpiaProvider>(context, listen: false);
     return Container(
       height: 60,
       decoration: BoxDecoration(
@@ -404,7 +418,7 @@ class _IdentificationPage1State extends State<IdentificationPage1> {
             height: 40,
           ),
           const Text(
-            '1 / 7',
+            '0 / 7',
             style: TextStyle(color: Colors.black),
           ),
           SizedBox(
@@ -424,10 +438,11 @@ class _IdentificationPage1State extends State<IdentificationPage1> {
                           access: textController2.text,
                           activity: textController3.text,
                           volume: textController4.text,
-                          dropdown: selectedItems,
+                          dropdown: dpiaProvider.checkselectedItems,
                           datasubjects: textController5.text,
                           organization: textController6.text));
-                      dpiaProvider.setcheckselectedItems(selectedItems);
+                      dpiaProvider.setcheckselectedItems(
+                          dpiaProvider.checkselectedItems);
                       context.go('/Identification');
                     },
               child: const Text('ถัดไป'),

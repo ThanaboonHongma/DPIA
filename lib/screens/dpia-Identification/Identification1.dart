@@ -220,10 +220,16 @@ class _Identification1State extends State<Identification1> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          const SizedBox(
+          SizedBox(
             width: 100,
             height: 40,
+            child: ElevatedButton(
+                onPressed: () {
+                  context.go('/IdentificationPage1');
+                },
+                child: const Text('ย้อนกลับ')),
           ),
+          
           const Text(
             '1 / 7',
             style: TextStyle(color: Colors.black),
