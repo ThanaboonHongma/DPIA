@@ -347,37 +347,45 @@ class _HomePageState extends State<HomePage> {
                                               .textTheme
                                               .titleMedium),
                                       Container(
-                                        child: summary[index]
-                                                .risks[index]
-                                                .measures[0]
-                                                .datetime
-                                                .isEmpty
-                                            ? Text(
-                                                '${selectedDate.day.toString()}/${selectedDate.month.toString()}/${selectedDate.year.toString()}',
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .bodySmall
-                                                    ?.copyWith(
-                                                      color: Theme.of(context)
-                                                          .colorScheme
-                                                          .onSurface,
-                                                    ),
-                                              )
-                                            : Text(
-                                                summary[index]
-                                                    .risks[index]
-                                                    .measures[0]
-                                                    .datetime,
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .bodySmall
-                                                    ?.copyWith(
-                                                      color: Theme.of(context)
-                                                          .colorScheme
-                                                          .onSurface,
-                                                    ),
-                                              ),
-                                      )
+                                          child: summary[index].risks.isEmpty
+                                              ? Text(
+                                                  '${selectedDate.day.toString()}/${selectedDate.month.toString()}/${selectedDate.year.toString()}',
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .bodySmall
+                                                      ?.copyWith(
+                                                        color: Theme.of(context)
+                                                            .colorScheme
+                                                            .onSurface,
+                                                      ),
+                                                )
+                                              : summary[index]
+                                                      .risks
+                                                      .first
+                                                      .measures
+                                                      .first
+                                                      .datetime
+                                                      .isEmpty
+                                                  ? Text(
+                                                      '${summary[index].risks.last.date.day.toString()}/'
+                                                      '${summary[index].risks.last.date.month.toString()}/'
+                                                      '${summary[index].risks.last.date.year.toString()}',
+                                                      style: Theme.of(context)
+                                                          .textTheme
+                                                          .bodySmall
+                                                          ?.copyWith(
+                                                            color: Theme.of(
+                                                                    context)
+                                                                .colorScheme
+                                                                .onSurface,
+                                                          ),
+                                                    )
+                                                  : Text(summary[index]
+                                                      .risks
+                                                      .first
+                                                      .measures
+                                                      .first
+                                                      .datetime))
                                     ],
                                   ),
                                   const SizedBox(
