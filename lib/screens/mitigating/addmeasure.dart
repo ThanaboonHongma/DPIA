@@ -49,6 +49,7 @@ class _AddMeasureState extends State<AddMeasure> {
   }
 
   List<RiskData> defaultriskdata = [];
+  
 
   void _updateDPO() {
     if (dpoagree[0] == true) {
@@ -490,6 +491,7 @@ class _AddMeasureState extends State<AddMeasure> {
                                           },
                                           controller: measures1,
                                           decoration: InputDecoration(
+                                            hintText: 'กรอกมาตรการ',
                                             border: const OutlineInputBorder(),
                                             errorText: _errormeasures1,
                                           ),
@@ -510,6 +512,7 @@ class _AddMeasureState extends State<AddMeasure> {
                                         child: TextField(
                                           controller: measures2,
                                           decoration: const InputDecoration(
+                                            hintText: 'กรอกมาตรการ',
                                             border: OutlineInputBorder(),
                                           ),
                                         ),
@@ -529,6 +532,7 @@ class _AddMeasureState extends State<AddMeasure> {
                                         child: TextField(
                                           controller: measures3,
                                           decoration: const InputDecoration(
+                                            hintText: 'กรอกมาตรการ',
                                             border: OutlineInputBorder(),
                                           ),
                                         ),
@@ -548,6 +552,7 @@ class _AddMeasureState extends State<AddMeasure> {
                                         child: TextField(
                                           controller: project,
                                           decoration: const InputDecoration(
+                                            hintText: 'กรอกชื่อโครงการ',
                                             border: OutlineInputBorder(),
                                           ),
                                         ),
@@ -606,6 +611,7 @@ class _AddMeasureState extends State<AddMeasure> {
                                         child: TextField(
                                           controller: responsible,
                                           decoration: const InputDecoration(
+                                            hintText: 'กรอกผู้รับผิดชอบ',
                                             border: OutlineInputBorder(),
                                           ),
                                         ),
@@ -651,6 +657,7 @@ class _AddMeasureState extends State<AddMeasure> {
                                       child: TextField(
                                         controller: rick1,
                                         decoration: const InputDecoration(
+                                          hintText: 'กรอกความเสี่ยง',
                                           border: OutlineInputBorder(),
                                         ),
                                       ),
@@ -672,6 +679,7 @@ class _AddMeasureState extends State<AddMeasure> {
                                       child: TextField(
                                         controller: rick2,
                                         decoration: const InputDecoration(
+                                          hintText: 'กรอกความเสี่ยง',
                                           border: OutlineInputBorder(),
                                         ),
                                       ),
@@ -693,6 +701,7 @@ class _AddMeasureState extends State<AddMeasure> {
                                       child: TextField(
                                         controller: rick3,
                                         decoration: const InputDecoration(
+                                          hintText: 'กรอกความเสี่ยง',
                                           border: OutlineInputBorder(),
                                         ),
                                       ),
