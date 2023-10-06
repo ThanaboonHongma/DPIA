@@ -169,7 +169,7 @@ class _IdentificationPage1State extends State<IdentificationPage1> {
                       const SizedBox(
                         height: 10,
                       ),
-                      const Text('Identifiable'),
+                      const Text('สารสนเทศส่วนบุคคลที่สามารถระบุตัวตนได้'),
                       const SizedBox(
                         height: 10,
                       ),
@@ -184,7 +184,7 @@ class _IdentificationPage1State extends State<IdentificationPage1> {
                       const SizedBox(
                         height: 10,
                       ),
-                      const Text('Access'),
+                      const Text('บริมาณการเข้าถึง'),
                       const SizedBox(
                         height: 10,
                       ),
@@ -199,7 +199,7 @@ class _IdentificationPage1State extends State<IdentificationPage1> {
                       const SizedBox(
                         height: 10,
                       ),
-                      const Text('Activity'),
+                      const Text('กิจกรรมการประมวลผลข้อมูล'),
                       const SizedBox(
                         height: 10,
                       ),
@@ -214,7 +214,7 @@ class _IdentificationPage1State extends State<IdentificationPage1> {
                       const SizedBox(
                         height: 10,
                       ),
-                      const Text('Volume'),
+                      const Text('จำนวนผู้ได้รับผลกระทบ'),
                       const SizedBox(
                         height: 10,
                       ),
@@ -233,7 +233,7 @@ class _IdentificationPage1State extends State<IdentificationPage1> {
                         text:  TextSpan(
                           children: [
                             const TextSpan(
-                              text: 'Volume options   ',
+                              text: 'ประเภทผลกระทบเพิ่มเติม   ',
                             ),
                             TextSpan(
                               text:
@@ -356,7 +356,7 @@ class _IdentificationPage1State extends State<IdentificationPage1> {
                       const SizedBox(
                         height: 10,
                       ),
-                      const Text('Adverse Effects to Data Subjects'),
+                      const Text('ผลกระทบต่อเจ้าของข้อมูล'),
                       const SizedBox(
                         height: 10,
                       ),
@@ -371,7 +371,7 @@ class _IdentificationPage1State extends State<IdentificationPage1> {
                       const SizedBox(
                         height: 10,
                       ),
-                      const Text('Adverse Effects to Organization'),
+                      const Text('ผลกระทบต่อองค์กร'),
                       const SizedBox(
                         height: 10,
                       ),
